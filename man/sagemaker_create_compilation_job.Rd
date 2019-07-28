@@ -11,7 +11,7 @@ sagemaker_create_compilation_job(CompilationJobName, RoleArn,
 \item{CompilationJobName}{[required] A name for the model compilation job. The name must be unique within the
 AWS Region and within your AWS account.}
 
-\item{RoleArn}{[required] The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon
+\item{RoleArn}{[required] The Amazon Resource Name (ARN) of an IAM role that enables Amazon
 SageMaker to perform tasks on your behalf.
 
 During model compilation, Amazon SageMaker needs your permission to:
@@ -33,7 +33,9 @@ the model was trained.}
 \item{OutputConfig}{[required] Provides information about the output location for the compiled model
 and the target device the model runs on.}
 
-\item{StoppingCondition}{[required] The duration allowed for model compilation.}
+\item{StoppingCondition}{[required] Specifies a limit to how long a model compilation job can run. When the
+job reaches the time limit, Amazon SageMaker ends the compilation job.
+Use this API to cap model training costs.}
 }
 \description{
 Starts a model compilation job. After the model has been compiled,
@@ -75,7 +77,7 @@ compilation jobs, use ListCompilationJobs.
   ),
   OutputConfig = list(
     S3OutputLocation = "string",
-    TargetDevice = "ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"jetson_tx1"|"jetson_tx2"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"
+    TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"|"sbe_c"
   ),
   StoppingCondition = list(
     MaxRuntimeInSeconds = 123

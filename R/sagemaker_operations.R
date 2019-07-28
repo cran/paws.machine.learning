@@ -8,8 +8,8 @@ NULL
 #'
 #' Adds or overwrites one or more tags for the specified Amazon SageMaker
 #' resource. You can add tags to notebook instances, training jobs,
-#' hyperparameter tuning jobs, models, endpoint configurations, and
-#' endpoints.
+#' hyperparameter tuning jobs, batch transform jobs, models, labeling jobs,
+#' work teams, endpoint configurations, and endpoints.
 #' 
 #' Each tag consists of a key and an optional value. Tag keys must be
 #' unique per resource. For more information about tags, see For more
@@ -397,7 +397,7 @@ sagemaker_create_code_repository <- function(CodeRepositoryName, GitConfig) {
 #'
 #' @param CompilationJobName &#91;required&#93; A name for the model compilation job. The name must be unique within the
 #' AWS Region and within your AWS account.
-#' @param RoleArn &#91;required&#93; The Amazon Resource Name (ARN) of an IIAMAM role that enables Amazon
+#' @param RoleArn &#91;required&#93; The Amazon Resource Name (ARN) of an IAM role that enables Amazon
 #' SageMaker to perform tasks on your behalf.
 #' 
 #' During model compilation, Amazon SageMaker needs your permission to:
@@ -419,7 +419,9 @@ sagemaker_create_code_repository <- function(CodeRepositoryName, GitConfig) {
 #' the model was trained.
 #' @param OutputConfig &#91;required&#93; Provides information about the output location for the compiled model
 #' and the target device the model runs on.
-#' @param StoppingCondition &#91;required&#93; The duration allowed for model compilation.
+#' @param StoppingCondition &#91;required&#93; Specifies a limit to how long a model compilation job can run. When the
+#' job reaches the time limit, Amazon SageMaker ends the compilation job.
+#' Use this API to cap model training costs.
 #'
 #' @section Request syntax:
 #' ```
@@ -433,7 +435,7 @@ sagemaker_create_code_repository <- function(CodeRepositoryName, GitConfig) {
 #'   ),
 #'   OutputConfig = list(
 #'     S3OutputLocation = "string",
-#'     TargetDevice = "ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"jetson_tx1"|"jetson_tx2"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"
+#'     TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"rasp3b"|"deeplens"|"rk3399"|"rk3288"|"sbe_c"
 #'   ),
 #'   StoppingCondition = list(
 #'     MaxRuntimeInSeconds = 123
@@ -471,6 +473,11 @@ sagemaker_create_compilation_job <- function(CompilationJobName, RoleArn, InputC
 #' 
 #' Use this API only for hosting models using Amazon SageMaker hosting
 #' services.
+#' 
+#' You must not delete an `EndpointConfig` in use by an endpoint that is
+#' live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
+#' being performed on the endpoint. To update an endpoint, you must create
+#' a new `EndpointConfig`.
 #' 
 #' The endpoint name must be unique within an AWS Region in your AWS
 #' account.
@@ -577,9 +584,9 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' @param EndpointConfigName &#91;required&#93; The name of the endpoint configuration. You specify this name in a
 #' [CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
 #' request.
-#' @param ProductionVariants &#91;required&#93; An array of `ProductionVariant` objects, one for each model that you
-#' want to host at this endpoint.
-#' @param Tags An array of key-value pairs. For more information, see [Using Cost
+#' @param ProductionVariants &#91;required&#93; An list of `ProductionVariant` objects, one for each model that you want
+#' to host at this endpoint.
+#' @param Tags A list of key-value pairs. For more information, see [Using Cost
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 #' in the *AWS Billing and Cost Management User Guide*.
@@ -653,7 +660,7 @@ sagemaker_create_endpoint_config <- function(EndpointConfigName, ProductionVaria
 #' including the search strategy, the objective metric used to evaluate
 #' training jobs, ranges of parameters to search, and resource limits for
 #' the tuning job. For more information, see automatic-model-tuning
-#' @param TrainingJobDefinition &#91;required&#93; The HyperParameterTrainingJobDefinition object that describes the
+#' @param TrainingJobDefinition The HyperParameterTrainingJobDefinition object that describes the
 #' training jobs that this tuning job launches, including static
 #' hyperparameters, input data configuration, output data configuration,
 #' resource configuration, and stopping condition.
@@ -805,7 +812,7 @@ sagemaker_create_endpoint_config <- function(EndpointConfigName, ProductionVaria
 #' @keywords internal
 #'
 #' @rdname sagemaker_create_hyper_parameter_tuning_job
-sagemaker_create_hyper_parameter_tuning_job <- function(HyperParameterTuningJobName, HyperParameterTuningJobConfig, TrainingJobDefinition, WarmStartConfig = NULL, Tags = NULL) {
+sagemaker_create_hyper_parameter_tuning_job <- function(HyperParameterTuningJobName, HyperParameterTuningJobConfig, TrainingJobDefinition = NULL, WarmStartConfig = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateHyperParameterTuningJob",
     http_method = "POST",
@@ -1064,11 +1071,12 @@ sagemaker_create_labeling_job <- function(LabelingJobName, LabelAttributeName, I
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 #' in the *AWS Billing and Cost Management User Guide*.
-#' @param VpcConfig A VpcConfig object that specifies the VPC that you want your model to
-#' connect to. Control access to and from your model container by
-#' configuring the VPC. `VpcConfig` is used in hosting services and in
-#' batch transform. For more information, see [Protect Endpoints by Using
-#' an Amazon Virtual Private
+#' @param VpcConfig A
+#' [VpcConfig](https://docs.aws.amazon.com/sagemaker/latest/dg/API_VpcConfig.html)
+#' object that specifies the VPC that you want your model to connect to.
+#' Control access to and from your model container by configuring the VPC.
+#' `VpcConfig` is used in hosting services and in batch transform. For more
+#' information, see [Protect Endpoints by Using an Amazon Virtual Private
 #' Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html)
 #' and [Protect Data in Batch Transform Jobs by Using an Amazon Virtual
 #' Private
@@ -1342,10 +1350,10 @@ sagemaker_create_model_package <- function(ModelPackageName, ModelPackageDescrip
 #' 
 #' To be able to pass this role to Amazon SageMaker, the caller of this API
 #' must have the `iam:PassRole` permission.
-#' @param KmsKeyId If you provide a AWS KMS key ID, Amazon SageMaker uses it to encrypt
-#' data at rest on the ML storage volume that is attached to your notebook
-#' instance. The KMS key you provide must be enabled. For information, see
-#' [Enabling and Disabling
+#' @param KmsKeyId The Amazon Resource Name (ARN) of a AWS Key Management Service key that
+#' Amazon SageMaker uses to encrypt data on the storage volume attached to
+#' your notebook instance. The KMS key you provide must be enabled. For
+#' information, see [Enabling and Disabling
 #' Keys](http://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html)
 #' in the *AWS Key Management Service Developer Guide*.
 #' @param Tags A list of tags to associate with the notebook instance. You can add tags
@@ -1527,16 +1535,19 @@ sagemaker_create_notebook_instance_lifecycle_config <- function(NotebookInstance
 #' showing the Jupyter server home page from the notebook instance. The
 #' console uses this API to get the URL and show the page.
 #' 
-#' You can restrict access to this API and to the URL that it returns to a
-#' list of IP addresses that you specify. To restrict access, attach an IAM
-#' policy that denies access to this API unless the call comes from an IP
-#' address in the specified list to every AWS Identity and Access
-#' Management user, group, or role used to access the notebook instance.
-#' Use the `NotIpAddress` condition operator and the `aws:SourceIP`
-#' condition context key to specify the list of IP addresses that you want
-#' to have access to the notebook instance. For more information, see
-#' [Limit Access to a Notebook Instance by IP
+#' IAM authorization policies for this API are also enforced for every HTTP
+#' request and WebSocket frame that attempts to connect to the notebook
+#' instance.For example, you can restrict access to this API and to the URL
+#' that it returns to a list of IP addresses that you specify. Use the
+#' `NotIpAddress` condition operator and the `aws:SourceIP` condition
+#' context key to specify the list of IP addresses that you want to have
+#' access to the notebook instance. For more information, see [Limit Access
+#' to a Notebook Instance by IP
 #' Address](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-ip-filter.html).
+#' 
+#' The URL that you get from a call to is valid only for 5 minutes. If you
+#' try to use the URL after the 5-minute limit expires, you are directed to
+#' the AWS console sign-in page.
 #'
 #' @usage
 #' sagemaker_create_presigned_notebook_instance_url(NotebookInstanceName,
@@ -1589,9 +1600,10 @@ sagemaker_create_presigned_notebook_instance_url <- function(NotebookInstanceNam
 #' -   `AlgorithmSpecification` - Identifies the training algorithm to use.
 #' 
 #' -   `HyperParameters` - Specify these algorithm-specific parameters to
-#'     influence the quality of the final model. For a list of
-#'     hyperparameters for each training algorithm provided by Amazon
-#'     SageMaker, see
+#'     enable the estimation of model parameters during training.
+#'     Hyperparameters can be tuned to optimize this learning process. For
+#'     a list of hyperparameters for each training algorithm provided by
+#'     Amazon SageMaker, see
 #'     [Algorithms](https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html).
 #' 
 #' -   `InputDataConfig` - Describes the training dataset and the Amazon S3
@@ -1609,7 +1621,7 @@ sagemaker_create_presigned_notebook_instance_url <- function(NotebookInstanceNam
 #'     must grant this role the necessary permissions so that Amazon
 #'     SageMaker can successfully complete model training.
 #' 
-#' -   `StoppingCondition` - Sets a duration for training. Use this
+#' -   `StoppingCondition` - Sets a time limit for training. Use this
 #'     parameter to cap model training costs.
 #' 
 #' For more information about Amazon SageMaker, see [How It
@@ -1682,15 +1694,14 @@ sagemaker_create_presigned_notebook_instance_url <- function(NotebookInstanceNam
 #' configuring the VPC. For more information, see [Protect Training Jobs by
 #' Using an Amazon Virtual Private
 #' Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/train-vpc.html).
-#' @param StoppingCondition &#91;required&#93; Sets a duration for training. Use this parameter to cap model training
-#' costs. To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
-#' signal, which delays job termination for 120 seconds. Algorithms might
-#' use this 120-second window to save the model artifacts.
+#' @param StoppingCondition &#91;required&#93; Specifies a limit to how long a model training job can run. When the job
+#' reaches the time limit, Amazon SageMaker ends the training job. Use this
+#' API to cap model training costs.
 #' 
-#' When Amazon SageMaker terminates a job because the stopping condition
-#' has been met, training algorithms provided by Amazon SageMaker save the
-#' intermediate results of the job. This intermediate data is a valid model
-#' artifact. You can use it to create a model using the `CreateModel` API.
+#' To stop a job, Amazon SageMaker sends the algorithm the `SIGTERM`
+#' signal, which delays job termination for 120 seconds. Algorithms can use
+#' this 120-second window to save the model artifacts, so the results of
+#' training are not lost.
 #' @param Tags An array of key-value pairs. For more information, see [Using Cost
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
@@ -1840,7 +1851,8 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' @usage
 #' sagemaker_create_transform_job(TransformJobName, ModelName,
 #'   MaxConcurrentTransforms, MaxPayloadInMB, BatchStrategy, Environment,
-#'   TransformInput, TransformOutput, TransformResources, Tags)
+#'   TransformInput, TransformOutput, TransformResources, DataProcessing,
+#'   Tags)
 #'
 #' @param TransformJobName &#91;required&#93; The name of the transform job. The name must be unique within an AWS
 #' Region in an AWS account.
@@ -1848,9 +1860,14 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' `ModelName` must be the name of an existing Amazon SageMaker model
 #' within an AWS Region in an AWS account.
 #' @param MaxConcurrentTransforms The maximum number of parallel requests that can be sent to each
-#' instance in a transform job. The default value is `1`. To allow Amazon
-#' SageMaker to determine the appropriate number for
-#' `MaxConcurrentTransforms`, set the value to `0`.
+#' instance in a transform job. If `MaxConcurrentTransforms` is set to `0`
+#' or left unset, Amazon SageMaker checks the optional execution-parameters
+#' to determine the optimal settings for your chosen algorithm. If the
+#' execution-parameters endpoint is not enabled, the default value is `1`.
+#' For more information on execution-parameters, see [How Containers Serve
+#' Requests](http://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests).
+#' For built-in algorithms, you don\'t need to set a value for
+#' `MaxConcurrentTransforms`.
 #' @param MaxPayloadInMB The maximum allowed size of the payload, in MB. A *payload* is the data
 #' portion of a record (without metadata). The value in `MaxPayloadInMB`
 #' must be greater than, or equal to, the size of a single record. To
@@ -1884,6 +1901,9 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' @param TransformOutput &#91;required&#93; Describes the results of the transform job.
 #' @param TransformResources &#91;required&#93; Describes the resources, including ML instance types and ML instance
 #' count, to use for the transform job.
+#' @param DataProcessing The data structure used for combining the input data and inference in
+#' the output file. For more information, see [Batch Transform I/O
+#' Join](http://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-io-join.html).
 #' @param Tags (Optional) An array of key-value pairs. For more information, see [Using
 #' Cost Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
@@ -1922,6 +1942,11 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #'     InstanceCount = 123,
 #'     VolumeKmsKeyId = "string"
 #'   ),
+#'   DataProcessing = list(
+#'     InputFilter = "string",
+#'     OutputFilter = "string",
+#'     JoinSource = "Input"|"None"
+#'   ),
 #'   Tags = list(
 #'     list(
 #'       Key = "string",
@@ -1934,14 +1959,14 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' @keywords internal
 #'
 #' @rdname sagemaker_create_transform_job
-sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcurrentTransforms = NULL, MaxPayloadInMB = NULL, BatchStrategy = NULL, Environment = NULL, TransformInput, TransformOutput, TransformResources, Tags = NULL) {
+sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcurrentTransforms = NULL, MaxPayloadInMB = NULL, BatchStrategy = NULL, Environment = NULL, TransformInput, TransformOutput, TransformResources, DataProcessing = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateTransformJob",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sagemaker$create_transform_job_input(TransformJobName = TransformJobName, ModelName = ModelName, MaxConcurrentTransforms = MaxConcurrentTransforms, MaxPayloadInMB = MaxPayloadInMB, BatchStrategy = BatchStrategy, Environment = Environment, TransformInput = TransformInput, TransformOutput = TransformOutput, TransformResources = TransformResources, Tags = Tags)
+  input <- .sagemaker$create_transform_job_input(TransformJobName = TransformJobName, ModelName = ModelName, MaxConcurrentTransforms = MaxConcurrentTransforms, MaxPayloadInMB = MaxPayloadInMB, BatchStrategy = BatchStrategy, Environment = Environment, TransformInput = TransformInput, TransformOutput = TransformOutput, TransformResources = TransformResources, DataProcessing = DataProcessing, Tags = Tags)
   output <- .sagemaker$create_transform_job_output()
   svc <- .sagemaker$service()
   request <- new_request(svc, op, input, output)
@@ -1960,7 +1985,7 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #'
 #' @usage
 #' sagemaker_create_workteam(WorkteamName, MemberDefinitions, Description,
-#'   Tags)
+#'   NotificationConfiguration, Tags)
 #'
 #' @param WorkteamName &#91;required&#93; The name of the work team. Use this name to identify the work team.
 #' @param MemberDefinitions &#91;required&#93; A list of `MemberDefinition` objects that contains objects that identify
@@ -1971,6 +1996,8 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #' All of the `CognitoMemberDefinition` objects that make up the member
 #' definition must have the same `ClientId` and `UserPool` values.
 #' @param Description &#91;required&#93; A description of the work team.
+#' @param NotificationConfiguration Configures notification of workers regarding available or expiring work
+#' items.
 #' @param Tags 
 #'
 #' @section Request syntax:
@@ -1987,6 +2014,9 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #'     )
 #'   ),
 #'   Description = "string",
+#'   NotificationConfiguration = list(
+#'     NotificationTopicArn = "string"
+#'   ),
 #'   Tags = list(
 #'     list(
 #'       Key = "string",
@@ -1999,14 +2029,14 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #' @keywords internal
 #'
 #' @rdname sagemaker_create_workteam
-sagemaker_create_workteam <- function(WorkteamName, MemberDefinitions, Description, Tags = NULL) {
+sagemaker_create_workteam <- function(WorkteamName, MemberDefinitions, Description, NotificationConfiguration = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateWorkteam",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sagemaker$create_workteam_input(WorkteamName = WorkteamName, MemberDefinitions = MemberDefinitions, Description = Description, Tags = Tags)
+  input <- .sagemaker$create_workteam_input(WorkteamName = WorkteamName, MemberDefinitions = MemberDefinitions, Description = Description, NotificationConfiguration = NotificationConfiguration, Tags = Tags)
   output <- .sagemaker$create_workteam_output()
   svc <- .sagemaker$service()
   request <- new_request(svc, op, input, output)
@@ -3210,8 +3240,8 @@ sagemaker_list_compilation_jobs <- function(NextToken = NULL, MaxResults = NULL,
 #' endpoint configurations whose name contains the specified string.
 #' @param CreationTimeBefore A filter that returns only endpoint configurations created before the
 #' specified time (timestamp).
-#' @param CreationTimeAfter A filter that returns only endpoint configurations created after the
-#' specified time (timestamp).
+#' @param CreationTimeAfter A filter that returns only endpoint configurations with a creation time
+#' greater than or equal to the specified time (timestamp).
 #'
 #' @section Request syntax:
 #' ```
@@ -3268,8 +3298,8 @@ sagemaker_list_endpoint_configs <- function(SortBy = NULL, SortOrder = NULL, Nex
 #' name contains the specified string.
 #' @param CreationTimeBefore A filter that returns only endpoints that were created before the
 #' specified time (timestamp).
-#' @param CreationTimeAfter A filter that returns only endpoints that were created after the
-#' specified time (timestamp).
+#' @param CreationTimeAfter A filter that returns only endpoints with a creation time greater than
+#' or equal to the specified time (timestamp).
 #' @param LastModifiedTimeBefore A filter that returns only endpoints that were modified before the
 #' specified timestamp.
 #' @param LastModifiedTimeAfter A filter that returns only endpoints that were modified after the
@@ -3602,8 +3632,8 @@ sagemaker_list_model_packages <- function(CreationTimeAfter = NULL, CreationTime
 #' the training job whose name contains the specified string.
 #' @param CreationTimeBefore A filter that returns only models created before the specified time
 #' (timestamp).
-#' @param CreationTimeAfter A filter that returns only models created after the specified time
-#' (timestamp).
+#' @param CreationTimeAfter A filter that returns only models with a creation time greater than or
+#' equal to the specified time (timestamp).
 #'
 #' @section Request syntax:
 #' ```
@@ -4436,7 +4466,9 @@ sagemaker_stop_labeling_job <- function(LabelingJobName) {
 #'
 #' Terminates the ML compute instance. Before terminating the instance,
 #' Amazon SageMaker disconnects the ML storage volume from it. Amazon
-#' SageMaker preserves the ML storage volume.
+#' SageMaker preserves the ML storage volume. Amazon SageMaker stops
+#' charging you for the ML compute instance when you call
+#' `StopNotebookInstance`.
 #' 
 #' To access data on the ML storage volume for a notebook instance that has
 #' been terminated, call the `StartNotebookInstance` API.
@@ -4619,8 +4651,10 @@ sagemaker_update_code_repository <- function(CodeRepositoryName, GitConfig = NUL
 #' [DescribeEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_DescribeEndpoint.html)
 #' API.
 #' 
-#' You cannot update an endpoint with the current `EndpointConfig`. To
-#' update an endpoint, you must create a new `EndpointConfig`.
+#' You must not delete an `EndpointConfig` in use by an endpoint that is
+#' live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
+#' being performed on the endpoint. To update an endpoint, you must create
+#' a new `EndpointConfig`.
 #'
 #' @usage
 #' sagemaker_update_endpoint(EndpointName, EndpointConfigName)
@@ -4711,8 +4745,7 @@ sagemaker_update_endpoint_weights_and_capacities <- function(EndpointName, Desir
 #'
 #' Updates a notebook instance. NotebookInstance updates include upgrading
 #' or downgrading the ML compute instance used for your notebook instance
-#' to accommodate changes in your workload requirements. You can also
-#' update the VPC security groups.
+#' to accommodate changes in your workload requirements.
 #'
 #' @usage
 #' sagemaker_update_notebook_instance(NotebookInstanceName, InstanceType,
@@ -4736,9 +4769,17 @@ sagemaker_update_endpoint_weights_and_capacities <- function(EndpointName, Desir
 #' (Optional) Customize a Notebook
 #' Instance](https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 #' @param DisassociateLifecycleConfig Set to `true` to remove the notebook instance lifecycle configuration
-#' currently associated with the notebook instance.
+#' currently associated with the notebook instance. This operation is
+#' idempotent. If you specify a lifecycle configuration that is not
+#' associated with the notebook instance when you call this method, it does
+#' not throw an error.
 #' @param VolumeSizeInGB The size, in GB, of the ML storage volume to attach to the notebook
-#' instance. The default value is 5 GB.
+#' instance. The default value is 5 GB. ML storage volumes are encrypted,
+#' so Amazon SageMaker can\'t determine the amount of available free space
+#' on the volume. Because of this, you can increase the volume size when
+#' you update a notebook instance, but you can\'t decrease the volume size.
+#' If you want to decrease the size of the ML storage volume in use, create
+#' a new notebook instance with the desired size.
 #' @param DefaultCodeRepository The Git repository to associate with the notebook instance as its
 #' default code repository. This can be either the name of a Git repository
 #' stored as a resource in your account, or the URL of a Git repository in
@@ -4764,11 +4805,17 @@ sagemaker_update_endpoint_weights_and_capacities <- function(EndpointName, Desir
 #' Elastic Inference in Amazon
 #' SageMaker](http://docs.aws.amazon.com/sagemaker/latest/dg/ei.html).
 #' @param DisassociateAcceleratorTypes A list of the Elastic Inference (EI) instance types to remove from this
-#' notebook instance.
+#' notebook instance. This operation is idempotent. If you specify an
+#' accelerator type that is not associated with the notebook instance when
+#' you call this method, it does not throw an error.
 #' @param DisassociateDefaultCodeRepository The name or URL of the default Git repository to remove from this
-#' notebook instance.
+#' notebook instance. This operation is idempotent. If you specify a Git
+#' repository that is not associated with the notebook instance when you
+#' call this method, it does not throw an error.
 #' @param DisassociateAdditionalCodeRepositories A list of names or URLs of the default Git repositories to remove from
-#' this notebook instance.
+#' this notebook instance. This operation is idempotent. If you specify a
+#' Git repository that is not associated with the notebook instance when
+#' you call this method, it does not throw an error.
 #' @param RootAccess Whether root access is enabled or disabled for users of the notebook
 #' instance. The default value is `Enabled`.
 #' 
@@ -4876,12 +4923,14 @@ sagemaker_update_notebook_instance_lifecycle_config <- function(NotebookInstance
 #' description.
 #'
 #' @usage
-#' sagemaker_update_workteam(WorkteamName, MemberDefinitions, Description)
+#' sagemaker_update_workteam(WorkteamName, MemberDefinitions, Description,
+#'   NotificationConfiguration)
 #'
 #' @param WorkteamName &#91;required&#93; The name of the work team to update.
 #' @param MemberDefinitions A list of `MemberDefinition` objects that contain the updated work team
 #' members.
 #' @param Description An updated description for the work team.
+#' @param NotificationConfiguration Configures SNS topic notifications for available or expiring work items
 #'
 #' @section Request syntax:
 #' ```
@@ -4896,21 +4945,24 @@ sagemaker_update_notebook_instance_lifecycle_config <- function(NotebookInstance
 #'       )
 #'     )
 #'   ),
-#'   Description = "string"
+#'   Description = "string",
+#'   NotificationConfiguration = list(
+#'     NotificationTopicArn = "string"
+#'   )
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname sagemaker_update_workteam
-sagemaker_update_workteam <- function(WorkteamName, MemberDefinitions = NULL, Description = NULL) {
+sagemaker_update_workteam <- function(WorkteamName, MemberDefinitions = NULL, Description = NULL, NotificationConfiguration = NULL) {
   op <- new_operation(
     name = "UpdateWorkteam",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sagemaker$update_workteam_input(WorkteamName = WorkteamName, MemberDefinitions = MemberDefinitions, Description = Description)
+  input <- .sagemaker$update_workteam_input(WorkteamName = WorkteamName, MemberDefinitions = MemberDefinitions, Description = Description, NotificationConfiguration = NotificationConfiguration)
   output <- .sagemaker$update_workteam_output()
   svc <- .sagemaker$service()
   request <- new_request(svc, op, input, output)
