@@ -33,7 +33,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- comprehend()
+#' \dontrun{svc <- comprehend()
 #' svc$batch_detect_dominant_language(
 #'   Foo = 123
 #' )}
@@ -116,8 +116,7 @@ comprehend <- function(config = list()) {
   target_prefix = "Comprehend_20171127"
 )
 
-.comprehend$handlers <- new_handlers("jsonrpc", "v4")
-
 .comprehend$service <- function(config = list()) {
-  new_service(.comprehend$metadata, .comprehend$handlers, config)
+  handlers <- new_handlers("jsonrpc", "v4")
+  new_service(.comprehend$metadata, handlers, config)
 }

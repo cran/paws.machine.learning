@@ -30,7 +30,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- sagemakerruntime()
+#' \dontrun{svc <- sagemakerruntime()
 #' svc$invoke_endpoint(
 #'   Foo = 123
 #' )}
@@ -63,8 +63,7 @@ sagemakerruntime <- function(config = list()) {
   target_prefix = ""
 )
 
-.sagemakerruntime$handlers <- new_handlers("restjson", "v4")
-
 .sagemakerruntime$service <- function(config = list()) {
-  new_service(.sagemakerruntime$metadata, .sagemakerruntime$handlers, config)
+  handlers <- new_handlers("restjson", "v4")
+  new_service(.sagemakerruntime$metadata, handlers, config)
 }

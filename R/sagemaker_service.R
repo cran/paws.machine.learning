@@ -30,7 +30,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- sagemaker()
+#' \dontrun{svc <- sagemaker()
 #' svc$add_tags(
 #'   Foo = 123
 #' )}
@@ -193,8 +193,7 @@ sagemaker <- function(config = list()) {
   target_prefix = "SageMaker"
 )
 
-.sagemaker$handlers <- new_handlers("jsonrpc", "v4")
-
 .sagemaker$service <- function(config = list()) {
-  new_service(.sagemaker$metadata, .sagemaker$handlers, config)
+  handlers <- new_handlers("jsonrpc", "v4")
+  new_service(.sagemaker$metadata, handlers, config)
 }

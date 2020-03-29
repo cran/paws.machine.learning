@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: Amazon Web Services Machine Learning APIs
-Version: 0.1.6
+Version: 0.1.7
 Authors@R: 
     c(person(given = "David",
              family = "Kretch",
@@ -17,7 +17,7 @@ Description: Interface to Amazon Web Services machine learning APIs,
     language processing, speech recognition, translation, and more
     <https://aws.amazon.com/machine-learning/>.
 License: Apache License (>= 2.0)
-Imports: paws.common (>= 0.2.5)
+Imports: paws.common (>= 0.3.0)
 Suggests: testthat
 Encoding: UTF-8
 LazyData: true
@@ -49,10 +49,10 @@ Collate: 'comprehend_service.R' 'comprehend_interfaces.R'
         'transcribeservice_operations.R' 'translate_service.R'
         'translate_interfaces.R' 'translate_operations.R'
 NeedsCompilation: no
-Packaged: 2020-01-14 17:52:56 UTC; david.kretch
+Packaged: 2020-03-29 11:53:35 UTC; david.kretch
 Author: David Kretch [aut, cre],
   Adam Banker [aut],
   Amazon.com, Inc. [cph]
 Maintainer: David Kretch <david.kretch@gmail.com>
 Repository: CRAN
-Date/Publication: 2020-01-14 20:20:02 UTC
+Date/Publication: 2020-03-29 15:10:13 UTC
