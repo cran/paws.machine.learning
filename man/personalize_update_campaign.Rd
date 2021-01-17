@@ -6,7 +6,7 @@
 value of the campaign's minProvisionedTPS parameter}
 \usage{
 personalize_update_campaign(campaignArn, solutionVersionArn,
-  minProvisionedTPS)
+  minProvisionedTPS, campaignConfig)
 }
 \arguments{
 \item{campaignArn}{[required] The Amazon Resource Name (ARN) of the campaign.}
@@ -15,12 +15,13 @@ personalize_update_campaign(campaignArn, solutionVersionArn,
 
 \item{minProvisionedTPS}{Specifies the requested minimum provisioned transactions
 (recommendations) per second that Amazon Personalize will support.}
+
+\item{campaignConfig}{The configuration details of a campaign.}
 }
 \description{
 Updates a campaign by either deploying a new solution or changing the
-value of the campaign\'s \code{minProvisionedTPS} parameter.
-}
-\details{
+value of the campaign's \code{minProvisionedTPS} parameter.
+
 To update a campaign, the campaign status must be ACTIVE or CREATE
 FAILED. Check the campaign status using the DescribeCampaign API.
 
@@ -33,7 +34,12 @@ For more information on campaigns, see CreateCampaign.
 \preformatted{svc$update_campaign(
   campaignArn = "string",
   solutionVersionArn = "string",
-  minProvisionedTPS = 123
+  minProvisionedTPS = 123,
+  campaignConfig = list(
+    itemExplorationConfig = list(
+      "string"
+    )
+  )
 )
 }
 }

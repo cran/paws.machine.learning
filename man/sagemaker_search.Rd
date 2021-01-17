@@ -34,14 +34,13 @@ Finds Amazon SageMaker resources that match a search query. Matching
 resources are returned as a list of \code{SearchRecord} objects in the
 response. You can sort the search results by any resource property in a
 ascending or descending order.
-}
-\details{
+
 You can query against the following value types: numeric, text, Boolean,
 and timestamp.
 }
 \section{Request syntax}{
 \preformatted{svc$search(
-  Resource = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent",
+  Resource = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup",
   SearchExpression = list(
     Filters = list(
       list(

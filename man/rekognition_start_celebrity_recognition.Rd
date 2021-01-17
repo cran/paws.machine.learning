@@ -19,15 +19,14 @@ from being accidently started more than once.}
 \item{NotificationChannel}{The Amazon SNS topic ARN that you want Amazon Rekognition Video to
 publish the completion status of the celebrity recognition analysis to.}
 
-\item{JobTag}{An identifier you specify that\'s returned in the completion
-notification that\'s published to your Amazon Simple Notification
-Service topic. For example, you can use \code{JobTag} to group related jobs
-and identify them in the completion notification.}
+\item{JobTag}{An identifier you specify that's returned in the completion notification
+that's published to your Amazon Simple Notification Service topic. For
+example, you can use \code{JobTag} to group related jobs and identify them in
+the completion notification.}
 }
 \description{
 Starts asynchronous recognition of celebrities in a stored video.
-}
-\details{
+
 Amazon Rekognition Video can detect celebrities in a video must be
 stored in an Amazon S3 bucket. Use Video to specify the bucket name and
 the filename of the video. \code{StartCelebrityRecognition} returns a job

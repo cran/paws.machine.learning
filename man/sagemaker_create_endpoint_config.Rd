@@ -17,8 +17,9 @@ to host at this endpoint.}
 
 \item{DataCaptureConfig}{}
 
-\item{Tags}{A list of key-value pairs. For more information, see \href{https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what}{Using Cost Allocation Tags}
-in the \emph{AWS Billing and Cost Management User Guide}.}
+\item{Tags}{An array of key-value pairs. You can use tags to categorize your AWS
+resources in different ways, for example, by purpose, owner, or
+environment. For more information, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging AWS Resources}.}
 
 \item{KmsKeyId}{The Amazon Resource Name (ARN) of a AWS Key Management Service key that
 Amazon SageMaker uses to encrypt data on the storage volume attached to
@@ -40,7 +41,7 @@ information, refer to the AWS Key Management Service section \href{https://docs.
 
 Certain Nitro-based instances include local storage, dependent on the
 instance type. Local storage volumes are encrypted using a hardware
-module on the instance. You can\'t request a \code{KmsKeyId} when using an
+module on the instance. You can't request a \code{KmsKeyId} when using an
 instance type with local storage. If any of the models that you specify
 in the \code{ProductionVariants} parameter use nitro-based instances with
 local storage, do not specify a value for the \code{KmsKeyId} parameter. If
@@ -58,8 +59,7 @@ uses to deploy models. In the configuration, you identify one or more
 models, created using the \code{CreateModel} API, to deploy and the resources
 that you want Amazon SageMaker to provision. Then you call the
 CreateEndpoint API.
-}
-\details{
+
 Use this API if you want to use Amazon SageMaker hosting services to
 deploy models into production.
 

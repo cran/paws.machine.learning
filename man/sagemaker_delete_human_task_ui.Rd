@@ -2,7 +2,8 @@
 % Please edit documentation in R/sagemaker_operations.R
 \name{sagemaker_delete_human_task_ui}
 \alias{sagemaker_delete_human_task_ui}
-\title{Use this operation to delete a worker task template (HumanTaskUi)}
+\title{Use this operation to delete a human task user interface (worker task
+template)}
 \usage{
 sagemaker_delete_human_task_ui(HumanTaskUiName)
 }
@@ -11,9 +12,9 @@ sagemaker_delete_human_task_ui(HumanTaskUiName)
 to delete.}
 }
 \description{
-Use this operation to delete a worker task template (\code{HumanTaskUi}).
-}
-\details{
+Use this operation to delete a human task user interface (worker task
+template).
+
 To see a list of human task user interfaces (work task templates) in
 your account, use . When you delete a worker task template, it no longer
 appears when you call \code{ListHumanTaskUis}.

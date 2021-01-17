@@ -2,18 +2,21 @@
 % Please edit documentation in R/sagemaker_operations.R
 \name{sagemaker_create_trial}
 \alias{sagemaker_create_trial}
-\title{Creates an Amazon SageMaker \emph{trial}}
+\title{Creates an Amazon SageMaker trial}
 \usage{
-sagemaker_create_trial(TrialName, DisplayName, ExperimentName, Tags)
+sagemaker_create_trial(TrialName, DisplayName, ExperimentName,
+  MetadataProperties, Tags)
 }
 \arguments{
 \item{TrialName}{[required] The name of the trial. The name must be unique in your AWS account and
 is not case-sensitive.}
 
-\item{DisplayName}{The name of the trial as displayed. The name doesn\'t need to be unique.
-If \code{DisplayName} isn\'t specified, \code{TrialName} is displayed.}
+\item{DisplayName}{The name of the trial as displayed. The name doesn't need to be unique.
+If \code{DisplayName} isn't specified, \code{TrialName} is displayed.}
 
 \item{ExperimentName}{[required] The name of the experiment to associate the trial with.}
+
+\item{MetadataProperties}{}
 
 \item{Tags}{A list of tags to associate with the trial. You can use Search API to
 search on the tags.}
@@ -22,8 +25,7 @@ search on the tags.}
 Creates an Amazon SageMaker \emph{trial}. A trial is a set of steps called
 \emph{trial components} that produce a machine learning model. A trial is
 part of a single Amazon SageMaker \emph{experiment}.
-}
-\details{
+
 When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK,
 all experiments, trials, and trial components are automatically tracked,
 logged, and indexed. When you use the AWS SDK for Python (Boto), you
@@ -33,7 +35,7 @@ You can add tags to a trial and then use the Search API to search for
 the tags.
 
 To get a list of all your trials, call the ListTrials API. To view a
-trial\'s properties, call the DescribeTrial API. To create a trial
+trial's properties, call the DescribeTrial API. To create a trial
 component, call the CreateTrialComponent API.
 }
 \section{Request syntax}{
@@ -41,6 +43,12 @@ component, call the CreateTrialComponent API.
   TrialName = "string",
   DisplayName = "string",
   ExperimentName = "string",
+  MetadataProperties = list(
+    CommitId = "string",
+    Repository = "string",
+    GeneratedBy = "string",
+    ProjectId = "string"
+  ),
   Tags = list(
     list(
       Key = "string",

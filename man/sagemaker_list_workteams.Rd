@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagemaker_operations.R
 \name{sagemaker_list_workteams}
 \alias{sagemaker_list_workteams}
-\title{Gets a list of work teams that you have defined in a region}
+\title{Gets a list of private work teams that you have defined in a region}
 \usage{
 sagemaker_list_workteams(SortBy, SortOrder, NameContains, NextToken,
   MaxResults)
@@ -12,7 +12,7 @@ sagemaker_list_workteams(SortBy, SortOrder, NameContains, NextToken,
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
 
-\item{NameContains}{A string in the work team\'s name. This filter returns only work teams
+\item{NameContains}{A string in the work team's name. This filter returns only work teams
 whose name contains the specified string.}
 
 \item{NextToken}{If the result of the previous \code{ListWorkteams} request was truncated, the
@@ -22,8 +22,8 @@ jobs, use the token in the next request.}
 \item{MaxResults}{The maximum number of work teams to return in each page of the response.}
 }
 \description{
-Gets a list of work teams that you have defined in a region. The list
-may be empty if no work team satisfies the filter specified in the
+Gets a list of private work teams that you have defined in a region. The
+list may be empty if no work team satisfies the filter specified in the
 \code{NameContains} parameter.
 }
 \section{Request syntax}{

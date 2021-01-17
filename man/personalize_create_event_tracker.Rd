@@ -18,8 +18,7 @@ Creates an event tracker that you use when sending event data to the
 specified dataset group using the
 \href{https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html}{PutEvents}
 API.
-}
-\details{
+
 When Amazon Personalize creates an event tracker, it also creates an
 \emph{event-interactions} dataset in the dataset group associated with the
 event tracker. The event-interactions dataset stores the event data from
@@ -35,8 +34,9 @@ identifies the customer and authorizes the customer to send the data.
 
 The event tracker can be in one of the following states:
 \itemize{
-\item CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
-\item DELETE PENDING \\> DELETE IN\\_PROGRESS
+\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+FAILED
+\item DELETE PENDING > DELETE IN\\_PROGRESS
 }
 
 To get the status of the event tracker, call DescribeEventTracker.

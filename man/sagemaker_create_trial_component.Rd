@@ -2,19 +2,18 @@
 % Please edit documentation in R/sagemaker_operations.R
 \name{sagemaker_create_trial_component}
 \alias{sagemaker_create_trial_component}
-\title{Creates a \emph{trial component}, which is a stage of a machine learning
-\emph{trial}}
+\title{Creates a trial component, which is a stage of a machine learning trial}
 \usage{
 sagemaker_create_trial_component(TrialComponentName, DisplayName,
   Status, StartTime, EndTime, Parameters, InputArtifacts, OutputArtifacts,
-  Tags)
+  MetadataProperties, Tags)
 }
 \arguments{
 \item{TrialComponentName}{[required] The name of the component. The name must be unique in your AWS account
 and is not case-sensitive.}
 
-\item{DisplayName}{The name of the component as displayed. The name doesn\'t need to be
-unique. If \code{DisplayName} isn\'t specified, \code{TrialComponentName} is
+\item{DisplayName}{The name of the component as displayed. The name doesn't need to be
+unique. If \code{DisplayName} isn't specified, \code{TrialComponentName} is
 displayed.}
 
 \item{Status}{The status of the component. States include:
@@ -36,6 +35,8 @@ datasets, algorithms, hyperparameters, source code, and instance types.}
 \item{OutputArtifacts}{The output artifacts for the component. Examples of output artifacts are
 metrics, snapshots, logs, and images.}
 
+\item{MetadataProperties}{}
+
 \item{Tags}{A list of tags to associate with the component. You can use Search API
 to search on the tags.}
 }
@@ -43,8 +44,7 @@ to search on the tags.}
 Creates a \emph{trial component}, which is a stage of a machine learning
 \emph{trial}. A trial is composed of one or more trial components. A trial
 component can be used in multiple trials.
-}
-\details{
+
 Trial components include pre-processing jobs, training jobs, and batch
 transform jobs.
 
@@ -93,6 +93,12 @@ results in an error.
       MediaType = "string",
       Value = "string"
     )
+  ),
+  MetadataProperties = list(
+    CommitId = "string",
+    Repository = "string",
+    GeneratedBy = "string",
+    ProjectId = "string"
   ),
   Tags = list(
     list(

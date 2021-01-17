@@ -11,13 +11,12 @@ sagemaker_stop_transform_job(TransformJobName)
 }
 \description{
 Stops a transform job.
-}
-\details{
+
 When Amazon SageMaker receives a \code{StopTransformJob} request, the status
 of the job changes to \code{Stopping}. After Amazon SageMaker stops the job,
 the status is set to \code{Stopped}. When you stop a transform job before it
-is completed, Amazon SageMaker doesn\'t store the job\'s output in
-Amazon S3.
+is completed, Amazon SageMaker doesn't store the job's output in Amazon
+S3.
 }
 \section{Request syntax}{
 \preformatted{svc$stop_transform_job(

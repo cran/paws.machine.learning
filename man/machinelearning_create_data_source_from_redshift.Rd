@@ -60,8 +60,7 @@ Creates a \code{DataSource} from a database hosted on an Amazon Redshift
 cluster. A \code{DataSource} references data that can be used to perform
 either \code{CreateMLModel}, \code{CreateEvaluation}, or \code{CreateBatchPrediction}
 operations.
-}
-\details{
+
 \code{CreateDataSourceFromRedshift} is an asynchronous operation. In response
 to \code{CreateDataSourceFromRedshift}, Amazon Machine Learning (Amazon ML)
 immediately returns and sets the \code{DataSource} status to \code{PENDING}. After
@@ -70,7 +69,7 @@ the \code{DataSource} is created and ready for use, Amazon ML sets the
 \code{PENDING} states can be used to perform only \code{CreateMLModel},
 \code{CreateEvaluation}, or \code{CreateBatchPrediction} operations.
 
-If Amazon ML can\'t accept the input source, it sets the \code{Status}
+If Amazon ML can't accept the input source, it sets the \code{Status}
 parameter to \code{FAILED} and includes an error message in the \code{Message}
 attribute of the \code{GetDataSource} operation response.
 
@@ -79,7 +78,7 @@ Redshift cluster and should be specified by a \code{SelectSqlQuery} query.
 Amazon ML executes an \code{Unload} command in Amazon Redshift to transfer
 the result set of the \code{SelectSqlQuery} query to \code{S3StagingLocation}.
 
-After the \code{DataSource} has been created, it\'s ready for use in
+After the \code{DataSource} has been created, it's ready for use in
 evaluations and batch predictions. If you plan to use the \code{DataSource}
 to train an \code{MLModel}, the \code{DataSource} also requires a recipe. A recipe
 describes how each input variable will be used in training an \code{MLModel}.
@@ -88,8 +87,8 @@ variable be manipulated; for example, will it be combined with another
 variable or will it be split apart into word combinations? The recipe
 provides answers to these questions.
 
-You can\'t change an existing datasource, but you can copy and modify
-the settings from an existing Amazon Redshift datasource to create a new
+You can't change an existing datasource, but you can copy and modify the
+settings from an existing Amazon Redshift datasource to create a new
 datasource. To do so, call \code{GetDataSource} for an existing datasource
 and copy the values to a \code{CreateDataSource} call. Change the settings
 that you want to change and make sure that all required fields have the

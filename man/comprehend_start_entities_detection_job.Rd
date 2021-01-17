@@ -30,8 +30,8 @@ language. You can specify any of the languages supported by Amazon
 Comprehend. If custom entities recognition is used, this parameter is
 ignored and the language used for training the model is used instead.}
 
-\item{ClientRequestToken}{A unique identifier for the request. If you don\'t set the client
-request token, Amazon Comprehend generates one.}
+\item{ClientRequestToken}{A unique identifier for the request. If you don't set the client request
+token, Amazon Comprehend generates one.}
 
 \item{VolumeKmsKeyId}{ID for the AWS Key Management Service (KMS) key that Amazon Comprehend
 uses to encrypt data on the storage volume attached to the ML compute
@@ -50,8 +50,7 @@ job. For more information, see \href{https://docs.aws.amazon.com/vpc/latest/user
 \description{
 Starts an asynchronous entity detection job for a collection of
 documents. Use the operation to track the status of a job.
-}
-\details{
+
 This API can be used for either standard entity detection or custom
 entity recognition. In order to be used for custom entity recognition,
 the optional \code{EntityRecognizerArn} must be used in order to provide

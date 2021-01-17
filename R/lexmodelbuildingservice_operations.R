@@ -5,12 +5,13 @@ NULL
 
 #' Creates a new version of the bot based on the $LATEST version
 #'
+#' @description
 #' Creates a new version of the bot based on the `$LATEST` version. If the
-#' `$LATEST` version of this resource hasn\'t changed since you created the
-#' last version, Amazon Lex doesn\'t create a new version. It returns the
+#' `$LATEST` version of this resource hasn't changed since you created the
+#' last version, Amazon Lex doesn't create a new version. It returns the
 #' last created version.
 #' 
-#' You can update only the `$LATEST` version of the bot. You can\'t update
+#' You can update only the `$LATEST` version of the bot. You can't update
 #' the numbered versions that you create with the `CreateBotVersion`
 #' operation.
 #' 
@@ -29,7 +30,7 @@ NULL
 #' @param checksum Identifies a specific revision of the `$LATEST` version of the bot. If
 #' you specify a checksum and the `$LATEST` version of the bot has a
 #' different checksum, a `PreconditionFailedException` exception is
-#' returned and Amazon Lex doesn\'t publish a new version. If you don\'t
+#' returned and Amazon Lex doesn't publish a new version. If you don't
 #' specify a checksum, Amazon Lex publishes the `$LATEST` version.
 #'
 #' @section Request syntax:
@@ -63,12 +64,13 @@ lexmodelbuildingservice_create_bot_version <- function(name, checksum = NULL) {
 #' Creates a new version of an intent based on the $LATEST version of the
 #' intent
 #'
+#' @description
 #' Creates a new version of an intent based on the `$LATEST` version of the
-#' intent. If the `$LATEST` version of this intent hasn\'t changed since
-#' you last updated it, Amazon Lex doesn\'t create a new version. It
-#' returns the last version you created.
+#' intent. If the `$LATEST` version of this intent hasn't changed since you
+#' last updated it, Amazon Lex doesn't create a new version. It returns the
+#' last version you created.
 #' 
-#' You can update only the `$LATEST` version of the intent. You can\'t
+#' You can update only the `$LATEST` version of the intent. You can't
 #' update the numbered versions that you create with the
 #' `CreateIntentVersion` operation.
 #' 
@@ -87,8 +89,8 @@ lexmodelbuildingservice_create_bot_version <- function(name, checksum = NULL) {
 #' @param checksum Checksum of the `$LATEST` version of the intent that should be used to
 #' create the new version. If you specify a checksum and the `$LATEST`
 #' version of the intent has a different checksum, Amazon Lex returns a
-#' `PreconditionFailedException` exception and doesn\'t publish a new
-#' version. If you don\'t specify a checksum, Amazon Lex publishes the
+#' `PreconditionFailedException` exception and doesn't publish a new
+#' version. If you don't specify a checksum, Amazon Lex publishes the
 #' `$LATEST` version.
 #'
 #' @section Request syntax:
@@ -122,12 +124,13 @@ lexmodelbuildingservice_create_intent_version <- function(name, checksum = NULL)
 #' Creates a new version of a slot type based on the $LATEST version of the
 #' specified slot type
 #'
+#' @description
 #' Creates a new version of a slot type based on the `$LATEST` version of
 #' the specified slot type. If the `$LATEST` version of this resource has
-#' not changed since the last version that you created, Amazon Lex doesn\'t
+#' not changed since the last version that you created, Amazon Lex doesn't
 #' create a new version. It returns the last version that you created.
 #' 
-#' You can update only the `$LATEST` version of a slot type. You can\'t
+#' You can update only the `$LATEST` version of a slot type. You can't
 #' update the numbered versions that you create with the
 #' `CreateSlotTypeVersion` operation.
 #' 
@@ -146,8 +149,8 @@ lexmodelbuildingservice_create_intent_version <- function(name, checksum = NULL)
 #' @param checksum Checksum for the `$LATEST` version of the slot type that you want to
 #' publish. If you specify a checksum and the `$LATEST` version of the slot
 #' type has a different checksum, Amazon Lex returns a
-#' `PreconditionFailedException` exception and doesn\'t publish the new
-#' version. If you don\'t specify a checksum, Amazon Lex publishes the
+#' `PreconditionFailedException` exception and doesn't publish the new
+#' version. If you don't specify a checksum, Amazon Lex publishes the
 #' `$LATEST` version.
 #'
 #' @section Request syntax:
@@ -180,9 +183,10 @@ lexmodelbuildingservice_create_slot_type_version <- function(name, checksum = NU
 
 #' Deletes all versions of the bot, including the $LATEST version
 #'
+#' @description
 #' Deletes all versions of the bot, including the `$LATEST` version. To
 #' delete a specific version of the bot, use the DeleteBotVersion
-#' operation. The `DeleteBot` operation doesn\'t immediately remove the bot
+#' operation. The `DeleteBot` operation doesn't immediately remove the bot
 #' schema. Instead, it is marked for deletion and removed later.
 #' 
 #' Amazon Lex stores utterances indefinitely for improving the ability of
@@ -190,7 +194,7 @@ lexmodelbuildingservice_create_slot_type_version <- function(name, checksum = NU
 #' when the bot is deleted. To remove the utterances, use the
 #' DeleteUtterances operation.
 #' 
-#' If a bot has an alias, you can\'t delete it. Instead, the `DeleteBot`
+#' If a bot has an alias, you can't delete it. Instead, the `DeleteBot`
 #' operation returns a `ResourceInUseException` exception that includes a
 #' reference to the alias that refers to the bot. To remove the reference
 #' to the bot, delete the alias. If you get the same exception again,
@@ -233,9 +237,10 @@ lexmodelbuildingservice_delete_bot <- function(name) {
 
 #' Deletes an alias for the specified bot
 #'
+#' @description
 #' Deletes an alias for the specified bot.
 #' 
-#' You can\'t delete an alias that is used in the association between a bot
+#' You can't delete an alias that is used in the association between a bot
 #' and a messaging channel. If an alias is used in a channel association,
 #' the `DeleteBot` operation returns a `ResourceInUseException` exception
 #' that includes a reference to the channel association that refers to the
@@ -280,6 +285,7 @@ lexmodelbuildingservice_delete_bot_alias <- function(name, botName) {
 #' Deletes the association between an Amazon Lex bot and a messaging
 #' platform
 #'
+#' @description
 #' Deletes the association between an Amazon Lex bot and a messaging
 #' platform.
 #' 
@@ -326,6 +332,7 @@ lexmodelbuildingservice_delete_bot_channel_association <- function(name, botName
 
 #' Deletes a specific version of a bot
 #'
+#' @description
 #' Deletes a specific version of a bot. To delete all versions of a bot,
 #' use the DeleteBot operation.
 #' 
@@ -370,6 +377,7 @@ lexmodelbuildingservice_delete_bot_version <- function(name, version) {
 
 #' Deletes all versions of the intent, including the $LATEST version
 #'
+#' @description
 #' Deletes all versions of the intent, including the `$LATEST` version. To
 #' delete a specific version of the intent, use the DeleteIntentVersion
 #' operation.
@@ -421,6 +429,7 @@ lexmodelbuildingservice_delete_intent <- function(name) {
 
 #' Deletes a specific version of an intent
 #'
+#' @description
 #' Deletes a specific version of an intent. To delete all versions of a
 #' intent, use the DeleteIntent operation.
 #' 
@@ -465,6 +474,7 @@ lexmodelbuildingservice_delete_intent_version <- function(name, version) {
 
 #' Deletes all versions of the slot type, including the $LATEST version
 #'
+#' @description
 #' Deletes all versions of the slot type, including the `$LATEST` version.
 #' To delete a specific version of the slot type, use the
 #' DeleteSlotTypeVersion operation.
@@ -516,6 +526,7 @@ lexmodelbuildingservice_delete_slot_type <- function(name) {
 
 #' Deletes a specific version of a slot type
 #'
+#' @description
 #' Deletes a specific version of a slot type. To delete all versions of a
 #' slot type, use the DeleteSlotType operation.
 #' 
@@ -560,6 +571,7 @@ lexmodelbuildingservice_delete_slot_type_version <- function(name, version) {
 
 #' Deletes stored utterances
 #'
+#' @description
 #' Deletes stored utterances.
 #' 
 #' Amazon Lex stores the utterances that users send to your bot. Utterances
@@ -569,9 +581,9 @@ lexmodelbuildingservice_delete_slot_type_version <- function(name, version) {
 #' 
 #' Use the `DeleteUtterances` operation to manually delete stored
 #' utterances for a specific user. When you use the `DeleteUtterances`
-#' operation, utterances stored for improving your bot\'s ability to
-#' respond to user input are deleted immediately. Utterances stored for use
-#' with the `GetUtterancesView` operation are deleted after 15 days.
+#' operation, utterances stored for improving your bot's ability to respond
+#' to user input are deleted immediately. Utterances stored for use with
+#' the `GetUtterancesView` operation are deleted after 15 days.
 #' 
 #' This operation requires permissions for the `lex:DeleteUtterances`
 #' action.
@@ -582,9 +594,9 @@ lexmodelbuildingservice_delete_slot_type_version <- function(name, version) {
 #' @param botName &#91;required&#93; The name of the bot that stored the utterances.
 #' @param userId &#91;required&#93; The unique identifier for the user that made the utterances. This is the
 #' user ID that was sent in the
-#' [PostContent](http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
+#' [PostContent](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
 #' or
-#' [PostText](http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+#' [PostText](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
 #' operation request that contained the utterance.
 #'
 #' @section Request syntax:
@@ -617,6 +629,7 @@ lexmodelbuildingservice_delete_utterances <- function(botName, userId) {
 
 #' Returns metadata information for a specific bot
 #'
+#' @description
 #' Returns metadata information for a specific bot. You must provide the
 #' bot name and the bot version or alias.
 #' 
@@ -667,6 +680,7 @@ lexmodelbuildingservice_get_bot <- function(name, versionOrAlias) {
 
 #' Returns information about an Amazon Lex bot alias
 #'
+#' @description
 #' Returns information about an Amazon Lex bot alias. For more information
 #' about aliases, see versioning-aliases.
 #' 
@@ -708,6 +722,7 @@ lexmodelbuildingservice_get_bot_alias <- function(name, botName) {
 
 #' Returns a list of aliases for a specified Amazon Lex bot
 #'
+#' @description
 #' Returns a list of aliases for a specified Amazon Lex bot.
 #' 
 #' This operation requires permissions for the `lex:GetBotAliases` action.
@@ -724,8 +739,8 @@ lexmodelbuildingservice_get_bot_alias <- function(name, botName) {
 #' @param maxResults The maximum number of aliases to return in the response. The default is
 #' 50. .
 #' @param nameContains Substring to match in bot alias names. An alias will be returned if any
-#' part of its name matches the substring. For example, \"xyz\" matches
-#' both \"xyzabc\" and \"abcxyz.\"
+#' part of its name matches the substring. For example, "xyz" matches both
+#' "xyzabc" and "abcxyz."
 #'
 #' @section Request syntax:
 #' ```
@@ -760,6 +775,7 @@ lexmodelbuildingservice_get_bot_aliases <- function(botName, nextToken = NULL, m
 #' Returns information about the association between an Amazon Lex bot and
 #' a messaging platform
 #'
+#' @description
 #' Returns information about the association between an Amazon Lex bot and
 #' a messaging platform.
 #' 
@@ -807,6 +823,7 @@ lexmodelbuildingservice_get_bot_channel_association <- function(name, botName, b
 
 #' Returns a list of all of the channels associated with the specified bot
 #'
+#' @description
 #' Returns a list of all of the channels associated with the specified bot.
 #' 
 #' The `GetBotChannelAssociations` operation requires permissions for the
@@ -827,9 +844,8 @@ lexmodelbuildingservice_get_bot_channel_association <- function(name, botName, b
 #' default is 50.
 #' @param nameContains Substring to match in channel association names. An association will be
 #' returned if any part of its name matches the substring. For example,
-#' \"xyz\" matches both \"xyzabc\" and \"abcxyz.\" To return all bot
-#' channel associations, use a hyphen (\"-\") as the `nameContains`
-#' parameter.
+#' "xyz" matches both "xyzabc" and "abcxyz." To return all bot channel
+#' associations, use a hyphen ("-") as the `nameContains` parameter.
 #'
 #' @section Request syntax:
 #' ```
@@ -864,6 +880,7 @@ lexmodelbuildingservice_get_bot_channel_associations <- function(botName, botAli
 
 #' Gets information about all of the versions of a bot
 #'
+#' @description
 #' Gets information about all of the versions of a bot.
 #' 
 #' The `GetBotVersions` operation returns a `BotMetadata` object for each
@@ -921,14 +938,15 @@ lexmodelbuildingservice_get_bot_versions <- function(name, nextToken = NULL, max
 #' field, the response includes information for the $LATEST version of all
 #' bots whose name contains the specified string
 #'
+#' @description
 #' Returns bot information as follows:
 #' 
 #' -   If you provide the `nameContains` field, the response includes
 #'     information for the `$LATEST` version of all bots whose name
 #'     contains the specified string.
 #' 
-#' -   If you don\'t specify the `nameContains` field, the operation
-#'     returns information about the `$LATEST` version of all of your bots.
+#' -   If you don't specify the `nameContains` field, the operation returns
+#'     information about the `$LATEST` version of all of your bots.
 #' 
 #' This operation requires permission for the `lex:GetBots` action.
 #'
@@ -942,8 +960,8 @@ lexmodelbuildingservice_get_bot_versions <- function(name, nextToken = NULL, max
 #' @param maxResults The maximum number of bots to return in the response that the request
 #' will return. The default is 10.
 #' @param nameContains Substring to match in bot names. A bot will be returned if any part of
-#' its name matches the substring. For example, \"xyz\" matches both
-#' \"xyzabc\" and \"abcxyz.\"
+#' its name matches the substring. For example, "xyz" matches both "xyzabc"
+#' and "abcxyz."
 #'
 #' @section Request syntax:
 #' ```
@@ -985,6 +1003,7 @@ lexmodelbuildingservice_get_bots <- function(nextToken = NULL, maxResults = NULL
 
 #' Returns information about a built-in intent
 #'
+#' @description
 #' Returns information about a built-in intent.
 #' 
 #' This operation requires permission for the `lex:GetBuiltinIntent`
@@ -995,7 +1014,7 @@ lexmodelbuildingservice_get_bots <- function(nextToken = NULL, maxResults = NULL
 #'
 #' @param signature &#91;required&#93; The unique identifier for a built-in intent. To find the signature for
 #' an intent, see [Standard Built-in
-#' Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+#' Intents](https://developer.amazon.com/en-US/docs/alexa/custom-skills/standard-built-in-intents.html)
 #' in the *Alexa Skills Kit*.
 #'
 #' @section Request syntax:
@@ -1027,6 +1046,7 @@ lexmodelbuildingservice_get_builtin_intent <- function(signature) {
 
 #' Gets a list of built-in intents that meet the specified criteria
 #'
+#' @description
 #' Gets a list of built-in intents that meet the specified criteria.
 #' 
 #' This operation requires permission for the `lex:GetBuiltinIntents`
@@ -1039,9 +1059,9 @@ lexmodelbuildingservice_get_builtin_intent <- function(signature) {
 #' @param locale A list of locales that the intent supports.
 #' @param signatureContains Substring to match in built-in intent signatures. An intent will be
 #' returned if any part of its signature matches the substring. For
-#' example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\" To find the
-#' signature for an intent, see [Standard Built-in
-#' Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+#' example, "xyz" matches both "xyzabc" and "abcxyz." To find the signature
+#' for an intent, see [Standard Built-in
+#' Intents](https://developer.amazon.com/en-US/docs/alexa/custom-skills/standard-built-in-intents.html)
 #' in the *Alexa Skills Kit*.
 #' @param nextToken A pagination token that fetches the next page of intents. If this API
 #' call is truncated, Amazon Lex returns a pagination token in the
@@ -1053,7 +1073,7 @@ lexmodelbuildingservice_get_builtin_intent <- function(signature) {
 #' @section Request syntax:
 #' ```
 #' svc$get_builtin_intents(
-#'   locale = "en-US"|"en-GB"|"de-DE",
+#'   locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
 #'   signatureContains = "string",
 #'   nextToken = "string",
 #'   maxResults = 123
@@ -1082,10 +1102,11 @@ lexmodelbuildingservice_get_builtin_intents <- function(locale = NULL, signature
 
 #' Gets a list of built-in slot types that meet the specified criteria
 #'
+#' @description
 #' Gets a list of built-in slot types that meet the specified criteria.
 #' 
 #' For a list of built-in slot types, see [Slot Type
-#' Reference](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+#' Reference](https://developer.amazon.com/en-US/docs/alexa/custom-skills/slot-type-reference.html)
 #' in the *Alexa Skills Kit*.
 #' 
 #' This operation requires permission for the `lex:GetBuiltInSlotTypes`
@@ -1098,7 +1119,7 @@ lexmodelbuildingservice_get_builtin_intents <- function(locale = NULL, signature
 #' @param locale A list of locales that the slot type supports.
 #' @param signatureContains Substring to match in built-in slot type signatures. A slot type will be
 #' returned if any part of its signature matches the substring. For
-#' example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\"
+#' example, "xyz" matches both "xyzabc" and "abcxyz."
 #' @param nextToken A pagination token that fetches the next page of slot types. If the
 #' response to this API call is truncated, Amazon Lex returns a pagination
 #' token in the response. To fetch the next page of slot types, specify the
@@ -1109,7 +1130,7 @@ lexmodelbuildingservice_get_builtin_intents <- function(locale = NULL, signature
 #' @section Request syntax:
 #' ```
 #' svc$get_builtin_slot_types(
-#'   locale = "en-US"|"en-GB"|"de-DE",
+#'   locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
 #'   signatureContains = "string",
 #'   nextToken = "string",
 #'   maxResults = 123
@@ -1138,6 +1159,7 @@ lexmodelbuildingservice_get_builtin_slot_types <- function(locale = NULL, signat
 
 #' Exports the contents of a Amazon Lex resource in a specified format
 #'
+#' @description
 #' Exports the contents of a Amazon Lex resource in a specified format.
 #'
 #' @usage
@@ -1182,6 +1204,7 @@ lexmodelbuildingservice_get_export <- function(name, version, resourceType, expo
 #' Gets information about an import job started with the StartImport
 #' operation
 #'
+#' @description
 #' Gets information about an import job started with the `StartImport`
 #' operation.
 #'
@@ -1219,6 +1242,7 @@ lexmodelbuildingservice_get_import <- function(importId) {
 
 #' Returns information about an intent
 #'
+#' @description
 #' Returns information about an intent. In addition to the intent name, you
 #' must specify the intent version.
 #' 
@@ -1270,6 +1294,7 @@ lexmodelbuildingservice_get_intent <- function(name, version) {
 
 #' Gets information about all of the versions of an intent
 #'
+#' @description
 #' Gets information about all of the versions of an intent.
 #' 
 #' The `GetIntentVersions` operation returns an `IntentMetadata` object for
@@ -1328,12 +1353,13 @@ lexmodelbuildingservice_get_intent_versions <- function(name, nextToken = NULL, 
 #' field, returns the $LATEST version of all intents that contain the
 #' specified string
 #'
+#' @description
 #' Returns intent information as follows:
 #' 
 #' -   If you specify the `nameContains` field, returns the `$LATEST`
 #'     version of all intents that contain the specified string.
 #' 
-#' -   If you don\'t specify the `nameContains` field, returns information
+#' -   If you don't specify the `nameContains` field, returns information
 #'     about the `$LATEST` version of all intents.
 #' 
 #' The operation requires permission for the `lex:GetIntents` action.
@@ -1348,8 +1374,8 @@ lexmodelbuildingservice_get_intent_versions <- function(name, nextToken = NULL, 
 #' @param maxResults The maximum number of intents to return in the response. The default is
 #' 10.
 #' @param nameContains Substring to match in intent names. An intent will be returned if any
-#' part of its name matches the substring. For example, \"xyz\" matches
-#' both \"xyzabc\" and \"abcxyz.\"
+#' part of its name matches the substring. For example, "xyz" matches both
+#' "xyzabc" and "abcxyz."
 #'
 #' @section Request syntax:
 #' ```
@@ -1392,6 +1418,7 @@ lexmodelbuildingservice_get_intents <- function(nextToken = NULL, maxResults = N
 
 #' Returns information about a specific version of a slot type
 #'
+#' @description
 #' Returns information about a specific version of a slot type. In addition
 #' to specifying the slot type name, you must specify the slot type
 #' version.
@@ -1443,6 +1470,7 @@ lexmodelbuildingservice_get_slot_type <- function(name, version) {
 
 #' Gets information about all versions of a slot type
 #'
+#' @description
 #' Gets information about all versions of a slot type.
 #' 
 #' The `GetSlotTypeVersions` operation returns a `SlotTypeMetadata` object
@@ -1502,12 +1530,13 @@ lexmodelbuildingservice_get_slot_type_versions <- function(name, nextToken = NUL
 #' nameContains field, returns the $LATEST version of all slot types that
 #' contain the specified string
 #'
+#' @description
 #' Returns slot type information as follows:
 #' 
 #' -   If you specify the `nameContains` field, returns the `$LATEST`
 #'     version of all slot types that contain the specified string.
 #' 
-#' -   If you don\'t specify the `nameContains` field, returns information
+#' -   If you don't specify the `nameContains` field, returns information
 #'     about the `$LATEST` version of all slot types.
 #' 
 #' The operation requires permission for the `lex:GetSlotTypes` action.
@@ -1523,8 +1552,8 @@ lexmodelbuildingservice_get_slot_type_versions <- function(name, nextToken = NUL
 #' @param maxResults The maximum number of slot types to return in the response. The default
 #' is 10.
 #' @param nameContains Substring to match in slot type names. A slot type will be returned if
-#' any part of its name matches the substring. For example, \"xyz\" matches
-#' both \"xyzabc\" and \"abcxyz.\"
+#' any part of its name matches the substring. For example, "xyz" matches
+#' both "xyzabc" and "abcxyz."
 #'
 #' @section Request syntax:
 #' ```
@@ -1568,6 +1597,7 @@ lexmodelbuildingservice_get_slot_types <- function(nextToken = NULL, maxResults 
 #' Use the GetUtterancesView operation to get information about the
 #' utterances that your users have made to your bot
 #'
+#' @description
 #' Use the `GetUtterancesView` operation to get information about the
 #' utterances that your users have made to your bot. You can use this list
 #' to tune the utterances that your bot responds to.
@@ -1575,7 +1605,7 @@ lexmodelbuildingservice_get_slot_types <- function(nextToken = NULL, maxResults 
 #' For example, say that you have created a bot to order flowers. After
 #' your users have used your bot for a while, use the `GetUtterancesView`
 #' operation to see the requests that they have made and whether they have
-#' been successful. You might find that the utterance \"I want flowers\" is
+#' been successful. You might find that the utterance "I want flowers" is
 #' not being recognized. You could add this utterance to the `OrderFlowers`
 #' intent so that your bot recognizes that utterance.
 #' 
@@ -1639,6 +1669,7 @@ lexmodelbuildingservice_get_utterances_view <- function(botName, botVersions, st
 
 #' Gets a list of tags associated with the specified resource
 #'
+#' @description
 #' Gets a list of tags associated with the specified resource. Only bots,
 #' bot aliases, and bot channels can have tags associated with them.
 #'
@@ -1677,6 +1708,7 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 
 #' Creates an Amazon Lex conversational bot or replaces an existing bot
 #'
+#' @description
 #' Creates an Amazon Lex conversational bot or replaces an existing bot.
 #' When you create or update a bot you are only required to specify a name,
 #' a locale, and whether the bot is directed toward children under age 13.
@@ -1688,9 +1720,9 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' 
 #' If you specify the name of an existing bot, the fields in the request
 #' replace the existing values in the `$LATEST` version of the bot. Amazon
-#' Lex removes any fields that you don\'t provide values for in the
-#' request, except for the `idleTTLInSeconds` and `privacySettings` fields,
-#' which are set to their default values. If you don\'t specify values for
+#' Lex removes any fields that you don't provide values for in the request,
+#' except for the `idleTTLInSeconds` and `privacySettings` fields, which
+#' are set to their default values. If you don't specify values for
 #' required fields, Amazon Lex throws an exception.
 #' 
 #' This operation requires permissions for the `lex:PutBot` action. For
@@ -1698,6 +1730,7 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #'
 #' @usage
 #' lexmodelbuildingservice_put_bot(name, description, intents,
+#'   enableModelImprovements, nluIntentConfidenceThreshold,
 #'   clarificationPrompt, abortStatement, idleSessionTTLInSeconds, voiceId,
 #'   checksum, processBehavior, locale, childDirected, detectSentiment,
 #'   createVersion, tags)
@@ -1707,31 +1740,93 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' @param intents An array of `Intent` objects. Each intent represents a command that a
 #' user can express. For example, a pizza ordering bot might support an
 #' OrderPizza intent. For more information, see how-it-works.
-#' @param clarificationPrompt When Amazon Lex doesn\'t understand the user\'s intent, it uses this
+#' @param enableModelImprovements Set to `true` to enable access to natural language understanding
+#' improvements.
+#' 
+#' When you set the `enableModelImprovements` parameter to `true` you can
+#' use the `nluIntentConfidenceThreshold` parameter to configure confidence
+#' scores. For more information, see [Confidence
+#' Scores](https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html).
+#' 
+#' You can only set the `enableModelImprovements` parameter in certain
+#' Regions. If you set the parameter to `true`, your bot has access to
+#' accuracy improvements.
+#' 
+#' The Regions where you can set the `enableModelImprovements` parameter to
+#' `true` are:
+#' 
+#' -   US East (N. Virginia) (us-east-1)
+#' 
+#' -   US West (Oregon) (us-west-2)
+#' 
+#' -   Asia Pacific (Sydney) (ap-southeast-2)
+#' 
+#' -   EU (Ireland) (eu-west-1)
+#' 
+#' In other Regions, the `enableModelImprovements` parameter is set to
+#' `true` by default. In these Regions setting the parameter to `false`
+#' throws a `ValidationException` exception.
+#' @param nluIntentConfidenceThreshold Determines the threshold where Amazon Lex will insert the
+#' `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when
+#' returning alternative intents in a
+#' [PostContent](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
+#' or
+#' [PostText](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+#' response. `AMAZON.FallbackIntent` and `AMAZON.KendraSearchIntent` are
+#' only inserted if they are configured for the bot.
+#' 
+#' You must set the `enableModelImprovements` parameter to `true` to use
+#' confidence scores in the following regions.
+#' 
+#' -   US East (N. Virginia) (us-east-1)
+#' 
+#' -   US West (Oregon) (us-west-2)
+#' 
+#' -   Asia Pacific (Sydney) (ap-southeast-2)
+#' 
+#' -   EU (Ireland) (eu-west-1)
+#' 
+#' In other Regions, the `enableModelImprovements` parameter is set to
+#' `true` by default.
+#' 
+#' For example, suppose a bot is configured with the confidence threshold
+#' of 0.80 and the `AMAZON.FallbackIntent`. Amazon Lex returns three
+#' alternative intents with the following confidence scores: IntentA
+#' (0.70), IntentB (0.60), IntentC (0.50). The response from the `PostText`
+#' operation would be:
+#' 
+#' -   AMAZON.FallbackIntent
+#' 
+#' -   IntentA
+#' 
+#' -   IntentB
+#' 
+#' -   IntentC
+#' @param clarificationPrompt When Amazon Lex doesn't understand the user's intent, it uses this
 #' message to get clarification. To specify how many times Amazon Lex
 #' should repeat the clarification prompt, use the `maxAttempts` field. If
-#' Amazon Lex still doesn\'t understand, it sends the message in the
+#' Amazon Lex still doesn't understand, it sends the message in the
 #' `abortStatement` field.
 #' 
 #' When you create a clarification prompt, make sure that it suggests the
 #' correct response from the user. for example, for a bot that orders pizza
-#' and drinks, you might create this clarification prompt: \"What would you
-#' like to do? You can say \'Order a pizza\' or \'Order a drink.\'\"
+#' and drinks, you might create this clarification prompt: "What would you
+#' like to do? You can say 'Order a pizza' or 'Order a drink.'"
 #' 
 #' If you have defined a fallback intent, it will be invoked if the
 #' clarification prompt is repeated the number of times defined in the
 #' `maxAttempts` field. For more information, see
 #' [AMAZON.FallbackIntent](https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html).
 #' 
-#' If you don\'t define a clarification prompt, at runtime Amazon Lex will
+#' If you don't define a clarification prompt, at runtime Amazon Lex will
 #' return a 400 Bad Request exception in three cases:
 #' 
 #' -   Follow-up prompt - When the user responds to a follow-up prompt but
 #'     does not provide an intent. For example, in response to a follow-up
-#'     prompt that says \"Would you like anything else today?\" the user
-#'     says \"Yes.\" Amazon Lex will return a 400 Bad Request exception
-#'     because it does not have a clarification prompt to send to the user
-#'     to get an intent.
+#'     prompt that says "Would you like anything else today?" the user says
+#'     "Yes." Amazon Lex will return a 400 Bad Request exception because it
+#'     does not have a clarification prompt to send to the user to get an
+#'     intent.
 #' 
 #' -   Lambda function - When using a Lambda function, you return an
 #'     `ElicitIntent` dialog type. Since Amazon Lex does not have a
@@ -1742,23 +1837,23 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #'     send an `ElicitIntent` dialog type. Since Amazon Lex does not have a
 #'     clarification prompt to get an intent from the user, it returns a
 #'     400 Bad Request exception.
-#' @param abortStatement When Amazon Lex can\'t understand the user\'s input in context, it tries
+#' @param abortStatement When Amazon Lex can't understand the user's input in context, it tries
 #' to elicit the information a few times. After that, Amazon Lex sends the
-#' message defined in `abortStatement` to the user, and then aborts the
+#' message defined in `abortStatement` to the user, and then cancels the
 #' conversation. To set the number of retries, use the
 #' `valueElicitationPrompt` field for the slot type.
 #' 
-#' For example, in a pizza ordering bot, Amazon Lex might ask a user \"What
-#' type of crust would you like?\" If the user\'s response is not one of
-#' the expected responses (for example, \"thin crust, \"deep dish,\" etc.),
-#' Amazon Lex tries to elicit a correct response a few more times.
+#' For example, in a pizza ordering bot, Amazon Lex might ask a user "What
+#' type of crust would you like?" If the user's response is not one of the
+#' expected responses (for example, "thin crust, "deep dish," etc.), Amazon
+#' Lex tries to elicit a correct response a few more times.
 #' 
 #' For example, in a pizza ordering application, `OrderPizza` might be one
 #' of the intents. This intent might require the `CrustType` slot. You
 #' specify the `valueElicitationPrompt` field when you create the
 #' `CrustType` slot.
 #' 
-#' If you have defined a fallback intent the abort statement will not be
+#' If you have defined a fallback intent the cancel statement will not be
 #' sent to the user, the fallback intent is used instead. For more
 #' information, see
 #' [AMAZON.FallbackIntent](https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-fallback.html).
@@ -1770,13 +1865,13 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' expires and Amazon Lex deletes any data provided before the timeout.
 #' 
 #' For example, suppose that a user chooses the OrderPizza intent, but gets
-#' sidetracked halfway through placing an order. If the user doesn\'t
+#' sidetracked halfway through placing an order. If the user doesn't
 #' complete the order within the specified time, Amazon Lex discards the
 #' slot information that it gathered, and the user must start over.
 #' 
-#' If you don\'t include the `idleSessionTTLInSeconds` element in a
-#' `PutBot` operation request, Amazon Lex uses the default value. This is
-#' also true if the request replaces an existing bot.
+#' If you don't include the `idleSessionTTLInSeconds` element in a `PutBot`
+#' operation request, Amazon Lex uses the default value. This is also true
+#' if the request replaces an existing bot.
 #' 
 #' The default is 300 seconds (5 minutes).
 #' @param voiceId The Amazon Polly voice ID that you want Amazon Lex to use for voice
@@ -1790,14 +1885,14 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' specify a checksum you get a `BadRequestException` exception.
 #' 
 #' When you want to update a bot, set the `checksum` field to the checksum
-#' of the most recent revision of the `$LATEST` version. If you don\'t
+#' of the most recent revision of the `$LATEST` version. If you don't
 #' specify the ` checksum` field, or if the checksum does not match the
 #' `$LATEST` version, you get a `PreconditionFailedException` exception.
 #' @param processBehavior If you set the `processBehavior` element to `BUILD`, Amazon Lex builds
 #' the bot so that it can be run. If you set the element to `SAVE` Amazon
-#' Lex saves the bot, but doesn\'t build it.
+#' Lex saves the bot, but doesn't build it.
 #' 
-#' If you don\'t specify this value, the default value is `BUILD`.
+#' If you don't specify this value, the default value is `BUILD`.
 #' @param locale &#91;required&#93; Specifies the target locale for the bot. Any intent used in the bot must
 #' be compatible with the locale of the bot.
 #' 
@@ -1805,15 +1900,15 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' @param childDirected &#91;required&#93; For each Amazon Lex bot created with the Amazon Lex Model Building
 #' Service, you must specify whether your use of Amazon Lex is related to a
 #' website, program, or other application that is directed or targeted, in
-#' whole or in part, to children under age 13 and subject to the
-#' Children\'s Online Privacy Protection Act (COPPA) by specifying `true`
-#' or `false` in the `childDirected` field. By specifying `true` in the
-#' `childDirected` field, you confirm that your use of Amazon Lex **is**
-#' related to a website, program, or other application that is directed or
-#' targeted, in whole or in part, to children under age 13 and subject to
-#' COPPA. By specifying `false` in the `childDirected` field, you confirm
-#' that your use of Amazon Lex **is not** related to a website, program, or
-#' other application that is directed or targeted, in whole or in part, to
+#' whole or in part, to children under age 13 and subject to the Children's
+#' Online Privacy Protection Act (COPPA) by specifying `true` or `false` in
+#' the `childDirected` field. By specifying `true` in the `childDirected`
+#' field, you confirm that your use of Amazon Lex **is** related to a
+#' website, program, or other application that is directed or targeted, in
+#' whole or in part, to children under age 13 and subject to COPPA. By
+#' specifying `false` in the `childDirected` field, you confirm that your
+#' use of Amazon Lex **is not** related to a website, program, or other
+#' application that is directed or targeted, in whole or in part, to
 #' children under age 13 and subject to COPPA. You may not specify a
 #' default value for the `childDirected` field that does not accurately
 #' reflect whether your use of Amazon Lex is related to a website, program,
@@ -1826,16 +1921,16 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' COPPA. For information regarding the use of Amazon Lex in connection
 #' with websites, programs, or other applications that are directed or
 #' targeted, in whole or in part, to children under age 13, see the [Amazon
-#' Lex FAQ.](https://aws.amazon.com/lex/faqs#data-security)
+#' Lex FAQ.](https://aws.amazon.com/lex/faqs/#data-security)
 #' @param detectSentiment When set to `true` user utterances are sent to Amazon Comprehend for
-#' sentiment analysis. If you don\'t specify `detectSentiment`, the default
+#' sentiment analysis. If you don't specify `detectSentiment`, the default
 #' is `false`.
 #' @param createVersion When set to `true` a new numbered version of the bot is created. This is
-#' the same as calling the `CreateBotVersion` operation. If you don\'t
+#' the same as calling the `CreateBotVersion` operation. If you don't
 #' specify `createVersion`, the default is `false`.
 #' @param tags A list of tags to add to the bot. You can only add tags when you create
-#' a bot, you can\'t use the `PutBot` operation to update the tags on a
-#' bot. To update tags, use the `TagResource` operation.
+#' a bot, you can't use the `PutBot` operation to update the tags on a bot.
+#' To update tags, use the `TagResource` operation.
 #'
 #' @section Request syntax:
 #' ```
@@ -1848,6 +1943,8 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #'       intentVersion = "string"
 #'     )
 #'   ),
+#'   enableModelImprovements = TRUE|FALSE,
+#'   nluIntentConfidenceThreshold = 123.0,
 #'   clarificationPrompt = list(
 #'     messages = list(
 #'       list(
@@ -1873,7 +1970,7 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #'   voiceId = "string",
 #'   checksum = "string",
 #'   processBehavior = "SAVE"|"BUILD",
-#'   locale = "en-US"|"en-GB"|"de-DE",
+#'   locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
 #'   childDirected = TRUE|FALSE,
 #'   detectSentiment = TRUE|FALSE,
 #'   createVersion = TRUE|FALSE,
@@ -1933,14 +2030,14 @@ lexmodelbuildingservice_list_tags_for_resource <- function(resourceArn) {
 #' @keywords internal
 #'
 #' @rdname lexmodelbuildingservice_put_bot
-lexmodelbuildingservice_put_bot <- function(name, description = NULL, intents = NULL, clarificationPrompt = NULL, abortStatement = NULL, idleSessionTTLInSeconds = NULL, voiceId = NULL, checksum = NULL, processBehavior = NULL, locale, childDirected, detectSentiment = NULL, createVersion = NULL, tags = NULL) {
+lexmodelbuildingservice_put_bot <- function(name, description = NULL, intents = NULL, enableModelImprovements = NULL, nluIntentConfidenceThreshold = NULL, clarificationPrompt = NULL, abortStatement = NULL, idleSessionTTLInSeconds = NULL, voiceId = NULL, checksum = NULL, processBehavior = NULL, locale, childDirected, detectSentiment = NULL, createVersion = NULL, tags = NULL) {
   op <- new_operation(
     name = "PutBot",
     http_method = "PUT",
     http_path = "/bots/{name}/versions/$LATEST",
     paginator = list()
   )
-  input <- .lexmodelbuildingservice$put_bot_input(name = name, description = description, intents = intents, clarificationPrompt = clarificationPrompt, abortStatement = abortStatement, idleSessionTTLInSeconds = idleSessionTTLInSeconds, voiceId = voiceId, checksum = checksum, processBehavior = processBehavior, locale = locale, childDirected = childDirected, detectSentiment = detectSentiment, createVersion = createVersion, tags = tags)
+  input <- .lexmodelbuildingservice$put_bot_input(name = name, description = description, intents = intents, enableModelImprovements = enableModelImprovements, nluIntentConfidenceThreshold = nluIntentConfidenceThreshold, clarificationPrompt = clarificationPrompt, abortStatement = abortStatement, idleSessionTTLInSeconds = idleSessionTTLInSeconds, voiceId = voiceId, checksum = checksum, processBehavior = processBehavior, locale = locale, childDirected = childDirected, detectSentiment = detectSentiment, createVersion = createVersion, tags = tags)
   output <- .lexmodelbuildingservice$put_bot_output()
   config <- get_config()
   svc <- .lexmodelbuildingservice$service(config)
@@ -1953,6 +2050,7 @@ lexmodelbuildingservice_put_bot <- function(name, description = NULL, intents = 
 #' Creates an alias for the specified version of the bot or replaces an
 #' alias for the specified bot
 #'
+#' @description
 #' Creates an alias for the specified version of the bot or replaces an
 #' alias for the specified bot. To change the version of the bot that the
 #' alias points to, replace the alias. For more information about aliases,
@@ -1975,14 +2073,13 @@ lexmodelbuildingservice_put_bot <- function(name, description = NULL, intents = 
 #' 
 #' When you want to update a bot alias, set the `checksum` field to the
 #' checksum of the most recent revision of the `$LATEST` version. If you
-#' don\'t specify the ` checksum` field, or if the checksum does not match
+#' don't specify the ` checksum` field, or if the checksum does not match
 #' the `$LATEST` version, you get a `PreconditionFailedException`
 #' exception.
 #' @param conversationLogs Settings for conversation logs for the alias.
 #' @param tags A list of tags to add to the bot alias. You can only add tags when you
-#' create an alias, you can\'t use the `PutBotAlias` operation to update
-#' the tags on a bot alias. To update tags, use the `TagResource`
-#' operation.
+#' create an alias, you can't use the `PutBotAlias` operation to update the
+#' tags on a bot alias. To update tags, use the `TagResource` operation.
 #'
 #' @section Request syntax:
 #' ```
@@ -2034,6 +2131,7 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 
 #' Creates an intent or replaces an existing intent
 #'
+#' @description
 #' Creates an intent or replaces an existing intent.
 #' 
 #' To define the interaction between the user and your bot, you use one or
@@ -2045,8 +2143,8 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' 
 #' -   Intent name. For example, `OrderPizza`.
 #' 
-#' -   Sample utterances. For example, \"Can I order a pizza, please.\" and
-#'     \"I want to order a pizza.\"
+#' -   Sample utterances. For example, "Can I order a pizza, please." and
+#'     "I want to order a pizza."
 #' 
 #' -   Information to be gathered. You specify slot types for the
 #'     information that your bot will request from the user. You can
@@ -2063,18 +2161,18 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' You can specify other optional information in the request, such as:
 #' 
 #' -   A confirmation prompt to ask the user to confirm an intent. For
-#'     example, \"Shall I order your pizza?\"
+#'     example, "Shall I order your pizza?"
 #' 
 #' -   A conclusion statement to send to the user after the intent has been
-#'     fulfilled. For example, \"I placed your pizza order.\"
+#'     fulfilled. For example, "I placed your pizza order."
 #' 
 #' -   A follow-up prompt that asks the user for additional activity. For
-#'     example, asking \"Do you want to order a drink with your pizza?\"
+#'     example, asking "Do you want to order a drink with your pizza?"
 #' 
 #' If you specify an existing intent name to update the intent, Amazon Lex
 #' replaces the values in the `$LATEST` version of the intent with the
-#' values in the request. Amazon Lex removes fields that you don\'t provide
-#' in the request. If you don\'t specify the required fields, Amazon Lex
+#' values in the request. Amazon Lex removes fields that you don't provide
+#' in the request. If you don't specify the required fields, Amazon Lex
 #' throws an exception. When you update the `$LATEST` version of an intent,
 #' the `status` field of any bot that uses the `$LATEST` version of the
 #' intent is set to `NOT_BUILT`.
@@ -2088,25 +2186,25 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #'   sampleUtterances, confirmationPrompt, rejectionStatement,
 #'   followUpPrompt, conclusionStatement, dialogCodeHook,
 #'   fulfillmentActivity, parentIntentSignature, checksum, createVersion,
-#'   kendraConfiguration)
+#'   kendraConfiguration, inputContexts, outputContexts)
 #'
 #' @param name &#91;required&#93; The name of the intent. The name is *not* case sensitive.
 #' 
-#' The name can\'t match a built-in intent name, or a built-in intent name
-#' with \"AMAZON.\" removed. For example, because there is a built-in
-#' intent called `AMAZON.HelpIntent`, you can\'t create a custom intent
-#' called `HelpIntent`.
+#' The name can't match a built-in intent name, or a built-in intent name
+#' with "AMAZON." removed. For example, because there is a built-in intent
+#' called `AMAZON.HelpIntent`, you can't create a custom intent called
+#' `HelpIntent`.
 #' 
 #' For a list of built-in intents, see [Standard Built-in
-#' Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+#' Intents](https://developer.amazon.com/en-US/docs/alexa/custom-skills/standard-built-in-intents.html)
 #' in the *Alexa Skills Kit*.
 #' @param description A description of the intent.
 #' @param slots An array of intent slots. At runtime, Amazon Lex elicits required slot
 #' values from the user using prompts defined in the slots. For more
 #' information, see how-it-works.
 #' @param sampleUtterances An array of utterances (strings) that a user might say to signal the
-#' intent. For example, \"I want \{PizzaSize\} pizza\", \"Order \{Quantity\}
-#' \{PizzaSize\} pizzas\".
+#' intent. For example, "I want \{PizzaSize\} pizza", "Order \{Quantity\}
+#' \{PizzaSize\} pizzas".
 #' 
 #' In each utterance, a slot name is enclosed in curly braces.
 #' @param confirmationPrompt Prompts the user to confirm the intent. This question should have a yes
@@ -2121,7 +2219,7 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' 
 #' You you must provide both the `rejectionStatement` and the
 #' `confirmationPrompt`, or neither.
-#' @param rejectionStatement When the user answers \"no\" to the question defined in
+#' @param rejectionStatement When the user answers "no" to the question defined in
 #' `confirmationPrompt`, Amazon Lex responds with this statement to
 #' acknowledge that the intent was canceled.
 #' 
@@ -2131,19 +2229,19 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' fulfilling an intent. For example, after the `OrderPizza` intent is
 #' fulfilled, you might prompt the user to order a drink.
 #' 
-#' The action that Amazon Lex takes depends on the user\'s response, as
+#' The action that Amazon Lex takes depends on the user's response, as
 #' follows:
 #' 
-#' -   If the user says \"Yes\" it responds with the clarification prompt
+#' -   If the user says "Yes" it responds with the clarification prompt
 #'     that is configured for the bot.
 #' 
-#' -   if the user says \"Yes\" and continues with an utterance that
-#'     triggers an intent it starts a conversation for the intent.
+#' -   if the user says "Yes" and continues with an utterance that triggers
+#'     an intent it starts a conversation for the intent.
 #' 
-#' -   If the user says \"No\" it responds with the rejection statement
+#' -   If the user says "No" it responds with the rejection statement
 #'     configured for the the follow-up prompt.
 #' 
-#' -   If it doesn\'t recognize the utterance it repeats the follow-up
+#' -   If it doesn't recognize the utterance it repeats the follow-up
 #'     prompt again.
 #' 
 #' The `followUpPrompt` field and the `conclusionStatement` field are
@@ -2153,7 +2251,7 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' 
 #' This element is relevant only if you provide a Lambda function in the
 #' `fulfillmentActivity`. If you return the intent to the client
-#' application, you can\'t specify this element.
+#' application, you can't specify this element.
 #' 
 #' The `followUpPrompt` and `conclusionStatement` are mutually exclusive.
 #' You can specify only one.
@@ -2161,10 +2259,10 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' invoke this Lambda function to personalize user interaction.
 #' 
 #' For example, suppose your bot determines that the user is John. Your
-#' Lambda function might retrieve John\'s information from a backend
+#' Lambda function might retrieve John's information from a backend
 #' database and prepopulate some of the values. For example, if you find
 #' that John is gluten intolerant, you might set the corresponding intent
-#' slot, `GlutenIntolerant`, to true. You might find John\'s phone number
+#' slot, `GlutenIntolerant`, to true. You might find John's phone number
 #' and set the corresponding session attribute.
 #' @param fulfillmentActivity Required. Describes how the intent is fulfilled. For example, after a
 #' user provides all of the information for a pizza order,
@@ -2176,7 +2274,7 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' can process the intent (for example, place an order with a pizzeria).
 #' @param parentIntentSignature A unique identifier for the built-in intent to base this intent on. To
 #' find the signature for an intent, see [Standard Built-in
-#' Intents](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
+#' Intents](https://developer.amazon.com/en-US/docs/alexa/custom-skills/standard-built-in-intents.html)
 #' in the *Alexa Skills Kit*.
 #' @param checksum Identifies a specific revision of the `$LATEST` version.
 #' 
@@ -2185,7 +2283,7 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' 
 #' When you want to update a intent, set the `checksum` field to the
 #' checksum of the most recent revision of the `$LATEST` version. If you
-#' don\'t specify the ` checksum` field, or if the checksum does not match
+#' don't specify the ` checksum` field, or if the checksum does not match
 #' the `$LATEST` version, you get a `PreconditionFailedException`
 #' exception.
 #' @param createVersion When set to `true` a new numbered version of the intent is created. This
@@ -2194,7 +2292,12 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' @param kendraConfiguration Configuration information required to use the
 #' `AMAZON.KendraSearchIntent` intent to connect to an Amazon Kendra index.
 #' For more information, see
-#' [AMAZON.KendraSearchIntent](http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+#' [AMAZON.KendraSearchIntent](https://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+#' @param inputContexts An array of `InputContext` objects that lists the contexts that must be
+#' active for Amazon Lex to choose the intent in a conversation with the
+#' user.
+#' @param outputContexts An array of `OutputContext` objects that lists the contexts that the
+#' intent activates when the intent is fulfilled.
 #'
 #' @section Request syntax:
 #' ```
@@ -2224,7 +2327,14 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #'         "string"
 #'       ),
 #'       responseCard = "string",
-#'       obfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"
+#'       obfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION",
+#'       defaultValueSpec = list(
+#'         defaultValueList = list(
+#'           list(
+#'             defaultValue = "string"
+#'           )
+#'         )
+#'       )
 #'     )
 #'   ),
 #'   sampleUtterances = list(
@@ -2302,6 +2412,18 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #'     kendraIndex = "string",
 #'     queryFilterString = "string",
 #'     role = "string"
+#'   ),
+#'   inputContexts = list(
+#'     list(
+#'       name = "string"
+#'     )
+#'   ),
+#'   outputContexts = list(
+#'     list(
+#'       name = "string",
+#'       timeToLiveInSeconds = 123,
+#'       turnsToLive = 123
+#'     )
 #'   )
 #' )
 #' ```
@@ -2443,14 +2565,14 @@ lexmodelbuildingservice_put_bot_alias <- function(name, description = NULL, botV
 #' @keywords internal
 #'
 #' @rdname lexmodelbuildingservice_put_intent
-lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots = NULL, sampleUtterances = NULL, confirmationPrompt = NULL, rejectionStatement = NULL, followUpPrompt = NULL, conclusionStatement = NULL, dialogCodeHook = NULL, fulfillmentActivity = NULL, parentIntentSignature = NULL, checksum = NULL, createVersion = NULL, kendraConfiguration = NULL) {
+lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots = NULL, sampleUtterances = NULL, confirmationPrompt = NULL, rejectionStatement = NULL, followUpPrompt = NULL, conclusionStatement = NULL, dialogCodeHook = NULL, fulfillmentActivity = NULL, parentIntentSignature = NULL, checksum = NULL, createVersion = NULL, kendraConfiguration = NULL, inputContexts = NULL, outputContexts = NULL) {
   op <- new_operation(
     name = "PutIntent",
     http_method = "PUT",
     http_path = "/intents/{name}/versions/$LATEST",
     paginator = list()
   )
-  input <- .lexmodelbuildingservice$put_intent_input(name = name, description = description, slots = slots, sampleUtterances = sampleUtterances, confirmationPrompt = confirmationPrompt, rejectionStatement = rejectionStatement, followUpPrompt = followUpPrompt, conclusionStatement = conclusionStatement, dialogCodeHook = dialogCodeHook, fulfillmentActivity = fulfillmentActivity, parentIntentSignature = parentIntentSignature, checksum = checksum, createVersion = createVersion, kendraConfiguration = kendraConfiguration)
+  input <- .lexmodelbuildingservice$put_intent_input(name = name, description = description, slots = slots, sampleUtterances = sampleUtterances, confirmationPrompt = confirmationPrompt, rejectionStatement = rejectionStatement, followUpPrompt = followUpPrompt, conclusionStatement = conclusionStatement, dialogCodeHook = dialogCodeHook, fulfillmentActivity = fulfillmentActivity, parentIntentSignature = parentIntentSignature, checksum = checksum, createVersion = createVersion, kendraConfiguration = kendraConfiguration, inputContexts = inputContexts, outputContexts = outputContexts)
   output <- .lexmodelbuildingservice$put_intent_output()
   config <- get_config()
   svc <- .lexmodelbuildingservice$service(config)
@@ -2462,6 +2584,7 @@ lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots =
 
 #' Creates a custom slot type or replaces an existing custom slot type
 #'
+#' @description
 #' Creates a custom slot type or replaces an existing custom slot type.
 #' 
 #' To create a custom slot type, specify a name for the slot type and a set
@@ -2470,11 +2593,11 @@ lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots =
 #' 
 #' If you specify the name of an existing slot type, the fields in the
 #' request replace the existing values in the `$LATEST` version of the slot
-#' type. Amazon Lex removes the fields that you don\'t provide in the
-#' request. If you don\'t specify required fields, Amazon Lex throws an
+#' type. Amazon Lex removes the fields that you don't provide in the
+#' request. If you don't specify required fields, Amazon Lex throws an
 #' exception. When you update the `$LATEST` version of a slot type, if a
 #' bot uses the `$LATEST` version of an intent that contains the slot type,
-#' the bot\'s `status` field is set to `NOT_BUILT`.
+#' the bot's `status` field is set to `NOT_BUILT`.
 #' 
 #' This operation requires permissions for the `lex:PutSlotType` action.
 #'
@@ -2485,19 +2608,22 @@ lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots =
 #'
 #' @param name &#91;required&#93; The name of the slot type. The name is *not* case sensitive.
 #' 
-#' The name can\'t match a built-in slot type name, or a built-in slot type
-#' name with \"AMAZON.\" removed. For example, because there is a built-in
-#' slot type called `AMAZON.DATE`, you can\'t create a custom slot type
+#' The name can't match a built-in slot type name, or a built-in slot type
+#' name with "AMAZON." removed. For example, because there is a built-in
+#' slot type called `AMAZON.DATE`, you can't create a custom slot type
 #' called `DATE`.
 #' 
 #' For a list of built-in slot types, see [Slot Type
-#' Reference](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
+#' Reference](https://developer.amazon.com/en-US/docs/alexa/custom-skills/slot-type-reference.html)
 #' in the *Alexa Skills Kit*.
 #' @param description A description of the slot type.
 #' @param enumerationValues A list of `EnumerationValue` objects that defines the values that the
 #' slot type can take. Each value can have a list of `synonyms`, which are
 #' additional values that help train the machine learning model about the
 #' values that it resolves for a slot.
+#' 
+#' A regular expression slot type doesn't require enumeration values. All
+#' other slot types require a list of enumeration values.
 #' 
 #' When Amazon Lex resolves a slot value, it generates a resolution list
 #' that contains up to five possible values for the slot. If you are using
@@ -2513,7 +2639,7 @@ lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots =
 #' 
 #' When you want to update a slot type, set the `checksum` field to the
 #' checksum of the most recent revision of the `$LATEST` version. If you
-#' don\'t specify the ` checksum` field, or if the checksum does not match
+#' don't specify the ` checksum` field, or if the checksum does not match
 #' the `$LATEST` version, you get a `PreconditionFailedException`
 #' exception.
 #' @param valueSelectionStrategy Determines the slot resolution strategy that Amazon Lex uses to return
@@ -2526,7 +2652,7 @@ lexmodelbuildingservice_put_intent <- function(name, description = NULL, slots =
 #'     return the first value in the resolution list as the slot type
 #'     value. If there is no resolution list, null is returned.
 #' 
-#' If you don\'t specify the `valueSelectionStrategy`, the default is
+#' If you don't specify the `valueSelectionStrategy`, the default is
 #' `ORIGINAL_VALUE`.
 #' @param createVersion When set to `true` a new numbered version of the slot type is created.
 #' This is the same as calling the `CreateSlotTypeVersion` operation. If
@@ -2606,6 +2732,7 @@ lexmodelbuildingservice_put_slot_type <- function(name, description = NULL, enum
 
 #' Starts a job to import a resource to Amazon Lex
 #'
+#' @description
 #' Starts a job to import a resource to Amazon Lex.
 #'
 #' @usage
@@ -2630,10 +2757,10 @@ lexmodelbuildingservice_put_slot_type <- function(name, description = NULL, enum
 #'     `failureReason` field of the response to the `GetImport` operation.
 #' 
 #'     OVERWRITE\\_LATEST - The import operation proceeds even if there is a
-#'     conflict with an existing resource. The \\$LASTEST version of the
+#'     conflict with an existing resource. The $LASTEST version of the
 #'     existing resource is overwritten with the data from the import file.
 #' @param tags A list of tags to add to the imported bot. You can only add tags when
-#' you import a bot, you can\'t add tags to an intent or slot type.
+#' you import a bot, you can't add tags to an intent or slot type.
 #'
 #' @section Request syntax:
 #' ```
@@ -2672,6 +2799,7 @@ lexmodelbuildingservice_start_import <- function(payload, resourceType, mergeStr
 
 #' Adds the specified tags to the specified resource
 #'
+#' @description
 #' Adds the specified tags to the specified resource. If a tag key already
 #' exists, the existing value is replaced with the new value.
 #'
@@ -2718,6 +2846,7 @@ lexmodelbuildingservice_tag_resource <- function(resourceArn, tags) {
 
 #' Removes tags from a bot, bot alias or bot channel
 #'
+#' @description
 #' Removes tags from a bot, bot alias or bot channel.
 #'
 #' @usage

@@ -3,8 +3,105 @@
 #' @include translate_service.R
 NULL
 
+#' Creates a parallel data resource in Amazon Translate by importing an
+#' input file from Amazon S3
+#'
+#' @description
+#' Creates a parallel data resource in Amazon Translate by importing an
+#' input file from Amazon S3. Parallel data files contain examples of
+#' source phrases and their translations from your translation memory. By
+#' adding parallel data, you can influence the style, tone, and word choice
+#' in your translation output.
+#'
+#' @usage
+#' translate_create_parallel_data(Name, Description, ParallelDataConfig,
+#'   EncryptionKey, ClientToken)
+#'
+#' @param Name &#91;required&#93; A custom name for the parallel data resource in Amazon Translate. You
+#' must assign a name that is unique in the account and region.
+#' @param Description A custom description for the parallel data resource in Amazon Translate.
+#' @param ParallelDataConfig &#91;required&#93; Specifies the format and S3 location of the parallel data input file.
+#' @param EncryptionKey 
+#' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is automatically
+#' generated when you use Amazon Translate through an AWS SDK.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$create_parallel_data(
+#'   Name = "string",
+#'   Description = "string",
+#'   ParallelDataConfig = list(
+#'     S3Uri = "string",
+#'     Format = "TSV"|"CSV"|"TMX"
+#'   ),
+#'   EncryptionKey = list(
+#'     Type = "KMS",
+#'     Id = "string"
+#'   ),
+#'   ClientToken = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname translate_create_parallel_data
+translate_create_parallel_data <- function(Name, Description = NULL, ParallelDataConfig, EncryptionKey = NULL, ClientToken) {
+  op <- new_operation(
+    name = "CreateParallelData",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .translate$create_parallel_data_input(Name = Name, Description = Description, ParallelDataConfig = ParallelDataConfig, EncryptionKey = EncryptionKey, ClientToken = ClientToken)
+  output <- .translate$create_parallel_data_output()
+  config <- get_config()
+  svc <- .translate$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.translate$operations$create_parallel_data <- translate_create_parallel_data
+
+#' Deletes a parallel data resource in Amazon Translate
+#'
+#' @description
+#' Deletes a parallel data resource in Amazon Translate.
+#'
+#' @usage
+#' translate_delete_parallel_data(Name)
+#'
+#' @param Name &#91;required&#93; The name of the parallel data resource that is being deleted.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$delete_parallel_data(
+#'   Name = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname translate_delete_parallel_data
+translate_delete_parallel_data <- function(Name) {
+  op <- new_operation(
+    name = "DeleteParallelData",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .translate$delete_parallel_data_input(Name = Name)
+  output <- .translate$delete_parallel_data_output()
+  config <- get_config()
+  svc <- .translate$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.translate$operations$delete_parallel_data <- translate_delete_parallel_data
+
 #' A synchronous action that deletes a custom terminology
 #'
+#' @description
 #' A synchronous action that deletes a custom terminology.
 #'
 #' @usage
@@ -43,6 +140,7 @@ translate_delete_terminology <- function(Name) {
 #' job including name, ID, status, source and target languages,
 #' input/output S3 buckets, and so on
 #'
+#' @description
 #' Gets the properties associated with an asycnhronous batch translation
 #' job including name, ID, status, source and target languages,
 #' input/output S3 buckets, and so on.
@@ -81,8 +179,46 @@ translate_describe_text_translation_job <- function(JobId) {
 }
 .translate$operations$describe_text_translation_job <- translate_describe_text_translation_job
 
+#' Provides information about a parallel data resource
+#'
+#' @description
+#' Provides information about a parallel data resource.
+#'
+#' @usage
+#' translate_get_parallel_data(Name)
+#'
+#' @param Name &#91;required&#93; The name of the parallel data resource that is being retrieved.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$get_parallel_data(
+#'   Name = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname translate_get_parallel_data
+translate_get_parallel_data <- function(Name) {
+  op <- new_operation(
+    name = "GetParallelData",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .translate$get_parallel_data_input(Name = Name)
+  output <- .translate$get_parallel_data_output()
+  config <- get_config()
+  svc <- .translate$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.translate$operations$get_parallel_data <- translate_get_parallel_data
+
 #' Retrieves a custom terminology
 #'
+#' @description
 #' Retrieves a custom terminology.
 #'
 #' @usage
@@ -123,6 +259,7 @@ translate_get_terminology <- function(Name, TerminologyDataFormat) {
 #' Creates or updates a custom terminology, depending on whether or not one
 #' already exists for the given terminology name
 #'
+#' @description
 #' Creates or updates a custom terminology, depending on whether or not one
 #' already exists for the given terminology name. Importing a terminology
 #' with the same name as an existing one will merge the terminologies based
@@ -185,8 +322,49 @@ translate_import_terminology <- function(Name, MergeStrategy, Description = NULL
 }
 .translate$operations$import_terminology <- translate_import_terminology
 
+#' Provides a list of your parallel data resources in Amazon Translate
+#'
+#' @description
+#' Provides a list of your parallel data resources in Amazon Translate.
+#'
+#' @usage
+#' translate_list_parallel_data(NextToken, MaxResults)
+#'
+#' @param NextToken A string that specifies the next page of results to return in a
+#' paginated response.
+#' @param MaxResults The maximum number of parallel data resources returned for each request.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$list_parallel_data(
+#'   NextToken = "string",
+#'   MaxResults = 123
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname translate_list_parallel_data
+translate_list_parallel_data <- function(NextToken = NULL, MaxResults = NULL) {
+  op <- new_operation(
+    name = "ListParallelData",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .translate$list_parallel_data_input(NextToken = NextToken, MaxResults = MaxResults)
+  output <- .translate$list_parallel_data_output()
+  config <- get_config()
+  svc <- .translate$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.translate$operations$list_parallel_data <- translate_list_parallel_data
+
 #' Provides a list of custom terminologies associated with your account
 #'
+#' @description
 #' Provides a list of custom terminologies associated with your account.
 #'
 #' @usage
@@ -226,6 +404,7 @@ translate_list_terminologies <- function(NextToken = NULL, MaxResults = NULL) {
 
 #' Gets a list of the batch translation jobs that you have submitted
 #'
+#' @description
 #' Gets a list of the batch translation jobs that you have submitted.
 #'
 #' @usage
@@ -278,6 +457,7 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 
 #' Starts an asynchronous batch translation job
 #'
+#' @description
 #' Starts an asynchronous batch translation job. Batch translation jobs can
 #' be used to translate large volumes of text across multiple documents at
 #' once. For more information, see async.
@@ -293,7 +473,7 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #' @usage
 #' translate_start_text_translation_job(JobName, InputDataConfig,
 #'   OutputDataConfig, DataAccessRoleArn, SourceLanguageCode,
-#'   TargetLanguageCodes, TerminologyNames, ClientToken)
+#'   TargetLanguageCodes, TerminologyNames, ParallelDataNames, ClientToken)
 #'
 #' @param JobName The name of the batch translation job to be performed.
 #' @param InputDataConfig &#91;required&#93; Specifies the format and S3 location of the input documents for the
@@ -310,13 +490,11 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #' @param TargetLanguageCodes &#91;required&#93; The language code of the output language.
 #' @param TerminologyNames The name of the terminology to use in the batch translation job. For a
 #' list of available terminologies, use the ListTerminologies operation.
-#' @param ClientToken &#91;required&#93; The client token of the EC2 instance calling the request. This token is
-#' auto-generated when using the Amazon Translate SDK. Otherwise, use the
-#' [DescribeInstances](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
-#' EC2 operation to retreive an instance\'s client token. For more
-#' information, see [Client
-#' Tokens](https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens)
-#' in the EC2 User Guide.
+#' @param ParallelDataNames The names of the parallel data resources to use in the batch translation
+#' job. For a list of available parallel data resources, use the
+#' ListParallelData operation.
+#' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is auto-generated when
+#' using the Amazon Translate SDK.
 #'
 #' @section Request syntax:
 #' ```
@@ -337,6 +515,9 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #'   TerminologyNames = list(
 #'     "string"
 #'   ),
+#'   ParallelDataNames = list(
+#'     "string"
+#'   ),
 #'   ClientToken = "string"
 #' )
 #' ```
@@ -344,14 +525,14 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #' @keywords internal
 #'
 #' @rdname translate_start_text_translation_job
-translate_start_text_translation_job <- function(JobName = NULL, InputDataConfig, OutputDataConfig, DataAccessRoleArn, SourceLanguageCode, TargetLanguageCodes, TerminologyNames = NULL, ClientToken) {
+translate_start_text_translation_job <- function(JobName = NULL, InputDataConfig, OutputDataConfig, DataAccessRoleArn, SourceLanguageCode, TargetLanguageCodes, TerminologyNames = NULL, ParallelDataNames = NULL, ClientToken) {
   op <- new_operation(
     name = "StartTextTranslationJob",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .translate$start_text_translation_job_input(JobName = JobName, InputDataConfig = InputDataConfig, OutputDataConfig = OutputDataConfig, DataAccessRoleArn = DataAccessRoleArn, SourceLanguageCode = SourceLanguageCode, TargetLanguageCodes = TargetLanguageCodes, TerminologyNames = TerminologyNames, ClientToken = ClientToken)
+  input <- .translate$start_text_translation_job_input(JobName = JobName, InputDataConfig = InputDataConfig, OutputDataConfig = OutputDataConfig, DataAccessRoleArn = DataAccessRoleArn, SourceLanguageCode = SourceLanguageCode, TargetLanguageCodes = TargetLanguageCodes, TerminologyNames = TerminologyNames, ParallelDataNames = ParallelDataNames, ClientToken = ClientToken)
   output <- .translate$start_text_translation_job_output()
   config <- get_config()
   svc <- .translate$service(config)
@@ -363,9 +544,10 @@ translate_start_text_translation_job <- function(JobName = NULL, InputDataConfig
 
 #' Stops an asynchronous batch translation job that is in progress
 #'
+#' @description
 #' Stops an asynchronous batch translation job that is in progress.
 #' 
-#' If the job\'s state is `IN_PROGRESS`, the job will be marked for
+#' If the job's state is `IN_PROGRESS`, the job will be marked for
 #' termination and put into the `STOP_REQUESTED` state. If the job
 #' completes before it can be stopped, it is put into the `COMPLETED`
 #' state. Otherwise, the job is put into the `STOPPED` state.
@@ -373,7 +555,7 @@ translate_start_text_translation_job <- function(JobName = NULL, InputDataConfig
 #' Asynchronous batch translation jobs are started with the
 #' StartTextTranslationJob operation. You can use the
 #' DescribeTextTranslationJob or ListTextTranslationJobs operations to get
-#' a batch translation job\'s `JobId`.
+#' a batch translation job's `JobId`.
 #'
 #' @usage
 #' translate_stop_text_translation_job(JobId)
@@ -409,6 +591,7 @@ translate_stop_text_translation_job <- function(JobId) {
 
 #' Translates input text from the source language to the target language
 #'
+#' @description
 #' Translates input text from the source language to the target language.
 #' For a list of available languages and language codes, see
 #' what-is-languages.
@@ -466,3 +649,53 @@ translate_translate_text <- function(Text, TerminologyNames = NULL, SourceLangua
   return(response)
 }
 .translate$operations$translate_text <- translate_translate_text
+
+#' Updates a previously created parallel data resource by importing a new
+#' input file from Amazon S3
+#'
+#' @description
+#' Updates a previously created parallel data resource by importing a new
+#' input file from Amazon S3.
+#'
+#' @usage
+#' translate_update_parallel_data(Name, Description, ParallelDataConfig,
+#'   ClientToken)
+#'
+#' @param Name &#91;required&#93; The name of the parallel data resource being updated.
+#' @param Description A custom description for the parallel data resource in Amazon Translate.
+#' @param ParallelDataConfig &#91;required&#93; Specifies the format and S3 location of the parallel data input file.
+#' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is automatically
+#' generated when you use Amazon Translate through an AWS SDK.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$update_parallel_data(
+#'   Name = "string",
+#'   Description = "string",
+#'   ParallelDataConfig = list(
+#'     S3Uri = "string",
+#'     Format = "TSV"|"CSV"|"TMX"
+#'   ),
+#'   ClientToken = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname translate_update_parallel_data
+translate_update_parallel_data <- function(Name, Description = NULL, ParallelDataConfig, ClientToken) {
+  op <- new_operation(
+    name = "UpdateParallelData",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .translate$update_parallel_data_input(Name = Name, Description = Description, ParallelDataConfig = ParallelDataConfig, ClientToken = ClientToken)
+  output <- .translate$update_parallel_data_output()
+  config <- get_config()
+  svc <- .translate$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.translate$operations$update_parallel_data <- translate_update_parallel_data

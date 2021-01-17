@@ -28,8 +28,7 @@ One of the following (case insensitive) values:
 \description{
 Creates an empty dataset and adds it to the specified dataset group. Use
 CreateDatasetImportJob to import your training data to a dataset.
-}
-\details{
+
 There are three types of datasets:
 \itemize{
 \item Interactions
@@ -43,8 +42,9 @@ Only the \code{Interactions} dataset is required in order to train a model
 
 A dataset can be in one of the following states:
 \itemize{
-\item CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
-\item DELETE PENDING \\> DELETE IN\\_PROGRESS
+\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+FAILED
+\item DELETE PENDING > DELETE IN\\_PROGRESS
 }
 
 To get the status of the dataset, call DescribeDataset.

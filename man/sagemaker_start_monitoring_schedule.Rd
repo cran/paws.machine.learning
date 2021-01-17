@@ -11,9 +11,9 @@ sagemaker_start_monitoring_schedule(MonitoringScheduleName)
 }
 \description{
 Starts a previously stopped monitoring schedule.
-}
-\details{
-New monitoring schedules are immediately started after creation.
+
+By default, when you successfully create a new schedule, the status of a
+monitoring schedule is \code{scheduled}.
 }
 \section{Request syntax}{
 \preformatted{svc$start_monitoring_schedule(

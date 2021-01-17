@@ -28,8 +28,7 @@ the time the celebrity was recognized.}
 \description{
 Gets the celebrity recognition results for a Amazon Rekognition Video
 analysis started by StartCelebrityRecognition.
-}
-\details{
+
 Celebrity recognition in a video is an asynchronous operation. Analysis
 is started by a call to StartCelebrityRecognition which returns a job
 identifier (\code{JobId}). When the celebrity recognition operation finishes,
@@ -61,7 +60,7 @@ the start of the video). You can also sort the array by celebrity by
 specifying the value \code{ID} in the \code{SortBy} input parameter.
 
 The \code{CelebrityDetail} object includes the celebrity identifer and
-additional information urls. If you don\'t store the additional
+additional information urls. If you don't store the additional
 information urls, you can get them later by calling GetCelebrityInfo
 with the celebrity identifer.
 

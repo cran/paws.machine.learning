@@ -4,7 +4,8 @@
 \alias{personalize_create_campaign}
 \title{Creates a campaign by deploying a solution version}
 \usage{
-personalize_create_campaign(name, solutionVersionArn, minProvisionedTPS)
+personalize_create_campaign(name, solutionVersionArn, minProvisionedTPS,
+  campaignConfig)
 }
 \arguments{
 \item{name}{[required] A name for the new campaign. The campaign name must be unique within
@@ -14,6 +15,8 @@ your account.}
 
 \item{minProvisionedTPS}{[required] Specifies the requested minimum provisioned transactions
 (recommendations) per second that Amazon Personalize will support.}
+
+\item{campaignConfig}{The configuration details of a campaign.}
 }
 \description{
 Creates a campaign by deploying a solution version. When a client calls
@@ -22,8 +25,7 @@ the
 and
 \href{https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html}{GetPersonalizedRanking}
 APIs, a campaign is specified in the request.
-}
-\details{
+
 \strong{Minimum Provisioned TPS and Auto-Scaling}
 
 A transaction is a single \code{GetRecommendations} or
@@ -33,9 +35,9 @@ provisioned TPS (\code{minProvisionedTPS}) specifies the baseline throughput
 provisioned by Amazon Personalize, and thus, the minimum billing charge.
 If your TPS increases beyond \code{minProvisionedTPS}, Amazon Personalize
 auto-scales the provisioned capacity up and down, but never below
-\code{minProvisionedTPS}, to maintain a 70\% utilization. There\'s a short
-time delay while the capacity is increased that might cause loss of
-transactions. It\'s recommended to start with a low \code{minProvisionedTPS},
+\code{minProvisionedTPS}, to maintain a 70\% utilization. There's a short time
+delay while the capacity is increased that might cause loss of
+transactions. It's recommended to start with a low \code{minProvisionedTPS},
 track your usage using Amazon CloudWatch metrics, and then increase the
 \code{minProvisionedTPS} as necessary.
 
@@ -43,8 +45,9 @@ track your usage using Amazon CloudWatch metrics, and then increase the
 
 A campaign can be in one of the following states:
 \itemize{
-\item CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
-\item DELETE PENDING \\> DELETE IN\\_PROGRESS
+\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+FAILED
+\item DELETE PENDING > DELETE IN\\_PROGRESS
 }
 
 To get the campaign status, call DescribeCampaign.
@@ -64,7 +67,12 @@ campaign for recommendations.
 \preformatted{svc$create_campaign(
   name = "string",
   solutionVersionArn = "string",
-  minProvisionedTPS = 123
+  minProvisionedTPS = 123,
+  campaignConfig = list(
+    itemExplorationConfig = list(
+      "string"
+    )
+  )
 )
 }
 }

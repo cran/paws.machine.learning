@@ -22,10 +22,10 @@ predict.}
 \item{OutputUri}{[required] The location of an Amazon Simple Storage Service (Amazon S3) bucket or
 directory to store the batch prediction results. The following
 substrings are not allowed in the \verb{s3 key} portion of the \code{outputURI}
-field: \':\', \'//\', \'/./\', \'/../\'.
+field: ':', '//', '/./', '/../'.
 
 Amazon ML needs permissions to store and retrieve the logs on your
-behalf. For information about how to set permissions, see the \href{http://docs.aws.amazon.com/machine-learning/latest/dg}{Amazon Machine Learning Developer Guide}.}
+behalf. For information about how to set permissions, see the \href{https://docs.aws.amazon.com/machine-learning/latest/dg/}{Amazon Machine Learning Developer Guide}.}
 }
 \description{
 Generates predictions for a group of observations. The observations to
@@ -33,8 +33,7 @@ process exist in one or more data files referenced by a \code{DataSource}.
 This operation creates a new \code{BatchPrediction}, and uses an \code{MLModel}
 and the data files referenced by the \code{DataSource} as information
 sources.
-}
-\details{
+
 \code{CreateBatchPrediction} is an asynchronous operation. In response to
 \code{CreateBatchPrediction}, Amazon Machine Learning (Amazon ML) immediately
 returns and sets the \code{BatchPrediction} status to \code{PENDING}. After the

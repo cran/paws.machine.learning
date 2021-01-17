@@ -2,7 +2,7 @@
 % Please edit documentation in R/sagemaker_operations.R
 \name{sagemaker_create_experiment}
 \alias{sagemaker_create_experiment}
-\title{Creates an Amazon SageMaker \emph{experiment}}
+\title{Creates an SageMaker experiment}
 \usage{
 sagemaker_create_experiment(ExperimentName, DisplayName, Description,
   Tags)
@@ -11,8 +11,8 @@ sagemaker_create_experiment(ExperimentName, DisplayName, Description,
 \item{ExperimentName}{[required] The name of the experiment. The name must be unique in your AWS account
 and is not case-sensitive.}
 
-\item{DisplayName}{The name of the experiment as displayed. The name doesn\'t need to be
-unique. If you don\'t specify \code{DisplayName}, the value in
+\item{DisplayName}{The name of the experiment as displayed. The name doesn't need to be
+unique. If you don't specify \code{DisplayName}, the value in
 \code{ExperimentName} is displayed.}
 
 \item{Description}{The description of the experiment.}
@@ -21,12 +21,11 @@ unique. If you don\'t specify \code{DisplayName}, the value in
 to search on the tags.}
 }
 \description{
-Creates an Amazon SageMaker \emph{experiment}. An experiment is a collection
-of \emph{trials} that are observed, compared and evaluated as a group. A
-trial is a set of steps, called \emph{trial components}, that produce a
-machine learning model.
-}
-\details{
+Creates an SageMaker \emph{experiment}. An experiment is a collection of
+\emph{trials} that are observed, compared and evaluated as a group. A trial
+is a set of steps, called \emph{trial components}, that produce a machine
+learning model.
+
 The goal of an experiment is to determine the components that produce
 the best model. Multiple trials are performed, each one isolating and
 measuring the impact of a change to one or more inputs, while keeping
@@ -45,8 +44,8 @@ To add a description to an experiment, specify the optional
 description, call the UpdateExperiment API.
 
 To get a list of all your experiments, call the ListExperiments API. To
-view an experiment\'s properties, call the DescribeExperiment API. To
-get a list of all the trials associated with an experiment, call the
+view an experiment's properties, call the DescribeExperiment API. To get
+a list of all the trials associated with an experiment, call the
 ListTrials API. To create a trial call the CreateTrial API.
 }
 \section{Request syntax}{

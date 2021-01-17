@@ -26,11 +26,11 @@ database instance.
 credentials that are used to connect to the Amazon RDS database.
 \item ResourceRole - A role (DataPipelineDefaultResourceRole) assumed by
 an EC2 instance to carry out the copy task from Amazon RDS to Amazon
-Simple Storage Service (Amazon S3). For more information, see \href{http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html}{Role templates}
+Simple Storage Service (Amazon S3). For more information, see \href{https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html}{Role templates}
 for data pipelines.
 \item ServiceRole - A role (DataPipelineDefaultRole) assumed by the AWS
 Data Pipeline service to monitor the progress of the copy task from
-Amazon RDS to Amazon S3. For more information, see \href{http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html}{Role templates}
+Amazon RDS to Amazon S3. For more information, see \href{https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html}{Role templates}
 for data pipelines.
 \item SecurityInfo - The security information to use to access an RDS DB
 instance. You need to set up appropriate ingress rules for the
@@ -48,14 +48,12 @@ required if \code{DataSchemaUri} is specified.
 \item DataRearrangement - A JSON string that represents the splitting and
 rearrangement requirements for the \code{Datasource}.
 
-\\
-
 Sample -
 \verb{ "\\\{\\"splitting\\":\\\{\\"percentBegin\\":10,\\"percentEnd\\":60\\\}\\\}"}
 }}
 
 \item{RoleARN}{[required] The role that Amazon ML assumes on behalf of the user to create and
-activate a data pipeline in the user\'s account and copy data using the
+activate a data pipeline in the user's account and copy data using the
 \code{SelectSqlQuery} query from Amazon RDS to Amazon S3.}
 
 \item{ComputeStatistics}{The compute statistics for a \code{DataSource}. The statistics are generated
@@ -65,17 +63,16 @@ be set to \code{true} if the \code{DataSource} needs to be used for \code{MLMode
 training.}
 }
 \description{
-Creates a \code{DataSource} object from an \href{http://aws.amazon.com/rds/}{Amazon Relational Database Service} (Amazon RDS). A \code{DataSource}
+Creates a \code{DataSource} object from an \href{https://aws.amazon.com/rds/}{Amazon Relational Database Service} (Amazon RDS). A \code{DataSource}
 references data that can be used to perform \code{CreateMLModel},
 \code{CreateEvaluation}, or \code{CreateBatchPrediction} operations.
-}
-\details{
+
 \code{CreateDataSourceFromRDS} is an asynchronous operation. In response to
 \code{CreateDataSourceFromRDS}, Amazon Machine Learning (Amazon ML)
 immediately returns and sets the \code{DataSource} status to \code{PENDING}. After
 the \code{DataSource} is created and ready for use, Amazon ML sets the
 \code{Status} parameter to \code{COMPLETED}. \code{DataSource} in the \code{COMPLETED} or
-\code{PENDING} state can be used only to perform \verb{&gt;CreateMLModel}\\>,
+\code{PENDING} state can be used only to perform \verb{&gt;CreateMLModel}>,
 \code{CreateEvaluation}, or \code{CreateBatchPrediction} operations.
 
 If Amazon ML cannot accept the input source, it sets the \code{Status}

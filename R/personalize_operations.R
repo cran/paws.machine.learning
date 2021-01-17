@@ -5,13 +5,15 @@ NULL
 
 #' Creates a batch inference job
 #'
+#' @description
 #' Creates a batch inference job. The operation can handle up to 50 million
 #' records and the input file must be in JSON format. For more information,
 #' see recommendations-batch.
 #'
 #' @usage
 #' personalize_create_batch_inference_job(jobName, solutionVersionArn,
-#'   filterArn, numResults, jobInput, jobOutput, roleArn)
+#'   filterArn, numResults, jobInput, jobOutput, roleArn,
+#'   batchInferenceJobConfig)
 #'
 #' @param jobName &#91;required&#93; The name of the batch inference job to create.
 #' @param solutionVersionArn &#91;required&#93; The Amazon Resource Name (ARN) of the solution version that will be used
@@ -21,10 +23,11 @@ NULL
 #' @param numResults The number of recommendations to retreive.
 #' @param jobInput &#91;required&#93; The Amazon S3 path that leads to the input file to base your
 #' recommendations on. The input material must be in JSON format.
-#' @param jobOutput &#91;required&#93; The path to the Amazon S3 bucket where the job\'s output will be stored.
+#' @param jobOutput &#91;required&#93; The path to the Amazon S3 bucket where the job's output will be stored.
 #' @param roleArn &#91;required&#93; The ARN of the Amazon Identity and Access Management role that has
 #' permissions to read and write to your input and out Amazon S3 buckets
 #' respectively.
+#' @param batchInferenceJobConfig The configuration details of a batch inference job.
 #'
 #' @section Request syntax:
 #' ```
@@ -45,21 +48,26 @@ NULL
 #'       kmsKeyArn = "string"
 #'     )
 #'   ),
-#'   roleArn = "string"
+#'   roleArn = "string",
+#'   batchInferenceJobConfig = list(
+#'     itemExplorationConfig = list(
+#'       "string"
+#'     )
+#'   )
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname personalize_create_batch_inference_job
-personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, filterArn = NULL, numResults = NULL, jobInput, jobOutput, roleArn) {
+personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, filterArn = NULL, numResults = NULL, jobInput, jobOutput, roleArn, batchInferenceJobConfig = NULL) {
   op <- new_operation(
     name = "CreateBatchInferenceJob",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .personalize$create_batch_inference_job_input(jobName = jobName, solutionVersionArn = solutionVersionArn, filterArn = filterArn, numResults = numResults, jobInput = jobInput, jobOutput = jobOutput, roleArn = roleArn)
+  input <- .personalize$create_batch_inference_job_input(jobName = jobName, solutionVersionArn = solutionVersionArn, filterArn = filterArn, numResults = numResults, jobInput = jobInput, jobOutput = jobOutput, roleArn = roleArn, batchInferenceJobConfig = batchInferenceJobConfig)
   output <- .personalize$create_batch_inference_job_output()
   config <- get_config()
   svc <- .personalize$service(config)
@@ -71,6 +79,7 @@ personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, 
 
 #' Creates a campaign by deploying a solution version
 #'
+#' @description
 #' Creates a campaign by deploying a solution version. When a client calls
 #' the
 #' [GetRecommendations](https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
@@ -87,9 +96,9 @@ personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, 
 #' provisioned by Amazon Personalize, and thus, the minimum billing charge.
 #' If your TPS increases beyond `minProvisionedTPS`, Amazon Personalize
 #' auto-scales the provisioned capacity up and down, but never below
-#' `minProvisionedTPS`, to maintain a 70% utilization. There\'s a short
-#' time delay while the capacity is increased that might cause loss of
-#' transactions. It\'s recommended to start with a low `minProvisionedTPS`,
+#' `minProvisionedTPS`, to maintain a 70% utilization. There's a short time
+#' delay while the capacity is increased that might cause loss of
+#' transactions. It's recommended to start with a low `minProvisionedTPS`,
 #' track your usage using Amazon CloudWatch metrics, and then increase the
 #' `minProvisionedTPS` as necessary.
 #' 
@@ -97,9 +106,10 @@ personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, 
 #' 
 #' A campaign can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
-#' -   DELETE PENDING \\> DELETE IN\\_PROGRESS
+#' -   DELETE PENDING &gt; DELETE IN\\_PROGRESS
 #' 
 #' To get the campaign status, call DescribeCampaign.
 #' 
@@ -117,34 +127,41 @@ personalize_create_batch_inference_job <- function(jobName, solutionVersionArn, 
 #' -   DeleteCampaign
 #'
 #' @usage
-#' personalize_create_campaign(name, solutionVersionArn, minProvisionedTPS)
+#' personalize_create_campaign(name, solutionVersionArn, minProvisionedTPS,
+#'   campaignConfig)
 #'
 #' @param name &#91;required&#93; A name for the new campaign. The campaign name must be unique within
 #' your account.
 #' @param solutionVersionArn &#91;required&#93; The Amazon Resource Name (ARN) of the solution version to deploy.
 #' @param minProvisionedTPS &#91;required&#93; Specifies the requested minimum provisioned transactions
 #' (recommendations) per second that Amazon Personalize will support.
+#' @param campaignConfig The configuration details of a campaign.
 #'
 #' @section Request syntax:
 #' ```
 #' svc$create_campaign(
 #'   name = "string",
 #'   solutionVersionArn = "string",
-#'   minProvisionedTPS = 123
+#'   minProvisionedTPS = 123,
+#'   campaignConfig = list(
+#'     itemExplorationConfig = list(
+#'       "string"
+#'     )
+#'   )
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname personalize_create_campaign
-personalize_create_campaign <- function(name, solutionVersionArn, minProvisionedTPS) {
+personalize_create_campaign <- function(name, solutionVersionArn, minProvisionedTPS, campaignConfig = NULL) {
   op <- new_operation(
     name = "CreateCampaign",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .personalize$create_campaign_input(name = name, solutionVersionArn = solutionVersionArn, minProvisionedTPS = minProvisionedTPS)
+  input <- .personalize$create_campaign_input(name = name, solutionVersionArn = solutionVersionArn, minProvisionedTPS = minProvisionedTPS, campaignConfig = campaignConfig)
   output <- .personalize$create_campaign_output()
   config <- get_config()
   svc <- .personalize$service(config)
@@ -156,6 +173,7 @@ personalize_create_campaign <- function(name, solutionVersionArn, minProvisioned
 
 #' Creates an empty dataset and adds it to the specified dataset group
 #'
+#' @description
 #' Creates an empty dataset and adds it to the specified dataset group. Use
 #' CreateDatasetImportJob to import your training data to a dataset.
 #' 
@@ -173,9 +191,10 @@ personalize_create_campaign <- function(name, solutionVersionArn, minProvisioned
 #' 
 #' A dataset can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
-#' -   DELETE PENDING \\> DELETE IN\\_PROGRESS
+#' -   DELETE PENDING &gt; DELETE IN\\_PROGRESS
 #' 
 #' To get the status of the dataset, call DescribeDataset.
 #' 
@@ -240,6 +259,7 @@ personalize_create_dataset <- function(name, schemaArn, datasetGroupArn, dataset
 
 #' Creates an empty dataset group
 #'
+#' @description
 #' Creates an empty dataset group. A dataset group contains related
 #' datasets that supply data for training a model. A dataset group can
 #' contain at most three datasets, one for each type of dataset:
@@ -256,7 +276,8 @@ personalize_create_dataset <- function(name, schemaArn, datasetGroupArn, dataset
 #' 
 #' A dataset group can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
 #' -   DELETE PENDING
 #' 
@@ -329,11 +350,13 @@ personalize_create_dataset_group <- function(name, roleArn = NULL, kmsKeyArn = N
 #' Creates a job that imports training data from your data source (an
 #' Amazon S3 bucket) to an Amazon Personalize dataset
 #'
+#' @description
 #' Creates a job that imports training data from your data source (an
 #' Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
 #' Personalize to import the training data, you must specify an AWS
 #' Identity and Access Management (IAM) role that has permission to read
-#' from the data source.
+#' from the data source, as Amazon Personalize makes a copy of your data
+#' and processes it in an internal AWS system.
 #' 
 #' The dataset import job replaces any previous data in the dataset.
 #' 
@@ -341,7 +364,8 @@ personalize_create_dataset_group <- function(name, roleArn = NULL, kmsKeyArn = N
 #' 
 #' A dataset import job can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
 #' To get the status of the import job, call DescribeDatasetImportJob,
 #' providing the Amazon Resource Name (ARN) of the dataset import job. The
@@ -403,6 +427,7 @@ personalize_create_dataset_import_job <- function(jobName, datasetArn, dataSourc
 #' Creates an event tracker that you use when sending event data to the
 #' specified dataset group using the PutEvents API
 #'
+#' @description
 #' Creates an event tracker that you use when sending event data to the
 #' specified dataset group using the
 #' [PutEvents](https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
@@ -423,9 +448,10 @@ personalize_create_dataset_import_job <- function(jobName, datasetArn, dataSourc
 #' 
 #' The event tracker can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
-#' -   DELETE PENDING \\> DELETE IN\\_PROGRESS
+#' -   DELETE PENDING &gt; DELETE IN\\_PROGRESS
 #' 
 #' To get the status of the event tracker, call DescribeEventTracker.
 #' 
@@ -477,8 +503,10 @@ personalize_create_event_tracker <- function(name, datasetGroupArn) {
 
 #' Creates a recommendation filter
 #'
-#' Creates a recommendation filter. For more information, see Using Filters
-#' with Amazon Personalize.
+#' @description
+#' Creates a recommendation filter. For more information, see [Using
+#' Filters with Amazon
+#' Personalize](https://docs.aws.amazon.com/personalize/latest/dg/).
 #'
 #' @usage
 #' personalize_create_filter(name, datasetGroupArn, filterExpression)
@@ -491,9 +519,10 @@ personalize_create_event_tracker <- function(name, datasetGroupArn) {
 #' 
 #' `EXCLUDE itemId WHERE INTERACTIONS.event_type in ("EVENT_TYPE")`
 #' 
-#' Where \"EVENT\\_TYPE\" is the type of event to filter out. To filter out
+#' Where "EVENT\\_TYPE" is the type of event to filter out. To filter out
 #' all items with any interactions history, set `"*"` as the EVENT\\_TYPE.
-#' For more information, see Using Filters with Amazon Personalize.
+#' For more information, see [Using Filters with Amazon
+#' Personalize](https://docs.aws.amazon.com/personalize/latest/dg/).
 #'
 #' @section Request syntax:
 #' ```
@@ -526,6 +555,7 @@ personalize_create_filter <- function(name, datasetGroupArn, filterExpression) {
 
 #' Creates an Amazon Personalize schema from the specified schema string
 #'
+#' @description
 #' Creates an Amazon Personalize schema from the specified schema string.
 #' The schema you create must be in Avro JSON format.
 #' 
@@ -577,6 +607,7 @@ personalize_create_schema <- function(name, schema) {
 
 #' Creates the configuration for training a model
 #'
+#' @description
 #' Creates the configuration for training a model. A trained model is known
 #' as a solution. After the configuration is created, you train the model
 #' (create a solution) by calling the CreateSolutionVersion operation.
@@ -602,9 +633,10 @@ personalize_create_schema <- function(name, schema) {
 #' 
 #' A solution can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
-#' -   DELETE PENDING \\> DELETE IN\\_PROGRESS
+#' -   DELETE PENDING &gt; DELETE IN\\_PROGRESS
 #' 
 #' To get the status of the solution, call DescribeSolution. Wait until the
 #' status shows as ACTIVE before calling `CreateSolutionVersion`.
@@ -649,8 +681,8 @@ personalize_create_schema <- function(name, schema) {
 #' @param datasetGroupArn &#91;required&#93; The Amazon Resource Name (ARN) of the dataset group that provides the
 #' training data.
 #' @param eventType When your have multiple event types (using an `EVENT_TYPE` schema
-#' field), this parameter specifies which event type (for example,
-#' \'click\' or \'like\') is used for training the model.
+#' field), this parameter specifies which event type (for example, 'click'
+#' or 'like') is used for training the model.
 #' @param solutionConfig The configuration to use with the solution. When `performAutoML` is set
 #' to true, Amazon Personalize only evaluates the `autoMLConfig` section of
 #' the solution configuration.
@@ -739,6 +771,7 @@ personalize_create_solution <- function(name, performHPO = NULL, performAutoML =
 
 #' Trains or retrains an active solution
 #'
+#' @description
 #' Trains or retrains an active solution. A solution is created using the
 #' CreateSolution operation and must be in the ACTIVE state before calling
 #' `CreateSolutionVersion`. A new version of the solution is created every
@@ -748,7 +781,8 @@ personalize_create_solution <- function(name, performHPO = NULL, performAutoML =
 #' 
 #' A solution version can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
 #' To get the status of the version, call DescribeSolutionVersion. Wait
 #' until the status shows as ACTIVE before calling `CreateCampaign`.
@@ -779,7 +813,7 @@ personalize_create_solution <- function(name, performHPO = NULL, performAutoML =
 #' configuration information.
 #' @param trainingMode The scope of training to be performed when creating the solution
 #' version. The `FULL` option trains the solution version based on the
-#' entirety of the input solution\'s training data, while the `UPDATE`
+#' entirety of the input solution's training data, while the `UPDATE`
 #' option processes only the data that has changed in comparison to the
 #' input solution. Choose `UPDATE` when you want to incrementally update
 #' your solution version instead of creating an entirely new one.
@@ -819,6 +853,7 @@ personalize_create_solution_version <- function(solutionArn, trainingMode = NULL
 
 #' Removes a campaign by deleting the solution deployment
 #'
+#' @description
 #' Removes a campaign by deleting the solution deployment. The solution
 #' that the campaign is based on is not deleted and can be redeployed when
 #' needed. A deleted campaign can no longer be specified in a
@@ -859,7 +894,8 @@ personalize_delete_campaign <- function(campaignArn) {
 
 #' Deletes a dataset
 #'
-#' Deletes a dataset. You can\'t delete a dataset if an associated
+#' @description
+#' Deletes a dataset. You can't delete a dataset if an associated
 #' `DatasetImportJob` or `SolutionVersion` is in the CREATE PENDING or IN
 #' PROGRESS state. For more information on datasets, see CreateDataset.
 #'
@@ -897,6 +933,7 @@ personalize_delete_dataset <- function(datasetArn) {
 
 #' Deletes a dataset group
 #'
+#' @description
 #' Deletes a dataset group. Before you delete a dataset group, you must
 #' delete the following:
 #' 
@@ -940,6 +977,7 @@ personalize_delete_dataset_group <- function(datasetGroupArn) {
 
 #' Deletes the event tracker
 #'
+#' @description
 #' Deletes the event tracker. Does not delete the event-interactions
 #' dataset from the associated dataset group. For more information on event
 #' trackers, see CreateEventTracker.
@@ -978,6 +1016,7 @@ personalize_delete_event_tracker <- function(eventTrackerArn) {
 
 #' Deletes a filter
 #'
+#' @description
 #' Deletes a filter.
 #'
 #' @usage
@@ -1014,6 +1053,7 @@ personalize_delete_filter <- function(filterArn) {
 
 #' Deletes a schema
 #'
+#' @description
 #' Deletes a schema. Before deleting a schema, you must delete all datasets
 #' referencing the schema. For more information on schemas, see
 #' CreateSchema.
@@ -1052,13 +1092,14 @@ personalize_delete_schema <- function(schemaArn) {
 
 #' Deletes all versions of a solution and the Solution object itself
 #'
+#' @description
 #' Deletes all versions of a solution and the `Solution` object itself.
 #' Before deleting a solution, you must delete all campaigns based on the
 #' solution. To determine what campaigns are using the solution, call
 #' ListCampaigns and supply the Amazon Resource Name (ARN) of the solution.
-#' You can\'t delete a solution if an associated `SolutionVersion` is in
-#' the CREATE PENDING or IN PROGRESS state. For more information on
-#' solutions, see CreateSolution.
+#' You can't delete a solution if an associated `SolutionVersion` is in the
+#' CREATE PENDING or IN PROGRESS state. For more information on solutions,
+#' see CreateSolution.
 #'
 #' @usage
 #' personalize_delete_solution(solutionArn)
@@ -1094,6 +1135,7 @@ personalize_delete_solution <- function(solutionArn) {
 
 #' Describes the given algorithm
 #'
+#' @description
 #' Describes the given algorithm.
 #'
 #' @usage
@@ -1132,6 +1174,7 @@ personalize_describe_algorithm <- function(algorithmArn) {
 #' Resource Name (ARN), status, input and output configurations, and the
 #' ARN of the solution version used to generate the recommendations
 #'
+#' @description
 #' Gets the properties of a batch inference job including name, Amazon
 #' Resource Name (ARN), status, input and output configurations, and the
 #' ARN of the solution version used to generate the recommendations.
@@ -1170,13 +1213,15 @@ personalize_describe_batch_inference_job <- function(batchInferenceJobArn) {
 
 #' Describes the given campaign, including its status
 #'
+#' @description
 #' Describes the given campaign, including its status.
 #' 
 #' A campaign can be in one of the following states:
 #' 
-#' -   CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
+#' -   CREATE PENDING &gt; CREATE IN\\_PROGRESS &gt; ACTIVE -or- CREATE
+#'     FAILED
 #' 
-#' -   DELETE PENDING \\> DELETE IN\\_PROGRESS
+#' -   DELETE PENDING &gt; DELETE IN\\_PROGRESS
 #' 
 #' When the `status` is `CREATE FAILED`, the response includes the
 #' `failureReason` key, which describes why.
@@ -1217,6 +1262,7 @@ personalize_describe_campaign <- function(campaignArn) {
 
 #' Describes the given dataset
 #'
+#' @description
 #' Describes the given dataset. For more information on datasets, see
 #' CreateDataset.
 #'
@@ -1254,6 +1300,7 @@ personalize_describe_dataset <- function(datasetArn) {
 
 #' Describes the given dataset group
 #'
+#' @description
 #' Describes the given dataset group. For more information on dataset
 #' groups, see CreateDatasetGroup.
 #'
@@ -1292,6 +1339,7 @@ personalize_describe_dataset_group <- function(datasetGroupArn) {
 #' Describes the dataset import job created by CreateDatasetImportJob,
 #' including the import job status
 #'
+#' @description
 #' Describes the dataset import job created by CreateDatasetImportJob,
 #' including the import job status.
 #'
@@ -1329,6 +1377,7 @@ personalize_describe_dataset_import_job <- function(datasetImportJobArn) {
 
 #' Describes an event tracker
 #'
+#' @description
 #' Describes an event tracker. The response includes the `trackingId` and
 #' `status` of the event tracker. For more information on event trackers,
 #' see CreateEventTracker.
@@ -1367,6 +1416,7 @@ personalize_describe_event_tracker <- function(eventTrackerArn) {
 
 #' Describes the given feature transformation
 #'
+#' @description
 #' Describes the given feature transformation.
 #'
 #' @usage
@@ -1404,7 +1454,8 @@ personalize_describe_feature_transformation <- function(featureTransformationArn
 
 #' Describes a filter's properties
 #'
-#' Describes a filter\'s properties.
+#' @description
+#' Describes a filter's properties.
 #'
 #' @usage
 #' personalize_describe_filter(filterArn)
@@ -1440,6 +1491,7 @@ personalize_describe_filter <- function(filterArn) {
 
 #' Describes a recipe
 #'
+#' @description
 #' Describes a recipe.
 #' 
 #' A recipe contains three items:
@@ -1493,6 +1545,7 @@ personalize_describe_recipe <- function(recipeArn) {
 
 #' Describes a schema
 #'
+#' @description
 #' Describes a schema. For more information on schemas, see CreateSchema.
 #'
 #' @usage
@@ -1529,6 +1582,7 @@ personalize_describe_schema <- function(schemaArn) {
 
 #' Describes a solution
 #'
+#' @description
 #' Describes a solution. For more information on solutions, see
 #' CreateSolution.
 #'
@@ -1566,6 +1620,7 @@ personalize_describe_solution <- function(solutionArn) {
 
 #' Describes a specific version of a solution
 #'
+#' @description
 #' Describes a specific version of a solution. For more information on
 #' solutions, see CreateSolution.
 #'
@@ -1603,6 +1658,7 @@ personalize_describe_solution_version <- function(solutionVersionArn) {
 
 #' Gets the metrics for the specified solution version
 #'
+#' @description
 #' Gets the metrics for the specified solution version.
 #'
 #' @usage
@@ -1641,6 +1697,7 @@ personalize_get_solution_metrics <- function(solutionVersionArn) {
 #' Gets a list of the batch inference jobs that have been performed off of
 #' a solution version
 #'
+#' @description
 #' Gets a list of the batch inference jobs that have been performed off of
 #' a solution version.
 #'
@@ -1685,6 +1742,7 @@ personalize_list_batch_inference_jobs <- function(solutionVersionArn = NULL, nex
 
 #' Returns a list of campaigns that use the given solution
 #'
+#' @description
 #' Returns a list of campaigns that use the given solution. When a solution
 #' is not specified, all the campaigns associated with the account are
 #' listed. The response provides the properties for each campaign,
@@ -1732,6 +1790,7 @@ personalize_list_campaigns <- function(solutionArn = NULL, nextToken = NULL, max
 
 #' Returns a list of dataset groups
 #'
+#' @description
 #' Returns a list of dataset groups. The response provides the properties
 #' for each dataset group, including the Amazon Resource Name (ARN). For
 #' more information on dataset groups, see CreateDatasetGroup.
@@ -1773,6 +1832,7 @@ personalize_list_dataset_groups <- function(nextToken = NULL, maxResults = NULL)
 
 #' Returns a list of dataset import jobs that use the given dataset
 #'
+#' @description
 #' Returns a list of dataset import jobs that use the given dataset. When a
 #' dataset is not specified, all the dataset import jobs associated with
 #' the account are listed. The response provides the properties for each
@@ -1820,6 +1880,7 @@ personalize_list_dataset_import_jobs <- function(datasetArn = NULL, nextToken = 
 
 #' Returns the list of datasets contained in the given dataset group
 #'
+#' @description
 #' Returns the list of datasets contained in the given dataset group. The
 #' response provides the properties for each dataset, including the Amazon
 #' Resource Name (ARN). For more information on datasets, see
@@ -1865,6 +1926,7 @@ personalize_list_datasets <- function(datasetGroupArn = NULL, nextToken = NULL, 
 
 #' Returns the list of event trackers associated with the account
 #'
+#' @description
 #' Returns the list of event trackers associated with the account. The
 #' response provides the properties for each event tracker, including the
 #' Amazon Resource Name (ARN) and tracking ID. For more information on
@@ -1909,6 +1971,7 @@ personalize_list_event_trackers <- function(datasetGroupArn = NULL, nextToken = 
 
 #' Lists all filters that belong to a given dataset group
 #'
+#' @description
 #' Lists all filters that belong to a given dataset group.
 #'
 #' @usage
@@ -1950,8 +2013,9 @@ personalize_list_filters <- function(datasetGroupArn = NULL, nextToken = NULL, m
 
 #' Returns a list of available recipes
 #'
+#' @description
 #' Returns a list of available recipes. The response provides the
-#' properties for each recipe, including the recipe\'s Amazon Resource Name
+#' properties for each recipe, including the recipe's Amazon Resource Name
 #' (ARN).
 #'
 #' @usage
@@ -1993,6 +2057,7 @@ personalize_list_recipes <- function(recipeProvider = NULL, nextToken = NULL, ma
 
 #' Returns the list of schemas associated with the account
 #'
+#' @description
 #' Returns the list of schemas associated with the account. The response
 #' provides the properties for each schema, including the Amazon Resource
 #' Name (ARN). For more information on schemas, see CreateSchema.
@@ -2034,6 +2099,7 @@ personalize_list_schemas <- function(nextToken = NULL, maxResults = NULL) {
 
 #' Returns a list of solution versions for the given solution
 #'
+#' @description
 #' Returns a list of solution versions for the given solution. When a
 #' solution is not specified, all the solution versions associated with the
 #' account are listed. The response provides the properties for each
@@ -2079,6 +2145,7 @@ personalize_list_solution_versions <- function(solutionArn = NULL, nextToken = N
 
 #' Returns a list of solutions that use the given dataset group
 #'
+#' @description
 #' Returns a list of solutions that use the given dataset group. When a
 #' dataset group is not specified, all the solutions associated with the
 #' account are listed. The response provides the properties for each
@@ -2125,8 +2192,9 @@ personalize_list_solutions <- function(datasetGroupArn = NULL, nextToken = NULL,
 #' Updates a campaign by either deploying a new solution or changing the
 #' value of the campaign's minProvisionedTPS parameter
 #'
+#' @description
 #' Updates a campaign by either deploying a new solution or changing the
-#' value of the campaign\'s `minProvisionedTPS` parameter.
+#' value of the campaign's `minProvisionedTPS` parameter.
 #' 
 #' To update a campaign, the campaign status must be ACTIVE or CREATE
 #' FAILED. Check the campaign status using the DescribeCampaign API.
@@ -2138,33 +2206,39 @@ personalize_list_solutions <- function(datasetGroupArn = NULL, nextToken = NULL,
 #'
 #' @usage
 #' personalize_update_campaign(campaignArn, solutionVersionArn,
-#'   minProvisionedTPS)
+#'   minProvisionedTPS, campaignConfig)
 #'
 #' @param campaignArn &#91;required&#93; The Amazon Resource Name (ARN) of the campaign.
 #' @param solutionVersionArn The ARN of a new solution version to deploy.
 #' @param minProvisionedTPS Specifies the requested minimum provisioned transactions
 #' (recommendations) per second that Amazon Personalize will support.
+#' @param campaignConfig The configuration details of a campaign.
 #'
 #' @section Request syntax:
 #' ```
 #' svc$update_campaign(
 #'   campaignArn = "string",
 #'   solutionVersionArn = "string",
-#'   minProvisionedTPS = 123
+#'   minProvisionedTPS = 123,
+#'   campaignConfig = list(
+#'     itemExplorationConfig = list(
+#'       "string"
+#'     )
+#'   )
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname personalize_update_campaign
-personalize_update_campaign <- function(campaignArn, solutionVersionArn = NULL, minProvisionedTPS = NULL) {
+personalize_update_campaign <- function(campaignArn, solutionVersionArn = NULL, minProvisionedTPS = NULL, campaignConfig = NULL) {
   op <- new_operation(
     name = "UpdateCampaign",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .personalize$update_campaign_input(campaignArn = campaignArn, solutionVersionArn = solutionVersionArn, minProvisionedTPS = minProvisionedTPS)
+  input <- .personalize$update_campaign_input(campaignArn = campaignArn, solutionVersionArn = solutionVersionArn, minProvisionedTPS = minProvisionedTPS, campaignConfig = campaignConfig)
   output <- .personalize$update_campaign_output()
   config <- get_config()
   svc <- .personalize$service(config)

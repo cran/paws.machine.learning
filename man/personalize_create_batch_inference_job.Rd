@@ -5,7 +5,8 @@
 \title{Creates a batch inference job}
 \usage{
 personalize_create_batch_inference_job(jobName, solutionVersionArn,
-  filterArn, numResults, jobInput, jobOutput, roleArn)
+  filterArn, numResults, jobInput, jobOutput, roleArn,
+  batchInferenceJobConfig)
 }
 \arguments{
 \item{jobName}{[required] The name of the batch inference job to create.}
@@ -21,11 +22,13 @@ information on using filters, see Using Filters with Amazon Personalize.}
 \item{jobInput}{[required] The Amazon S3 path that leads to the input file to base your
 recommendations on. The input material must be in JSON format.}
 
-\item{jobOutput}{[required] The path to the Amazon S3 bucket where the job\'s output will be stored.}
+\item{jobOutput}{[required] The path to the Amazon S3 bucket where the job's output will be stored.}
 
 \item{roleArn}{[required] The ARN of the Amazon Identity and Access Management role that has
 permissions to read and write to your input and out Amazon S3 buckets
 respectively.}
+
+\item{batchInferenceJobConfig}{The configuration details of a batch inference job.}
 }
 \description{
 Creates a batch inference job. The operation can handle up to 50 million
@@ -50,7 +53,12 @@ see recommendations-batch.
       kmsKeyArn = "string"
     )
   ),
-  roleArn = "string"
+  roleArn = "string",
+  batchInferenceJobConfig = list(
+    itemExplorationConfig = list(
+      "string"
+    )
+  )
 )
 }
 }

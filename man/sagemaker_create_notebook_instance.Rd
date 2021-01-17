@@ -37,8 +37,9 @@ your notebook instance. The KMS key you provide must be enabled. For
 information, see \href{https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html}{Enabling and Disabling Keys}
 in the \emph{AWS Key Management Service Developer Guide}.}
 
-\item{Tags}{A list of tags to associate with the notebook instance. You can add tags
-later by using the \code{CreateTags} API.}
+\item{Tags}{An array of key-value pairs. You can use tags to categorize your AWS
+resources in different ways, for example, by purpose, owner, or
+environment. For more information, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging AWS Resources}.}
 
 \item{LifecycleConfigName}{The name of a lifecycle configuration to associate with the notebook
 instance. For information about lifestyle configurations, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html}{Step 2.1: (Optional) Customize a Notebook Instance}.}
@@ -49,7 +50,7 @@ able to access resources only in your VPC, and will not be able to
 connect to Amazon SageMaker training and endpoint services unless your
 configure a NAT Gateway in your VPC.
 
-For more information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access}{Notebook Instances Are Internet-Enabled by Default}.
+For more information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/#appendix-notebook-and-internet-access}{Notebook Instances Are Internet-Enabled by Default}.
 You can set the value of this parameter to \code{Disabled} only if you set a
 value for the \code{SubnetId} parameter.}
 
@@ -85,8 +86,7 @@ root access for users.}
 \description{
 Creates an Amazon SageMaker notebook instance. A notebook instance is a
 machine learning (ML) compute instance running on a Jupyter notebook.
-}
-\details{
+
 In a \code{CreateNotebookInstance} request, specify the type of ML compute
 instance that you want to run. Amazon SageMaker launches the instance,
 installs common libraries that you can use to explore datasets for model
@@ -113,7 +113,7 @@ notebook instance, assuming that the security groups allow it.
 }
 
 After creating the notebook instance, Amazon SageMaker returns its
-Amazon Resource Name (ARN). You can\'t change the name of a notebook
+Amazon Resource Name (ARN). You can't change the name of a notebook
 instance after you create it.
 
 After Amazon SageMaker creates the notebook instance, you can connect to
@@ -122,7 +122,7 @@ write code to explore a dataset that you can use for model training,
 train a model, host models by creating Amazon SageMaker endpoints, and
 validate hosted models.
 
-For more information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html}{How It Works}.
+For more information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/}{How It Works}.
 }
 \section{Request syntax}{
 \preformatted{svc$create_notebook_instance(

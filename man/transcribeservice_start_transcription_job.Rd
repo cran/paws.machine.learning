@@ -6,17 +6,17 @@
 \usage{
 transcribeservice_start_transcription_job(TranscriptionJobName,
   LanguageCode, MediaSampleRateHertz, MediaFormat, Media,
-  OutputBucketName, OutputEncryptionKMSKeyId, Settings,
-  JobExecutionSettings, ContentRedaction)
+  OutputBucketName, OutputKey, OutputEncryptionKMSKeyId, Settings,
+  ModelSettings, JobExecutionSettings, ContentRedaction, IdentifyLanguage,
+  LanguageOptions)
 }
 \arguments{
-\item{TranscriptionJobName}{[required] The name of the job. Note that you can\'t use the strings \".\" or
-\"..\" by themselves as the job name. The name must also be unique
-within an AWS account. If you try to create a transcription job with the
-same name as a previous transcription job you will receive a
-\code{ConflictException} error.}
+\item{TranscriptionJobName}{[required] The name of the job. You can't use the strings "\code{.}" or "\code{..}" by
+themselves as the job name. The name must also be unique within an AWS
+account. If you try to create a transcription job with the same name as
+a previous transcription job, you get a \code{ConflictException} error.}
 
-\item{LanguageCode}{[required] The language code for the language used in the input media file.}
+\item{LanguageCode}{The language code for the language used in the input media file.}
 
 \item{MediaSampleRateHertz}{The sample rate, in Hertz, of the audio track in the input media file.
 
@@ -38,20 +38,39 @@ operation, the operation returns this location in the
 \code{TranscriptFileUri} field. If you enable content redaction, the redacted
 transcript appears in \code{RedactedTranscriptFileUri}. If you enable content
 redaction and choose to output an unredacted transcript, that
-transcript\'s location still appears in the \code{TranscriptFileUri}. The S3
+transcript's location still appears in the \code{TranscriptFileUri}. The S3
 bucket must have permissions that allow Amazon Transcribe to put files
 in the bucket. For more information, see \href{https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user}{Permissions Required for IAM User Roles}.
 
 You can specify an AWS Key Management Service (KMS) key to encrypt the
 output of your transcription using the \code{OutputEncryptionKMSKeyId}
-parameter. If you don\'t specify a KMS key, Amazon Transcribe uses the
+parameter. If you don't specify a KMS key, Amazon Transcribe uses the
 default Amazon S3 key for server-side encryption of transcripts that are
 placed in your S3 bucket.
 
-If you don\'t set the \code{OutputBucketName}, Amazon Transcribe generates a
+If you don't set the \code{OutputBucketName}, Amazon Transcribe generates a
 pre-signed URL, a shareable URL that provides secure access to your
 transcription, and returns it in the \code{TranscriptFileUri} field. Use this
 URL to download the transcription.}
+
+\item{OutputKey}{You can specify a location in an Amazon S3 bucket to store the output of
+your transcription job.
+
+If you don't specify an output key, Amazon Transcribe stores the output
+of your transcription job in the Amazon S3 bucket you specified. By
+default, the object key is "your-transcription-job-name.json".
+
+You can use output keys to specify the Amazon S3 prefix and file name of
+the transcription output. For example, specifying the Amazon S3 prefix,
+"folder1/folder2/", as an output key would lead to the output being
+stored as "folder1/folder2/your-transcription-job-name.json". If you
+specify "my-other-job-name.json" as the output key, the object key is
+changed to "my-other-job-name.json". You can use an output key to change
+both the prefix and the file name, for example
+"folder/my-other-job-name.json".
+
+If you specify an output key, you must also specify an S3 bucket in the
+\code{OutputBucketName} parameter.}
 
 \item{OutputEncryptionKMSKeyId}{The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
 key used to encrypt the output of the transcription job. The user
@@ -61,21 +80,20 @@ use the specified KMS key.
 You can use either of the following to identify a KMS key in the current
 account:
 \itemize{
-\item KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"
-\item KMS Key Alias: \"alias/ExampleAlias\"
+\item KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+\item KMS Key Alias: "alias/ExampleAlias"
 }
 
 You can use either of the following to identify a KMS key in the current
 account or another account:
 \itemize{
-\item Amazon Resource Name (ARN) of a KMS Key:
-\"arn:aws:kms:region:account
-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"
-\item ARN of a KMS Key Alias: \"arn:aws:kms:region:account
-ID:alias/ExampleAlias\"
+\item Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account
+ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+\item ARN of a KMS Key Alias: "arn:aws:kms:region:account
+ID:alias/ExampleAlias"
 }
 
-If you don\'t specify an encryption key, the output of the transcription
+If you don't specify an encryption key, the output of the transcription
 job is encrypted with the default Amazon S3 key (SSE-S3).
 
 If you specify a KMS key to encrypt your output, you must also specify
@@ -84,12 +102,23 @@ an output location in the \code{OutputBucketName} parameter.}
 \item{Settings}{A \code{Settings} object that provides optional settings for a transcription
 job.}
 
+\item{ModelSettings}{Choose the custom language model you use for your transcription job in
+this parameter.}
+
 \item{JobExecutionSettings}{Provides information about how a transcription job is executed. Use this
 field to indicate that the job can be queued for deferred execution if
 the concurrency limit is reached and there are no slots available to
 immediately run the job.}
 
 \item{ContentRedaction}{An object that contains the request parameters for content redaction.}
+
+\item{IdentifyLanguage}{Set this field to \code{true} to enable automatic language identification.
+Automatic language identification is disabled by default. You receive a
+\code{BadRequestException} error if you enter a value for a \code{LanguageCode}.}
+
+\item{LanguageOptions}{An object containing a list of languages that might be present in your
+collection of audio files. Automatic language identification chooses a
+language that best matches the source audio from that list.}
 }
 \description{
 Starts an asynchronous job to transcribe speech to text.
@@ -97,13 +126,14 @@ Starts an asynchronous job to transcribe speech to text.
 \section{Request syntax}{
 \preformatted{svc$start_transcription_job(
   TranscriptionJobName = "string",
-  LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|"en-IN"|"hi-IN"|"ar-SA"|"ru-RU"|"zh-CN"|"nl-NL"|"id-ID"|"ta-IN"|"fa-IR"|"en-IE"|"en-AB"|"en-WL"|"pt-PT"|"te-IN"|"tr-TR"|"de-CH"|"he-IL"|"ms-MY"|"ja-JP"|"ar-AE",
+  LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN",
   MediaSampleRateHertz = 123,
-  MediaFormat = "mp3"|"mp4"|"wav"|"flac",
+  MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm",
   Media = list(
     MediaFileUri = "string"
   ),
   OutputBucketName = "string",
+  OutputKey = "string",
   OutputEncryptionKMSKeyId = "string",
   Settings = list(
     VocabularyName = "string",
@@ -115,6 +145,9 @@ Starts an asynchronous job to transcribe speech to text.
     VocabularyFilterName = "string",
     VocabularyFilterMethod = "remove"|"mask"
   ),
+  ModelSettings = list(
+    LanguageModelName = "string"
+  ),
   JobExecutionSettings = list(
     AllowDeferredExecution = TRUE|FALSE,
     DataAccessRoleArn = "string"
@@ -122,6 +155,10 @@ Starts an asynchronous job to transcribe speech to text.
   ContentRedaction = list(
     RedactionType = "PII",
     RedactionOutput = "redacted"|"redacted_and_unredacted"
+  ),
+  IdentifyLanguage = TRUE|FALSE,
+  LanguageOptions = list(
+    "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"
   )
 )
 }

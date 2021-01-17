@@ -5,10 +5,11 @@ NULL
 
 #' Adds one or more tags to an object, up to a limit of 10
 #'
+#' @description
 #' Adds one or more tags to an object, up to a limit of 10. Each tag
 #' consists of a key and an optional value. If you add a tag using a key
 #' that is already associated with the ML object, `AddTags` updates the
-#' tag\'s value.
+#' tag's value.
 #'
 #' @usage
 #' machinelearning_add_tags(Tags, ResourceId, ResourceType)
@@ -55,6 +56,7 @@ machinelearning_add_tags <- function(Tags, ResourceId, ResourceType) {
 
 #' Generates predictions for a group of observations
 #'
+#' @description
 #' Generates predictions for a group of observations. The observations to
 #' process exist in one or more data files referenced by a `DataSource`.
 #' This operation creates a new `BatchPrediction`, and uses an `MLModel`
@@ -85,12 +87,12 @@ machinelearning_add_tags <- function(Tags, ResourceId, ResourceType) {
 #' @param OutputUri &#91;required&#93; The location of an Amazon Simple Storage Service (Amazon S3) bucket or
 #' directory to store the batch prediction results. The following
 #' substrings are not allowed in the `s3 key` portion of the `outputURI`
-#' field: \':\', \'//\', \'/./\', \'/../\'.
+#' field: ':', '//', '/./', '/../'.
 #' 
 #' Amazon ML needs permissions to store and retrieve the logs on your
 #' behalf. For information about how to set permissions, see the [Amazon
 #' Machine Learning Developer
-#' Guide](http://docs.aws.amazon.com/machine-learning/latest/dg).
+#' Guide](https://docs.aws.amazon.com/machine-learning/latest/dg/).
 #'
 #' @section Request syntax:
 #' ```
@@ -126,8 +128,9 @@ machinelearning_create_batch_prediction <- function(BatchPredictionId, BatchPred
 #' Creates a DataSource object from an Amazon Relational Database Service
 #' (Amazon RDS)
 #'
+#' @description
 #' Creates a `DataSource` object from an [Amazon Relational Database
-#' Service](http://aws.amazon.com/rds/) (Amazon RDS). A `DataSource`
+#' Service](https://aws.amazon.com/rds/) (Amazon RDS). A `DataSource`
 #' references data that can be used to perform `CreateMLModel`,
 #' `CreateEvaluation`, or `CreateBatchPrediction` operations.
 #' 
@@ -136,7 +139,7 @@ machinelearning_create_batch_prediction <- function(BatchPredictionId, BatchPred
 #' immediately returns and sets the `DataSource` status to `PENDING`. After
 #' the `DataSource` is created and ready for use, Amazon ML sets the
 #' `Status` parameter to `COMPLETED`. `DataSource` in the `COMPLETED` or
-#' `PENDING` state can be used only to perform `&gt;CreateMLModel`\\>,
+#' `PENDING` state can be used only to perform `&gt;CreateMLModel`&gt;,
 #' `CreateEvaluation`, or `CreateBatchPrediction` operations.
 #' 
 #' If Amazon ML cannot accept the input source, it sets the `Status`
@@ -164,13 +167,13 @@ machinelearning_create_batch_prediction <- function(BatchPredictionId, BatchPred
 #' -   ResourceRole - A role (DataPipelineDefaultResourceRole) assumed by
 #'     an EC2 instance to carry out the copy task from Amazon RDS to Amazon
 #'     Simple Storage Service (Amazon S3). For more information, see [Role
-#'     templates](http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+#'     templates](https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 #'     for data pipelines.
 #' 
 #' -   ServiceRole - A role (DataPipelineDefaultRole) assumed by the AWS
 #'     Data Pipeline service to monitor the progress of the copy task from
 #'     Amazon RDS to Amazon S3. For more information, see [Role
-#'     templates](http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+#'     templates](https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 #'     for data pipelines.
 #' 
 #' -   SecurityInfo - The security information to use to access an RDS DB
@@ -194,12 +197,12 @@ machinelearning_create_batch_prediction <- function(BatchPredictionId, BatchPred
 #' -   DataRearrangement - A JSON string that represents the splitting and
 #'     rearrangement requirements for the `Datasource`.
 #' 
-#'     \\
+#'       
 #' 
 #'     Sample -
 #'     ` "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
 #' @param RoleARN &#91;required&#93; The role that Amazon ML assumes on behalf of the user to create and
-#' activate a data pipeline in the user\'s account and copy data using the
+#' activate a data pipeline in the user's account and copy data using the
 #' `SelectSqlQuery` query from Amazon RDS to Amazon S3.
 #' @param ComputeStatistics The compute statistics for a `DataSource`. The statistics are generated
 #' from the observation data referenced by a `DataSource`. Amazon ML uses
@@ -261,6 +264,7 @@ machinelearning_create_data_source_from_rds <- function(DataSourceId, DataSource
 #' Creates a DataSource from a database hosted on an Amazon Redshift
 #' cluster
 #'
+#' @description
 #' Creates a `DataSource` from a database hosted on an Amazon Redshift
 #' cluster. A `DataSource` references data that can be used to perform
 #' either `CreateMLModel`, `CreateEvaluation`, or `CreateBatchPrediction`
@@ -274,7 +278,7 @@ machinelearning_create_data_source_from_rds <- function(DataSourceId, DataSource
 #' `PENDING` states can be used to perform only `CreateMLModel`,
 #' `CreateEvaluation`, or `CreateBatchPrediction` operations.
 #' 
-#' If Amazon ML can\'t accept the input source, it sets the `Status`
+#' If Amazon ML can't accept the input source, it sets the `Status`
 #' parameter to `FAILED` and includes an error message in the `Message`
 #' attribute of the `GetDataSource` operation response.
 #' 
@@ -283,7 +287,7 @@ machinelearning_create_data_source_from_rds <- function(DataSourceId, DataSource
 #' Amazon ML executes an `Unload` command in Amazon Redshift to transfer
 #' the result set of the `SelectSqlQuery` query to `S3StagingLocation`.
 #' 
-#' After the `DataSource` has been created, it\'s ready for use in
+#' After the `DataSource` has been created, it's ready for use in
 #' evaluations and batch predictions. If you plan to use the `DataSource`
 #' to train an `MLModel`, the `DataSource` also requires a recipe. A recipe
 #' describes how each input variable will be used in training an `MLModel`.
@@ -292,8 +296,8 @@ machinelearning_create_data_source_from_rds <- function(DataSourceId, DataSource
 #' variable or will it be split apart into word combinations? The recipe
 #' provides answers to these questions.
 #' 
-#' You can\'t change an existing datasource, but you can copy and modify
-#' the settings from an existing Amazon Redshift datasource to create a new
+#' You can't change an existing datasource, but you can copy and modify the
+#' settings from an existing Amazon Redshift datasource to create a new
 #' datasource. To do so, call `GetDataSource` for an existing datasource
 #' and copy the values to a `CreateDataSource` call. Change the settings
 #' that you want to change and make sure that all required fields have the
@@ -396,6 +400,7 @@ machinelearning_create_data_source_from_redshift <- function(DataSourceId, DataS
 
 #' Creates a DataSource object
 #'
+#' @description
 #' Creates a `DataSource` object. A `DataSource` references data that can
 #' be used to perform `CreateMLModel`, `CreateEvaluation`, or
 #' `CreateBatchPrediction` operations.
@@ -408,7 +413,7 @@ machinelearning_create_data_source_from_redshift <- function(DataSourceId, DataS
 #' or `PENDING` state can be used to perform only `CreateMLModel`,
 #' `CreateEvaluation` or `CreateBatchPrediction` operations.
 #' 
-#' If Amazon ML can\'t accept the input source, it sets the `Status`
+#' If Amazon ML can't accept the input source, it sets the `Status`
 #' parameter to `FAILED` and includes an error message in the `Message`
 #' attribute of the `GetDataSource` operation response.
 #' 
@@ -420,7 +425,7 @@ machinelearning_create_data_source_from_redshift <- function(DataSourceId, DataS
 #' type. The same schema must be used for all of the data files referenced
 #' by the `DataSource`.
 #' 
-#' After the `DataSource` has been created, it\'s ready to use in
+#' After the `DataSource` has been created, it's ready to use in
 #' evaluations and batch predictions. If you plan to use the `DataSource`
 #' to train an `MLModel`, the `DataSource` also needs a recipe. A recipe
 #' describes how each input variable will be used in training an `MLModel`.
@@ -492,6 +497,7 @@ machinelearning_create_data_source_from_s3 <- function(DataSourceId, DataSourceN
 
 #' Creates a new Evaluation of an MLModel
 #'
+#' @description
 #' Creates a new `Evaluation` of an `MLModel`. An `MLModel` is evaluated on
 #' a set of observations associated to a `DataSource`. Like a `DataSource`
 #' for an `MLModel`, the `DataSource` for an `Evaluation` contains values
@@ -557,6 +563,7 @@ machinelearning_create_evaluation <- function(EvaluationId, EvaluationName = NUL
 #' Creates a new MLModel using the DataSource and the recipe as information
 #' sources
 #'
+#' @description
 #' Creates a new `MLModel` using the `DataSource` and the recipe as
 #' information sources.
 #' 
@@ -593,7 +600,7 @@ machinelearning_create_evaluation <- function(EvaluationId, EvaluationName = NUL
 #'     values.
 #' 
 #' For more information, see the [Amazon Machine Learning Developer
-#' Guide](http://docs.aws.amazon.com/machine-learning/latest/dg).
+#' Guide](https://docs.aws.amazon.com/machine-learning/latest/dg/).
 #' @param Parameters A list of the training parameters in the `MLModel`. The list is
 #' implemented as a map of key-value pairs.
 #' 
@@ -611,7 +618,7 @@ machinelearning_create_evaluation <- function(EvaluationId, EvaluationName = NUL
 #'     integer that ranges from `1` to `10000`. The default value is `10`.
 #' 
 #' -   `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
-#'     Shuffling the data improves a model\'s ability to find the optimal
+#'     Shuffling the data improves a model's ability to find the optimal
 #'     solution for a variety of data types. The valid values are `auto`
 #'     and `none`. The default value is `none`. We strongly recommend that
 #'     you shuffle your data.
@@ -623,8 +630,8 @@ machinelearning_create_evaluation <- function(EvaluationId, EvaluationName = NUL
 #'     a small value, such as `1.0E-08`.
 #' 
 #'     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-#'     default is to not use L1 normalization. This parameter can\'t be
-#'     used when `L2` is specified. Use this parameter sparingly.
+#'     default is to not use L1 normalization. This parameter can't be used
+#'     when `L2` is specified. Use this parameter sparingly.
 #' 
 #' -   `sgd.l2RegularizationAmount` - The coefficient regularization L2
 #'     norm. It controls overfitting the data by penalizing large
@@ -633,15 +640,15 @@ machinelearning_create_evaluation <- function(EvaluationId, EvaluationName = NUL
 #'     value, such as `1.0E-08`.
 #' 
 #'     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-#'     default is to not use L2 normalization. This parameter can\'t be
-#'     used when `L1` is specified. Use this parameter sparingly.
+#'     default is to not use L2 normalization. This parameter can't be used
+#'     when `L1` is specified. Use this parameter sparingly.
 #' @param TrainingDataSourceId &#91;required&#93; The `DataSource` that points to the training data.
 #' @param Recipe The data recipe for creating the `MLModel`. You must specify either the
-#' recipe or its URI. If you don\'t specify a recipe or its URI, Amazon ML
+#' recipe or its URI. If you don't specify a recipe or its URI, Amazon ML
 #' creates a default.
 #' @param RecipeUri The Amazon Simple Storage Service (Amazon S3) location and file name
 #' that contains the `MLModel` recipe. You must specify either the recipe
-#' or its URI. If you don\'t specify a recipe or its URI, Amazon ML creates
+#' or its URI. If you don't specify a recipe or its URI, Amazon ML creates
 #' a default.
 #'
 #' @section Request syntax:
@@ -681,6 +688,7 @@ machinelearning_create_ml_model <- function(MLModelId, MLModelName = NULL, MLMod
 
 #' Creates a real-time endpoint for the MLModel
 #'
+#' @description
 #' Creates a real-time endpoint for the `MLModel`. The endpoint contains
 #' the URI of the `MLModel`; that is, the location to send real-time
 #' prediction requests for the specified `MLModel`.
@@ -719,6 +727,7 @@ machinelearning_create_realtime_endpoint <- function(MLModelId) {
 
 #' Assigns the DELETED status to a BatchPrediction, rendering it unusable
 #'
+#' @description
 #' Assigns the DELETED status to a `BatchPrediction`, rendering it
 #' unusable.
 #' 
@@ -763,6 +772,7 @@ machinelearning_delete_batch_prediction <- function(BatchPredictionId) {
 
 #' Assigns the DELETED status to a DataSource, rendering it unusable
 #'
+#' @description
 #' Assigns the DELETED status to a `DataSource`, rendering it unusable.
 #' 
 #' After using the `DeleteDataSource` operation, you can use the
@@ -806,6 +816,7 @@ machinelearning_delete_data_source <- function(DataSourceId) {
 
 #' Assigns the DELETED status to an Evaluation, rendering it unusable
 #'
+#' @description
 #' Assigns the `DELETED` status to an `Evaluation`, rendering it unusable.
 #' 
 #' After invoking the `DeleteEvaluation` operation, you can use the
@@ -850,6 +861,7 @@ machinelearning_delete_evaluation <- function(EvaluationId) {
 
 #' Assigns the DELETED status to an MLModel, rendering it unusable
 #'
+#' @description
 #' Assigns the `DELETED` status to an `MLModel`, rendering it unusable.
 #' 
 #' After using the `DeleteMLModel` operation, you can use the `GetMLModel`
@@ -892,6 +904,7 @@ machinelearning_delete_ml_model <- function(MLModelId) {
 
 #' Deletes a real time endpoint of an MLModel
 #'
+#' @description
 #' Deletes a real time endpoint of an `MLModel`.
 #'
 #' @usage
@@ -928,10 +941,11 @@ machinelearning_delete_realtime_endpoint <- function(MLModelId) {
 
 #' Deletes the specified tags associated with an ML object
 #'
+#' @description
 #' Deletes the specified tags associated with an ML object. After this
-#' operation is complete, you can\'t recover deleted tags.
+#' operation is complete, you can't recover deleted tags.
 #' 
-#' If you specify a tag that doesn\'t exist, Amazon ML ignores it.
+#' If you specify a tag that doesn't exist, Amazon ML ignores it.
 #'
 #' @usage
 #' machinelearning_delete_tags(TagKeys, ResourceId, ResourceType)
@@ -974,6 +988,7 @@ machinelearning_delete_tags <- function(TagKeys, ResourceId, ResourceType) {
 #' Returns a list of BatchPrediction operations that match the search
 #' criteria in the request
 #'
+#' @description
 #' Returns a list of `BatchPrediction` operations that match the search
 #' criteria in the request.
 #'
@@ -1079,6 +1094,7 @@ machinelearning_describe_batch_predictions <- function(FilterVariable = NULL, EQ
 #' Returns a list of DataSource that match the search criteria in the
 #' request
 #'
+#' @description
 #' Returns a list of `DataSource` that match the search criteria in the
 #' request.
 #'
@@ -1178,6 +1194,7 @@ machinelearning_describe_data_sources <- function(FilterVariable = NULL, EQ = NU
 #' Returns a list of DescribeEvaluations that match the search criteria in
 #' the request
 #'
+#' @description
 #' Returns a list of `DescribeEvaluations` that match the search criteria
 #' in the request.
 #'
@@ -1281,6 +1298,7 @@ machinelearning_describe_evaluations <- function(FilterVariable = NULL, EQ = NUL
 
 #' Returns a list of MLModel that match the search criteria in the request
 #'
+#' @description
 #' Returns a list of `MLModel` that match the search criteria in the
 #' request.
 #'
@@ -1385,6 +1403,7 @@ machinelearning_describe_ml_models <- function(FilterVariable = NULL, EQ = NULL,
 
 #' Describes one or more of the tags for your Amazon ML object
 #'
+#' @description
 #' Describes one or more of the tags for your Amazon ML object.
 #'
 #' @usage
@@ -1424,6 +1443,7 @@ machinelearning_describe_tags <- function(ResourceId, ResourceType) {
 #' Returns a BatchPrediction that includes detailed metadata, status, and
 #' data file information for a Batch Prediction request
 #'
+#' @description
 #' Returns a `BatchPrediction` that includes detailed metadata, status, and
 #' data file information for a `Batch Prediction` request.
 #'
@@ -1462,6 +1482,7 @@ machinelearning_get_batch_prediction <- function(BatchPredictionId) {
 #' Returns a DataSource that includes metadata and data file information,
 #' as well as the current status of the DataSource
 #'
+#' @description
 #' Returns a `DataSource` that includes metadata and data file information,
 #' as well as the current status of the `DataSource`.
 #' 
@@ -1511,6 +1532,7 @@ machinelearning_get_data_source <- function(DataSourceId, Verbose = NULL) {
 #' Returns an Evaluation that includes metadata as well as the current
 #' status of the Evaluation
 #'
+#' @description
 #' Returns an `Evaluation` that includes metadata as well as the current
 #' status of the `Evaluation`.
 #'
@@ -1551,6 +1573,7 @@ machinelearning_get_evaluation <- function(EvaluationId) {
 #' Returns an MLModel that includes detailed metadata, data source
 #' information, and the current status of the MLModel
 #'
+#' @description
 #' Returns an `MLModel` that includes detailed metadata, data source
 #' information, and the current status of the `MLModel`.
 #' 
@@ -1596,6 +1619,7 @@ machinelearning_get_ml_model <- function(MLModelId, Verbose = NULL) {
 
 #' Generates a prediction for the observation using the specified ML Model
 #'
+#' @description
 #' Generates a prediction for the observation using the specified
 #' `ML Model`.
 #' 
@@ -1644,6 +1668,7 @@ machinelearning_predict <- function(MLModelId, Record, PredictEndpoint) {
 
 #' Updates the BatchPredictionName of a BatchPrediction
 #'
+#' @description
 #' Updates the `BatchPredictionName` of a `BatchPrediction`.
 #' 
 #' You can use the `GetBatchPrediction` operation to view the contents of
@@ -1686,6 +1711,7 @@ machinelearning_update_batch_prediction <- function(BatchPredictionId, BatchPred
 
 #' Updates the DataSourceName of a DataSource
 #'
+#' @description
 #' Updates the `DataSourceName` of a `DataSource`.
 #' 
 #' You can use the `GetDataSource` operation to view the contents of the
@@ -1728,6 +1754,7 @@ machinelearning_update_data_source <- function(DataSourceId, DataSourceName) {
 
 #' Updates the EvaluationName of an Evaluation
 #'
+#' @description
 #' Updates the `EvaluationName` of an `Evaluation`.
 #' 
 #' You can use the `GetEvaluation` operation to view the contents of the
@@ -1770,6 +1797,7 @@ machinelearning_update_evaluation <- function(EvaluationId, EvaluationName) {
 
 #' Updates the MLModelName and the ScoreThreshold of an MLModel
 #'
+#' @description
 #' Updates the `MLModelName` and the `ScoreThreshold` of an `MLModel`.
 #' 
 #' You can use the `GetMLModel` operation to view the contents of the

@@ -23,7 +23,7 @@ or left unset, Amazon SageMaker checks the optional execution-parameters
 to determine the settings for your chosen algorithm. If the
 execution-parameters endpoint is not enabled, the default value is \code{1}.
 For more information on execution-parameters, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/your-algorithms-batch-code.html#your-algorithms-batch-code-how-containe-serves-requests}{How Containers Serve Requests}.
-For built-in algorithms, you don\'t need to set a value for
+For built-in algorithms, you don't need to set a value for
 \code{MaxConcurrentTransforms}.}
 
 \item{ModelClientConfig}{Configures the timeout and maximum number of retries for processing a
@@ -85,8 +85,7 @@ in the \emph{AWS Billing and Cost Management User Guide}.}
 Starts a transform job. A transform job uses a trained model to get
 inferences on a dataset and saves these results to an Amazon S3 location
 that you specify.
-}
-\details{
+
 To perform batch transformations, you create a transform job and use the
 data that you have readily available.
 

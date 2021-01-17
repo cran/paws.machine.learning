@@ -31,7 +31,7 @@ before a specified time.}
 specified string.}
 
 \item{StatusEquals}{A filter that retrieves model compilation jobs with a specific
-DescribeCompilationJobResponse\\$CompilationJobStatus status.}
+DescribeCompilationJobResponse$CompilationJobStatus status.}
 
 \item{SortBy}{The field by which to sort results. The default is \code{CreationTime}.}
 
@@ -39,8 +39,7 @@ DescribeCompilationJobResponse\\$CompilationJobStatus status.}
 }
 \description{
 Lists model compilation jobs that satisfy various filters.
-}
-\details{
+
 To create a model compilation job, use CreateCompilationJob. To get
 information about a particular model compilation job you have created,
 use DescribeCompilationJob.

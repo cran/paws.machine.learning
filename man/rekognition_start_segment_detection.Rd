@@ -19,10 +19,10 @@ accidently started more than once.}
 Video to publish the completion status of the segment detection
 operation.}
 
-\item{JobTag}{An identifier you specify that\'s returned in the completion
-notification that\'s published to your Amazon Simple Notification
-Service topic. For example, you can use \code{JobTag} to group related jobs
-and identify them in the completion notification.}
+\item{JobTag}{An identifier you specify that's returned in the completion notification
+that's published to your Amazon Simple Notification Service topic. For
+example, you can use \code{JobTag} to group related jobs and identify them in
+the completion notification.}
 
 \item{Filters}{Filters for technical cue or shot detection.}
 
@@ -31,8 +31,7 @@ TECHNICAL\\_CUE and SHOT.}
 }
 \description{
 Starts asynchronous detection of segment detection in a stored video.
-}
-\details{
+
 Amazon Rekognition Video can detect segments in a video stored in an
 Amazon S3 bucket. Use Video to specify the bucket name and the filename
 of the video. \code{StartSegmentDetection} returns a job identifier (\code{JobId})

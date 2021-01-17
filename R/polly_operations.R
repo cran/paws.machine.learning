@@ -5,6 +5,7 @@ NULL
 
 #' Deletes the specified pronunciation lexicon stored in an AWS Region
 #'
+#' @description
 #' Deletes the specified pronunciation lexicon stored in an AWS Region. A
 #' lexicon which has been deleted is not available for speech synthesis,
 #' nor is it possible to retrieve it using either the `GetLexicon` or
@@ -57,6 +58,7 @@ polly_delete_lexicon <- function(Name) {
 #' Returns the list of voices that are available for use when requesting
 #' speech synthesis
 #'
+#' @description
 #' Returns the list of voices that are available for use when requesting
 #' speech synthesis. Each voice speaks a specified language, is either male
 #' or female, and is identified by an ID, which is the ASCII version of the
@@ -86,7 +88,7 @@ polly_delete_lexicon <- function(Name) {
 #' processing input text for speech synthesis.
 #' @param LanguageCode The language identification tag (ISO 639 code for the language name-ISO
 #' 3166 country code) for filtering the list of voices returned. If you
-#' don\'t specify this optional parameter, all available voices are
+#' don't specify this optional parameter, all available voices are
 #' returned.
 #' @param IncludeAdditionalLanguageCodes Boolean value indicating whether to return any bilingual voices that use
 #' the specified language as an additional language. For instance, if you
@@ -140,6 +142,7 @@ polly_describe_voices <- function(Engine = NULL, LanguageCode = NULL, IncludeAdd
 #' Returns the content of the specified pronunciation lexicon stored in an
 #' AWS Region
 #'
+#' @description
 #' Returns the content of the specified pronunciation lexicon stored in an
 #' AWS Region. For more information, see [Managing
 #' Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
@@ -187,6 +190,7 @@ polly_get_lexicon <- function(Name) {
 
 #' Retrieves a specific SpeechSynthesisTask object based on its TaskID
 #'
+#' @description
 #' Retrieves a specific SpeechSynthesisTask object based on its TaskID.
 #' This object contains information about the given speech synthesis task,
 #' including the status of the task, and a link to the S3 bucket containing
@@ -226,6 +230,7 @@ polly_get_speech_synthesis_task <- function(TaskId) {
 
 #' Returns a list of pronunciation lexicons stored in an AWS Region
 #'
+#' @description
 #' Returns a list of pronunciation lexicons stored in an AWS Region. For
 #' more information, see [Managing
 #' Lexicons](https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
@@ -272,6 +277,7 @@ polly_list_lexicons <- function(NextToken = NULL) {
 #' Returns a list of SpeechSynthesisTask objects ordered by their creation
 #' date
 #'
+#' @description
 #' Returns a list of SpeechSynthesisTask objects ordered by their creation
 #' date. This operation can filter the tasks by their status, for example,
 #' allowing users to list only tasks that are completed.
@@ -315,6 +321,7 @@ polly_list_speech_synthesis_tasks <- function(MaxResults = NULL, NextToken = NUL
 
 #' Stores a pronunciation lexicon in an AWS Region
 #'
+#' @description
 #' Stores a pronunciation lexicon in an AWS Region. If a lexicon with the
 #' same name already exists in the region, it is overwritten by the new
 #' lexicon. Lexicon operations have eventual consistency, therefore, it
@@ -372,6 +379,7 @@ polly_put_lexicon <- function(Name, Content) {
 #' Allows the creation of an asynchronous synthesis task, by starting a new
 #' SpeechSynthesisTask
 #'
+#' @description
 #' Allows the creation of an asynchronous synthesis task, by starting a new
 #' `SpeechSynthesisTask`. This operation requires all the standard
 #' information needed for speech synthesis, plus the name of an Amazon S3
@@ -409,12 +417,12 @@ polly_put_lexicon <- function(Name, Content) {
 #' @param OutputS3KeyPrefix The Amazon S3 key prefix for the output speech file.
 #' @param SampleRate The audio frequency specified in Hz.
 #' 
-#' The valid values for mp3 and ogg\\_vorbis are \"8000\", \"16000\",
-#' \"22050\", and \"24000\". The default value for standard voices is
-#' \"22050\". The default value for neural voices is \"24000\".
+#' The valid values for mp3 and ogg\\_vorbis are "8000", "16000", "22050",
+#' and "24000". The default value for standard voices is "22050". The
+#' default value for neural voices is "24000".
 #' 
-#' Valid values for pcm are \"8000\" and \"16000\" The default value is
-#' \"16000\".
+#' Valid values for pcm are "8000" and "16000" The default value is
+#' "16000".
 #' @param SnsTopicArn ARN for the SNS topic optionally used for providing status notification
 #' for a speech synthesis task.
 #' @param SpeechMarkTypes The type of speech marks returned for the input text.
@@ -442,7 +450,7 @@ polly_put_lexicon <- function(Name, Content) {
 #'   ),
 #'   Text = "string",
 #'   TextType = "ssml"|"text",
-#'   VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"
+#'   VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"
 #' )
 #' ```
 #'
@@ -468,6 +476,7 @@ polly_start_speech_synthesis_task <- function(Engine = NULL, LanguageCode = NULL
 
 #' Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes
 #'
+#' @description
 #' Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes. SSML
 #' input must be valid, well-formed SSML. Some alphabets might not be
 #' available with all the voices (for example, Cyrillic might not be read
@@ -480,8 +489,28 @@ polly_start_speech_synthesis_task <- function(Engine = NULL, LanguageCode = NULL
 #'   OutputFormat, SampleRate, SpeechMarkTypes, Text, TextType, VoiceId)
 #'
 #' @param Engine Specifies the engine (`standard` or `neural`) for Amazon Polly to use
-#' when processing input text for speech synthesis. Using a voice that is
-#' not supported for the engine selected will result in an error.
+#' when processing input text for speech synthesis. For information on
+#' Amazon Polly voices and which voices are available in standard-only,
+#' NTTS-only, and both standard and NTTS formats, see [Available
+#' Voices](https://docs.aws.amazon.com/polly/latest/dg/voicelist.html).
+#' 
+#' **NTTS-only voices**
+#' 
+#' When using NTTS-only voices such as Kevin (en-US), this parameter is
+#' required and must be set to `neural`. If the engine is not specified, or
+#' is set to `standard`, this will result in an error.
+#' 
+#' Type: String
+#' 
+#' Valid Values: `standard` | `neural`
+#' 
+#' Required: Yes
+#' 
+#' **Standard voices**
+#' 
+#' For standard voices, this is not required; the engine parameter defaults
+#' to `standard`. If the engine is not specified, or is set to `standard`
+#' and an NTTS-only voice is selected, this will result in an error.
 #' @param LanguageCode Optional language code for the Synthesize Speech request. This is only
 #' necessary if using a bilingual voice, such as Aditi, which can be used
 #' for either Indian English (en-IN) or Hindi (hi-IN).
@@ -505,12 +534,12 @@ polly_start_speech_synthesis_task <- function(Engine = NULL, LanguageCode = NULL
 #' 1 channel (mono), little-endian format.
 #' @param SampleRate The audio frequency specified in Hz.
 #' 
-#' The valid values for mp3 and ogg\\_vorbis are \"8000\", \"16000\",
-#' \"22050\", and \"24000\". The default value for standard voices is
-#' \"22050\". The default value for neural voices is \"24000\".
+#' The valid values for mp3 and ogg\\_vorbis are "8000", "16000", "22050",
+#' and "24000". The default value for standard voices is "22050". The
+#' default value for neural voices is "24000".
 #' 
-#' Valid values for pcm are \"8000\" and \"16000\" The default value is
-#' \"16000\".
+#' Valid values for pcm are "8000" and "16000" The default value is
+#' "16000".
 #' @param SpeechMarkTypes The type of speech marks returned for the input text.
 #' @param Text &#91;required&#93; Input text to synthesize. If you specify `ssml` as the `TextType`,
 #' follow the SSML format for the input text.
@@ -537,7 +566,7 @@ polly_start_speech_synthesis_task <- function(Engine = NULL, LanguageCode = NULL
 #'   ),
 #'   Text = "string",
 #'   TextType = "ssml"|"text",
-#'   VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"
+#'   VoiceId = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu"
 #' )
 #' ```
 #'

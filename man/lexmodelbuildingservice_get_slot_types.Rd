@@ -19,17 +19,15 @@ pagination token in the next request.}
 is 10.}
 
 \item{nameContains}{Substring to match in slot type names. A slot type will be returned if
-any part of its name matches the substring. For example, \"xyz\" matches
-both \"xyzabc\" and \"abcxyz.\"}
+any part of its name matches the substring. For example, "xyz" matches
+both "xyzabc" and "abcxyz."}
 }
 \description{
 Returns slot type information as follows:
-}
-\details{
 \itemize{
 \item If you specify the \code{nameContains} field, returns the \verb{$LATEST}
 version of all slot types that contain the specified string.
-\item If you don\'t specify the \code{nameContains} field, returns information
+\item If you don't specify the \code{nameContains} field, returns information
 about the \verb{$LATEST} version of all slot types.
 }
 

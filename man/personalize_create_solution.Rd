@@ -33,8 +33,8 @@ selecting a specific recipe.}
 training data.}
 
 \item{eventType}{When your have multiple event types (using an \code{EVENT_TYPE} schema
-field), this parameter specifies which event type (for example,
-\'click\' or \'like\') is used for training the model.}
+field), this parameter specifies which event type (for example, 'click'
+or 'like') is used for training the model.}
 
 \item{solutionConfig}{The configuration to use with the solution. When \code{performAutoML} is set
 to true, Amazon Personalize only evaluates the \code{autoMLConfig} section of
@@ -46,8 +46,7 @@ as a solution. After the configuration is created, you train the model
 (create a solution) by calling the CreateSolutionVersion operation.
 Every time you call \code{CreateSolutionVersion}, a new version of the
 solution is created.
-}
-\details{
+
 After creating a solution version, you check its accuracy by calling
 GetSolutionMetrics. When you are satisfied with the version, you deploy
 it using CreateCampaign. The campaign provides recommendations to a
@@ -67,8 +66,9 @@ USER\\_PERSONALIZATION recipe for you.
 
 A solution can be in one of the following states:
 \itemize{
-\item CREATE PENDING \\> CREATE IN\\_PROGRESS \\> ACTIVE -or- CREATE FAILED
-\item DELETE PENDING \\> DELETE IN\\_PROGRESS
+\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+FAILED
+\item DELETE PENDING > DELETE IN\\_PROGRESS
 }
 
 To get the status of the solution, call DescribeSolution. Wait until the

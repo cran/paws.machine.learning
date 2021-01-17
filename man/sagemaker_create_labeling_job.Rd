@@ -15,10 +15,10 @@ list of labeling jobs.}
 
 \item{LabelAttributeName}{[required] The attribute name to use for the label in the output manifest file.
 This is the key for the key/value pair formed with the label that a
-worker assigns to the object. The name can\'t end with \"-metadata\". If
+worker assigns to the object. The name can't end with "-metadata". If
 you are running a semantic segmentation labeling job, the attribute name
-must end with \"-ref\". If you are running any other kind of labeling
-job, the attribute name must not end with \"-ref\".}
+must end with "-ref". If you are running any other kind of labeling job,
+the attribute name must not end with "-ref".}
 
 \item{InputConfig}{[required] Input data for the labeling job, such as the Amazon S3 location of the
 data objects and the location of the manifest file that describes the
@@ -32,10 +32,10 @@ perform tasks on your behalf during data labeling. You must grant this
 role the necessary permissions so that Amazon SageMaker can successfully
 complete data labeling.}
 
-\item{LabelCategoryConfigS3Uri}{The S3 URL of the file that defines the categories used to label the
+\item{LabelCategoryConfigS3Uri}{The S3 URI of the file that defines the categories used to label the
 data objects.
 
-For 3D point cloud task types, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html}{Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs}.
+For 3D point cloud task types, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/sms-label-cat-config-attributes.html}{Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs}.
 
 For all other \href{https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html}{built-in task types}
 and \href{https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html}{custom tasks},
@@ -89,8 +89,7 @@ in the \emph{AWS Billing and Cost Management User Guide}.}
 \description{
 Creates a job that uses workers to label the data objects in your input
 dataset. You can use the labeled data to train machine learning models.
-}
-\details{
+
 You can select your workforce from one of three providers:
 \itemize{
 \item A private workforce that you create. It can include employees,
@@ -125,6 +124,9 @@ as training data for your machine learning models.
     DataSource = list(
       S3DataSource = list(
         ManifestS3Uri = "string"
+      ),
+      SnsDataSource = list(
+        SnsTopicArn = "string"
       )
     ),
     DataAttributes = list(
@@ -135,7 +137,8 @@ as training data for your machine learning models.
   ),
   OutputConfig = list(
     S3OutputPath = "string",
-    KmsKeyId = "string"
+    KmsKeyId = "string",
+    SnsTopicArn = "string"
   ),
   RoleArn = "string",
   LabelCategoryConfigS3Uri = "string",

@@ -12,7 +12,7 @@ lexmodelbuildingservice_get_builtin_slot_types(locale,
 
 \item{signatureContains}{Substring to match in built-in slot type signatures. A slot type will be
 returned if any part of its signature matches the substring. For
-example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\"}
+example, "xyz" matches both "xyzabc" and "abcxyz."}
 
 \item{nextToken}{A pagination token that fetches the next page of slot types. If the
 response to this API call is truncated, Amazon Lex returns a pagination
@@ -24,9 +24,8 @@ is 10.}
 }
 \description{
 Gets a list of built-in slot types that meet the specified criteria.
-}
-\details{
-For a list of built-in slot types, see \href{https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference}{Slot Type Reference}
+
+For a list of built-in slot types, see \href{https://developer.amazon.com/en-US/docs/alexa/custom-skills/slot-type-reference.html}{Slot Type Reference}
 in the \emph{Alexa Skills Kit}.
 
 This operation requires permission for the \code{lex:GetBuiltInSlotTypes}
@@ -34,7 +33,7 @@ action.
 }
 \section{Request syntax}{
 \preformatted{svc$get_builtin_slot_types(
-  locale = "en-US"|"en-GB"|"de-DE",
+  locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
   signatureContains = "string",
   nextToken = "string",
   maxResults = 123

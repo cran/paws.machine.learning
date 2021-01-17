@@ -17,10 +17,10 @@ need to base64-encode image bytes passed using the \code{Bytes} field. For
 more information, see Images in the Amazon Rekognition developer guide.}
 
 \item{MinConfidence}{Specifies the minimum confidence level for the labels to return. Amazon
-Rekognition doesn\'t return any labels with a confidence level lower
-than this specified value.
+Rekognition doesn't return any labels with a confidence level lower than
+this specified value.
 
-If you don\'t specify \code{MinConfidence}, the operation returns labels with
+If you don't specify \code{MinConfidence}, the operation returns labels with
 confidence values greater than or equal to 50 percent.}
 
 \item{HumanLoopConfig}{Sets up the configuration for human evaluation, including the
@@ -31,8 +31,7 @@ Detects unsafe content in a specified JPEG or PNG format image. Use
 \code{DetectModerationLabels} to moderate images depending on your
 requirements. For example, you might want to filter images that contain
 nudity, but not images containing suggestive content.
-}
-\details{
+
 To filter images, use the labels returned by \code{DetectModerationLabels} to
 determine which types of content are appropriate.
 

@@ -12,8 +12,8 @@ lexmodelbuildingservice_get_builtin_intents(locale, signatureContains,
 
 \item{signatureContains}{Substring to match in built-in intent signatures. An intent will be
 returned if any part of its signature matches the substring. For
-example, \"xyz\" matches both \"xyzabc\" and \"abcxyz.\" To find the
-signature for an intent, see \href{https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents}{Standard Built-in Intents}
+example, "xyz" matches both "xyzabc" and "abcxyz." To find the signature
+for an intent, see \href{https://developer.amazon.com/en-US/docs/alexa/custom-skills/standard-built-in-intents.html}{Standard Built-in Intents}
 in the \emph{Alexa Skills Kit}.}
 
 \item{nextToken}{A pagination token that fetches the next page of intents. If this API
@@ -26,14 +26,13 @@ the next request.}
 }
 \description{
 Gets a list of built-in intents that meet the specified criteria.
-}
-\details{
+
 This operation requires permission for the \code{lex:GetBuiltinIntents}
 action.
 }
 \section{Request syntax}{
 \preformatted{svc$get_builtin_intents(
-  locale = "en-US"|"en-GB"|"de-DE",
+  locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
   signatureContains = "string",
   nextToken = "string",
   maxResults = 123
