@@ -16,9 +16,21 @@ next set of stream processors.}
 \item{MaxResults}{Maximum number of stream processors you want Amazon Rekognition Video to
 return in the response. The default is 1000.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  NextToken = "string",
+  StreamProcessors = list(
+    list(
+      Name = "string",
+      Status = "STOPPED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"
+    )
+  )
+)
+}
+}
 \description{
 Gets a list of stream processors that you have created with
-CreateStreamProcessor.
+\code{\link[=rekognition_create_stream_processor]{create_stream_processor}}.
 }
 \section{Request syntax}{
 \preformatted{svc$list_stream_processors(

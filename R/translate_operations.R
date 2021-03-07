@@ -25,6 +25,15 @@ NULL
 #' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is automatically
 #' generated when you use Amazon Translate through an AWS SDK.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Name = "string",
+#'   Status = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_parallel_data(
@@ -72,6 +81,15 @@ translate_create_parallel_data <- function(Name, Description = NULL, ParallelDat
 #'
 #' @param Name &#91;required&#93; The name of the parallel data resource that is being deleted.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Name = "string",
+#'   Status = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_parallel_data(
@@ -108,6 +126,9 @@ translate_delete_parallel_data <- function(Name) {
 #' translate_delete_terminology(Name)
 #'
 #' @param Name &#91;required&#93; The name of the custom terminology being deleted.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -149,8 +170,50 @@ translate_delete_terminology <- function(Name) {
 #' translate_describe_text_translation_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The identifier that Amazon Translate generated for the job. The
-#' StartTextTranslationJob operation returns this identifier in its
-#' response.
+#' [`start_text_translation_job`][translate_start_text_translation_job]
+#' operation returns this identifier in its response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TextTranslationJobProperties = list(
+#'     JobId = "string",
+#'     JobName = "string",
+#'     JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'     JobDetails = list(
+#'       TranslatedDocumentsCount = 123,
+#'       DocumentsWithErrorsCount = 123,
+#'       InputDocumentsCount = 123
+#'     ),
+#'     SourceLanguageCode = "string",
+#'     TargetLanguageCodes = list(
+#'       "string"
+#'     ),
+#'     TerminologyNames = list(
+#'       "string"
+#'     ),
+#'     ParallelDataNames = list(
+#'       "string"
+#'     ),
+#'     Message = "string",
+#'     SubmittedTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     InputDataConfig = list(
+#'       S3Uri = "string",
+#'       ContentType = "string"
+#'     ),
+#'     OutputDataConfig = list(
+#'       S3Uri = "string"
+#'     ),
+#'     DataAccessRoleArn = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -188,6 +251,58 @@ translate_describe_text_translation_job <- function(JobId) {
 #' translate_get_parallel_data(Name)
 #'
 #' @param Name &#91;required&#93; The name of the parallel data resource that is being retrieved.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ParallelDataProperties = list(
+#'     Name = "string",
+#'     Arn = "string",
+#'     Description = "string",
+#'     Status = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'     SourceLanguageCode = "string",
+#'     TargetLanguageCodes = list(
+#'       "string"
+#'     ),
+#'     ParallelDataConfig = list(
+#'       S3Uri = "string",
+#'       Format = "TSV"|"CSV"|"TMX"
+#'     ),
+#'     Message = "string",
+#'     ImportedDataSize = 123,
+#'     ImportedRecordCount = 123,
+#'     FailedRecordCount = 123,
+#'     SkippedRecordCount = 123,
+#'     EncryptionKey = list(
+#'       Type = "KMS",
+#'       Id = "string"
+#'     ),
+#'     CreatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastUpdatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LatestUpdateAttemptStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'     LatestUpdateAttemptAt = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   DataLocation = list(
+#'     RepositoryType = "string",
+#'     Location = "string"
+#'   ),
+#'   AuxiliaryDataLocation = list(
+#'     RepositoryType = "string",
+#'     Location = "string"
+#'   ),
+#'   LatestUpdateAttemptAuxiliaryDataLocation = list(
+#'     RepositoryType = "string",
+#'     Location = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -227,6 +342,38 @@ translate_get_parallel_data <- function(Name) {
 #' @param Name &#91;required&#93; The name of the custom terminology being retrieved.
 #' @param TerminologyDataFormat &#91;required&#93; The data format of the custom terminology being retrieved, either CSV or
 #' TMX.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TerminologyProperties = list(
+#'     Name = "string",
+#'     Description = "string",
+#'     Arn = "string",
+#'     SourceLanguageCode = "string",
+#'     TargetLanguageCodes = list(
+#'       "string"
+#'     ),
+#'     EncryptionKey = list(
+#'       Type = "KMS",
+#'       Id = "string"
+#'     ),
+#'     SizeBytes = 123,
+#'     TermCount = 123,
+#'     CreatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastUpdatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   ),
+#'   TerminologyDataLocation = list(
+#'     RepositoryType = "string",
+#'     Location = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -285,6 +432,34 @@ translate_get_terminology <- function(Name, TerminologyDataFormat) {
 #' @param TerminologyData &#91;required&#93; The terminology data for the custom terminology being imported.
 #' @param EncryptionKey The encryption key for the custom terminology being imported.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TerminologyProperties = list(
+#'     Name = "string",
+#'     Description = "string",
+#'     Arn = "string",
+#'     SourceLanguageCode = "string",
+#'     TargetLanguageCodes = list(
+#'       "string"
+#'     ),
+#'     EncryptionKey = list(
+#'       Type = "KMS",
+#'       Id = "string"
+#'     ),
+#'     SizeBytes = 123,
+#'     TermCount = 123,
+#'     CreatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastUpdatedAt = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$import_terminology(
@@ -334,6 +509,49 @@ translate_import_terminology <- function(Name, MergeStrategy, Description = NULL
 #' paginated response.
 #' @param MaxResults The maximum number of parallel data resources returned for each request.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ParallelDataPropertiesList = list(
+#'     list(
+#'       Name = "string",
+#'       Arn = "string",
+#'       Description = "string",
+#'       Status = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'       SourceLanguageCode = "string",
+#'       TargetLanguageCodes = list(
+#'         "string"
+#'       ),
+#'       ParallelDataConfig = list(
+#'         S3Uri = "string",
+#'         Format = "TSV"|"CSV"|"TMX"
+#'       ),
+#'       Message = "string",
+#'       ImportedDataSize = 123,
+#'       ImportedRecordCount = 123,
+#'       FailedRecordCount = 123,
+#'       SkippedRecordCount = 123,
+#'       EncryptionKey = list(
+#'         Type = "KMS",
+#'         Id = "string"
+#'       ),
+#'       CreatedAt = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastUpdatedAt = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LatestUpdateAttemptStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'       LatestUpdateAttemptAt = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_parallel_data(
@@ -373,6 +591,37 @@ translate_list_parallel_data <- function(NextToken = NULL, MaxResults = NULL) {
 #' @param NextToken If the result of the request to ListTerminologies was truncated, include
 #' the NextToken to fetch the next group of custom terminologies.
 #' @param MaxResults The maximum number of custom terminologies returned per list request.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TerminologyPropertiesList = list(
+#'     list(
+#'       Name = "string",
+#'       Description = "string",
+#'       Arn = "string",
+#'       SourceLanguageCode = "string",
+#'       TargetLanguageCodes = list(
+#'         "string"
+#'       ),
+#'       EncryptionKey = list(
+#'         Type = "KMS",
+#'         Id = "string"
+#'       ),
+#'       SizeBytes = 123,
+#'       TermCount = 123,
+#'       CreatedAt = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastUpdatedAt = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -416,6 +665,51 @@ translate_list_terminologies <- function(NextToken = NULL, MaxResults = NULL) {
 #' @param NextToken The token to request the next page of results.
 #' @param MaxResults The maximum number of results to return in each page. The default value
 #' is 100.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TextTranslationJobPropertiesList = list(
+#'     list(
+#'       JobId = "string",
+#'       JobName = "string",
+#'       JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'       JobDetails = list(
+#'         TranslatedDocumentsCount = 123,
+#'         DocumentsWithErrorsCount = 123,
+#'         InputDocumentsCount = 123
+#'       ),
+#'       SourceLanguageCode = "string",
+#'       TargetLanguageCodes = list(
+#'         "string"
+#'       ),
+#'       TerminologyNames = list(
+#'         "string"
+#'       ),
+#'       ParallelDataNames = list(
+#'         "string"
+#'       ),
+#'       Message = "string",
+#'       SubmittedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       InputDataConfig = list(
+#'         S3Uri = "string",
+#'         ContentType = "string"
+#'       ),
+#'       OutputDataConfig = list(
+#'         S3Uri = "string"
+#'       ),
+#'       DataAccessRoleArn = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -463,9 +757,12 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #' once. For more information, see async.
 #' 
 #' Batch translation jobs can be described with the
-#' DescribeTextTranslationJob operation, listed with the
-#' ListTextTranslationJobs operation, and stopped with the
-#' StopTextTranslationJob operation.
+#' [`describe_text_translation_job`][translate_describe_text_translation_job]
+#' operation, listed with the
+#' [`list_text_translation_jobs`][translate_list_text_translation_jobs]
+#' operation, and stopped with the
+#' [`stop_text_translation_job`][translate_stop_text_translation_job]
+#' operation.
 #' 
 #' Amazon Translate does not support batch translation of multiple source
 #' languages at once.
@@ -489,12 +786,22 @@ translate_list_text_translation_jobs <- function(Filter = NULL, NextToken = NULL
 #' batch translation jobs.
 #' @param TargetLanguageCodes &#91;required&#93; The language code of the output language.
 #' @param TerminologyNames The name of the terminology to use in the batch translation job. For a
-#' list of available terminologies, use the ListTerminologies operation.
+#' list of available terminologies, use the
+#' [`list_terminologies`][translate_list_terminologies] operation.
 #' @param ParallelDataNames The names of the parallel data resources to use in the batch translation
 #' job. For a list of available parallel data resources, use the
-#' ListParallelData operation.
+#' [`list_parallel_data`][translate_list_parallel_data] operation.
 #' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is auto-generated when
 #' using the Amazon Translate SDK.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string",
+#'   JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -553,14 +860,25 @@ translate_start_text_translation_job <- function(JobName = NULL, InputDataConfig
 #' state. Otherwise, the job is put into the `STOPPED` state.
 #' 
 #' Asynchronous batch translation jobs are started with the
-#' StartTextTranslationJob operation. You can use the
-#' DescribeTextTranslationJob or ListTextTranslationJobs operations to get
-#' a batch translation job's `JobId`.
+#' [`start_text_translation_job`][translate_start_text_translation_job]
+#' operation. You can use the
+#' [`describe_text_translation_job`][translate_describe_text_translation_job]
+#' or [`list_text_translation_jobs`][translate_list_text_translation_jobs]
+#' operations to get a batch translation job's `JobId`.
 #'
 #' @usage
 #' translate_stop_text_translation_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The job ID of the job to be stopped.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string",
+#'   JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -604,8 +922,9 @@ translate_stop_text_translation_job <- function(JobId) {
 #' long. Depending on your character set, this may be fewer than 5,000
 #' characters.
 #' @param TerminologyNames The name of the terminology list file to be used in the TranslateText
-#' request. You can use 1 terminology list at most in a `TranslateText`
-#' request. Terminology lists can contain a maximum of 256 terms.
+#' request. You can use 1 terminology list at most in a
+#' [`translate_text`][translate_translate_text] request. Terminology lists
+#' can contain a maximum of 256 terms.
 #' @param SourceLanguageCode &#91;required&#93; The language code for the language of the source text. The language must
 #' be a language supported by Amazon Translate. For a list of language
 #' codes, see what-is-languages.
@@ -617,6 +936,27 @@ translate_stop_text_translation_job <- function(JobId) {
 #' to determine the source language.
 #' @param TargetLanguageCode &#91;required&#93; The language code requested for the language of the target text. The
 #' language must be a language supported by Amazon Translate.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TranslatedText = "string",
+#'   SourceLanguageCode = "string",
+#'   TargetLanguageCode = "string",
+#'   AppliedTerminologies = list(
+#'     list(
+#'       Name = "string",
+#'       Terms = list(
+#'         list(
+#'           SourceText = "string",
+#'           TargetText = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -666,6 +1006,19 @@ translate_translate_text <- function(Text, TerminologyNames = NULL, SourceLangua
 #' @param ParallelDataConfig &#91;required&#93; Specifies the format and S3 location of the parallel data input file.
 #' @param ClientToken &#91;required&#93; A unique identifier for the request. This token is automatically
 #' generated when you use Amazon Translate through an AWS SDK.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Name = "string",
+#'   Status = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'   LatestUpdateAttemptStatus = "CREATING"|"UPDATING"|"ACTIVE"|"DELETING"|"FAILED",
+#'   LatestUpdateAttemptAt = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

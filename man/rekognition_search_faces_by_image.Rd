@@ -40,6 +40,36 @@ If you specify \code{NONE}, no filtering is performed. The default value is
 To use quality filtering, the collection you are using must be
 associated with version 3 of the face model or higher.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  SearchedFaceBoundingBox = list(
+    Width = 123.0,
+    Height = 123.0,
+    Left = 123.0,
+    Top = 123.0
+  ),
+  SearchedFaceConfidence = 123.0,
+  FaceMatches = list(
+    list(
+      Similarity = 123.0,
+      Face = list(
+        FaceId = "string",
+        BoundingBox = list(
+          Width = 123.0,
+          Height = 123.0,
+          Left = 123.0,
+          Top = 123.0
+        ),
+        ImageId = "string",
+        ExternalImageId = "string",
+        Confidence = 123.0
+      )
+    )
+  ),
+  FaceModelVersion = "string"
+)
+}
+}
 \description{
 For a given input image, first detects the largest face in the image,
 and then searches the specified collection for matching faces. The
@@ -47,12 +77,14 @@ operation compares the features of the input face with faces in the
 specified collection.
 
 To search for all faces in an input image, you might first call the
-IndexFaces operation, and then use the face IDs returned in subsequent
-calls to the SearchFaces operation.
+\code{\link[=rekognition_index_faces]{index_faces}} operation, and then use the
+face IDs returned in subsequent calls to the
+\code{\link[=rekognition_search_faces]{search_faces}} operation.
 
-You can also call the \code{DetectFaces} operation and use the bounding boxes
-in the response to make face crops, which then you can pass in to the
-\code{SearchFacesByImage} operation.
+You can also call the \code{\link[=rekognition_detect_faces]{detect_faces}}
+operation and use the bounding boxes in the response to make face crops,
+which then you can pass in to the
+\code{\link[=rekognition_search_faces_by_image]{search_faces_by_image}} operation.
 
 You pass the input image either as base64-encoded image bytes or as a
 reference to an image in an Amazon S3 bucket. If you use the AWS CLI to
@@ -79,7 +111,8 @@ not want to filter detected faces, specify \code{NONE}. The default value is
 
 To use quality filtering, you need a collection associated with version
 3 of the face model or higher. To get the version of the face model
-associated with a collection, call DescribeCollection.
+associated with a collection, call
+\code{\link[=rekognition_describe_collection]{describe_collection}}.
 
 This operation requires permissions to perform the
 \code{rekognition:SearchFacesByImage} action.

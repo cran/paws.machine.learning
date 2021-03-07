@@ -22,7 +22,7 @@ required if \code{DataSchemaUri} is specified.
 rearrangement requirements for the \code{Datasource}.
 
 Sample -
-\verb{ "\\\{\\"splitting\\":\\\{\\"percentBegin\\":10,\\"percentEnd\\":60\\\}\\\}"}
+\verb{ "\{\\"splitting\\":\{\\"percentBegin\\":10,\\"percentEnd\\":60\}\}"}
 }}
 
 \item{ComputeStatistics}{The compute statistics for a \code{DataSource}. The statistics are generated
@@ -31,22 +31,36 @@ the statistics internally during \code{MLModel} training. This parameter must
 be set to \code{true} if the \code{DataSource} needs to be used for \code{MLModel}
 training.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DataSourceId = "string"
+)
+}
+}
 \description{
 Creates a \code{DataSource} object. A \code{DataSource} references data that can
-be used to perform \code{CreateMLModel}, \code{CreateEvaluation}, or
-\code{CreateBatchPrediction} operations.
+be used to perform \code{\link[=machinelearning_create_ml_model]{create_ml_model}},
+\code{\link[=machinelearning_create_evaluation]{create_evaluation}}, or
+\code{\link[=machinelearning_create_batch_prediction]{create_batch_prediction}}
+operations.
 
-\code{CreateDataSourceFromS3} is an asynchronous operation. In response to
-\code{CreateDataSourceFromS3}, Amazon Machine Learning (Amazon ML)
-immediately returns and sets the \code{DataSource} status to \code{PENDING}. After
-the \code{DataSource} has been created and is ready for use, Amazon ML sets
-the \code{Status} parameter to \code{COMPLETED}. \code{DataSource} in the \code{COMPLETED}
-or \code{PENDING} state can be used to perform only \code{CreateMLModel},
-\code{CreateEvaluation} or \code{CreateBatchPrediction} operations.
+\code{\link[=machinelearning_create_data_source_from_s3]{create_data_source_from_s3}}
+is an asynchronous operation. In response to
+\code{\link[=machinelearning_create_data_source_from_s3]{create_data_source_from_s3}},
+Amazon Machine Learning (Amazon ML) immediately returns and sets the
+\code{DataSource} status to \code{PENDING}. After the \code{DataSource} has been
+created and is ready for use, Amazon ML sets the \code{Status} parameter to
+\code{COMPLETED}. \code{DataSource} in the \code{COMPLETED} or \code{PENDING} state can be
+used to perform only
+\code{\link[=machinelearning_create_ml_model]{create_ml_model}},
+\code{\link[=machinelearning_create_evaluation]{create_evaluation}} or
+\code{\link[=machinelearning_create_batch_prediction]{create_batch_prediction}}
+operations.
 
 If Amazon ML can't accept the input source, it sets the \code{Status}
 parameter to \code{FAILED} and includes an error message in the \code{Message}
-attribute of the \code{GetDataSource} operation response.
+attribute of the \code{\link[=machinelearning_get_data_source]{get_data_source}}
+operation response.
 
 The observation data used in a \code{DataSource} should be ready to use; that
 is, it should have a consistent structure, and missing data values

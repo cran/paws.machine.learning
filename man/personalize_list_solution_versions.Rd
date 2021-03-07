@@ -9,17 +9,38 @@ personalize_list_solution_versions(solutionArn, nextToken, maxResults)
 \arguments{
 \item{solutionArn}{The Amazon Resource Name (ARN) of the solution.}
 
-\item{nextToken}{A token returned from the previous call to \code{ListSolutionVersions} for
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_solution_versions]{list_solution_versions}} for
 getting the next set of solution versions (if they exist).}
 
 \item{maxResults}{The maximum number of solution versions to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  solutionVersions = list(
+    list(
+      solutionVersionArn = "string",
+      status = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      failureReason = "string"
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Returns a list of solution versions for the given solution. When a
 solution is not specified, all the solution versions associated with the
 account are listed. The response provides the properties for each
 solution version, including the Amazon Resource Name (ARN). For more
-information on solutions, see CreateSolution.
+information on solutions, see
+\code{\link[=personalize_create_solution]{create_solution}}.
 }
 \section{Request syntax}{
 \preformatted{svc$list_solution_versions(

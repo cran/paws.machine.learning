@@ -23,8 +23,30 @@ request all languages that use US English (es-US), and there is an
 Italian voice that speaks both Italian (it-IT) and US English, that
 voice will be included if you specify \code{yes} but not if you specify \code{no}.}
 
-\item{NextToken}{An opaque pagination token returned from the previous \code{DescribeVoices}
-operation. If present, this indicates where to continue the listing.}
+\item{NextToken}{An opaque pagination token returned from the previous
+\code{\link[=polly_describe_voices]{describe_voices}} operation. If present, this
+indicates where to continue the listing.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Voices = list(
+    list(
+      Gender = "Female"|"Male",
+      Id = "Aditi"|"Amy"|"Astrid"|"Bianca"|"Brian"|"Camila"|"Carla"|"Carmen"|"Celine"|"Chantal"|"Conchita"|"Cristiano"|"Dora"|"Emma"|"Enrique"|"Ewa"|"Filiz"|"Geraint"|"Giorgio"|"Gwyneth"|"Hans"|"Ines"|"Ivy"|"Jacek"|"Jan"|"Joanna"|"Joey"|"Justin"|"Karl"|"Kendra"|"Kevin"|"Kimberly"|"Lea"|"Liv"|"Lotte"|"Lucia"|"Lupe"|"Mads"|"Maja"|"Marlene"|"Mathieu"|"Matthew"|"Maxim"|"Mia"|"Miguel"|"Mizuki"|"Naja"|"Nicole"|"Olivia"|"Penelope"|"Raveena"|"Ricardo"|"Ruben"|"Russell"|"Salli"|"Seoyeon"|"Takumi"|"Tatyana"|"Vicki"|"Vitoria"|"Zeina"|"Zhiyu",
+      LanguageCode = "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR",
+      LanguageName = "string",
+      Name = "string",
+      AdditionalLanguageCodes = list(
+        "arb"|"cmn-CN"|"cy-GB"|"da-DK"|"de-DE"|"en-AU"|"en-GB"|"en-GB-WLS"|"en-IN"|"en-US"|"es-ES"|"es-MX"|"es-US"|"fr-CA"|"fr-FR"|"is-IS"|"it-IT"|"ja-JP"|"hi-IN"|"ko-KR"|"nb-NO"|"nl-NL"|"pl-PL"|"pt-BR"|"pt-PT"|"ro-RO"|"ru-RU"|"sv-SE"|"tr-TR"
+      ),
+      SupportedEngines = list(
+        "standard"|"neural"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Returns the list of voices that are available for use when requesting
@@ -32,14 +54,15 @@ speech synthesis. Each voice speaks a specified language, is either male
 or female, and is identified by an ID, which is the ASCII version of the
 voice name.
 
-When synthesizing speech ( \code{SynthesizeSpeech} ), you provide the voice
+When synthesizing speech (
+\code{\link[=polly_synthesize_speech]{synthesize_speech}} ), you provide the voice
 ID for the voice you want from the list of voices returned by
-\code{DescribeVoices}.
+\code{\link[=polly_describe_voices]{describe_voices}}.
 
 For example, you want your news reader application to read news in a
 specific language, but giving a user the option to choose the voice.
-Using the \code{DescribeVoices} operation you can provide the user with a
-list of available voices to select from.
+Using the \code{\link[=polly_describe_voices]{describe_voices}} operation you can
+provide the user with a list of available voices to select from.
 
 You can optionally specify a language code to filter the available
 voices. For example, if you specify \code{en-US}, the operation returns a

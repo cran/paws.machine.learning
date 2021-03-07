@@ -20,7 +20,7 @@ not set it to \code{false}.}
 \code{false}. For this case, you must specify \code{recipeArn}.
 
 When set to \code{true}, Amazon Personalize analyzes your training data and
-selects the optimal USER\\_PERSONALIZATION recipe and hyperparameters. In
+selects the optimal USER_PERSONALIZATION recipe and hyperparameters. In
 this case, you must omit \code{recipeArn}. Amazon Personalize determines the
 optimal recipe by running tests with different values for the
 hyperparameters. AutoML lengthens the training process as compared to
@@ -40,17 +40,26 @@ or 'like') is used for training the model.}
 to true, Amazon Personalize only evaluates the \code{autoMLConfig} section of
 the solution configuration.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  solutionArn = "string"
+)
+}
+}
 \description{
 Creates the configuration for training a model. A trained model is known
 as a solution. After the configuration is created, you train the model
-(create a solution) by calling the CreateSolutionVersion operation.
-Every time you call \code{CreateSolutionVersion}, a new version of the
-solution is created.
+(create a solution) by calling the
+\code{\link[=personalize_create_solution_version]{create_solution_version}}
+operation. Every time you call
+\code{\link[=personalize_create_solution_version]{create_solution_version}}, a new
+version of the solution is created.
 
 After creating a solution version, you check its accuracy by calling
-GetSolutionMetrics. When you are satisfied with the version, you deploy
-it using CreateCampaign. The campaign provides recommendations to a
-client through the
+\code{\link[=personalize_get_solution_metrics]{get_solution_metrics}}. When you are
+satisfied with the version, you deploy it using
+\code{\link[=personalize_create_campaign]{create_campaign}}. The campaign provides
+recommendations to a client through the
 \href{https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html}{GetRecommendations}
 API.
 
@@ -60,31 +69,30 @@ in the request. A recipe specifies the training algorithm and a feature
 transformation. You can specify one of the predefined recipes provided
 by Amazon Personalize. Alternatively, you can specify \code{performAutoML}
 and Amazon Personalize will analyze your data and select the optimum
-USER\\_PERSONALIZATION recipe for you.
+USER_PERSONALIZATION recipe for you.
 
 \strong{Status}
 
 A solution can be in one of the following states:
 \itemize{
-\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+\item CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 FAILED
-\item DELETE PENDING > DELETE IN\\_PROGRESS
+\item DELETE PENDING > DELETE IN_PROGRESS
 }
 
-To get the status of the solution, call DescribeSolution. Wait until the
-status shows as ACTIVE before calling \code{CreateSolutionVersion}.
+To get the status of the solution, call
+\code{\link[=personalize_describe_solution]{describe_solution}}. Wait until the
+status shows as ACTIVE before calling
+\code{\link[=personalize_create_solution_version]{create_solution_version}}.
 
 \strong{Related APIs}
 \itemize{
-\item ListSolutions
-\item CreateSolutionVersion
-\item DescribeSolution
-\item DeleteSolution
-}<!-- -->
-
-\itemize{
-\item ListSolutionVersions
-\item DescribeSolutionVersion
+\item \code{\link[=personalize_list_solutions]{list_solutions}}
+\item \code{\link[=personalize_create_solution_version]{create_solution_version}}
+\item \code{\link[=personalize_describe_solution]{describe_solution}}
+\item \code{\link[=personalize_delete_solution]{delete_solution}}
+\item \code{\link[=personalize_list_solution_versions]{list_solution_versions}}
+\item \code{\link[=personalize_describe_solution_version]{describe_solution_version}}
 }
 }
 \section{Request syntax}{

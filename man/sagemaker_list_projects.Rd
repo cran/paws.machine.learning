@@ -19,13 +19,31 @@ time.}
 \item{NameContains}{A filter that returns the projects whose name contains a specified
 string.}
 
-\item{NextToken}{If the result of the previous \code{ListProjects} request was truncated, the
-response includes a \code{NextToken}. To retrieve the next set of projects,
-use the token in the next request.}
+\item{NextToken}{If the result of the previous \code{\link[=sagemaker_list_projects]{list_projects}}
+request was truncated, the response includes a \code{NextToken}. To retrieve
+the next set of projects, use the token in the next request.}
 
 \item{SortBy}{The field by which to sort results. The default is \code{CreationTime}.}
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ProjectSummaryList = list(
+    list(
+      ProjectName = "string",
+      ProjectDescription = "string",
+      ProjectArn = "string",
+      ProjectId = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of the projects in an AWS account.

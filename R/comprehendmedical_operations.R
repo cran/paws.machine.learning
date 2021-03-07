@@ -13,8 +13,43 @@ NULL
 #' comprehendmedical_describe_entities_detection_v2_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The identifier that Amazon Comprehend Medical generated for the job. The
-#' `StartEntitiesDetectionV2Job` operation returns this identifier in its
-#' response.
+#' [`start_entities_detection_v2_job`][comprehendmedical_start_entities_detection_v2_job]
+#' operation returns this identifier in its response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobProperties = list(
+#'     JobId = "string",
+#'     JobName = "string",
+#'     JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'     Message = "string",
+#'     SubmitTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpirationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     InputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     OutputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     LanguageCode = "en",
+#'     DataAccessRoleArn = "string",
+#'     ManifestFilePath = "string",
+#'     KMSKey = "string",
+#'     ModelVersion = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -56,6 +91,41 @@ comprehendmedical_describe_entities_detection_v2_job <- function(JobId) {
 #' `The StartICD10CMInferenceJob` operation returns this identifier in its
 #' response.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobProperties = list(
+#'     JobId = "string",
+#'     JobName = "string",
+#'     JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'     Message = "string",
+#'     SubmitTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpirationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     InputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     OutputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     LanguageCode = "en",
+#'     DataAccessRoleArn = "string",
+#'     ManifestFilePath = "string",
+#'     KMSKey = "string",
+#'     ModelVersion = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_icd10cm_inference_job(
@@ -94,8 +164,43 @@ comprehendmedical_describe_icd10cm_inference_job <- function(JobId) {
 #' comprehendmedical_describe_phi_detection_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The identifier that Amazon Comprehend Medical generated for the job. The
-#' `StartPHIDetectionJob` operation returns this identifier in its
-#' response.
+#' [`start_phi_detection_job`][comprehendmedical_start_phi_detection_job]
+#' operation returns this identifier in its response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobProperties = list(
+#'     JobId = "string",
+#'     JobName = "string",
+#'     JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'     Message = "string",
+#'     SubmitTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpirationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     InputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     OutputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     LanguageCode = "en",
+#'     DataAccessRoleArn = "string",
+#'     ManifestFilePath = "string",
+#'     KMSKey = "string",
+#'     ModelVersion = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -137,6 +242,41 @@ comprehendmedical_describe_phi_detection_job <- function(JobId) {
 #' StartRxNormInferenceJob operation returns this identifier in its
 #' response.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobProperties = list(
+#'     JobId = "string",
+#'     JobName = "string",
+#'     JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'     Message = "string",
+#'     SubmitTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     ExpirationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     InputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     OutputDataConfig = list(
+#'       S3Bucket = "string",
+#'       S3Key = "string"
+#'     ),
+#'     LanguageCode = "en",
+#'     DataAccessRoleArn = "string",
+#'     ManifestFilePath = "string",
+#'     KMSKey = "string",
+#'     ModelVersion = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_rx_norm_inference_job(
@@ -167,8 +307,10 @@ comprehendmedical_describe_rx_norm_inference_job <- function(JobId) {
 #' The DetectEntities operation is deprecated
 #'
 #' @description
-#' The `DetectEntities` operation is deprecated. You should use the
-#' DetectEntitiesV2 operation instead.
+#' The [`detect_entities`][comprehendmedical_detect_entities] operation is
+#' deprecated. You should use the
+#' [`detect_entities_v2`][comprehendmedical_detect_entities_v2] operation
+#' instead.
 #' 
 #' Inspects the clinical text for a variety of medical entities and returns
 #' specific information about them such as entity category, location, and
@@ -180,6 +322,73 @@ comprehendmedical_describe_rx_norm_inference_job <- function(JobId) {
 #' @param Text &#91;required&#93; A UTF-8 text string containing the clinical content being examined for
 #' entities. Each string must contain fewer than 20,000 bytes of
 #' characters.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Entities = list(
+#'     list(
+#'       Id = 123,
+#'       BeginOffset = 123,
+#'       EndOffset = 123,
+#'       Score = 123.0,
+#'       Text = "string",
+#'       Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'       Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'       Traits = list(
+#'         list(
+#'           Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'           Score = 123.0
+#'         )
+#'       ),
+#'       Attributes = list(
+#'         list(
+#'           Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'           Score = 123.0,
+#'           RelationshipScore = 123.0,
+#'           RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE",
+#'           Id = 123,
+#'           BeginOffset = 123,
+#'           EndOffset = 123,
+#'           Text = "string",
+#'           Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'           Traits = list(
+#'             list(
+#'               Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'               Score = 123.0
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   UnmappedAttributes = list(
+#'     list(
+#'       Type = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'       Attribute = list(
+#'         Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'         Score = 123.0,
+#'         RelationshipScore = 123.0,
+#'         RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE",
+#'         Id = 123,
+#'         BeginOffset = 123,
+#'         EndOffset = 123,
+#'         Text = "string",
+#'         Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'         Traits = list(
+#'           list(
+#'             Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'             Score = 123.0
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   PaginationToken = "string",
+#'   ModelVersion = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -218,14 +427,18 @@ comprehendmedical_detect_entities <- function(Text) {
 #' confidence score on that information. Amazon Comprehend Medical only
 #' detects medical entities in English language texts.
 #' 
-#' The `DetectEntitiesV2` operation replaces the DetectEntities operation.
-#' This new action uses a different model for determining the entities in
-#' your medical text and changes the way that some entities are returned in
-#' the output. You should use the `DetectEntitiesV2` operation in all new
-#' applications.
+#' The [`detect_entities_v2`][comprehendmedical_detect_entities_v2]
+#' operation replaces the
+#' [`detect_entities`][comprehendmedical_detect_entities] operation. This
+#' new action uses a different model for determining the entities in your
+#' medical text and changes the way that some entities are returned in the
+#' output. You should use the
+#' [`detect_entities_v2`][comprehendmedical_detect_entities_v2] operation
+#' in all new applications.
 #' 
-#' The `DetectEntitiesV2` operation returns the `Acuity` and `Direction`
-#' entities as attributes instead of types.
+#' The [`detect_entities_v2`][comprehendmedical_detect_entities_v2]
+#' operation returns the `Acuity` and `Direction` entities as attributes
+#' instead of types.
 #'
 #' @usage
 #' comprehendmedical_detect_entities_v2(Text)
@@ -233,6 +446,73 @@ comprehendmedical_detect_entities <- function(Text) {
 #' @param Text &#91;required&#93; A UTF-8 string containing the clinical content being examined for
 #' entities. Each string must contain fewer than 20,000 bytes of
 #' characters.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Entities = list(
+#'     list(
+#'       Id = 123,
+#'       BeginOffset = 123,
+#'       EndOffset = 123,
+#'       Score = 123.0,
+#'       Text = "string",
+#'       Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'       Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'       Traits = list(
+#'         list(
+#'           Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'           Score = 123.0
+#'         )
+#'       ),
+#'       Attributes = list(
+#'         list(
+#'           Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'           Score = 123.0,
+#'           RelationshipScore = 123.0,
+#'           RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE",
+#'           Id = 123,
+#'           BeginOffset = 123,
+#'           EndOffset = 123,
+#'           Text = "string",
+#'           Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'           Traits = list(
+#'             list(
+#'               Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'               Score = 123.0
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   UnmappedAttributes = list(
+#'     list(
+#'       Type = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'       Attribute = list(
+#'         Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'         Score = 123.0,
+#'         RelationshipScore = 123.0,
+#'         RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE",
+#'         Id = 123,
+#'         BeginOffset = 123,
+#'         EndOffset = 123,
+#'         Text = "string",
+#'         Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'         Traits = list(
+#'           list(
+#'             Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'             Score = 123.0
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   PaginationToken = "string",
+#'   ModelVersion = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -278,6 +558,51 @@ comprehendmedical_detect_entities_v2 <- function(Text) {
 #' PHI entities. Each string must contain fewer than 20,000 bytes of
 #' characters.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Entities = list(
+#'     list(
+#'       Id = 123,
+#'       BeginOffset = 123,
+#'       EndOffset = 123,
+#'       Score = 123.0,
+#'       Text = "string",
+#'       Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'       Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'       Traits = list(
+#'         list(
+#'           Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'           Score = 123.0
+#'         )
+#'       ),
+#'       Attributes = list(
+#'         list(
+#'           Type = "NAME"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"GENERIC_NAME"|"BRAND_NAME"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_NAME"|"TEST_VALUE"|"TEST_UNITS"|"PROCEDURE_NAME"|"TREATMENT_NAME"|"DATE"|"AGE"|"CONTACT_POINT"|"EMAIL"|"IDENTIFIER"|"URL"|"ADDRESS"|"PROFESSION"|"SYSTEM_ORGAN_SITE"|"DIRECTION"|"QUALITY"|"QUANTITY"|"TIME_EXPRESSION"|"TIME_TO_MEDICATION_NAME"|"TIME_TO_DX_NAME"|"TIME_TO_TEST_NAME"|"TIME_TO_PROCEDURE_NAME"|"TIME_TO_TREATMENT_NAME",
+#'           Score = 123.0,
+#'           RelationshipScore = 123.0,
+#'           RelationshipType = "EVERY"|"WITH_DOSAGE"|"ADMINISTERED_VIA"|"FOR"|"NEGATIVE"|"OVERLAP"|"DOSAGE"|"ROUTE_OR_MODE"|"FORM"|"FREQUENCY"|"DURATION"|"STRENGTH"|"RATE"|"ACUITY"|"TEST_VALUE"|"TEST_UNITS"|"DIRECTION"|"SYSTEM_ORGAN_SITE",
+#'           Id = 123,
+#'           BeginOffset = 123,
+#'           EndOffset = 123,
+#'           Text = "string",
+#'           Category = "MEDICATION"|"MEDICAL_CONDITION"|"PROTECTED_HEALTH_INFORMATION"|"TEST_TREATMENT_PROCEDURE"|"ANATOMY"|"TIME_EXPRESSION",
+#'           Traits = list(
+#'             list(
+#'               Name = "SIGN"|"SYMPTOM"|"DIAGNOSIS"|"NEGATION",
+#'               Score = 123.0
+#'             )
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   PaginationToken = "string",
+#'   ModelVersion = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$detect_phi(
@@ -322,6 +647,56 @@ comprehendmedical_detect_phi <- function(Text) {
 #' @param Text &#91;required&#93; The input text used for analysis. The input for InferICD10CM is a string
 #' from 1 to 10000 characters.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Entities = list(
+#'     list(
+#'       Id = 123,
+#'       Text = "string",
+#'       Category = "MEDICAL_CONDITION",
+#'       Type = "DX_NAME",
+#'       Score = 123.0,
+#'       BeginOffset = 123,
+#'       EndOffset = 123,
+#'       Attributes = list(
+#'         list(
+#'           Type = "ACUITY"|"DIRECTION"|"SYSTEM_ORGAN_SITE"|"QUALITY"|"QUANTITY",
+#'           Score = 123.0,
+#'           RelationshipScore = 123.0,
+#'           Id = 123,
+#'           BeginOffset = 123,
+#'           EndOffset = 123,
+#'           Text = "string",
+#'           Traits = list(
+#'             list(
+#'               Name = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM",
+#'               Score = 123.0
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       Traits = list(
+#'         list(
+#'           Name = "NEGATION"|"DIAGNOSIS"|"SIGN"|"SYMPTOM",
+#'           Score = 123.0
+#'         )
+#'       ),
+#'       ICD10CMConcepts = list(
+#'         list(
+#'           Description = "string",
+#'           Code = "string",
+#'           Score = 123.0
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   PaginationToken = "string",
+#'   ModelVersion = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$infer_icd10cm(
@@ -365,6 +740,56 @@ comprehendmedical_infer_icd10cm <- function(Text) {
 #' @param Text &#91;required&#93; The input text used for analysis. The input for InferRxNorm is a string
 #' from 1 to 10000 characters.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Entities = list(
+#'     list(
+#'       Id = 123,
+#'       Text = "string",
+#'       Category = "MEDICATION",
+#'       Type = "BRAND_NAME"|"GENERIC_NAME",
+#'       Score = 123.0,
+#'       BeginOffset = 123,
+#'       EndOffset = 123,
+#'       Attributes = list(
+#'         list(
+#'           Type = "DOSAGE"|"DURATION"|"FORM"|"FREQUENCY"|"RATE"|"ROUTE_OR_MODE"|"STRENGTH",
+#'           Score = 123.0,
+#'           RelationshipScore = 123.0,
+#'           Id = 123,
+#'           BeginOffset = 123,
+#'           EndOffset = 123,
+#'           Text = "string",
+#'           Traits = list(
+#'             list(
+#'               Name = "NEGATION",
+#'               Score = 123.0
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       Traits = list(
+#'         list(
+#'           Name = "NEGATION",
+#'           Score = 123.0
+#'         )
+#'       ),
+#'       RxNormConcepts = list(
+#'         list(
+#'           Description = "string",
+#'           Code = "string",
+#'           Score = 123.0
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   PaginationToken = "string",
+#'   ModelVersion = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$infer_rx_norm(
@@ -407,6 +832,44 @@ comprehendmedical_infer_rx_norm <- function(Text) {
 #' @param NextToken Identifies the next page of results to return.
 #' @param MaxResults The maximum number of results to return in each page. The default is
 #' 100.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobPropertiesList = list(
+#'     list(
+#'       JobId = "string",
+#'       JobName = "string",
+#'       JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'       Message = "string",
+#'       SubmitTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       InputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       OutputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       LanguageCode = "en",
+#'       DataAccessRoleArn = "string",
+#'       ManifestFilePath = "string",
+#'       KMSKey = "string",
+#'       ModelVersion = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -461,6 +924,44 @@ comprehendmedical_list_entities_detection_v2_jobs <- function(Filter = NULL, Nex
 #' @param NextToken Identifies the next page of results to return.
 #' @param MaxResults The maximum number of results to return in each page. The default is
 #' 100.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobPropertiesList = list(
+#'     list(
+#'       JobId = "string",
+#'       JobName = "string",
+#'       JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'       Message = "string",
+#'       SubmitTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       InputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       OutputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       LanguageCode = "en",
+#'       DataAccessRoleArn = "string",
+#'       ManifestFilePath = "string",
+#'       KMSKey = "string",
+#'       ModelVersion = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -517,6 +1018,44 @@ comprehendmedical_list_icd10cm_inference_jobs <- function(Filter = NULL, NextTok
 #' @param MaxResults The maximum number of results to return in each page. The default is
 #' 100.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobPropertiesList = list(
+#'     list(
+#'       JobId = "string",
+#'       JobName = "string",
+#'       JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'       Message = "string",
+#'       SubmitTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       InputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       OutputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       LanguageCode = "en",
+#'       DataAccessRoleArn = "string",
+#'       ManifestFilePath = "string",
+#'       KMSKey = "string",
+#'       ModelVersion = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_phi_detection_jobs(
@@ -570,6 +1109,44 @@ comprehendmedical_list_phi_detection_jobs <- function(Filter = NULL, NextToken =
 #' @param NextToken Identifies the next page of results to return.
 #' @param MaxResults Identifies the next page of results to return.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ComprehendMedicalAsyncJobPropertiesList = list(
+#'     list(
+#'       JobId = "string",
+#'       JobName = "string",
+#'       JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"PARTIAL_SUCCESS"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+#'       Message = "string",
+#'       SubmitTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       InputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       OutputDataConfig = list(
+#'         S3Bucket = "string",
+#'         S3Key = "string"
+#'       ),
+#'       LanguageCode = "en",
+#'       DataAccessRoleArn = "string",
+#'       ManifestFilePath = "string",
+#'       KMSKey = "string",
+#'       ModelVersion = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_rx_norm_inference_jobs(
@@ -613,8 +1190,9 @@ comprehendmedical_list_rx_norm_inference_jobs <- function(Filter = NULL, NextTok
 #'
 #' @description
 #' Starts an asynchronous medical entity detection job for a collection of
-#' documents. Use the `DescribeEntitiesDetectionV2Job` operation to track
-#' the status of a job.
+#' documents. Use the
+#' [`describe_entities_detection_v2_job`][comprehendmedical_describe_entities_detection_v2_job]
+#' operation to track the status of a job.
 #'
 #' @usage
 #' comprehendmedical_start_entities_detection_v2_job(InputDataConfig,
@@ -635,6 +1213,14 @@ comprehendmedical_list_rx_norm_inference_jobs <- function(Filter = NULL, NextTok
 #' do not specify a key, the files are written in plain text.
 #' @param LanguageCode &#91;required&#93; The language of the input documents. All documents must be in the same
 #' language.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -680,8 +1266,9 @@ comprehendmedical_start_entities_detection_v2_job <- function(InputDataConfig, O
 #'
 #' @description
 #' Starts an asynchronous job to detect medical conditions and link them to
-#' the ICD-10-CM ontology. Use the `DescribeICD10CMInferenceJob` operation
-#' to track the status of a job.
+#' the ICD-10-CM ontology. Use the
+#' [`describe_icd10cm_inference_job`][comprehendmedical_describe_icd10cm_inference_job]
+#' operation to track the status of a job.
 #'
 #' @usage
 #' comprehendmedical_start_icd10cm_inference_job(InputDataConfig,
@@ -702,6 +1289,14 @@ comprehendmedical_start_entities_detection_v2_job <- function(InputDataConfig, O
 #' do not specify a key, the files are written in plain text.
 #' @param LanguageCode &#91;required&#93; The language of the input documents. All documents must be in the same
 #' language.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -746,8 +1341,9 @@ comprehendmedical_start_icd10cm_inference_job <- function(InputDataConfig, Outpu
 #'
 #' @description
 #' Starts an asynchronous job to detect protected health information (PHI).
-#' Use the `DescribePHIDetectionJob` operation to track the status of a
-#' job.
+#' Use the
+#' [`describe_phi_detection_job`][comprehendmedical_describe_phi_detection_job]
+#' operation to track the status of a job.
 #'
 #' @usage
 #' comprehendmedical_start_phi_detection_job(InputDataConfig,
@@ -768,6 +1364,14 @@ comprehendmedical_start_icd10cm_inference_job <- function(InputDataConfig, Outpu
 #' do not specify a key, the files are written in plain text.
 #' @param LanguageCode &#91;required&#93; The language of the input documents. All documents must be in the same
 #' language.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -813,8 +1417,9 @@ comprehendmedical_start_phi_detection_job <- function(InputDataConfig, OutputDat
 #'
 #' @description
 #' Starts an asynchronous job to detect medication entities and link them
-#' to the RxNorm ontology. Use the `DescribeRxNormInferenceJob` operation
-#' to track the status of a job.
+#' to the RxNorm ontology. Use the
+#' [`describe_rx_norm_inference_job`][comprehendmedical_describe_rx_norm_inference_job]
+#' operation to track the status of a job.
 #'
 #' @usage
 #' comprehendmedical_start_rx_norm_inference_job(InputDataConfig,
@@ -835,6 +1440,14 @@ comprehendmedical_start_phi_detection_job <- function(InputDataConfig, OutputDat
 #' do not specify a key, the files are written in plain text.
 #' @param LanguageCode &#91;required&#93; The language of the input documents. All documents must be in the same
 #' language.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -885,6 +1498,14 @@ comprehendmedical_start_rx_norm_inference_job <- function(InputDataConfig, Outpu
 #'
 #' @param JobId &#91;required&#93; The identifier of the medical entities job to stop.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_entities_detection_v2_job(
@@ -921,6 +1542,14 @@ comprehendmedical_stop_entities_detection_v2_job <- function(JobId) {
 #' comprehendmedical_stop_icd10cm_inference_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The identifier of the job.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -959,6 +1588,14 @@ comprehendmedical_stop_icd10cm_inference_job <- function(JobId) {
 #'
 #' @param JobId &#91;required&#93; The identifier of the PHI detection job to stop.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_phi_detection_job(
@@ -995,6 +1632,14 @@ comprehendmedical_stop_phi_detection_job <- function(JobId) {
 #' comprehendmedical_stop_rx_norm_inference_job(JobId)
 #'
 #' @param JobId &#91;required&#93; The identifier of the job.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

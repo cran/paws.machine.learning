@@ -18,6 +18,12 @@ personalize_create_dataset_import_job(jobName, datasetArn, dataSource,
 \item{roleArn}{[required] The ARN of the IAM role that has permissions to read from the Amazon S3
 data source.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  datasetImportJobArn = "string"
+)
+}
+}
 \description{
 Creates a job that imports training data from your data source (an
 Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon
@@ -32,11 +38,12 @@ The dataset import job replaces any previous data in the dataset.
 
 A dataset import job can be in one of the following states:
 \itemize{
-\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+\item CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 FAILED
 }
 
-To get the status of the import job, call DescribeDatasetImportJob,
+To get the status of the import job, call
+\code{\link[=personalize_describe_dataset_import_job]{describe_dataset_import_job}},
 providing the Amazon Resource Name (ARN) of the dataset import job. The
 dataset import is complete when the status shows as ACTIVE. If the
 status shows as CREATE FAILED, the response includes a \code{failureReason}
@@ -47,8 +54,8 @@ before training a model using the dataset.
 
 \strong{Related APIs}
 \itemize{
-\item ListDatasetImportJobs
-\item DescribeDatasetImportJob
+\item \code{\link[=personalize_list_dataset_import_jobs]{list_dataset_import_jobs}}
+\item \code{\link[=personalize_describe_dataset_import_job]{describe_dataset_import_job}}
 }
 }
 \section{Request syntax}{

@@ -11,10 +11,14 @@ sagemaker_delete_feature_group(FeatureGroupName)
 \item{FeatureGroupName}{[required] The name of the \code{FeatureGroup} you want to delete. The name must be
 unique within an AWS Region in an AWS account.}
 }
+\value{
+An empty list.
+}
 \description{
 Delete the \code{FeatureGroup} and any data that was written to the
 \code{OnlineStore} of the \code{FeatureGroup}. Data cannot be accessed from the
-\code{OnlineStore} immediately after \code{DeleteFeatureGroup} is called.
+\code{OnlineStore} immediately after
+\code{\link[=sagemaker_delete_feature_group]{delete_feature_group}} is called.
 
 Data written into the \code{OfflineStore} will not be deleted. The AWS Glue
 database and tables that are automatically created for your

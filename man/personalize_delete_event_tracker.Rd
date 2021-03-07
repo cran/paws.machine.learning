@@ -9,10 +9,14 @@ personalize_delete_event_tracker(eventTrackerArn)
 \arguments{
 \item{eventTrackerArn}{[required] The Amazon Resource Name (ARN) of the event tracker to delete.}
 }
+\value{
+An empty list.
+}
 \description{
 Deletes the event tracker. Does not delete the event-interactions
 dataset from the associated dataset group. For more information on event
-trackers, see CreateEventTracker.
+trackers, see
+\code{\link[=personalize_create_event_tracker]{create_event_tracker}}.
 }
 \section{Request syntax}{
 \preformatted{svc$delete_event_tracker(

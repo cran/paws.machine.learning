@@ -31,8 +31,44 @@ exception.}
 \item{conversationLogs}{Settings for conversation logs for the alias.}
 
 \item{tags}{A list of tags to add to the bot alias. You can only add tags when you
-create an alias, you can't use the \code{PutBotAlias} operation to update the
-tags on a bot alias. To update tags, use the \code{TagResource} operation.}
+create an alias, you can't use the
+\code{\link[=lexmodelbuildingservice_put_bot_alias]{put_bot_alias}} operation to
+update the tags on a bot alias. To update tags, use the
+\code{\link[=lexmodelbuildingservice_tag_resource]{tag_resource}} operation.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  name = "string",
+  description = "string",
+  botVersion = "string",
+  botName = "string",
+  lastUpdatedDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  createdDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  checksum = "string",
+  conversationLogs = list(
+    logSettings = list(
+      list(
+        logType = "AUDIO"|"TEXT",
+        destination = "CLOUDWATCH_LOGS"|"S3",
+        kmsKeyArn = "string",
+        resourceArn = "string",
+        resourcePrefix = "string"
+      )
+    ),
+    iamRoleArn = "string"
+  ),
+  tags = list(
+    list(
+      key = "string",
+      value = "string"
+    )
+  )
+)
+}
 }
 \description{
 Creates an alias for the specified version of the bot or replaces an

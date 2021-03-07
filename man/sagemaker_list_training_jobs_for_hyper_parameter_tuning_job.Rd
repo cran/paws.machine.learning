@@ -13,9 +13,9 @@ sagemaker_list_training_jobs_for_hyper_parameter_tuning_job(
 \item{HyperParameterTuningJobName}{[required] The name of the tuning job whose training jobs you want to list.}
 
 \item{NextToken}{If the result of the previous
-\code{ListTrainingJobsForHyperParameterTuningJob} request was truncated, the
-response includes a \code{NextToken}. To retrieve the next set of training
-jobs, use the token in the next request.}
+\code{\link[=sagemaker_list_training_jobs_for_hyper_parameter_tuning_job]{list_training_jobs_for_hyper_parameter_tuning_job}}
+request was truncated, the response includes a \code{NextToken}. To retrieve
+the next set of training jobs, use the token in the next request.}
 
 \item{MaxResults}{The maximum number of training jobs to return. The default value is 10.}
 
@@ -27,6 +27,40 @@ If the value of this field is \code{FinalObjectiveMetricValue}, any training
 jobs that did not return an objective metric are not listed.}
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  TrainingJobSummaries = list(
+    list(
+      TrainingJobDefinitionName = "string",
+      TrainingJobName = "string",
+      TrainingJobArn = "string",
+      TuningJobName = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      TrainingStartTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      TrainingEndTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+      TunedHyperParameters = list(
+        "string"
+      ),
+      FailureReason = "string",
+      FinalHyperParameterTuningJobObjectiveMetric = list(
+        Type = "Maximize"|"Minimize",
+        MetricName = "string",
+        Value = 123.0
+      ),
+      ObjectiveStatus = "Succeeded"|"Pending"|"Failed"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of TrainingJobSummary objects that describe the training

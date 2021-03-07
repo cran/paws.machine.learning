@@ -34,6 +34,15 @@ NULL
 #' -   Produced - The source generated the destination. For example, a
 #'     training job produced a model artifact.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SourceArn = "string",
+#'   DestinationArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$add_association(
@@ -84,7 +93,8 @@ sagemaker_add_association <- function(SourceArn, DestinationArn, AssociationType
 #' sure that the tags associated with a hyperparameter tuning job are also
 #' added to all training jobs that the hyperparameter tuning job launches,
 #' add the tags when you first create the tuning job by specifying them in
-#' the `Tags` parameter of CreateHyperParameterTuningJob
+#' the `Tags` parameter of
+#' [`create_hyper_parameter_tuning_job`][sagemaker_create_hyper_parameter_tuning_job]
 #'
 #' @usage
 #' sagemaker_add_tags(ResourceArn, Tags)
@@ -94,6 +104,19 @@ sagemaker_add_association <- function(SourceArn, DestinationArn, AssociationType
 #' resources in different ways, for example, by purpose, owner, or
 #' environment. For more information, see [Tagging AWS
 #' Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -133,13 +156,24 @@ sagemaker_add_tags <- function(ResourceArn, Tags) {
 #' @description
 #' Associates a trial component with a trial. A trial component can be
 #' associated with multiple trials. To disassociate a trial component from
-#' a trial, call the DisassociateTrialComponent API.
+#' a trial, call the
+#' [`disassociate_trial_component`][sagemaker_disassociate_trial_component]
+#' API.
 #'
 #' @usage
 #' sagemaker_associate_trial_component(TrialComponentName, TrialName)
 #'
 #' @param TrialComponentName &#91;required&#93; The name of the component to associated with the trial.
 #' @param TrialName &#91;required&#93; The name of the trial to associate with.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentArn = "string",
+#'   TrialArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -190,6 +224,14 @@ sagemaker_associate_trial_component <- function(TrialComponentName, TrialName) {
 #' @param Properties A list of properties to add to the action.
 #' @param MetadataProperties 
 #' @param Tags A list of tags to apply to the action.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ActionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -296,6 +338,14 @@ sagemaker_create_action <- function(ActionName, Source, ActionType, Description 
 #' resources in different ways, for example, by purpose, owner, or
 #' environment. For more information, see [Tagging AWS
 #' Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AlgorithmArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -524,6 +574,14 @@ sagemaker_create_algorithm <- function(AlgorithmName, AlgorithmDescription = NUL
 #' @param ResourceSpec The instance type and the Amazon Resource Name (ARN) of the SageMaker
 #' image created on the instance.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AppArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_app(
@@ -580,6 +638,14 @@ sagemaker_create_app <- function(DomainId, UserProfileName, AppType, AppName, Ta
 #' @param AppImageConfigName &#91;required&#93; The name of the AppImageConfig. Must be unique to your account.
 #' @param Tags A list of tags to apply to the AppImageConfig.
 #' @param KernelGatewayImageConfig The KernelGatewayImageConfig.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AppImageConfigArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -648,6 +714,14 @@ sagemaker_create_app_image_config <- function(AppImageConfigName, Tags = NULL, K
 #' @param MetadataProperties 
 #' @param Tags A list of tags to apply to the artifact.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArtifactArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_artifact(
@@ -708,7 +782,7 @@ sagemaker_create_artifact <- function(ArtifactName = NULL, Source, ArtifactType,
 #' Find the best performing model after you run an Autopilot job by calling
 #' . Deploy that model by following the steps described in [Step 6.1:
 #' Deploy the Model to Amazon SageMaker Hosting
-#' Services](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html).
+#' Services](https://docs.aws.amazon.com/sagemaker/latest/dg/).
 #' 
 #' For information about how to use Autopilot, see [Automate Model
 #' Development with Amazon SageMaker
@@ -739,6 +813,14 @@ sagemaker_create_artifact <- function(ArtifactName = NULL, Source, ArtifactType,
 #' settings.
 #' @param Tags Each tag consists of a key and an optional value. Tag keys must be
 #' unique per resource.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AutoMLJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -841,6 +923,14 @@ sagemaker_create_auto_ml_job <- function(AutoMLJobName, InputDataConfig, OutputD
 #' environment. For more information, see [Tagging AWS
 #' Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CodeRepositoryArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_code_repository(
@@ -907,10 +997,12 @@ sagemaker_create_code_repository <- function(CodeRepositoryName, GitConfig, Tags
 #' resource use and costs. The response body contains the
 #' `CompilationJobArn` for the compiled job.
 #' 
-#' To stop a model compilation job, use StopCompilationJob. To get
+#' To stop a model compilation job, use
+#' [`stop_compilation_job`][sagemaker_stop_compilation_job]. To get
 #' information about a particular model compilation job, use
-#' DescribeCompilationJob. To get information about multiple model
-#' compilation jobs, use ListCompilationJobs.
+#' [`describe_compilation_job`][sagemaker_describe_compilation_job]. To get
+#' information about multiple model compilation jobs, use
+#' [`list_compilation_jobs`][sagemaker_list_compilation_jobs].
 #'
 #' @usage
 #' sagemaker_create_compilation_job(CompilationJobName, RoleArn,
@@ -947,6 +1039,14 @@ sagemaker_create_code_repository <- function(CodeRepositoryName, GitConfig, Tags
 #' resources in different ways, for example, by purpose, owner, or
 #' environment. For more information, see [Tagging AWS
 #' Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CompilationJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1023,6 +1123,14 @@ sagemaker_create_compilation_job <- function(CompilationJobName, RoleArn, InputC
 #' @param Properties A list of properties to add to the context.
 #' @param Tags A list of tags to apply to the context.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ContextArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_context(
@@ -1094,6 +1202,14 @@ sagemaker_create_context <- function(ContextName, Source, ContextType, Descripti
 #' Cost Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 #' in the *AWS Billing and Cost Management User Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1217,6 +1333,9 @@ sagemaker_create_data_quality_job_definition <- function(JobDefinitionName, Data
 #' @param OutputConfig &#91;required&#93; The output configuration for storing sample data collected by the fleet.
 #' @param Tags Creates tags for the specified fleet.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_device_fleet(
@@ -1316,7 +1435,7 @@ sagemaker_create_device_fleet <- function(DeviceFleetName, RoleArn = NULL, Descr
 #' communication.
 #' @param Tags Tags to associated with the Domain. Each tag consists of a key and an
 #' optional value. Tag keys must be unique per resource. Tags are
-#' searchable using the Search API.
+#' searchable using the [`search`][sagemaker_search] API.
 #' @param AppNetworkAccessType Specifies the VPC used for non-EFS traffic. The default value is
 #' `PublicInternetOnly`.
 #' 
@@ -1329,6 +1448,15 @@ sagemaker_create_device_fleet <- function(DeviceFleetName, RoleArn = NULL, Descr
 #' @param KmsKeyId SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain
 #' with an AWS managed customer master key (CMK) by default. For more
 #' control, specify a customer managed CMK.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DomainArn = "string",
+#'   Url = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1436,6 +1564,9 @@ sagemaker_create_domain <- function(DomainName, AuthMode, DefaultUserSettings, S
 #' runs on.
 #' @param Tags Creates tags for the packaging job.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_edge_packaging_job(
@@ -1485,19 +1616,20 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #' Creates an endpoint using the endpoint configuration specified in the
 #' request. Amazon SageMaker uses the endpoint to provision resources and
 #' deploy models. You create the endpoint configuration with the
-#' CreateEndpointConfig API.
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config] API.
 #' 
 #' Use this API to deploy models using Amazon SageMaker hosting services.
 #' 
 #' For an example that calls this method when deploying a model to Amazon
 #' SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
 #' Hosting Services (AWS SDK for Python (Boto
-#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/#ex1-deploy-model-boto)
 #' 
 #' You must not delete an `EndpointConfig` that is in use by an endpoint
-#' that is live or while the `UpdateEndpoint` or `CreateEndpoint`
-#' operations are being performed on the endpoint. To update an endpoint,
-#' you must create a new `EndpointConfig`.
+#' that is live or while the [`update_endpoint`][sagemaker_update_endpoint]
+#' or [`create_endpoint`][sagemaker_create_endpoint] operations are being
+#' performed on the endpoint. To update an endpoint, you must create a new
+#' `EndpointConfig`.
 #' 
 #' The endpoint name must be unique within an AWS Region in your AWS
 #' account.
@@ -1506,9 +1638,9 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #' launches the resources (ML compute instances), and deploys the model(s)
 #' on them.
 #' 
-#' When you call CreateEndpoint, a load call is made to DynamoDB to verify
-#' that your endpoint configuration exists. When you read data from a
-#' DynamoDB table supporting
+#' When you call [`create_endpoint`][sagemaker_create_endpoint], a load
+#' call is made to DynamoDB to verify that your endpoint configuration
+#' exists. When you read data from a DynamoDB table supporting
 #' [`Eventually Consistent Reads`](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
 #' , the response might not reflect the results of a recently completed
 #' write operation. The response might include some stale data. If the
@@ -1516,14 +1648,15 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #' error. If you repeat your read request after a short time, the response
 #' should return the latest data. So retry logic is recommended to handle
 #' these possible issues. We also recommend that customers call
-#' DescribeEndpointConfig before calling CreateEndpoint to minimize the
+#' [`describe_endpoint_config`][sagemaker_describe_endpoint_config] before
+#' calling [`create_endpoint`][sagemaker_create_endpoint] to minimize the
 #' potential impact of a DynamoDB eventually consistent read.
 #' 
 #' When Amazon SageMaker receives the request, it sets the endpoint status
 #' to `Creating`. After it creates the endpoint, it sets the status to
 #' `InService`. Amazon SageMaker can then process incoming requests for
-#' inferences. To check the status of an endpoint, use the DescribeEndpoint
-#' API.
+#' inferences. To check the status of an endpoint, use the
+#' [`describe_endpoint`][sagemaker_describe_endpoint] API.
 #' 
 #' If any of the models hosted at this endpoint get model data from an
 #' Amazon S3 location, Amazon SageMaker uses AWS Security Token Service to
@@ -1537,9 +1670,10 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #' 
 #' To add the IAM role policies for using this API operation, go to the IAM
 #' console, and choose Roles in the left navigation pane. Search the IAM
-#' role that you want to grant access to use the CreateEndpoint and
-#' CreateEndpointConfig API operations, add the following policies to the
-#' role.
+#' role that you want to grant access to use the
+#' [`create_endpoint`][sagemaker_create_endpoint] and
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config] API
+#' operations, add the following policies to the role.
 #' 
 #' -   Option 1: For a full Amazon SageMaker access, search and attach the
 #'     `AmazonSageMakerFullAccess` policy.
@@ -1548,15 +1682,15 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #'     following Action elements manually into the JSON file of the IAM
 #'     role:
 #' 
-#'     `"Action": \\["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"\\]`
+#'     `"Action": ["sagemaker:CreateEndpoint", "sagemaker:CreateEndpointConfig"]`
 #' 
-#'     `"Resource": \\[`
+#'     `"Resource": [`
 #' 
 #'     `"arn:aws:sagemaker:region:account-id:endpoint/endpointName"`
 #' 
 #'     `"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName"`
 #' 
-#'     `\\]`
+#'     `]`
 #' 
 #'     For more information, see [Amazon SageMaker API Permissions:
 #'     Actions, Permissions, and Resources
@@ -1566,14 +1700,23 @@ sagemaker_create_edge_packaging_job <- function(EdgePackagingJobName, Compilatio
 #' sagemaker_create_endpoint(EndpointName, EndpointConfigName, Tags)
 #'
 #' @param EndpointName &#91;required&#93; The name of the endpoint.The name must be unique within an AWS Region in
-#' your AWS account. The name is case-insensitive in `CreateEndpoint`, but
-#' the case is preserved and must be matched in .
+#' your AWS account. The name is case-insensitive in
+#' [`create_endpoint`][sagemaker_create_endpoint], but the case is
+#' preserved and must be matched in .
 #' @param EndpointConfigName &#91;required&#93; The name of an endpoint configuration. For more information, see
-#' CreateEndpointConfig.
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config].
 #' @param Tags An array of key-value pairs. You can use tags to categorize your AWS
 #' resources in different ways, for example, by purpose, owner, or
 #' environment. For more information, see [Tagging AWS
 #' Resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1615,9 +1758,9 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' @description
 #' Creates an endpoint configuration that Amazon SageMaker hosting services
 #' uses to deploy models. In the configuration, you identify one or more
-#' models, created using the `CreateModel` API, to deploy and the resources
-#' that you want Amazon SageMaker to provision. Then you call the
-#' CreateEndpoint API.
+#' models, created using the [`create_model`][sagemaker_create_model] API,
+#' to deploy and the resources that you want Amazon SageMaker to provision.
+#' Then you call the [`create_endpoint`][sagemaker_create_endpoint] API.
 #' 
 #' Use this API if you want to use Amazon SageMaker hosting services to
 #' deploy models into production.
@@ -1637,11 +1780,11 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' For an example that calls this method when deploying a model to Amazon
 #' SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
 #' Hosting Services (AWS SDK for Python (Boto
-#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/#ex1-deploy-model-boto)
 #' 
-#' When you call CreateEndpoint, a load call is made to DynamoDB to verify
-#' that your endpoint configuration exists. When you read data from a
-#' DynamoDB table supporting
+#' When you call [`create_endpoint`][sagemaker_create_endpoint], a load
+#' call is made to DynamoDB to verify that your endpoint configuration
+#' exists. When you read data from a DynamoDB table supporting
 #' [`Eventually Consistent Reads`](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html)
 #' , the response might not reflect the results of a recently completed
 #' write operation. The response might include some stale data. If the
@@ -1649,7 +1792,8 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' error. If you repeat your read request after a short time, the response
 #' should return the latest data. So retry logic is recommended to handle
 #' these possible issues. We also recommend that customers call
-#' DescribeEndpointConfig before calling CreateEndpoint to minimize the
+#' [`describe_endpoint_config`][sagemaker_describe_endpoint_config] before
+#' calling [`create_endpoint`][sagemaker_create_endpoint] to minimize the
 #' potential impact of a DynamoDB eventually consistent read.
 #'
 #' @usage
@@ -1657,7 +1801,7 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #'   DataCaptureConfig, Tags, KmsKeyId)
 #'
 #' @param EndpointConfigName &#91;required&#93; The name of the endpoint configuration. You specify this name in a
-#' CreateEndpoint request.
+#' [`create_endpoint`][sagemaker_create_endpoint] request.
 #' @param ProductionVariants &#91;required&#93; An list of `ProductionVariant` objects, one for each model that you want
 #' to host at this endpoint.
 #' @param DataCaptureConfig 
@@ -1682,7 +1826,8 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #'     `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
 #' 
 #' The KMS key policy must grant permission to the IAM role that you
-#' specify in your `CreateEndpoint`, `UpdateEndpoint` requests. For more
+#' specify in your [`create_endpoint`][sagemaker_create_endpoint],
+#' [`update_endpoint`][sagemaker_update_endpoint] requests. For more
 #' information, refer to the AWS Key Management Service section [Using Key
 #' Policies in AWS
 #' KMS](https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
@@ -1694,7 +1839,8 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' in the `ProductionVariants` parameter use nitro-based instances with
 #' local storage, do not specify a value for the `KmsKeyId` parameter. If
 #' you specify a value for `KmsKeyId` when using any nitro-based instances
-#' with local storage, the call to `CreateEndpointConfig` fails.
+#' with local storage, the call to
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config] fails.
 #' 
 #' For a list of instance types that support local instance storage, see
 #' [Instance Store
@@ -1703,6 +1849,14 @@ sagemaker_create_endpoint <- function(EndpointName, EndpointConfigName, Tags = N
 #' For more information about local instance storage encryption, see [SSD
 #' Instance Store
 #' Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointConfigArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1786,16 +1940,20 @@ sagemaker_create_endpoint_config <- function(EndpointConfigName, ProductionVaria
 #' must use the logging APIs provided by the SDK.
 #' 
 #' You can add tags to experiments, trials, trial components and then use
-#' the Search API to search for the tags.
+#' the [`search`][sagemaker_search] API to search for the tags.
 #' 
 #' To add a description to an experiment, specify the optional
 #' `Description` parameter. To add a description later, or to change the
-#' description, call the UpdateExperiment API.
+#' description, call the [`update_experiment`][sagemaker_update_experiment]
+#' API.
 #' 
-#' To get a list of all your experiments, call the ListExperiments API. To
-#' view an experiment's properties, call the DescribeExperiment API. To get
-#' a list of all the trials associated with an experiment, call the
-#' ListTrials API. To create a trial call the CreateTrial API.
+#' To get a list of all your experiments, call the
+#' [`list_experiments`][sagemaker_list_experiments] API. To view an
+#' experiment's properties, call the
+#' [`describe_experiment`][sagemaker_describe_experiment] API. To get a
+#' list of all the trials associated with an experiment, call the
+#' [`list_trials`][sagemaker_list_trials] API. To create a trial call the
+#' [`create_trial`][sagemaker_create_trial] API.
 #'
 #' @usage
 #' sagemaker_create_experiment(ExperimentName, DisplayName, Description,
@@ -1807,8 +1965,16 @@ sagemaker_create_endpoint_config <- function(EndpointConfigName, ProductionVaria
 #' unique. If you don't specify `DisplayName`, the value in
 #' `ExperimentName` is displayed.
 #' @param Description The description of the experiment.
-#' @param Tags A list of tags to associate with the experiment. You can use Search API
-#' to search on the tags.
+#' @param Tags A list of tags to associate with the experiment. You can use
+#' [`search`][sagemaker_search] API to search on the tags.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExperimentArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1940,6 +2106,14 @@ sagemaker_create_experiment <- function(ExperimentName, DisplayName = NULL, Desc
 #' @param Description A free-form description of a `FeatureGroup`.
 #' @param Tags Tags used to identify `Features` in each `FeatureGroup`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FeatureGroupArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_feature_group(
@@ -2028,6 +2202,14 @@ sagemaker_create_feature_group <- function(FeatureGroupName, RecordIdentifierFea
 #' and organize a flow definition. Each tag consists of a key and a value,
 #' both of which you define.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FlowDefinitionArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_flow_definition(
@@ -2110,6 +2292,14 @@ sagemaker_create_flow_definition <- function(FlowDefinitionName, HumanLoopReques
 #' and organize a human review workflow user interface. Each tag consists
 #' of a key and a value, both of which you define.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HumanTaskUiArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_human_task_ui(
@@ -2164,7 +2354,7 @@ sagemaker_create_human_task_ui <- function(HumanTaskUiName, UiTemplate, Tags = N
 #' @param HyperParameterTuningJobName &#91;required&#93; The name of the tuning job. This name is the prefix for the names of all
 #' training jobs that this tuning job launches. The name must be unique
 #' within the same AWS account and AWS Region. The name must have 1 to 32
-#' characters. Valid characters are a-z, A-Z, 0-9, and : + = @@ \\_ % -
+#' characters. Valid characters are a-z, A-Z, 0-9, and : + = @@ _ % -
 #' (hyphen). The name is not case sensitive.
 #' @param HyperParameterTuningJobConfig &#91;required&#93; The HyperParameterTuningJobConfig object that describes the tuning job,
 #' including the search strategy, the objective metric used to evaluate
@@ -2200,6 +2390,14 @@ sagemaker_create_human_task_ui <- function(HumanTaskUiName, UiTemplate, Tags = N
 #' 
 #' Tags that you specify for the tuning job are also added to all training
 #' jobs that the tuning job launches.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HyperParameterTuningJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2516,6 +2714,14 @@ sagemaker_create_hyper_parameter_tuning_job <- function(HyperParameterTuningJobN
 #' SageMaker to perform tasks on your behalf.
 #' @param Tags A list of tags to apply to the image.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ImageArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_image(
@@ -2566,10 +2772,18 @@ sagemaker_create_image <- function(Description = NULL, DisplayName = NULL, Image
 #' for this version. The path is an Amazon Container Registry (ECR) URI in
 #' the following format:
 #' 
-#' `&lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name\\[:tag\\] or \\[@@digest\\]&gt;`
+#' `<acct-id>.dkr.ecr.<region>.amazonaws.com/<repo-name[:tag] or [@@digest]>`
 #' @param ClientToken &#91;required&#93; A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the SDK
 #' for Python (Boto3), add a unique value to the call.
 #' @param ImageName &#91;required&#93; The `ImageName` of the `Image` to create a version of.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ImageVersionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2677,17 +2891,17 @@ sagemaker_create_image_version <- function(BaseImage, ClientToken, ImageName) {
 #' 
 #' ` "document-version": "2018-11-28"`
 #' 
-#' ` "labels": \\[`
+#' ` "labels": [`
 #' 
 #' ` \{`
 #' 
-#' ` "label": "<i>label_1</i>"`
+#' ` "label": "label_1"`
 #' 
 #' ` \},`
 #' 
 #' ` \{`
 #' 
-#' ` "label": "<i>label_2</i>"`
+#' ` "label": "label_2"`
 #' 
 #' ` \},`
 #' 
@@ -2695,11 +2909,11 @@ sagemaker_create_image_version <- function(BaseImage, ClientToken, ImageName) {
 #' 
 #' ` \{`
 #' 
-#' ` "label": "<i>label_n</i>"`
+#' ` "label": "label_n"`
 #' 
 #' ` \}`
 #' 
-#' ` \\]`
+#' ` ]`
 #' 
 #' `\}`
 #' @param StoppingConditions A set of conditions for stopping the labeling job. If any of the
@@ -2713,6 +2927,14 @@ sagemaker_create_image_version <- function(BaseImage, ClientToken, ImageName) {
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 #' in the *AWS Billing and Cost Management User Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LabelingJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2821,22 +3043,24 @@ sagemaker_create_labeling_job <- function(LabelingJobName, LabelAttributeName, I
 #' hosting services or run a batch transform job.
 #' 
 #' To host your model, you create an endpoint configuration with the
-#' `CreateEndpointConfig` API, and then create an endpoint with the
-#' `CreateEndpoint` API. Amazon SageMaker then deploys all of the
-#' containers that you defined for the model in the hosting environment.
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config] API, and
+#' then create an endpoint with the
+#' [`create_endpoint`][sagemaker_create_endpoint] API. Amazon SageMaker
+#' then deploys all of the containers that you defined for the model in the
+#' hosting environment.
 #' 
 #' For an example that calls this method when deploying a model to Amazon
 #' SageMaker hosting services, see [Deploy the Model to Amazon SageMaker
 #' Hosting Services (AWS SDK for Python (Boto
-#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+#' 3)).](https://docs.aws.amazon.com/sagemaker/latest/dg/#ex1-deploy-model-boto)
 #' 
 #' To run a batch transform using your model, you start a job with the
-#' `CreateTransformJob` API. Amazon SageMaker uses your model and your
-#' dataset to get inferences which are then saved to a specified S3
-#' location.
+#' [`create_transform_job`][sagemaker_create_transform_job] API. Amazon
+#' SageMaker uses your model and your dataset to get inferences which are
+#' then saved to a specified S3 location.
 #' 
-#' In the `CreateModel` request, you must define a container with the
-#' `PrimaryContainer` parameter.
+#' In the [`create_model`][sagemaker_create_model] request, you must define
+#' a container with the `PrimaryContainer` parameter.
 #' 
 #' In the request, you also provide an IAM role that Amazon SageMaker can
 #' assume to access model artifacts and docker image for deployment on ML
@@ -2878,6 +3102,14 @@ sagemaker_create_labeling_job <- function(LabelingJobName, LabelAttributeName, I
 #' Cloud](https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
 #' @param EnableNetworkIsolation Isolates the model container. No inbound or outbound network calls can
 #' be made to or from the model container.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2976,6 +3208,14 @@ sagemaker_create_model <- function(ModelName, PrimaryContainer = NULL, Container
 #' Cost Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 #' in the *AWS Billing and Cost Management User Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3103,6 +3343,14 @@ sagemaker_create_model_bias_job_definition <- function(JobDefinitionName, ModelB
 #' Cost Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 #' in the *AWS Billing and Cost Management User Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3273,6 +3521,14 @@ sagemaker_create_model_explainability_job_definition <- function(JobDefinitionNa
 #' @param ModelMetrics A structure that contains model metrics reports.
 #' @param ClientToken A unique token that guarantees that the call to this API is idempotent.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_model_package(
@@ -3442,6 +3698,14 @@ sagemaker_create_model_package <- function(ModelPackageName = NULL, ModelPackage
 #' resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 #' in the *AWS General Reference Guide*.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageGroupArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_model_package_group(
@@ -3504,6 +3768,14 @@ sagemaker_create_model_package_group <- function(ModelPackageGroupName, ModelPac
 #' Cost Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 #' in the *AWS Billing and Cost Management User Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -3631,6 +3903,14 @@ sagemaker_create_model_quality_job_definition <- function(JobDefinitionName, Mod
 #' Cost Allocation Tags in the *AWS Billing and Cost Management User
 #' Guide*.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MonitoringScheduleArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_monitoring_schedule(
@@ -3754,10 +4034,11 @@ sagemaker_create_monitoring_schedule <- function(MonitoringScheduleName, Monitor
 #' Creates an Amazon SageMaker notebook instance. A notebook instance is a
 #' machine learning (ML) compute instance running on a Jupyter notebook.
 #' 
-#' In a `CreateNotebookInstance` request, specify the type of ML compute
-#' instance that you want to run. Amazon SageMaker launches the instance,
-#' installs common libraries that you can use to explore datasets for model
-#' training, and attaches an ML storage volume to the notebook instance.
+#' In a [`create_notebook_instance`][sagemaker_create_notebook_instance]
+#' request, specify the type of ML compute instance that you want to run.
+#' Amazon SageMaker launches the instance, installs common libraries that
+#' you can use to explore datasets for model training, and attaches an ML
+#' storage volume to the notebook instance.
 #' 
 #' Amazon SageMaker also provides a set of example notebooks. Each notebook
 #' demonstrates how to use Amazon SageMaker with a specific algorithm or
@@ -3873,6 +4154,14 @@ sagemaker_create_monitoring_schedule <- function(MonitoringScheduleName, Monitor
 #' with a notebook instance always run with root access even if you disable
 #' root access for users.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NotebookInstanceArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_notebook_instance(
@@ -3939,7 +4228,7 @@ sagemaker_create_notebook_instance <- function(NotebookInstanceName, InstanceTyp
 #' 
 #' View CloudWatch Logs for notebook instance lifecycle configurations in
 #' log group `/aws/sagemaker/NotebookInstances` in log stream
-#' `\\[notebook-instance-name\\]/\\[LifecycleConfigHook\\]`.
+#' `[notebook-instance-name]/[LifecycleConfigHook]`.
 #' 
 #' Lifecycle configuration scripts cannot run for longer than 5 minutes. If
 #' a script runs for longer than 5 minutes, it fails and the notebook
@@ -3959,6 +4248,14 @@ sagemaker_create_notebook_instance <- function(NotebookInstanceName, InstanceTyp
 #' @param OnStart A shell script that runs every time you start a notebook instance,
 #' including when you create the notebook instance. The shell script must
 #' be a base64-encoded string.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NotebookInstanceLifecycleConfigArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4018,6 +4315,14 @@ sagemaker_create_notebook_instance_lifecycle_config <- function(NotebookInstance
 #' access and create resources.
 #' @param Tags A list of tags to apply to the created pipeline.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_pipeline(
@@ -4066,9 +4371,11 @@ sagemaker_create_pipeline <- function(PipelineName, PipelineDisplayName = NULL, 
 #' This operation can only be called when the authentication mode equals
 #' IAM.
 #' 
-#' The URL that you get from a call to `CreatePresignedDomainUrl` is valid
-#' only for 5 minutes. If you try to use the URL after the 5-minute limit
-#' expires, you are directed to the AWS console sign-in page.
+#' The URL that you get from a call to
+#' [`create_presigned_domain_url`][sagemaker_create_presigned_domain_url]
+#' is valid only for 5 minutes. If you try to use the URL after the
+#' 5-minute limit expires, you are directed to the AWS console sign-in
+#' page.
 #'
 #' @usage
 #' sagemaker_create_presigned_domain_url(DomainId, UserProfileName,
@@ -4077,6 +4384,14 @@ sagemaker_create_pipeline <- function(PipelineName, PipelineDisplayName = NULL, 
 #' @param DomainId &#91;required&#93; The domain ID.
 #' @param UserProfileName &#91;required&#93; The name of the UserProfile to sign-in as.
 #' @param SessionExpirationDurationInSeconds The session expiration duration in seconds.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AuthorizedUrl = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4131,7 +4446,8 @@ sagemaker_create_presigned_domain_url <- function(DomainId, UserProfileName, Ses
 #' by IP
 #' Address](https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter).
 #' 
-#' The URL that you get from a call to CreatePresignedNotebookInstanceUrl
+#' The URL that you get from a call to
+#' [`create_presigned_notebook_instance_url`][sagemaker_create_presigned_notebook_instance_url]
 #' is valid only for 5 minutes. If you try to use the URL after the
 #' 5-minute limit expires, you are directed to the AWS console sign-in
 #' page.
@@ -4142,6 +4458,14 @@ sagemaker_create_presigned_domain_url <- function(DomainId, UserProfileName, Ses
 #'
 #' @param NotebookInstanceName &#91;required&#93; The name of the notebook instance.
 #' @param SessionExpirationDurationInSeconds The duration of the session, in seconds. The default is 12 hours.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AuthorizedUrl = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4200,6 +4524,14 @@ sagemaker_create_presigned_notebook_instance_url <- function(NotebookInstanceNam
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 #' in the *AWS Billing and Cost Management User Guide*.
 #' @param ExperimentConfig 
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProcessingJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4354,6 +4686,15 @@ sagemaker_create_processing_job <- function(ProcessingInputs = NULL, ProcessingO
 #' your AWS resource costs. For more information, see [Tagging AWS
 #' resources](https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
 #' in the *AWS General Reference Guide*.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProjectArn = "string",
+#'   ProjectId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4572,6 +4913,14 @@ sagemaker_create_project <- function(ProjectName, ProjectDescription = NULL, Ser
 #' @param ProfilerRuleConfigurations Configuration information for Debugger rules for profiling system and
 #' framework metrics.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrainingJobArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_training_job(
@@ -4753,7 +5102,7 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' -   `ModelName` - Identifies the model to use. `ModelName` must be the
 #'     name of an existing Amazon SageMaker model in the same AWS Region
 #'     and AWS account. For information on creating a model, see
-#'     CreateModel.
+#'     [`create_model`][sagemaker_create_model].
 #' 
 #' -   `TransformInput` - Describes the dataset to be transformed and the
 #'     Amazon S3 location where it is stored.
@@ -4836,6 +5185,14 @@ sagemaker_create_training_job <- function(TrainingJobName, HyperParameters = NUL
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 #' in the *AWS Billing and Cost Management User Guide*.
 #' @param ExperimentConfig 
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TransformJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -4925,12 +5282,14 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #' logged, and indexed. When you use the AWS SDK for Python (Boto), you
 #' must use the logging APIs provided by the SDK.
 #' 
-#' You can add tags to a trial and then use the Search API to search for
-#' the tags.
+#' You can add tags to a trial and then use the
+#' [`search`][sagemaker_search] API to search for the tags.
 #' 
-#' To get a list of all your trials, call the ListTrials API. To view a
-#' trial's properties, call the DescribeTrial API. To create a trial
-#' component, call the CreateTrialComponent API.
+#' To get a list of all your trials, call the
+#' [`list_trials`][sagemaker_list_trials] API. To view a trial's
+#' properties, call the [`describe_trial`][sagemaker_describe_trial] API.
+#' To create a trial component, call the
+#' [`create_trial_component`][sagemaker_create_trial_component] API.
 #'
 #' @usage
 #' sagemaker_create_trial(TrialName, DisplayName, ExperimentName,
@@ -4942,8 +5301,16 @@ sagemaker_create_transform_job <- function(TransformJobName, ModelName, MaxConcu
 #' If `DisplayName` isn't specified, `TrialName` is displayed.
 #' @param ExperimentName &#91;required&#93; The name of the experiment to associate the trial with.
 #' @param MetadataProperties 
-#' @param Tags A list of tags to associate with the trial. You can use Search API to
-#' search on the tags.
+#' @param Tags A list of tags to associate with the trial. You can use
+#' [`search`][sagemaker_search] API to search on the tags.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5001,14 +5368,15 @@ sagemaker_create_trial <- function(TrialName, DisplayName = NULL, ExperimentName
 #' logged, and indexed. When you use the AWS SDK for Python (Boto), you
 #' must use the logging APIs provided by the SDK.
 #' 
-#' You can add tags to a trial component and then use the Search API to
-#' search for the tags.
+#' You can add tags to a trial component and then use the
+#' [`search`][sagemaker_search] API to search for the tags.
 #' 
-#' `CreateTrialComponent` can only be invoked from within an Amazon
-#' SageMaker managed environment. This includes Amazon SageMaker training
-#' jobs, processing jobs, transform jobs, and Amazon SageMaker notebooks. A
-#' call to `CreateTrialComponent` from outside one of these environments
-#' results in an error.
+#' [`create_trial_component`][sagemaker_create_trial_component] can only be
+#' invoked from within an Amazon SageMaker managed environment. This
+#' includes Amazon SageMaker training jobs, processing jobs, transform
+#' jobs, and Amazon SageMaker notebooks. A call to
+#' [`create_trial_component`][sagemaker_create_trial_component] from
+#' outside one of these environments results in an error.
 #'
 #' @usage
 #' sagemaker_create_trial_component(TrialComponentName, DisplayName,
@@ -5035,8 +5403,16 @@ sagemaker_create_trial <- function(TrialName, DisplayName = NULL, ExperimentName
 #' @param OutputArtifacts The output artifacts for the component. Examples of output artifacts are
 #' metrics, snapshots, logs, and images.
 #' @param MetadataProperties 
-#' @param Tags A list of tags to associate with the component. You can use Search API
-#' to search on the tags.
+#' @param Tags A list of tags to associate with the component. You can use
+#' [`search`][sagemaker_search] API to search on the tags.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5136,6 +5512,14 @@ sagemaker_create_trial_component <- function(TrialComponentName, DisplayName = N
 #' unique per resource.
 #' @param UserSettings A collection of settings.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserProfileArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_user_profile(
@@ -5220,7 +5604,8 @@ sagemaker_create_user_profile <- function(DomainId, UserProfileName, SingleSignO
 #' 
 #' If you want to create a new workforce in an AWS Region where a workforce
 #' already exists, use the API operation to delete the existing workforce
-#' and then use `CreateWorkforce` to create a new workforce.
+#' and then use [`create_workforce`][sagemaker_create_workforce] to create
+#' a new workforce.
 #' 
 #' To create a private workforce using Amazon Cognito, you must specify a
 #' Cognito user pool in `CognitoConfig`. You can also create an Amazon
@@ -5254,6 +5639,14 @@ sagemaker_create_user_profile <- function(DomainId, UserProfileName, SingleSignO
 #' @param Tags An array of key-value pairs that contain metadata to help you categorize
 #' and organize our workforce. Each tag consists of a key and a value, both
 #' of which you define.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   WorkforceArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5354,6 +5747,14 @@ sagemaker_create_workforce <- function(CognitoConfig = NULL, OidcConfig = NULL, 
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 #' in the *AWS Billing and Cost Management User Guide*.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   WorkteamArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_workteam(
@@ -5416,6 +5817,14 @@ sagemaker_create_workteam <- function(WorkteamName, WorkforceName = NULL, Member
 #'
 #' @param ActionName &#91;required&#93; The name of the action to delete.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ActionArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_action(
@@ -5452,6 +5861,9 @@ sagemaker_delete_action <- function(ActionName) {
 #' sagemaker_delete_algorithm(AlgorithmName)
 #'
 #' @param AlgorithmName &#91;required&#93; The name of the algorithm to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -5493,6 +5905,9 @@ sagemaker_delete_algorithm <- function(AlgorithmName) {
 #' @param AppType &#91;required&#93; The type of app.
 #' @param AppName &#91;required&#93; The name of the app.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_app(
@@ -5533,6 +5948,9 @@ sagemaker_delete_app <- function(DomainId, UserProfileName, AppType, AppName) {
 #'
 #' @param AppImageConfigName &#91;required&#93; The name of the AppImageConfig to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_app_image_config(
@@ -5570,6 +5988,14 @@ sagemaker_delete_app_image_config <- function(AppImageConfigName) {
 #'
 #' @param ArtifactArn The Amazon Resource Name (ARN) of the artifact to delete.
 #' @param Source The URI of the source.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArtifactArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5618,6 +6044,15 @@ sagemaker_delete_artifact <- function(ArtifactArn = NULL, Source = NULL) {
 #' @param SourceArn &#91;required&#93; The ARN of the source.
 #' @param DestinationArn &#91;required&#93; The Amazon Resource Name (ARN) of the destination.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SourceArn = "string",
+#'   DestinationArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_association(
@@ -5656,6 +6091,9 @@ sagemaker_delete_association <- function(SourceArn, DestinationArn) {
 #'
 #' @param CodeRepositoryName &#91;required&#93; The name of the Git repository to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_code_repository(
@@ -5692,6 +6130,14 @@ sagemaker_delete_code_repository <- function(CodeRepositoryName) {
 #' sagemaker_delete_context(ContextName)
 #'
 #' @param ContextName &#91;required&#93; The name of the context to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ContextArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5730,6 +6176,9 @@ sagemaker_delete_context <- function(ContextName) {
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the data quality monitoring job definition to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_data_quality_job_definition(
@@ -5766,6 +6215,9 @@ sagemaker_delete_data_quality_job_definition <- function(JobDefinitionName) {
 #' sagemaker_delete_device_fleet(DeviceFleetName)
 #'
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -5809,6 +6261,9 @@ sagemaker_delete_device_fleet <- function(DeviceFleetName) {
 #' @param RetentionPolicy The retention policy for this domain, which specifies whether resources
 #' will be retained after the Domain is deleted. By default, all resources
 #' are retained (not automatically deleted).
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -5856,6 +6311,9 @@ sagemaker_delete_domain <- function(DomainId, RetentionPolicy = NULL) {
 #'
 #' @param EndpointName &#91;required&#93; The name of the endpoint that you want to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_endpoint(
@@ -5886,14 +6344,16 @@ sagemaker_delete_endpoint <- function(EndpointName) {
 #' Deletes an endpoint configuration
 #'
 #' @description
-#' Deletes an endpoint configuration. The `DeleteEndpointConfig` API
-#' deletes only the specified configuration. It does not delete endpoints
-#' created using the configuration.
+#' Deletes an endpoint configuration. The
+#' [`delete_endpoint_config`][sagemaker_delete_endpoint_config] API deletes
+#' only the specified configuration. It does not delete endpoints created
+#' using the configuration.
 #' 
 #' You must not delete an `EndpointConfig` in use by an endpoint that is
-#' live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
-#' being performed on the endpoint. If you delete the `EndpointConfig` of
-#' an endpoint that is active or being created or updated you may lose
+#' live or while the [`update_endpoint`][sagemaker_update_endpoint] or
+#' [`create_endpoint`][sagemaker_create_endpoint] operations are being
+#' performed on the endpoint. If you delete the `EndpointConfig` of an
+#' endpoint that is active or being created or updated you may lose
 #' visibility into the instance type the endpoint is using. The endpoint
 #' must be deleted in order to stop incurring charges.
 #'
@@ -5901,6 +6361,9 @@ sagemaker_delete_endpoint <- function(EndpointName) {
 #' sagemaker_delete_endpoint_config(EndpointConfigName)
 #'
 #' @param EndpointConfigName &#91;required&#93; The name of the endpoint configuration that you want to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -5933,13 +6396,22 @@ sagemaker_delete_endpoint_config <- function(EndpointConfigName) {
 #'
 #' @description
 #' Deletes an Amazon SageMaker experiment. All trials associated with the
-#' experiment must be deleted first. Use the ListTrials API to get a list
-#' of the trials associated with the experiment.
+#' experiment must be deleted first. Use the
+#' [`list_trials`][sagemaker_list_trials] API to get a list of the trials
+#' associated with the experiment.
 #'
 #' @usage
 #' sagemaker_delete_experiment(ExperimentName)
 #'
 #' @param ExperimentName &#91;required&#93; The name of the experiment to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExperimentArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -5974,7 +6446,8 @@ sagemaker_delete_experiment <- function(ExperimentName) {
 #' @description
 #' Delete the `FeatureGroup` and any data that was written to the
 #' `OnlineStore` of the `FeatureGroup`. Data cannot be accessed from the
-#' `OnlineStore` immediately after `DeleteFeatureGroup` is called.
+#' `OnlineStore` immediately after
+#' [`delete_feature_group`][sagemaker_delete_feature_group] is called.
 #' 
 #' Data written into the `OfflineStore` will not be deleted. The AWS Glue
 #' database and tables that are automatically created for your
@@ -5985,6 +6458,9 @@ sagemaker_delete_experiment <- function(ExperimentName) {
 #'
 #' @param FeatureGroupName &#91;required&#93; The name of the `FeatureGroup` you want to delete. The name must be
 #' unique within an AWS Region in an AWS account.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6023,6 +6499,9 @@ sagemaker_delete_feature_group <- function(FeatureGroupName) {
 #'
 #' @param FlowDefinitionName &#91;required&#93; The name of the flow definition you are deleting.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_flow_definition(
@@ -6059,13 +6538,17 @@ sagemaker_delete_flow_definition <- function(FlowDefinitionName) {
 #' 
 #' To see a list of human task user interfaces (work task templates) in
 #' your account, use . When you delete a worker task template, it no longer
-#' appears when you call `ListHumanTaskUis`.
+#' appears when you call
+#' [`list_human_task_uis`][sagemaker_list_human_task_uis].
 #'
 #' @usage
 #' sagemaker_delete_human_task_ui(HumanTaskUiName)
 #'
 #' @param HumanTaskUiName &#91;required&#93; The name of the human task user interface (work task template) you want
 #' to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6104,6 +6587,9 @@ sagemaker_delete_human_task_ui <- function(HumanTaskUiName) {
 #' sagemaker_delete_image(ImageName)
 #'
 #' @param ImageName &#91;required&#93; The name of the image to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6144,6 +6630,9 @@ sagemaker_delete_image <- function(ImageName) {
 #' @param ImageName &#91;required&#93; The name of the image.
 #' @param Version &#91;required&#93; The version to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_image_version(
@@ -6175,15 +6664,19 @@ sagemaker_delete_image_version <- function(ImageName, Version) {
 #' Deletes a model
 #'
 #' @description
-#' Deletes a model. The `DeleteModel` API deletes only the model entry that
-#' was created in Amazon SageMaker when you called the CreateModel API. It
-#' does not delete model artifacts, inference code, or the IAM role that
-#' you specified when creating the model.
+#' Deletes a model. The [`delete_model`][sagemaker_delete_model] API
+#' deletes only the model entry that was created in Amazon SageMaker when
+#' you called the [`create_model`][sagemaker_create_model] API. It does not
+#' delete model artifacts, inference code, or the IAM role that you
+#' specified when creating the model.
 #'
 #' @usage
 #' sagemaker_delete_model(ModelName)
 #'
 #' @param ModelName &#91;required&#93; The name of the model to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6222,6 +6715,9 @@ sagemaker_delete_model <- function(ModelName) {
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the model bias job definition to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_model_bias_job_definition(
@@ -6258,6 +6754,9 @@ sagemaker_delete_model_bias_job_definition <- function(JobDefinitionName) {
 #' sagemaker_delete_model_explainability_job_definition(JobDefinitionName)
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the model explainability job definition to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6301,6 +6800,9 @@ sagemaker_delete_model_explainability_job_definition <- function(JobDefinitionNa
 #' @param ModelPackageName &#91;required&#93; The name of the model package. The name must have 1 to 63 characters.
 #' Valid characters are a-z, A-Z, 0-9, and - (hyphen).
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_model_package(
@@ -6337,6 +6839,9 @@ sagemaker_delete_model_package <- function(ModelPackageName) {
 #' sagemaker_delete_model_package_group(ModelPackageGroupName)
 #'
 #' @param ModelPackageGroupName &#91;required&#93; The name of the model group to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6375,6 +6880,9 @@ sagemaker_delete_model_package_group <- function(ModelPackageGroupName) {
 #'
 #' @param ModelPackageGroupName &#91;required&#93; The name of the model group for which to delete the policy.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_model_package_group_policy(
@@ -6411,6 +6919,9 @@ sagemaker_delete_model_package_group_policy <- function(ModelPackageGroupName) {
 #' sagemaker_delete_model_quality_job_definition(JobDefinitionName)
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the model quality monitoring job definition to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6451,6 +6962,9 @@ sagemaker_delete_model_quality_job_definition <- function(JobDefinitionName) {
 #'
 #' @param MonitoringScheduleName &#91;required&#93; The name of the monitoring schedule to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_monitoring_schedule(
@@ -6482,7 +6996,8 @@ sagemaker_delete_monitoring_schedule <- function(MonitoringScheduleName) {
 #'
 #' @description
 #' Deletes an Amazon SageMaker notebook instance. Before you can delete a
-#' notebook instance, you must call the `StopNotebookInstance` API.
+#' notebook instance, you must call the
+#' [`stop_notebook_instance`][sagemaker_stop_notebook_instance] API.
 #' 
 #' When you delete a notebook instance, you lose all of your data. Amazon
 #' SageMaker removes the ML compute instance, and deletes the ML storage
@@ -6492,6 +7007,9 @@ sagemaker_delete_monitoring_schedule <- function(MonitoringScheduleName) {
 #' sagemaker_delete_notebook_instance(NotebookInstanceName)
 #'
 #' @param NotebookInstanceName &#91;required&#93; The name of the Amazon SageMaker notebook instance to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6530,6 +7048,9 @@ sagemaker_delete_notebook_instance <- function(NotebookInstanceName) {
 #'   NotebookInstanceLifecycleConfigName)
 #'
 #' @param NotebookInstanceLifecycleConfigName &#91;required&#93; The name of the lifecycle configuration to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6571,6 +7092,14 @@ sagemaker_delete_notebook_instance_lifecycle_config <- function(NotebookInstance
 #' idempotency of the operation. An idempotent operation completes no more
 #' than one time.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_pipeline(
@@ -6609,6 +7138,9 @@ sagemaker_delete_pipeline <- function(PipelineName, ClientRequestToken) {
 #'
 #' @param ProjectName &#91;required&#93; The name of the project to delete.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_project(
@@ -6641,7 +7173,8 @@ sagemaker_delete_project <- function(ProjectName) {
 #' @description
 #' Deletes the specified tags from an Amazon SageMaker resource.
 #' 
-#' To list a resource's tags, use the `ListTags` API.
+#' To list a resource's tags, use the [`list_tags`][sagemaker_list_tags]
+#' API.
 #' 
 #' When you call this API to delete tags from a hyperparameter tuning job,
 #' the deleted tags are not removed from training jobs that the
@@ -6653,6 +7186,9 @@ sagemaker_delete_project <- function(ProjectName) {
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
 #' delete.
 #' @param TagKeys &#91;required&#93; An array or one or more tag keys to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6688,13 +7224,22 @@ sagemaker_delete_tags <- function(ResourceArn, TagKeys) {
 #'
 #' @description
 #' Deletes the specified trial. All trial components that make up the trial
-#' must be deleted first. Use the DescribeTrialComponent API to get the
-#' list of trial components.
+#' must be deleted first. Use the
+#' [`describe_trial_component`][sagemaker_describe_trial_component] API to
+#' get the list of trial components.
 #'
 #' @usage
 #' sagemaker_delete_trial(TrialName)
 #'
 #' @param TrialName &#91;required&#93; The name of the trial to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6729,12 +7274,21 @@ sagemaker_delete_trial <- function(TrialName) {
 #' Deletes the specified trial component. A trial component must be
 #' disassociated from all trials before the trial component can be deleted.
 #' To disassociate a trial component from a trial, call the
-#' DisassociateTrialComponent API.
+#' [`disassociate_trial_component`][sagemaker_disassociate_trial_component]
+#' API.
 #'
 #' @usage
 #' sagemaker_delete_trial_component(TrialComponentName)
 #'
 #' @param TrialComponentName &#91;required&#93; The name of the component to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6775,6 +7329,9 @@ sagemaker_delete_trial_component <- function(TrialComponentName) {
 #'
 #' @param DomainId &#91;required&#93; The domain ID.
 #' @param UserProfileName &#91;required&#93; The user profile name.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6823,6 +7380,9 @@ sagemaker_delete_user_profile <- function(DomainId, UserProfileName) {
 #'
 #' @param WorkforceName &#91;required&#93; The name of the workforce.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_workforce(
@@ -6859,6 +7419,14 @@ sagemaker_delete_workforce <- function(WorkforceName) {
 #' sagemaker_delete_workteam(WorkteamName)
 #'
 #' @param WorkteamName &#91;required&#93; The name of the work team to delete.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Success = TRUE|FALSE
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -6898,6 +7466,9 @@ sagemaker_delete_workteam <- function(WorkteamName) {
 #'
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet the devices belong to.
 #' @param DeviceNames &#91;required&#93; The unique IDs of the devices.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -6939,6 +7510,48 @@ sagemaker_deregister_devices <- function(DeviceFleetName, DeviceNames) {
 #'
 #' @param ActionName &#91;required&#93; The name of the action to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ActionName = "string",
+#'   ActionArn = "string",
+#'   Source = list(
+#'     SourceUri = "string",
+#'     SourceType = "string",
+#'     SourceId = "string"
+#'   ),
+#'   ActionType = "string",
+#'   Description = "string",
+#'   Status = "Unknown"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'   Properties = list(
+#'     "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   MetadataProperties = list(
+#'     CommitId = "string",
+#'     Repository = "string",
+#'     GeneratedBy = "string",
+#'     ProjectId = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_action(
@@ -6976,6 +7589,208 @@ sagemaker_describe_action <- function(ActionName) {
 #' sagemaker_describe_algorithm(AlgorithmName)
 #'
 #' @param AlgorithmName &#91;required&#93; The name of the algorithm to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AlgorithmName = "string",
+#'   AlgorithmArn = "string",
+#'   AlgorithmDescription = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TrainingSpecification = list(
+#'     TrainingImage = "string",
+#'     TrainingImageDigest = "string",
+#'     SupportedHyperParameters = list(
+#'       list(
+#'         Name = "string",
+#'         Description = "string",
+#'         Type = "Integer"|"Continuous"|"Categorical"|"FreeText",
+#'         Range = list(
+#'           IntegerParameterRangeSpecification = list(
+#'             MinValue = "string",
+#'             MaxValue = "string"
+#'           ),
+#'           ContinuousParameterRangeSpecification = list(
+#'             MinValue = "string",
+#'             MaxValue = "string"
+#'           ),
+#'           CategoricalParameterRangeSpecification = list(
+#'             Values = list(
+#'               "string"
+#'             )
+#'           )
+#'         ),
+#'         IsTunable = TRUE|FALSE,
+#'         IsRequired = TRUE|FALSE,
+#'         DefaultValue = "string"
+#'       )
+#'     ),
+#'     SupportedTrainingInstanceTypes = list(
+#'       "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge"
+#'     ),
+#'     SupportsDistributedTraining = TRUE|FALSE,
+#'     MetricDefinitions = list(
+#'       list(
+#'         Name = "string",
+#'         Regex = "string"
+#'       )
+#'     ),
+#'     TrainingChannels = list(
+#'       list(
+#'         Name = "string",
+#'         Description = "string",
+#'         IsRequired = TRUE|FALSE,
+#'         SupportedContentTypes = list(
+#'           "string"
+#'         ),
+#'         SupportedCompressionTypes = list(
+#'           "None"|"Gzip"
+#'         ),
+#'         SupportedInputModes = list(
+#'           "Pipe"|"File"
+#'         )
+#'       )
+#'     ),
+#'     SupportedTuningJobObjectiveMetrics = list(
+#'       list(
+#'         Type = "Maximize"|"Minimize",
+#'         MetricName = "string"
+#'       )
+#'     )
+#'   ),
+#'   InferenceSpecification = list(
+#'     Containers = list(
+#'       list(
+#'         ContainerHostname = "string",
+#'         Image = "string",
+#'         ImageDigest = "string",
+#'         ModelDataUrl = "string",
+#'         ProductId = "string"
+#'       )
+#'     ),
+#'     SupportedTransformInstanceTypes = list(
+#'       "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"
+#'     ),
+#'     SupportedRealtimeInferenceInstanceTypes = list(
+#'       "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"
+#'     ),
+#'     SupportedContentTypes = list(
+#'       "string"
+#'     ),
+#'     SupportedResponseMIMETypes = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ValidationSpecification = list(
+#'     ValidationRole = "string",
+#'     ValidationProfiles = list(
+#'       list(
+#'         ProfileName = "string",
+#'         TrainingJobDefinition = list(
+#'           TrainingInputMode = "Pipe"|"File",
+#'           HyperParameters = list(
+#'             "string"
+#'           ),
+#'           InputDataConfig = list(
+#'             list(
+#'               ChannelName = "string",
+#'               DataSource = list(
+#'                 S3DataSource = list(
+#'                   S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                   S3Uri = "string",
+#'                   S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                   AttributeNames = list(
+#'                     "string"
+#'                   )
+#'                 ),
+#'                 FileSystemDataSource = list(
+#'                   FileSystemId = "string",
+#'                   FileSystemAccessMode = "rw"|"ro",
+#'                   FileSystemType = "EFS"|"FSxLustre",
+#'                   DirectoryPath = "string"
+#'                 )
+#'               ),
+#'               ContentType = "string",
+#'               CompressionType = "None"|"Gzip",
+#'               RecordWrapperType = "None"|"RecordIO",
+#'               InputMode = "Pipe"|"File",
+#'               ShuffleConfig = list(
+#'                 Seed = 123
+#'               )
+#'             )
+#'           ),
+#'           OutputDataConfig = list(
+#'             KmsKeyId = "string",
+#'             S3OutputPath = "string"
+#'           ),
+#'           ResourceConfig = list(
+#'             InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'             InstanceCount = 123,
+#'             VolumeSizeInGB = 123,
+#'             VolumeKmsKeyId = "string"
+#'           ),
+#'           StoppingCondition = list(
+#'             MaxRuntimeInSeconds = 123,
+#'             MaxWaitTimeInSeconds = 123
+#'           )
+#'         ),
+#'         TransformJobDefinition = list(
+#'           MaxConcurrentTransforms = 123,
+#'           MaxPayloadInMB = 123,
+#'           BatchStrategy = "MultiRecord"|"SingleRecord",
+#'           Environment = list(
+#'             "string"
+#'           ),
+#'           TransformInput = list(
+#'             DataSource = list(
+#'               S3DataSource = list(
+#'                 S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                 S3Uri = "string"
+#'               )
+#'             ),
+#'             ContentType = "string",
+#'             CompressionType = "None"|"Gzip",
+#'             SplitType = "None"|"Line"|"RecordIO"|"TFRecord"
+#'           ),
+#'           TransformOutput = list(
+#'             S3OutputPath = "string",
+#'             Accept = "string",
+#'             AssembleWith = "None"|"Line",
+#'             KmsKeyId = "string"
+#'           ),
+#'           TransformResources = list(
+#'             InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge",
+#'             InstanceCount = 123,
+#'             VolumeKmsKeyId = "string"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   AlgorithmStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting",
+#'   AlgorithmStatusDetails = list(
+#'     ValidationStatuses = list(
+#'       list(
+#'         Name = "string",
+#'         Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'         FailureReason = "string"
+#'       )
+#'     ),
+#'     ImageScanStatuses = list(
+#'       list(
+#'         Name = "string",
+#'         Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'         FailureReason = "string"
+#'       )
+#'     )
+#'   ),
+#'   ProductId = "string",
+#'   CertifyForMarketplace = TRUE|FALSE
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7017,6 +7832,34 @@ sagemaker_describe_algorithm <- function(AlgorithmName) {
 #' @param AppType &#91;required&#93; The type of app.
 #' @param AppName &#91;required&#93; The name of the app.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AppArn = "string",
+#'   AppType = "JupyterServer"|"KernelGateway"|"TensorBoard",
+#'   AppName = "string",
+#'   DomainId = "string",
+#'   UserProfileName = "string",
+#'   Status = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending",
+#'   LastHealthCheckTimestamp = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastUserActivityTimestamp = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   ResourceSpec = list(
+#'     SageMakerImageArn = "string",
+#'     SageMakerImageVersionArn = "string",
+#'     InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_app(
@@ -7057,6 +7900,34 @@ sagemaker_describe_app <- function(DomainId, UserProfileName, AppType, AppName) 
 #'
 #' @param AppImageConfigName &#91;required&#93; The name of the AppImageConfig to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AppImageConfigArn = "string",
+#'   AppImageConfigName = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   KernelGatewayImageConfig = list(
+#'     KernelSpecs = list(
+#'       list(
+#'         Name = "string",
+#'         DisplayName = "string"
+#'       )
+#'     ),
+#'     FileSystemConfig = list(
+#'       MountPath = "string",
+#'       DefaultUid = 123,
+#'       DefaultGid = 123
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_app_image_config(
@@ -7093,6 +7964,50 @@ sagemaker_describe_app_image_config <- function(AppImageConfigName) {
 #' sagemaker_describe_artifact(ArtifactArn)
 #'
 #' @param ArtifactArn &#91;required&#93; The Amazon Resource Name (ARN) of the artifact to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArtifactName = "string",
+#'   ArtifactArn = "string",
+#'   Source = list(
+#'     SourceUri = "string",
+#'     SourceTypes = list(
+#'       list(
+#'         SourceIdType = "MD5Hash"|"S3ETag"|"S3Version"|"Custom",
+#'         Value = "string"
+#'       )
+#'     )
+#'   ),
+#'   ArtifactType = "string",
+#'   Properties = list(
+#'     "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   MetadataProperties = list(
+#'     CommitId = "string",
+#'     Repository = "string",
+#'     GeneratedBy = "string",
+#'     ProjectId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7131,6 +8046,119 @@ sagemaker_describe_artifact <- function(ArtifactArn) {
 #'
 #' @param AutoMLJobName &#91;required&#93; Request information about a job using that job's unique name.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AutoMLJobName = "string",
+#'   AutoMLJobArn = "string",
+#'   InputDataConfig = list(
+#'     list(
+#'       DataSource = list(
+#'         S3DataSource = list(
+#'           S3DataType = "ManifestFile"|"S3Prefix",
+#'           S3Uri = "string"
+#'         )
+#'       ),
+#'       CompressionType = "None"|"Gzip",
+#'       TargetAttributeName = "string"
+#'     )
+#'   ),
+#'   OutputDataConfig = list(
+#'     KmsKeyId = "string",
+#'     S3OutputPath = "string"
+#'   ),
+#'   RoleArn = "string",
+#'   AutoMLJobObjective = list(
+#'     MetricName = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"
+#'   ),
+#'   ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression",
+#'   AutoMLJobConfig = list(
+#'     CompletionCriteria = list(
+#'       MaxCandidates = 123,
+#'       MaxRuntimePerTrainingJobInSeconds = 123,
+#'       MaxAutoMLJobRuntimeInSeconds = 123
+#'     ),
+#'     SecurityConfig = list(
+#'       VolumeKmsKeyId = "string",
+#'       EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'       VpcConfig = list(
+#'         SecurityGroupIds = list(
+#'           "string"
+#'         ),
+#'         Subnets = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   BestCandidate = list(
+#'     CandidateName = "string",
+#'     FinalAutoMLJobObjectiveMetric = list(
+#'       Type = "Maximize"|"Minimize",
+#'       MetricName = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC",
+#'       Value = 123.0
+#'     ),
+#'     ObjectiveStatus = "Succeeded"|"Pending"|"Failed",
+#'     CandidateSteps = list(
+#'       list(
+#'         CandidateStepType = "AWS::SageMaker::TrainingJob"|"AWS::SageMaker::TransformJob"|"AWS::SageMaker::ProcessingJob",
+#'         CandidateStepArn = "string",
+#'         CandidateStepName = "string"
+#'       )
+#'     ),
+#'     CandidateStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'     InferenceContainers = list(
+#'       list(
+#'         Image = "string",
+#'         ModelDataUrl = "string",
+#'         Environment = list(
+#'           "string"
+#'         )
+#'       )
+#'     ),
+#'     CreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     EndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastModifiedTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     FailureReason = "string"
+#'   ),
+#'   AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'   AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated",
+#'   GenerateCandidateDefinitionsOnly = TRUE|FALSE,
+#'   AutoMLJobArtifacts = list(
+#'     CandidateDefinitionNotebookLocation = "string",
+#'     DataExplorationNotebookLocation = "string"
+#'   ),
+#'   ResolvedAttributes = list(
+#'     AutoMLJobObjective = list(
+#'       MetricName = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC"
+#'     ),
+#'     ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression",
+#'     CompletionCriteria = list(
+#'       MaxCandidates = 123,
+#'       MaxRuntimePerTrainingJobInSeconds = 123,
+#'       MaxAutoMLJobRuntimeInSeconds = 123
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_auto_ml_job(
@@ -7168,6 +8196,26 @@ sagemaker_describe_auto_ml_job <- function(AutoMLJobName) {
 #'
 #' @param CodeRepositoryName &#91;required&#93; The name of the Git repository to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CodeRepositoryName = "string",
+#'   CodeRepositoryArn = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   GitConfig = list(
+#'     RepositoryUrl = "string",
+#'     Branch = "string",
+#'     SecretArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_code_repository(
@@ -7200,14 +8248,65 @@ sagemaker_describe_code_repository <- function(CodeRepositoryName) {
 #' @description
 #' Returns information about a model compilation job.
 #' 
-#' To create a model compilation job, use CreateCompilationJob. To get
+#' To create a model compilation job, use
+#' [`create_compilation_job`][sagemaker_create_compilation_job]. To get
 #' information about multiple model compilation jobs, use
-#' ListCompilationJobs.
+#' [`list_compilation_jobs`][sagemaker_list_compilation_jobs].
 #'
 #' @usage
 #' sagemaker_describe_compilation_job(CompilationJobName)
 #'
 #' @param CompilationJobName &#91;required&#93; The name of the model compilation job that you want information about.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CompilationJobName = "string",
+#'   CompilationJobArn = "string",
+#'   CompilationJobStatus = "INPROGRESS"|"COMPLETED"|"FAILED"|"STARTING"|"STOPPING"|"STOPPED",
+#'   CompilationStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CompilationEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123,
+#'     MaxWaitTimeInSeconds = 123
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   ModelArtifacts = list(
+#'     S3ModelArtifacts = "string"
+#'   ),
+#'   ModelDigests = list(
+#'     ArtifactDigest = "string"
+#'   ),
+#'   RoleArn = "string",
+#'   InputConfig = list(
+#'     S3Uri = "string",
+#'     DataInputConfig = "string",
+#'     Framework = "TENSORFLOW"|"KERAS"|"MXNET"|"ONNX"|"PYTORCH"|"XGBOOST"|"TFLITE"|"DARKNET"|"SKLEARN"
+#'   ),
+#'   OutputConfig = list(
+#'     S3OutputLocation = "string",
+#'     TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm",
+#'     TargetPlatform = list(
+#'       Os = "ANDROID"|"LINUX",
+#'       Arch = "X86_64"|"X86"|"ARM64"|"ARM_EABI"|"ARM_EABIHF",
+#'       Accelerator = "INTEL_GRAPHICS"|"MALI"|"NVIDIA"
+#'     ),
+#'     CompilerOptions = "string",
+#'     KmsKeyId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7246,6 +8345,41 @@ sagemaker_describe_compilation_job <- function(CompilationJobName) {
 #'
 #' @param ContextName &#91;required&#93; The name of the context to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ContextName = "string",
+#'   ContextArn = "string",
+#'   Source = list(
+#'     SourceUri = "string",
+#'     SourceType = "string",
+#'     SourceId = "string"
+#'   ),
+#'   ContextType = "string",
+#'   Description = "string",
+#'   Properties = list(
+#'     "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_context(
@@ -7282,6 +8416,91 @@ sagemaker_describe_context <- function(ContextName) {
 #' sagemaker_describe_data_quality_job_definition(JobDefinitionName)
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the data quality monitoring job definition to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string",
+#'   JobDefinitionName = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   DataQualityBaselineConfig = list(
+#'     BaseliningJobName = "string",
+#'     ConstraintsResource = list(
+#'       S3Uri = "string"
+#'     ),
+#'     StatisticsResource = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   DataQualityAppSpecification = list(
+#'     ImageUri = "string",
+#'     ContainerEntrypoint = list(
+#'       "string"
+#'     ),
+#'     ContainerArguments = list(
+#'       "string"
+#'     ),
+#'     RecordPreprocessorSourceUri = "string",
+#'     PostAnalyticsProcessorSourceUri = "string",
+#'     Environment = list(
+#'       "string"
+#'     )
+#'   ),
+#'   DataQualityJobInput = list(
+#'     EndpointInput = list(
+#'       EndpointName = "string",
+#'       LocalPath = "string",
+#'       S3InputMode = "Pipe"|"File",
+#'       S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'       FeaturesAttribute = "string",
+#'       InferenceAttribute = "string",
+#'       ProbabilityAttribute = "string",
+#'       ProbabilityThresholdAttribute = 123.0,
+#'       StartTimeOffset = "string",
+#'       EndTimeOffset = "string"
+#'     )
+#'   ),
+#'   DataQualityJobOutputConfig = list(
+#'     MonitoringOutputs = list(
+#'       list(
+#'         S3Output = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string",
+#'           S3UploadMode = "Continuous"|"EndOfJob"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string"
+#'   ),
+#'   JobResources = list(
+#'     ClusterConfig = list(
+#'       InstanceCount = 123,
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   NetworkConfig = list(
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7322,6 +8541,38 @@ sagemaker_describe_data_quality_job_definition <- function(JobDefinitionName) {
 #' @param DeviceName &#91;required&#93; The unique ID of the device.
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet the devices belong to.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DeviceArn = "string",
+#'   DeviceName = "string",
+#'   Description = "string",
+#'   DeviceFleetName = "string",
+#'   IotThingName = "string",
+#'   RegistrationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LatestHeartbeat = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   Models = list(
+#'     list(
+#'       ModelName = "string",
+#'       ModelVersion = "string",
+#'       LatestSampleTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LatestInference = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   MaxModels = 123,
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_device(
@@ -7361,6 +8612,28 @@ sagemaker_describe_device <- function(NextToken = NULL, DeviceName, DeviceFleetN
 #'
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DeviceFleetName = "string",
+#'   DeviceFleetArn = "string",
+#'   OutputConfig = list(
+#'     S3OutputLocation = "string",
+#'     KmsKeyId = "string"
+#'   ),
+#'   Description = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   RoleArn = "string",
+#'   IotRoleAlias = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_device_fleet(
@@ -7397,6 +8670,74 @@ sagemaker_describe_device_fleet <- function(DeviceFleetName) {
 #' sagemaker_describe_domain(DomainId)
 #'
 #' @param DomainId &#91;required&#93; The domain ID.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DomainArn = "string",
+#'   DomainId = "string",
+#'   DomainName = "string",
+#'   HomeEfsFileSystemId = "string",
+#'   SingleSignOnManagedApplicationInstanceId = "string",
+#'   Status = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   AuthMode = "SSO"|"IAM",
+#'   DefaultUserSettings = list(
+#'     ExecutionRole = "string",
+#'     SecurityGroups = list(
+#'       "string"
+#'     ),
+#'     SharingSettings = list(
+#'       NotebookOutputOption = "Allowed"|"Disabled",
+#'       S3OutputPath = "string",
+#'       S3KmsKeyId = "string"
+#'     ),
+#'     JupyterServerAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       )
+#'     ),
+#'     KernelGatewayAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       ),
+#'       CustomImages = list(
+#'         list(
+#'           ImageName = "string",
+#'           ImageVersionNumber = 123,
+#'           AppImageConfigName = "string"
+#'         )
+#'       )
+#'     ),
+#'     TensorBoardAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       )
+#'     )
+#'   ),
+#'   AppNetworkAccessType = "PublicInternetOnly"|"VpcOnly",
+#'   HomeEfsFileSystemKmsKeyId = "string",
+#'   SubnetIds = list(
+#'     "string"
+#'   ),
+#'   Url = "string",
+#'   VpcId = "string",
+#'   KmsKeyId = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7435,6 +8776,34 @@ sagemaker_describe_domain <- function(DomainId) {
 #'
 #' @param EdgePackagingJobName &#91;required&#93; The name of the edge packaging job.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EdgePackagingJobArn = "string",
+#'   EdgePackagingJobName = "string",
+#'   CompilationJobName = "string",
+#'   ModelName = "string",
+#'   ModelVersion = "string",
+#'   RoleArn = "string",
+#'   OutputConfig = list(
+#'     S3OutputLocation = "string",
+#'     KmsKeyId = "string"
+#'   ),
+#'   ResourceKey = "string",
+#'   EdgePackagingJobStatus = "STARTING"|"INPROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED",
+#'   EdgePackagingJobStatusMessage = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ModelArtifact = "string",
+#'   ModelSignature = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_edge_packaging_job(
@@ -7472,6 +8841,70 @@ sagemaker_describe_edge_packaging_job <- function(EdgePackagingJobName) {
 #'
 #' @param EndpointName &#91;required&#93; The name of the endpoint.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointName = "string",
+#'   EndpointArn = "string",
+#'   EndpointConfigName = "string",
+#'   ProductionVariants = list(
+#'     list(
+#'       VariantName = "string",
+#'       DeployedImages = list(
+#'         list(
+#'           SpecifiedImage = "string",
+#'           ResolvedImage = "string",
+#'           ResolutionTime = as.POSIXct(
+#'             "2015-01-01"
+#'           )
+#'         )
+#'       ),
+#'       CurrentWeight = 123.0,
+#'       DesiredWeight = 123.0,
+#'       CurrentInstanceCount = 123,
+#'       DesiredInstanceCount = 123
+#'     )
+#'   ),
+#'   DataCaptureConfig = list(
+#'     EnableCapture = TRUE|FALSE,
+#'     CaptureStatus = "Started"|"Stopped",
+#'     CurrentSamplingPercentage = 123,
+#'     DestinationS3Uri = "string",
+#'     KmsKeyId = "string"
+#'   ),
+#'   EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed",
+#'   FailureReason = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastDeploymentConfig = list(
+#'     BlueGreenUpdatePolicy = list(
+#'       TrafficRoutingConfiguration = list(
+#'         Type = "ALL_AT_ONCE"|"CANARY",
+#'         WaitIntervalInSeconds = 123,
+#'         CanarySize = list(
+#'           Type = "INSTANCE_COUNT"|"CAPACITY_PERCENT",
+#'           Value = 123
+#'         )
+#'       ),
+#'       TerminationWaitInSeconds = 123,
+#'       MaximumExecutionTimeoutInSeconds = 123
+#'     ),
+#'     AutoRollbackConfiguration = list(
+#'       Alarms = list(
+#'         list(
+#'           AlarmName = "string"
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_endpoint(
@@ -7504,12 +8937,54 @@ sagemaker_describe_endpoint <- function(EndpointName) {
 #'
 #' @description
 #' Returns the description of an endpoint configuration created using the
-#' `CreateEndpointConfig` API.
+#' [`create_endpoint_config`][sagemaker_create_endpoint_config] API.
 #'
 #' @usage
 #' sagemaker_describe_endpoint_config(EndpointConfigName)
 #'
 #' @param EndpointConfigName &#91;required&#93; The name of the endpoint configuration.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointConfigName = "string",
+#'   EndpointConfigArn = "string",
+#'   ProductionVariants = list(
+#'     list(
+#'       VariantName = "string",
+#'       ModelName = "string",
+#'       InitialInstanceCount = 123,
+#'       InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge",
+#'       InitialVariantWeight = 123.0,
+#'       AcceleratorType = "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"
+#'     )
+#'   ),
+#'   DataCaptureConfig = list(
+#'     EnableCapture = TRUE|FALSE,
+#'     InitialSamplingPercentage = 123,
+#'     DestinationS3Uri = "string",
+#'     KmsKeyId = "string",
+#'     CaptureOptions = list(
+#'       list(
+#'         CaptureMode = "Input"|"Output"
+#'       )
+#'     ),
+#'     CaptureContentTypeHeader = list(
+#'       CsvContentTypes = list(
+#'         "string"
+#'       ),
+#'       JsonContentTypes = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   KmsKeyId = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7547,6 +9022,37 @@ sagemaker_describe_endpoint_config <- function(EndpointConfigName) {
 #' sagemaker_describe_experiment(ExperimentName)
 #'
 #' @param ExperimentName &#91;required&#93; The name of the experiment to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExperimentName = "string",
+#'   ExperimentArn = "string",
+#'   DisplayName = "string",
+#'   Source = list(
+#'     SourceArn = "string",
+#'     SourceType = "string"
+#'   ),
+#'   Description = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7589,6 +9095,53 @@ sagemaker_describe_experiment <- function(ExperimentName) {
 #' @param NextToken A token to resume pagination of the list of `Features`
 #' (`FeatureDefinitions`). 2,500 `Features` are returned by default.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FeatureGroupArn = "string",
+#'   FeatureGroupName = "string",
+#'   RecordIdentifierFeatureName = "string",
+#'   EventTimeFeatureName = "string",
+#'   FeatureDefinitions = list(
+#'     list(
+#'       FeatureName = "string",
+#'       FeatureType = "Integral"|"Fractional"|"String"
+#'     )
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   OnlineStoreConfig = list(
+#'     SecurityConfig = list(
+#'       KmsKeyId = "string"
+#'     ),
+#'     EnableOnlineStore = TRUE|FALSE
+#'   ),
+#'   OfflineStoreConfig = list(
+#'     S3StorageConfig = list(
+#'       S3Uri = "string",
+#'       KmsKeyId = "string"
+#'     ),
+#'     DisableGlueTableCreation = TRUE|FALSE,
+#'     DataCatalogConfig = list(
+#'       TableName = "string",
+#'       Catalog = "string",
+#'       Database = "string"
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   FeatureGroupStatus = "Creating"|"Created"|"CreateFailed"|"Deleting"|"DeleteFailed",
+#'   OfflineStoreStatus = list(
+#'     Status = "Active"|"Blocked"|"Disabled",
+#'     BlockedReason = "string"
+#'   ),
+#'   FailureReason = "string",
+#'   Description = "string",
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_feature_group(
@@ -7626,6 +9179,52 @@ sagemaker_describe_feature_group <- function(FeatureGroupName, NextToken = NULL)
 #' sagemaker_describe_flow_definition(FlowDefinitionName)
 #'
 #' @param FlowDefinitionName &#91;required&#93; The name of the flow definition.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FlowDefinitionArn = "string",
+#'   FlowDefinitionName = "string",
+#'   FlowDefinitionStatus = "Initializing"|"Active"|"Failed"|"Deleting",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   HumanLoopRequestSource = list(
+#'     AwsManagedHumanLoopRequestSource = "AWS/Rekognition/DetectModerationLabels/Image/V3"|"AWS/Textract/AnalyzeDocument/Forms/V1"
+#'   ),
+#'   HumanLoopActivationConfig = list(
+#'     HumanLoopActivationConditionsConfig = list(
+#'       HumanLoopActivationConditions = "string"
+#'     )
+#'   ),
+#'   HumanLoopConfig = list(
+#'     WorkteamArn = "string",
+#'     HumanTaskUiArn = "string",
+#'     TaskTitle = "string",
+#'     TaskDescription = "string",
+#'     TaskCount = 123,
+#'     TaskAvailabilityLifetimeInSeconds = 123,
+#'     TaskTimeLimitInSeconds = 123,
+#'     TaskKeywords = list(
+#'       "string"
+#'     ),
+#'     PublicWorkforceTaskPrice = list(
+#'       AmountInUsd = list(
+#'         Dollars = 123,
+#'         Cents = 123,
+#'         TenthFractionsOfACent = 123
+#'       )
+#'     )
+#'   ),
+#'   OutputConfig = list(
+#'     S3OutputPath = "string",
+#'     KmsKeyId = "string"
+#'   ),
+#'   RoleArn = "string",
+#'   FailureReason = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7667,6 +9266,23 @@ sagemaker_describe_flow_definition <- function(FlowDefinitionName) {
 #' @param HumanTaskUiName &#91;required&#93; The name of the human task user interface (worker task template) you
 #' want information about.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HumanTaskUiArn = "string",
+#'   HumanTaskUiName = "string",
+#'   HumanTaskUiStatus = "Active"|"Deleting",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   UiTemplate = list(
+#'     Url = "string",
+#'     ContentSha256 = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_human_task_ui(
@@ -7705,6 +9321,351 @@ sagemaker_describe_human_task_ui <- function(HumanTaskUiName) {
 #'
 #' @param HyperParameterTuningJobName &#91;required&#93; The name of the tuning job.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HyperParameterTuningJobName = "string",
+#'   HyperParameterTuningJobArn = "string",
+#'   HyperParameterTuningJobConfig = list(
+#'     Strategy = "Bayesian"|"Random",
+#'     HyperParameterTuningJobObjective = list(
+#'       Type = "Maximize"|"Minimize",
+#'       MetricName = "string"
+#'     ),
+#'     ResourceLimits = list(
+#'       MaxNumberOfTrainingJobs = 123,
+#'       MaxParallelTrainingJobs = 123
+#'     ),
+#'     ParameterRanges = list(
+#'       IntegerParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           MinValue = "string",
+#'           MaxValue = "string",
+#'           ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'         )
+#'       ),
+#'       ContinuousParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           MinValue = "string",
+#'           MaxValue = "string",
+#'           ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'         )
+#'       ),
+#'       CategoricalParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           Values = list(
+#'             "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     TrainingJobEarlyStoppingType = "Off"|"Auto",
+#'     TuningJobCompletionCriteria = list(
+#'       TargetObjectiveMetricValue = 123.0
+#'     )
+#'   ),
+#'   TrainingJobDefinition = list(
+#'     DefinitionName = "string",
+#'     TuningObjective = list(
+#'       Type = "Maximize"|"Minimize",
+#'       MetricName = "string"
+#'     ),
+#'     HyperParameterRanges = list(
+#'       IntegerParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           MinValue = "string",
+#'           MaxValue = "string",
+#'           ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'         )
+#'       ),
+#'       ContinuousParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           MinValue = "string",
+#'           MaxValue = "string",
+#'           ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'         )
+#'       ),
+#'       CategoricalParameterRanges = list(
+#'         list(
+#'           Name = "string",
+#'           Values = list(
+#'             "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     StaticHyperParameters = list(
+#'       "string"
+#'     ),
+#'     AlgorithmSpecification = list(
+#'       TrainingImage = "string",
+#'       TrainingInputMode = "Pipe"|"File",
+#'       AlgorithmName = "string",
+#'       MetricDefinitions = list(
+#'         list(
+#'           Name = "string",
+#'           Regex = "string"
+#'         )
+#'       )
+#'     ),
+#'     RoleArn = "string",
+#'     InputDataConfig = list(
+#'       list(
+#'         ChannelName = "string",
+#'         DataSource = list(
+#'           S3DataSource = list(
+#'             S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'             S3Uri = "string",
+#'             S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'             AttributeNames = list(
+#'               "string"
+#'             )
+#'           ),
+#'           FileSystemDataSource = list(
+#'             FileSystemId = "string",
+#'             FileSystemAccessMode = "rw"|"ro",
+#'             FileSystemType = "EFS"|"FSxLustre",
+#'             DirectoryPath = "string"
+#'           )
+#'         ),
+#'         ContentType = "string",
+#'         CompressionType = "None"|"Gzip",
+#'         RecordWrapperType = "None"|"RecordIO",
+#'         InputMode = "Pipe"|"File",
+#'         ShuffleConfig = list(
+#'           Seed = 123
+#'         )
+#'       )
+#'     ),
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     ),
+#'     OutputDataConfig = list(
+#'       KmsKeyId = "string",
+#'       S3OutputPath = "string"
+#'     ),
+#'     ResourceConfig = list(
+#'       InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'       InstanceCount = 123,
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     ),
+#'     StoppingCondition = list(
+#'       MaxRuntimeInSeconds = 123,
+#'       MaxWaitTimeInSeconds = 123
+#'     ),
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableManagedSpotTraining = TRUE|FALSE,
+#'     CheckpointConfig = list(
+#'       S3Uri = "string",
+#'       LocalPath = "string"
+#'     )
+#'   ),
+#'   TrainingJobDefinitions = list(
+#'     list(
+#'       DefinitionName = "string",
+#'       TuningObjective = list(
+#'         Type = "Maximize"|"Minimize",
+#'         MetricName = "string"
+#'       ),
+#'       HyperParameterRanges = list(
+#'         IntegerParameterRanges = list(
+#'           list(
+#'             Name = "string",
+#'             MinValue = "string",
+#'             MaxValue = "string",
+#'             ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'           )
+#'         ),
+#'         ContinuousParameterRanges = list(
+#'           list(
+#'             Name = "string",
+#'             MinValue = "string",
+#'             MaxValue = "string",
+#'             ScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"
+#'           )
+#'         ),
+#'         CategoricalParameterRanges = list(
+#'           list(
+#'             Name = "string",
+#'             Values = list(
+#'               "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       StaticHyperParameters = list(
+#'         "string"
+#'       ),
+#'       AlgorithmSpecification = list(
+#'         TrainingImage = "string",
+#'         TrainingInputMode = "Pipe"|"File",
+#'         AlgorithmName = "string",
+#'         MetricDefinitions = list(
+#'           list(
+#'             Name = "string",
+#'             Regex = "string"
+#'           )
+#'         )
+#'       ),
+#'       RoleArn = "string",
+#'       InputDataConfig = list(
+#'         list(
+#'           ChannelName = "string",
+#'           DataSource = list(
+#'             S3DataSource = list(
+#'               S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'               S3Uri = "string",
+#'               S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'               AttributeNames = list(
+#'                 "string"
+#'               )
+#'             ),
+#'             FileSystemDataSource = list(
+#'               FileSystemId = "string",
+#'               FileSystemAccessMode = "rw"|"ro",
+#'               FileSystemType = "EFS"|"FSxLustre",
+#'               DirectoryPath = "string"
+#'             )
+#'           ),
+#'           ContentType = "string",
+#'           CompressionType = "None"|"Gzip",
+#'           RecordWrapperType = "None"|"RecordIO",
+#'           InputMode = "Pipe"|"File",
+#'           ShuffleConfig = list(
+#'             Seed = 123
+#'           )
+#'         )
+#'       ),
+#'       VpcConfig = list(
+#'         SecurityGroupIds = list(
+#'           "string"
+#'         ),
+#'         Subnets = list(
+#'           "string"
+#'         )
+#'       ),
+#'       OutputDataConfig = list(
+#'         KmsKeyId = "string",
+#'         S3OutputPath = "string"
+#'       ),
+#'       ResourceConfig = list(
+#'         InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'         InstanceCount = 123,
+#'         VolumeSizeInGB = 123,
+#'         VolumeKmsKeyId = "string"
+#'       ),
+#'       StoppingCondition = list(
+#'         MaxRuntimeInSeconds = 123,
+#'         MaxWaitTimeInSeconds = 123
+#'       ),
+#'       EnableNetworkIsolation = TRUE|FALSE,
+#'       EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'       EnableManagedSpotTraining = TRUE|FALSE,
+#'       CheckpointConfig = list(
+#'         S3Uri = "string",
+#'         LocalPath = "string"
+#'       )
+#'     )
+#'   ),
+#'   HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   HyperParameterTuningEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TrainingJobStatusCounters = list(
+#'     Completed = 123,
+#'     InProgress = 123,
+#'     RetryableError = 123,
+#'     NonRetryableError = 123,
+#'     Stopped = 123
+#'   ),
+#'   ObjectiveStatusCounters = list(
+#'     Succeeded = 123,
+#'     Pending = 123,
+#'     Failed = 123
+#'   ),
+#'   BestTrainingJob = list(
+#'     TrainingJobDefinitionName = "string",
+#'     TrainingJobName = "string",
+#'     TrainingJobArn = "string",
+#'     TuningJobName = "string",
+#'     CreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingEndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'     TunedHyperParameters = list(
+#'       "string"
+#'     ),
+#'     FailureReason = "string",
+#'     FinalHyperParameterTuningJobObjectiveMetric = list(
+#'       Type = "Maximize"|"Minimize",
+#'       MetricName = "string",
+#'       Value = 123.0
+#'     ),
+#'     ObjectiveStatus = "Succeeded"|"Pending"|"Failed"
+#'   ),
+#'   OverallBestTrainingJob = list(
+#'     TrainingJobDefinitionName = "string",
+#'     TrainingJobName = "string",
+#'     TrainingJobArn = "string",
+#'     TuningJobName = "string",
+#'     CreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingStartTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingEndTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'     TunedHyperParameters = list(
+#'       "string"
+#'     ),
+#'     FailureReason = "string",
+#'     FinalHyperParameterTuningJobObjectiveMetric = list(
+#'       Type = "Maximize"|"Minimize",
+#'       MetricName = "string",
+#'       Value = 123.0
+#'     ),
+#'     ObjectiveStatus = "Succeeded"|"Pending"|"Failed"
+#'   ),
+#'   WarmStartConfig = list(
+#'     ParentHyperParameterTuningJobs = list(
+#'       list(
+#'         HyperParameterTuningJobName = "string"
+#'       )
+#'     ),
+#'     WarmStartType = "IdenticalDataAndAlgorithm"|"TransferLearning"
+#'   ),
+#'   FailureReason = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_hyper_parameter_tuning_job(
@@ -7741,6 +9702,26 @@ sagemaker_describe_hyper_parameter_tuning_job <- function(HyperParameterTuningJo
 #' sagemaker_describe_image(ImageName)
 #'
 #' @param ImageName &#91;required&#93; The name of the image to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   Description = "string",
+#'   DisplayName = "string",
+#'   FailureReason = "string",
+#'   ImageArn = "string",
+#'   ImageName = "string",
+#'   ImageStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED",
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   RoleArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7781,6 +9762,26 @@ sagemaker_describe_image <- function(ImageName) {
 #' @param Version The version of the image. If not specified, the latest version is
 #' described.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   BaseImage = "string",
+#'   ContainerImage = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   ImageArn = "string",
+#'   ImageVersionArn = "string",
+#'   ImageVersionStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED",
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   Version = 123
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_image_version(
@@ -7819,6 +9820,102 @@ sagemaker_describe_image_version <- function(ImageName, Version = NULL) {
 #'
 #' @param LabelingJobName &#91;required&#93; The name of the labeling job to return information for.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LabelingJobStatus = "Initializing"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'   LabelCounters = list(
+#'     TotalLabeled = 123,
+#'     HumanLabeled = 123,
+#'     MachineLabeled = 123,
+#'     FailedNonRetryableError = 123,
+#'     Unlabeled = 123
+#'   ),
+#'   FailureReason = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   JobReferenceCode = "string",
+#'   LabelingJobName = "string",
+#'   LabelingJobArn = "string",
+#'   LabelAttributeName = "string",
+#'   InputConfig = list(
+#'     DataSource = list(
+#'       S3DataSource = list(
+#'         ManifestS3Uri = "string"
+#'       ),
+#'       SnsDataSource = list(
+#'         SnsTopicArn = "string"
+#'       )
+#'     ),
+#'     DataAttributes = list(
+#'       ContentClassifiers = list(
+#'         "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"
+#'       )
+#'     )
+#'   ),
+#'   OutputConfig = list(
+#'     S3OutputPath = "string",
+#'     KmsKeyId = "string",
+#'     SnsTopicArn = "string"
+#'   ),
+#'   RoleArn = "string",
+#'   LabelCategoryConfigS3Uri = "string",
+#'   StoppingConditions = list(
+#'     MaxHumanLabeledObjectCount = 123,
+#'     MaxPercentageOfInputDatasetLabeled = 123
+#'   ),
+#'   LabelingJobAlgorithmsConfig = list(
+#'     LabelingJobAlgorithmSpecificationArn = "string",
+#'     InitialActiveLearningModelArn = "string",
+#'     LabelingJobResourceConfig = list(
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   HumanTaskConfig = list(
+#'     WorkteamArn = "string",
+#'     UiConfig = list(
+#'       UiTemplateS3Uri = "string",
+#'       HumanTaskUiArn = "string"
+#'     ),
+#'     PreHumanTaskLambdaArn = "string",
+#'     TaskKeywords = list(
+#'       "string"
+#'     ),
+#'     TaskTitle = "string",
+#'     TaskDescription = "string",
+#'     NumberOfHumanWorkersPerDataObject = 123,
+#'     TaskTimeLimitInSeconds = 123,
+#'     TaskAvailabilityLifetimeInSeconds = 123,
+#'     MaxConcurrentTaskCount = 123,
+#'     AnnotationConsolidationConfig = list(
+#'       AnnotationConsolidationLambdaArn = "string"
+#'     ),
+#'     PublicWorkforceTaskPrice = list(
+#'       AmountInUsd = list(
+#'         Dollars = 123,
+#'         Cents = 123,
+#'         TenthFractionsOfACent = 123
+#'       )
+#'     )
+#'   ),
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   LabelingJobOutput = list(
+#'     OutputDatasetS3Uri = "string",
+#'     FinalActiveLearningModelArn = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_labeling_job(
@@ -7849,12 +9946,63 @@ sagemaker_describe_labeling_job <- function(LabelingJobName) {
 #' Describes a model that you created using the CreateModel API
 #'
 #' @description
-#' Describes a model that you created using the `CreateModel` API.
+#' Describes a model that you created using the
+#' [`create_model`][sagemaker_create_model] API.
 #'
 #' @usage
 #' sagemaker_describe_model(ModelName)
 #'
 #' @param ModelName &#91;required&#93; The name of the model.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelName = "string",
+#'   PrimaryContainer = list(
+#'     ContainerHostname = "string",
+#'     Image = "string",
+#'     ImageConfig = list(
+#'       RepositoryAccessMode = "Platform"|"Vpc"
+#'     ),
+#'     Mode = "SingleModel"|"MultiModel",
+#'     ModelDataUrl = "string",
+#'     Environment = list(
+#'       "string"
+#'     ),
+#'     ModelPackageName = "string"
+#'   ),
+#'   Containers = list(
+#'     list(
+#'       ContainerHostname = "string",
+#'       Image = "string",
+#'       ImageConfig = list(
+#'         RepositoryAccessMode = "Platform"|"Vpc"
+#'       ),
+#'       Mode = "SingleModel"|"MultiModel",
+#'       ModelDataUrl = "string",
+#'       Environment = list(
+#'         "string"
+#'       ),
+#'       ModelPackageName = "string"
+#'     )
+#'   ),
+#'   ExecutionRoleArn = "string",
+#'   VpcConfig = list(
+#'     SecurityGroupIds = list(
+#'       "string"
+#'     ),
+#'     Subnets = list(
+#'       "string"
+#'     )
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ModelArn = "string",
+#'   EnableNetworkIsolation = TRUE|FALSE
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7894,6 +10042,84 @@ sagemaker_describe_model <- function(ModelName) {
 #' @param JobDefinitionName &#91;required&#93; The name of the model bias job definition. The name must be unique
 #' within an AWS Region in the AWS account.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string",
+#'   JobDefinitionName = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ModelBiasBaselineConfig = list(
+#'     BaseliningJobName = "string",
+#'     ConstraintsResource = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   ModelBiasAppSpecification = list(
+#'     ImageUri = "string",
+#'     ConfigUri = "string",
+#'     Environment = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ModelBiasJobInput = list(
+#'     EndpointInput = list(
+#'       EndpointName = "string",
+#'       LocalPath = "string",
+#'       S3InputMode = "Pipe"|"File",
+#'       S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'       FeaturesAttribute = "string",
+#'       InferenceAttribute = "string",
+#'       ProbabilityAttribute = "string",
+#'       ProbabilityThresholdAttribute = 123.0,
+#'       StartTimeOffset = "string",
+#'       EndTimeOffset = "string"
+#'     ),
+#'     GroundTruthS3Input = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   ModelBiasJobOutputConfig = list(
+#'     MonitoringOutputs = list(
+#'       list(
+#'         S3Output = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string",
+#'           S3UploadMode = "Continuous"|"EndOfJob"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string"
+#'   ),
+#'   JobResources = list(
+#'     ClusterConfig = list(
+#'       InstanceCount = 123,
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   NetworkConfig = list(
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_model_bias_job_definition(
@@ -7932,6 +10158,81 @@ sagemaker_describe_model_bias_job_definition <- function(JobDefinitionName) {
 #'
 #' @param JobDefinitionName &#91;required&#93; The name of the model explainability job definition. The name must be
 #' unique within an AWS Region in the AWS account.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string",
+#'   JobDefinitionName = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ModelExplainabilityBaselineConfig = list(
+#'     BaseliningJobName = "string",
+#'     ConstraintsResource = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   ModelExplainabilityAppSpecification = list(
+#'     ImageUri = "string",
+#'     ConfigUri = "string",
+#'     Environment = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ModelExplainabilityJobInput = list(
+#'     EndpointInput = list(
+#'       EndpointName = "string",
+#'       LocalPath = "string",
+#'       S3InputMode = "Pipe"|"File",
+#'       S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'       FeaturesAttribute = "string",
+#'       InferenceAttribute = "string",
+#'       ProbabilityAttribute = "string",
+#'       ProbabilityThresholdAttribute = 123.0,
+#'       StartTimeOffset = "string",
+#'       EndTimeOffset = "string"
+#'     )
+#'   ),
+#'   ModelExplainabilityJobOutputConfig = list(
+#'     MonitoringOutputs = list(
+#'       list(
+#'         S3Output = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string",
+#'           S3UploadMode = "Continuous"|"EndOfJob"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string"
+#'   ),
+#'   JobResources = list(
+#'     ClusterConfig = list(
+#'       InstanceCount = 123,
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   NetworkConfig = list(
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -7975,6 +10276,169 @@ sagemaker_describe_model_explainability_job_definition <- function(JobDefinition
 #'
 #' @param ModelPackageName &#91;required&#93; The name of the model package to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageName = "string",
+#'   ModelPackageGroupName = "string",
+#'   ModelPackageVersion = 123,
+#'   ModelPackageArn = "string",
+#'   ModelPackageDescription = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   InferenceSpecification = list(
+#'     Containers = list(
+#'       list(
+#'         ContainerHostname = "string",
+#'         Image = "string",
+#'         ImageDigest = "string",
+#'         ModelDataUrl = "string",
+#'         ProductId = "string"
+#'       )
+#'     ),
+#'     SupportedTransformInstanceTypes = list(
+#'       "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"
+#'     ),
+#'     SupportedRealtimeInferenceInstanceTypes = list(
+#'       "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"
+#'     ),
+#'     SupportedContentTypes = list(
+#'       "string"
+#'     ),
+#'     SupportedResponseMIMETypes = list(
+#'       "string"
+#'     )
+#'   ),
+#'   SourceAlgorithmSpecification = list(
+#'     SourceAlgorithms = list(
+#'       list(
+#'         ModelDataUrl = "string",
+#'         AlgorithmName = "string"
+#'       )
+#'     )
+#'   ),
+#'   ValidationSpecification = list(
+#'     ValidationRole = "string",
+#'     ValidationProfiles = list(
+#'       list(
+#'         ProfileName = "string",
+#'         TransformJobDefinition = list(
+#'           MaxConcurrentTransforms = 123,
+#'           MaxPayloadInMB = 123,
+#'           BatchStrategy = "MultiRecord"|"SingleRecord",
+#'           Environment = list(
+#'             "string"
+#'           ),
+#'           TransformInput = list(
+#'             DataSource = list(
+#'               S3DataSource = list(
+#'                 S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                 S3Uri = "string"
+#'               )
+#'             ),
+#'             ContentType = "string",
+#'             CompressionType = "None"|"Gzip",
+#'             SplitType = "None"|"Line"|"RecordIO"|"TFRecord"
+#'           ),
+#'           TransformOutput = list(
+#'             S3OutputPath = "string",
+#'             Accept = "string",
+#'             AssembleWith = "None"|"Line",
+#'             KmsKeyId = "string"
+#'           ),
+#'           TransformResources = list(
+#'             InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge",
+#'             InstanceCount = 123,
+#'             VolumeKmsKeyId = "string"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting",
+#'   ModelPackageStatusDetails = list(
+#'     ValidationStatuses = list(
+#'       list(
+#'         Name = "string",
+#'         Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'         FailureReason = "string"
+#'       )
+#'     ),
+#'     ImageScanStatuses = list(
+#'       list(
+#'         Name = "string",
+#'         Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'         FailureReason = "string"
+#'       )
+#'     )
+#'   ),
+#'   CertifyForMarketplace = TRUE|FALSE,
+#'   ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval",
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   MetadataProperties = list(
+#'     CommitId = "string",
+#'     Repository = "string",
+#'     GeneratedBy = "string",
+#'     ProjectId = "string"
+#'   ),
+#'   ModelMetrics = list(
+#'     ModelQuality = list(
+#'       Statistics = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       ),
+#'       Constraints = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       )
+#'     ),
+#'     ModelDataQuality = list(
+#'       Statistics = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       ),
+#'       Constraints = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       )
+#'     ),
+#'     Bias = list(
+#'       Report = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       )
+#'     ),
+#'     Explainability = list(
+#'       Report = list(
+#'         ContentType = "string",
+#'         ContentDigest = "string",
+#'         S3Uri = "string"
+#'       )
+#'     )
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   ApprovalDescription = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_model_package(
@@ -8011,6 +10475,25 @@ sagemaker_describe_model_package <- function(ModelPackageName) {
 #' sagemaker_describe_model_package_group(ModelPackageGroupName)
 #'
 #' @param ModelPackageGroupName &#91;required&#93; The name of the model group to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageGroupName = "string",
+#'   ModelPackageGroupArn = "string",
+#'   ModelPackageGroupDescription = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   ModelPackageGroupStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|"DeleteFailed"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8050,6 +10533,92 @@ sagemaker_describe_model_package_group <- function(ModelPackageGroupName) {
 #' @param JobDefinitionName &#91;required&#93; The name of the model quality job. The name must be unique within an AWS
 #' Region in the AWS account.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionArn = "string",
+#'   JobDefinitionName = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ModelQualityBaselineConfig = list(
+#'     BaseliningJobName = "string",
+#'     ConstraintsResource = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   ModelQualityAppSpecification = list(
+#'     ImageUri = "string",
+#'     ContainerEntrypoint = list(
+#'       "string"
+#'     ),
+#'     ContainerArguments = list(
+#'       "string"
+#'     ),
+#'     RecordPreprocessorSourceUri = "string",
+#'     PostAnalyticsProcessorSourceUri = "string",
+#'     ProblemType = "BinaryClassification"|"MulticlassClassification"|"Regression",
+#'     Environment = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ModelQualityJobInput = list(
+#'     EndpointInput = list(
+#'       EndpointName = "string",
+#'       LocalPath = "string",
+#'       S3InputMode = "Pipe"|"File",
+#'       S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'       FeaturesAttribute = "string",
+#'       InferenceAttribute = "string",
+#'       ProbabilityAttribute = "string",
+#'       ProbabilityThresholdAttribute = 123.0,
+#'       StartTimeOffset = "string",
+#'       EndTimeOffset = "string"
+#'     ),
+#'     GroundTruthS3Input = list(
+#'       S3Uri = "string"
+#'     )
+#'   ),
+#'   ModelQualityJobOutputConfig = list(
+#'     MonitoringOutputs = list(
+#'       list(
+#'         S3Output = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string",
+#'           S3UploadMode = "Continuous"|"EndOfJob"
+#'         )
+#'       )
+#'     ),
+#'     KmsKeyId = "string"
+#'   ),
+#'   JobResources = list(
+#'     ClusterConfig = list(
+#'       InstanceCount = 123,
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   NetworkConfig = list(
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_model_quality_job_definition(
@@ -8087,6 +10656,127 @@ sagemaker_describe_model_quality_job_definition <- function(JobDefinitionName) {
 #'
 #' @param MonitoringScheduleName &#91;required&#93; Name of a previously created monitoring schedule.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MonitoringScheduleArn = "string",
+#'   MonitoringScheduleName = "string",
+#'   MonitoringScheduleStatus = "Pending"|"Failed"|"Scheduled"|"Stopped",
+#'   MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability",
+#'   FailureReason = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   MonitoringScheduleConfig = list(
+#'     ScheduleConfig = list(
+#'       ScheduleExpression = "string"
+#'     ),
+#'     MonitoringJobDefinition = list(
+#'       BaselineConfig = list(
+#'         BaseliningJobName = "string",
+#'         ConstraintsResource = list(
+#'           S3Uri = "string"
+#'         ),
+#'         StatisticsResource = list(
+#'           S3Uri = "string"
+#'         )
+#'       ),
+#'       MonitoringInputs = list(
+#'         list(
+#'           EndpointInput = list(
+#'             EndpointName = "string",
+#'             LocalPath = "string",
+#'             S3InputMode = "Pipe"|"File",
+#'             S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'             FeaturesAttribute = "string",
+#'             InferenceAttribute = "string",
+#'             ProbabilityAttribute = "string",
+#'             ProbabilityThresholdAttribute = 123.0,
+#'             StartTimeOffset = "string",
+#'             EndTimeOffset = "string"
+#'           )
+#'         )
+#'       ),
+#'       MonitoringOutputConfig = list(
+#'         MonitoringOutputs = list(
+#'           list(
+#'             S3Output = list(
+#'               S3Uri = "string",
+#'               LocalPath = "string",
+#'               S3UploadMode = "Continuous"|"EndOfJob"
+#'             )
+#'           )
+#'         ),
+#'         KmsKeyId = "string"
+#'       ),
+#'       MonitoringResources = list(
+#'         ClusterConfig = list(
+#'           InstanceCount = 123,
+#'           InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'           VolumeSizeInGB = 123,
+#'           VolumeKmsKeyId = "string"
+#'         )
+#'       ),
+#'       MonitoringAppSpecification = list(
+#'         ImageUri = "string",
+#'         ContainerEntrypoint = list(
+#'           "string"
+#'         ),
+#'         ContainerArguments = list(
+#'           "string"
+#'         ),
+#'         RecordPreprocessorSourceUri = "string",
+#'         PostAnalyticsProcessorSourceUri = "string"
+#'       ),
+#'       StoppingCondition = list(
+#'         MaxRuntimeInSeconds = 123
+#'       ),
+#'       Environment = list(
+#'         "string"
+#'       ),
+#'       NetworkConfig = list(
+#'         EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'         EnableNetworkIsolation = TRUE|FALSE,
+#'         VpcConfig = list(
+#'           SecurityGroupIds = list(
+#'             "string"
+#'           ),
+#'           Subnets = list(
+#'             "string"
+#'           )
+#'         )
+#'       ),
+#'       RoleArn = "string"
+#'     ),
+#'     MonitoringJobDefinitionName = "string",
+#'     MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'   ),
+#'   EndpointName = "string",
+#'   LastMonitoringExecutionSummary = list(
+#'     MonitoringScheduleName = "string",
+#'     ScheduledTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     CreationTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastModifiedTime = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     MonitoringExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped",
+#'     ProcessingJobArn = "string",
+#'     EndpointName = "string",
+#'     FailureReason = "string",
+#'     MonitoringJobDefinitionName = "string",
+#'     MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_monitoring_schedule(
@@ -8123,6 +10813,43 @@ sagemaker_describe_monitoring_schedule <- function(MonitoringScheduleName) {
 #' sagemaker_describe_notebook_instance(NotebookInstanceName)
 #'
 #' @param NotebookInstanceName &#91;required&#93; The name of the notebook instance that you want information about.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NotebookInstanceArn = "string",
+#'   NotebookInstanceName = "string",
+#'   NotebookInstanceStatus = "Pending"|"InService"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Updating",
+#'   FailureReason = "string",
+#'   Url = "string",
+#'   InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge",
+#'   SubnetId = "string",
+#'   SecurityGroups = list(
+#'     "string"
+#'   ),
+#'   RoleArn = "string",
+#'   KmsKeyId = "string",
+#'   NetworkInterfaceId = "string",
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   NotebookInstanceLifecycleConfigName = "string",
+#'   DirectInternetAccess = "Enabled"|"Disabled",
+#'   VolumeSizeInGB = 123,
+#'   AcceleratorTypes = list(
+#'     "ml.eia1.medium"|"ml.eia1.large"|"ml.eia1.xlarge"|"ml.eia2.medium"|"ml.eia2.large"|"ml.eia2.xlarge"
+#'   ),
+#'   DefaultCodeRepository = "string",
+#'   AdditionalCodeRepositories = list(
+#'     "string"
+#'   ),
+#'   RootAccess = "Enabled"|"Disabled"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8166,6 +10893,31 @@ sagemaker_describe_notebook_instance <- function(NotebookInstanceName) {
 #'
 #' @param NotebookInstanceLifecycleConfigName &#91;required&#93; The name of the lifecycle configuration to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NotebookInstanceLifecycleConfigArn = "string",
+#'   NotebookInstanceLifecycleConfigName = "string",
+#'   OnCreate = list(
+#'     list(
+#'       Content = "string"
+#'     )
+#'   ),
+#'   OnStart = list(
+#'     list(
+#'       Content = "string"
+#'     )
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_notebook_instance_lifecycle_config(
@@ -8202,6 +10954,39 @@ sagemaker_describe_notebook_instance_lifecycle_config <- function(NotebookInstan
 #' sagemaker_describe_pipeline(PipelineName)
 #'
 #' @param PipelineName &#91;required&#93; The name of the pipeline to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineArn = "string",
+#'   PipelineName = "string",
+#'   PipelineDisplayName = "string",
+#'   PipelineDefinition = "string",
+#'   PipelineDescription = "string",
+#'   RoleArn = "string",
+#'   PipelineStatus = "Active",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastRunTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8241,6 +11026,17 @@ sagemaker_describe_pipeline <- function(PipelineName) {
 #'
 #' @param PipelineExecutionArn &#91;required&#93; The Amazon Resource Name (ARN) of the pipeline execution.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineDefinition = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_pipeline_definition_for_execution(
@@ -8277,6 +11073,34 @@ sagemaker_describe_pipeline_definition_for_execution <- function(PipelineExecuti
 #' sagemaker_describe_pipeline_execution(PipelineExecutionArn)
 #'
 #' @param PipelineExecutionArn &#91;required&#93; The Amazon Resource Name (ARN) of the pipeline execution.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineArn = "string",
+#'   PipelineExecutionArn = "string",
+#'   PipelineExecutionDisplayName = "string",
+#'   PipelineExecutionStatus = "Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded",
+#'   PipelineExecutionDescription = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8316,6 +11140,131 @@ sagemaker_describe_pipeline_execution <- function(PipelineExecutionArn) {
 #' @param ProcessingJobName &#91;required&#93; The name of the processing job. The name must be unique within an AWS
 #' Region in the AWS account.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProcessingInputs = list(
+#'     list(
+#'       InputName = "string",
+#'       AppManaged = TRUE|FALSE,
+#'       S3Input = list(
+#'         S3Uri = "string",
+#'         LocalPath = "string",
+#'         S3DataType = "ManifestFile"|"S3Prefix",
+#'         S3InputMode = "Pipe"|"File",
+#'         S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'         S3CompressionType = "None"|"Gzip"
+#'       ),
+#'       DatasetDefinition = list(
+#'         AthenaDatasetDefinition = list(
+#'           Catalog = "string",
+#'           Database = "string",
+#'           QueryString = "string",
+#'           WorkGroup = "string",
+#'           OutputS3Uri = "string",
+#'           KmsKeyId = "string",
+#'           OutputFormat = "PARQUET"|"ORC"|"AVRO"|"JSON"|"TEXTFILE",
+#'           OutputCompression = "GZIP"|"SNAPPY"|"ZLIB"
+#'         ),
+#'         RedshiftDatasetDefinition = list(
+#'           ClusterId = "string",
+#'           Database = "string",
+#'           DbUser = "string",
+#'           QueryString = "string",
+#'           ClusterRoleArn = "string",
+#'           OutputS3Uri = "string",
+#'           KmsKeyId = "string",
+#'           OutputFormat = "PARQUET"|"CSV",
+#'           OutputCompression = "None"|"GZIP"|"BZIP2"|"ZSTD"|"SNAPPY"
+#'         ),
+#'         LocalPath = "string",
+#'         DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'         InputMode = "Pipe"|"File"
+#'       )
+#'     )
+#'   ),
+#'   ProcessingOutputConfig = list(
+#'     Outputs = list(
+#'       list(
+#'         OutputName = "string",
+#'         S3Output = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string",
+#'           S3UploadMode = "Continuous"|"EndOfJob"
+#'         ),
+#'         FeatureStoreOutput = list(
+#'           FeatureGroupName = "string"
+#'         ),
+#'         AppManaged = TRUE|FALSE
+#'       )
+#'     ),
+#'     KmsKeyId = "string"
+#'   ),
+#'   ProcessingJobName = "string",
+#'   ProcessingResources = list(
+#'     ClusterConfig = list(
+#'       InstanceCount = 123,
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       VolumeKmsKeyId = "string"
+#'     )
+#'   ),
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123
+#'   ),
+#'   AppSpecification = list(
+#'     ImageUri = "string",
+#'     ContainerEntrypoint = list(
+#'       "string"
+#'     ),
+#'     ContainerArguments = list(
+#'       "string"
+#'     )
+#'   ),
+#'   Environment = list(
+#'     "string"
+#'   ),
+#'   NetworkConfig = list(
+#'     EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'     EnableNetworkIsolation = TRUE|FALSE,
+#'     VpcConfig = list(
+#'       SecurityGroupIds = list(
+#'         "string"
+#'       ),
+#'       Subnets = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   RoleArn = "string",
+#'   ExperimentConfig = list(
+#'     ExperimentName = "string",
+#'     TrialName = "string",
+#'     TrialComponentDisplayName = "string"
+#'   ),
+#'   ProcessingJobArn = "string",
+#'   ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'   ExitMessage = "string",
+#'   FailureReason = "string",
+#'   ProcessingEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ProcessingStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   MonitoringScheduleArn = "string",
+#'   AutoMLJobArn = "string",
+#'   TrainingJobArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_processing_job(
@@ -8352,6 +11301,41 @@ sagemaker_describe_processing_job <- function(ProcessingJobName) {
 #' sagemaker_describe_project(ProjectName)
 #'
 #' @param ProjectName &#91;required&#93; The name of the project to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProjectArn = "string",
+#'   ProjectName = "string",
+#'   ProjectId = "string",
+#'   ProjectDescription = "string",
+#'   ServiceCatalogProvisioningDetails = list(
+#'     ProductId = "string",
+#'     ProvisioningArtifactId = "string",
+#'     PathId = "string",
+#'     ProvisioningParameters = list(
+#'       list(
+#'         Key = "string",
+#'         Value = "string"
+#'       )
+#'     )
+#'   ),
+#'   ServiceCatalogProvisionedProductDetails = list(
+#'     ProvisionedProductId = "string",
+#'     ProvisionedProductStatusMessage = "string"
+#'   ),
+#'   ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted",
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8391,6 +11375,20 @@ sagemaker_describe_project <- function(ProjectName) {
 #'
 #' @param WorkteamArn &#91;required&#93; The Amazon Resource Name (ARN) of the subscribed work team to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SubscribedWorkteam = list(
+#'     WorkteamArn = "string",
+#'     MarketplaceTitle = "string",
+#'     SellerName = "string",
+#'     MarketplaceDescription = "string",
+#'     ListingId = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_subscribed_workteam(
@@ -8427,6 +11425,212 @@ sagemaker_describe_subscribed_workteam <- function(WorkteamArn) {
 #' sagemaker_describe_training_job(TrainingJobName)
 #'
 #' @param TrainingJobName &#91;required&#93; The name of the training job.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrainingJobName = "string",
+#'   TrainingJobArn = "string",
+#'   TuningJobArn = "string",
+#'   LabelingJobArn = "string",
+#'   AutoMLJobArn = "string",
+#'   ModelArtifacts = list(
+#'     S3ModelArtifacts = "string"
+#'   ),
+#'   TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'   SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'   FailureReason = "string",
+#'   HyperParameters = list(
+#'     "string"
+#'   ),
+#'   AlgorithmSpecification = list(
+#'     TrainingImage = "string",
+#'     AlgorithmName = "string",
+#'     TrainingInputMode = "Pipe"|"File",
+#'     MetricDefinitions = list(
+#'       list(
+#'         Name = "string",
+#'         Regex = "string"
+#'       )
+#'     ),
+#'     EnableSageMakerMetricsTimeSeries = TRUE|FALSE
+#'   ),
+#'   RoleArn = "string",
+#'   InputDataConfig = list(
+#'     list(
+#'       ChannelName = "string",
+#'       DataSource = list(
+#'         S3DataSource = list(
+#'           S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'           S3Uri = "string",
+#'           S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'           AttributeNames = list(
+#'             "string"
+#'           )
+#'         ),
+#'         FileSystemDataSource = list(
+#'           FileSystemId = "string",
+#'           FileSystemAccessMode = "rw"|"ro",
+#'           FileSystemType = "EFS"|"FSxLustre",
+#'           DirectoryPath = "string"
+#'         )
+#'       ),
+#'       ContentType = "string",
+#'       CompressionType = "None"|"Gzip",
+#'       RecordWrapperType = "None"|"RecordIO",
+#'       InputMode = "Pipe"|"File",
+#'       ShuffleConfig = list(
+#'         Seed = 123
+#'       )
+#'     )
+#'   ),
+#'   OutputDataConfig = list(
+#'     KmsKeyId = "string",
+#'     S3OutputPath = "string"
+#'   ),
+#'   ResourceConfig = list(
+#'     InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'     InstanceCount = 123,
+#'     VolumeSizeInGB = 123,
+#'     VolumeKmsKeyId = "string"
+#'   ),
+#'   VpcConfig = list(
+#'     SecurityGroupIds = list(
+#'       "string"
+#'     ),
+#'     Subnets = list(
+#'       "string"
+#'     )
+#'   ),
+#'   StoppingCondition = list(
+#'     MaxRuntimeInSeconds = 123,
+#'     MaxWaitTimeInSeconds = 123
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TrainingStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TrainingEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   SecondaryStatusTransitions = list(
+#'     list(
+#'       Status = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       StatusMessage = "string"
+#'     )
+#'   ),
+#'   FinalMetricDataList = list(
+#'     list(
+#'       MetricName = "string",
+#'       Value = 123.0,
+#'       Timestamp = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   EnableNetworkIsolation = TRUE|FALSE,
+#'   EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'   EnableManagedSpotTraining = TRUE|FALSE,
+#'   CheckpointConfig = list(
+#'     S3Uri = "string",
+#'     LocalPath = "string"
+#'   ),
+#'   TrainingTimeInSeconds = 123,
+#'   BillableTimeInSeconds = 123,
+#'   DebugHookConfig = list(
+#'     LocalPath = "string",
+#'     S3OutputPath = "string",
+#'     HookParameters = list(
+#'       "string"
+#'     ),
+#'     CollectionConfigurations = list(
+#'       list(
+#'         CollectionName = "string",
+#'         CollectionParameters = list(
+#'           "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   ExperimentConfig = list(
+#'     ExperimentName = "string",
+#'     TrialName = "string",
+#'     TrialComponentDisplayName = "string"
+#'   ),
+#'   DebugRuleConfigurations = list(
+#'     list(
+#'       RuleConfigurationName = "string",
+#'       LocalPath = "string",
+#'       S3OutputPath = "string",
+#'       RuleEvaluatorImage = "string",
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       RuleParameters = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   TensorBoardOutputConfig = list(
+#'     LocalPath = "string",
+#'     S3OutputPath = "string"
+#'   ),
+#'   DebugRuleEvaluationStatuses = list(
+#'     list(
+#'       RuleConfigurationName = "string",
+#'       RuleEvaluationJobArn = "string",
+#'       RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped",
+#'       StatusDetails = "string",
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   ProfilerConfig = list(
+#'     S3OutputPath = "string",
+#'     ProfilingIntervalInMilliseconds = 123,
+#'     ProfilingParameters = list(
+#'       "string"
+#'     )
+#'   ),
+#'   ProfilerRuleConfigurations = list(
+#'     list(
+#'       RuleConfigurationName = "string",
+#'       LocalPath = "string",
+#'       S3OutputPath = "string",
+#'       RuleEvaluatorImage = "string",
+#'       InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'       VolumeSizeInGB = 123,
+#'       RuleParameters = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   ProfilerRuleEvaluationStatuses = list(
+#'     list(
+#'       RuleConfigurationName = "string",
+#'       RuleEvaluationJobArn = "string",
+#'       RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped",
+#'       StatusDetails = "string",
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   ProfilingStatus = "Enabled"|"Disabled"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8465,6 +11669,71 @@ sagemaker_describe_training_job <- function(TrainingJobName) {
 #'
 #' @param TransformJobName &#91;required&#93; The name of the transform job that you want to view details of.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TransformJobName = "string",
+#'   TransformJobArn = "string",
+#'   TransformJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'   FailureReason = "string",
+#'   ModelName = "string",
+#'   MaxConcurrentTransforms = 123,
+#'   ModelClientConfig = list(
+#'     InvocationsTimeoutInSeconds = 123,
+#'     InvocationsMaxRetries = 123
+#'   ),
+#'   MaxPayloadInMB = 123,
+#'   BatchStrategy = "MultiRecord"|"SingleRecord",
+#'   Environment = list(
+#'     "string"
+#'   ),
+#'   TransformInput = list(
+#'     DataSource = list(
+#'       S3DataSource = list(
+#'         S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'         S3Uri = "string"
+#'       )
+#'     ),
+#'     ContentType = "string",
+#'     CompressionType = "None"|"Gzip",
+#'     SplitType = "None"|"Line"|"RecordIO"|"TFRecord"
+#'   ),
+#'   TransformOutput = list(
+#'     S3OutputPath = "string",
+#'     Accept = "string",
+#'     AssembleWith = "None"|"Line",
+#'     KmsKeyId = "string"
+#'   ),
+#'   TransformResources = list(
+#'     InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge",
+#'     InstanceCount = 123,
+#'     VolumeKmsKeyId = "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TransformStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   TransformEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LabelingJobArn = "string",
+#'   AutoMLJobArn = "string",
+#'   DataProcessing = list(
+#'     InputFilter = "string",
+#'     OutputFilter = "string",
+#'     JoinSource = "Input"|"None"
+#'   ),
+#'   ExperimentConfig = list(
+#'     ExperimentName = "string",
+#'     TrialName = "string",
+#'     TrialComponentDisplayName = "string"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_transform_job(
@@ -8501,6 +11770,43 @@ sagemaker_describe_transform_job <- function(TransformJobName) {
 #' sagemaker_describe_trial(TrialName)
 #'
 #' @param TrialName &#91;required&#93; The name of the trial to describe.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialName = "string",
+#'   TrialArn = "string",
+#'   DisplayName = "string",
+#'   ExperimentName = "string",
+#'   Source = list(
+#'     SourceArn = "string",
+#'     SourceType = "string"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   MetadataProperties = list(
+#'     CommitId = "string",
+#'     Repository = "string",
+#'     GeneratedBy = "string",
+#'     ProjectId = "string"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8539,6 +11845,85 @@ sagemaker_describe_trial <- function(TrialName) {
 #'
 #' @param TrialComponentName &#91;required&#93; The name of the trial component to describe.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentName = "string",
+#'   TrialComponentArn = "string",
+#'   DisplayName = "string",
+#'   Source = list(
+#'     SourceArn = "string",
+#'     SourceType = "string"
+#'   ),
+#'   Status = list(
+#'     PrimaryStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'     Message = "string"
+#'   ),
+#'   StartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreatedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   LastModifiedBy = list(
+#'     UserProfileArn = "string",
+#'     UserProfileName = "string",
+#'     DomainId = "string"
+#'   ),
+#'   Parameters = list(
+#'     list(
+#'       StringValue = "string",
+#'       NumberValue = 123.0
+#'     )
+#'   ),
+#'   InputArtifacts = list(
+#'     list(
+#'       MediaType = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   OutputArtifacts = list(
+#'     list(
+#'       MediaType = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   MetadataProperties = list(
+#'     CommitId = "string",
+#'     Repository = "string",
+#'     GeneratedBy = "string",
+#'     ProjectId = "string"
+#'   ),
+#'   Metrics = list(
+#'     list(
+#'       MetricName = "string",
+#'       SourceArn = "string",
+#'       TimeStamp = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Max = 123.0,
+#'       Min = 123.0,
+#'       Last = 123.0,
+#'       Count = 123,
+#'       Avg = 123.0,
+#'       StdDev = 123.0
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_trial_component(
@@ -8569,13 +11954,74 @@ sagemaker_describe_trial_component <- function(TrialComponentName) {
 #' Describes a user profile
 #'
 #' @description
-#' Describes a user profile. For more information, see `CreateUserProfile`.
+#' Describes a user profile. For more information, see
+#' [`create_user_profile`][sagemaker_create_user_profile].
 #'
 #' @usage
 #' sagemaker_describe_user_profile(DomainId, UserProfileName)
 #'
 #' @param DomainId &#91;required&#93; The domain ID.
 #' @param UserProfileName &#91;required&#93; The user profile name.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DomainId = "string",
+#'   UserProfileArn = "string",
+#'   UserProfileName = "string",
+#'   HomeEfsFileSystemUid = "string",
+#'   Status = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed",
+#'   LastModifiedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   FailureReason = "string",
+#'   SingleSignOnUserIdentifier = "string",
+#'   SingleSignOnUserValue = "string",
+#'   UserSettings = list(
+#'     ExecutionRole = "string",
+#'     SecurityGroups = list(
+#'       "string"
+#'     ),
+#'     SharingSettings = list(
+#'       NotebookOutputOption = "Allowed"|"Disabled",
+#'       S3OutputPath = "string",
+#'       S3KmsKeyId = "string"
+#'     ),
+#'     JupyterServerAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       )
+#'     ),
+#'     KernelGatewayAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       ),
+#'       CustomImages = list(
+#'         list(
+#'           ImageName = "string",
+#'           ImageVersionNumber = 123,
+#'           AppImageConfigName = "string"
+#'         )
+#'       )
+#'     ),
+#'     TensorBoardAppSettings = list(
+#'       DefaultResourceSpec = list(
+#'         SageMakerImageArn = "string",
+#'         SageMakerImageVersionArn = "string",
+#'         InstanceType = "system"|"ml.t3.micro"|"ml.t3.small"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.8xlarge"|"ml.m5.12xlarge"|"ml.m5.16xlarge"|"ml.m5.24xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.12xlarge"|"ml.c5.18xlarge"|"ml.c5.24xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8625,6 +12071,42 @@ sagemaker_describe_user_profile <- function(DomainId, UserProfileName) {
 #' `WorkforceName` is automatically set to `default` when a workforce is
 #' created and cannot be modified.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workforce = list(
+#'     WorkforceName = "string",
+#'     WorkforceArn = "string",
+#'     LastUpdatedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     SourceIpConfig = list(
+#'       Cidrs = list(
+#'         "string"
+#'       )
+#'     ),
+#'     SubDomain = "string",
+#'     CognitoConfig = list(
+#'       UserPool = "string",
+#'       ClientId = "string"
+#'     ),
+#'     OidcConfig = list(
+#'       ClientId = "string",
+#'       Issuer = "string",
+#'       AuthorizationEndpoint = "string",
+#'       TokenEndpoint = "string",
+#'       UserInfoEndpoint = "string",
+#'       LogoutEndpoint = "string",
+#'       JwksUri = "string"
+#'     ),
+#'     CreateDate = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_workforce(
@@ -8664,6 +12146,46 @@ sagemaker_describe_workforce <- function(WorkforceName) {
 #'
 #' @param WorkteamName &#91;required&#93; The name of the work team to return a description of.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workteam = list(
+#'     WorkteamName = "string",
+#'     MemberDefinitions = list(
+#'       list(
+#'         CognitoMemberDefinition = list(
+#'           UserPool = "string",
+#'           UserGroup = "string",
+#'           ClientId = "string"
+#'         ),
+#'         OidcMemberDefinition = list(
+#'           Groups = list(
+#'             "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     WorkteamArn = "string",
+#'     WorkforceArn = "string",
+#'     ProductListingIds = list(
+#'       "string"
+#'     ),
+#'     Description = "string",
+#'     SubDomain = "string",
+#'     CreateDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastUpdatedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       NotificationTopicArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_workteam(
@@ -8700,6 +12222,9 @@ sagemaker_describe_workteam <- function(WorkteamName) {
 #' @usage
 #' sagemaker_disable_sagemaker_servicecatalog_portfolio()
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$disable_sagemaker_servicecatalog_portfolio()
@@ -8732,11 +12257,11 @@ sagemaker_disable_sagemaker_servicecatalog_portfolio <- function() {
 #' trials the component is associated with. Before you can delete a
 #' component, you must disassociate the component from all trials it is
 #' associated with. To associate a trial component with a trial, call the
-#' AssociateTrialComponent API.
+#' [`associate_trial_component`][sagemaker_associate_trial_component] API.
 #' 
 #' To get a list of the trials a component is associated with, use the
-#' Search API. Specify `ExperimentTrialComponent` for the `Resource`
-#' parameter. The list appears in the response under
+#' [`search`][sagemaker_search] API. Specify `ExperimentTrialComponent` for
+#' the `Resource` parameter. The list appears in the response under
 #' `Results.TrialComponent.Parents`.
 #'
 #' @usage
@@ -8744,6 +12269,15 @@ sagemaker_disable_sagemaker_servicecatalog_portfolio <- function() {
 #'
 #' @param TrialComponentName &#91;required&#93; The name of the component to disassociate from the trial.
 #' @param TrialName &#91;required&#93; The name of the trial to disassociate from.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentArn = "string",
+#'   TrialArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8782,6 +12316,9 @@ sagemaker_disassociate_trial_component <- function(TrialComponentName, TrialName
 #' @usage
 #' sagemaker_enable_sagemaker_servicecatalog_portfolio()
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$enable_sagemaker_servicecatalog_portfolio()
@@ -8816,6 +12353,43 @@ sagemaker_enable_sagemaker_servicecatalog_portfolio <- function() {
 #' sagemaker_get_device_fleet_report(DeviceFleetName)
 #'
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DeviceFleetArn = "string",
+#'   DeviceFleetName = "string",
+#'   OutputConfig = list(
+#'     S3OutputLocation = "string",
+#'     KmsKeyId = "string"
+#'   ),
+#'   Description = "string",
+#'   ReportGenerated = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   DeviceStats = list(
+#'     ConnectedDeviceCount = 123,
+#'     RegisteredDeviceCount = 123
+#'   ),
+#'   AgentVersions = list(
+#'     list(
+#'       Version = "string",
+#'       AgentCount = 123
+#'     )
+#'   ),
+#'   ModelStats = list(
+#'     list(
+#'       ModelName = "string",
+#'       ModelVersion = "string",
+#'       OfflineDeviceCount = 123,
+#'       ConnectedDeviceCount = 123,
+#'       ActiveDeviceCount = 123,
+#'       SamplingDeviceCount = 123
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8858,6 +12432,14 @@ sagemaker_get_device_fleet_report <- function(DeviceFleetName) {
 #'
 #' @param ModelPackageGroupName &#91;required&#93; The name of the model group for which to get the resource policy.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ResourcePolicy = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$get_model_package_group_policy(
@@ -8894,6 +12476,14 @@ sagemaker_get_model_package_group_policy <- function(ModelPackageGroupName) {
 #' @usage
 #' sagemaker_get_sagemaker_servicecatalog_portfolio_status()
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Status = "Enabled"|"Disabled"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$get_sagemaker_servicecatalog_portfolio_status()
@@ -8925,14 +12515,26 @@ sagemaker_get_sagemaker_servicecatalog_portfolio_status <- function() {
 #' @description
 #' An auto-complete API for the search functionality in the Amazon
 #' SageMaker console. It returns suggestions of possible matches for the
-#' property name to use in `Search` queries. Provides suggestions for
-#' `HyperParameters`, `Tags`, and `Metrics`.
+#' property name to use in [`search`][sagemaker_search] queries. Provides
+#' suggestions for `HyperParameters`, `Tags`, and `Metrics`.
 #'
 #' @usage
 #' sagemaker_get_search_suggestions(Resource, SuggestionQuery)
 #'
 #' @param Resource &#91;required&#93; The name of the Amazon SageMaker resource to search for.
 #' @param SuggestionQuery Limits the property names that are included in the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PropertyNameSuggestions = list(
+#'     list(
+#'       PropertyName = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -8983,10 +12585,38 @@ sagemaker_get_search_suggestions <- function(Resource, SuggestionQuery = NULL) {
 #' time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
-#' @param NextToken If the previous call to `ListActions` didn't return the full set of
-#' actions, the call returns a token for getting the next set of actions.
+#' @param NextToken If the previous call to [`list_actions`][sagemaker_list_actions] didn't
+#' return the full set of actions, the call returns a token for getting the
+#' next set of actions.
 #' @param MaxResults The maximum number of actions to return in the response. The default
 #' value is 10.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ActionSummaries = list(
+#'     list(
+#'       ActionArn = "string",
+#'       ActionName = "string",
+#'       Source = list(
+#'         SourceUri = "string",
+#'         SourceType = "string",
+#'         SourceId = "string"
+#'       ),
+#'       ActionType = "string",
+#'       Status = "Unknown"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9042,12 +12672,32 @@ sagemaker_list_actions <- function(SourceUri = NULL, ActionType = NULL, CreatedA
 #' @param MaxResults The maximum number of algorithms to return in the response.
 #' @param NameContains A string in the algorithm name. This filter returns only algorithms
 #' whose name contains the specified string.
-#' @param NextToken If the response to a previous `ListAlgorithms` request was truncated,
+#' @param NextToken If the response to a previous
+#' [`list_algorithms`][sagemaker_list_algorithms] request was truncated,
 #' the response includes a `NextToken`. To retrieve the next set of
 #' algorithms, use the token in the next request.
 #' @param SortBy The parameter by which to sort the results. The default is
 #' `CreationTime`.
 #' @param SortOrder The sort order for the results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AlgorithmSummaryList = list(
+#'     list(
+#'       AlgorithmName = "string",
+#'       AlgorithmArn = "string",
+#'       AlgorithmDescription = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       AlgorithmStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9100,9 +12750,9 @@ sagemaker_list_algorithms <- function(CreationTimeAfter = NULL, CreationTimeBefo
 #'
 #' @param MaxResults The maximum number of AppImageConfigs to return in the response. The
 #' default value is 10.
-#' @param NextToken If the previous call to `ListImages` didn't return the full set of
-#' AppImageConfigs, the call returns a token for getting the next set of
-#' AppImageConfigs.
+#' @param NextToken If the previous call to [`list_images`][sagemaker_list_images] didn't
+#' return the full set of AppImageConfigs, the call returns a token for
+#' getting the next set of AppImageConfigs.
 #' @param NameContains A filter that returns only AppImageConfigs whose name contains the
 #' specified string.
 #' @param CreationTimeBefore A filter that returns only AppImageConfigs created on or before the
@@ -9115,6 +12765,39 @@ sagemaker_list_algorithms <- function(CreationTimeAfter = NULL, CreationTimeBefo
 #' specified time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NextToken = "string",
+#'   AppImageConfigs = list(
+#'     list(
+#'       AppImageConfigArn = "string",
+#'       AppImageConfigName = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       KernelGatewayImageConfig = list(
+#'         KernelSpecs = list(
+#'           list(
+#'             Name = "string",
+#'             DisplayName = "string"
+#'           )
+#'         ),
+#'         FileSystemConfig = list(
+#'           MountPath = "string",
+#'           DefaultUid = 123,
+#'           DefaultGid = 123
+#'         )
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9176,6 +12859,26 @@ sagemaker_list_app_image_configs <- function(MaxResults = NULL, NextToken = NULL
 #' @param DomainIdEquals A parameter to search for the domain ID.
 #' @param UserProfileNameEquals A parameter to search by user profile name.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Apps = list(
+#'     list(
+#'       DomainId = "string",
+#'       UserProfileName = "string",
+#'       AppType = "JupyterServer"|"KernelGateway"|"TensorBoard",
+#'       AppName = "string",
+#'       Status = "Deleted"|"Deleting"|"Failed"|"InService"|"Pending",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_apps(
@@ -9225,11 +12928,41 @@ sagemaker_list_apps <- function(NextToken = NULL, MaxResults = NULL, SortOrder =
 #' time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
-#' @param NextToken If the previous call to `ListArtifacts` didn't return the full set of
-#' artifacts, the call returns a token for getting the next set of
-#' artifacts.
+#' @param NextToken If the previous call to [`list_artifacts`][sagemaker_list_artifacts]
+#' didn't return the full set of artifacts, the call returns a token for
+#' getting the next set of artifacts.
 #' @param MaxResults The maximum number of artifacts to return in the response. The default
 #' value is 10.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArtifactSummaries = list(
+#'     list(
+#'       ArtifactArn = "string",
+#'       ArtifactName = "string",
+#'       Source = list(
+#'         SourceUri = "string",
+#'         SourceTypes = list(
+#'           list(
+#'             SourceIdType = "MD5Hash"|"S3ETag"|"S3Version"|"Custom",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       ArtifactType = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9292,11 +13025,39 @@ sagemaker_list_artifacts <- function(SourceUri = NULL, ArtifactType = NULL, Crea
 #' specified time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
-#' @param NextToken If the previous call to `ListAssociations` didn't return the full set of
-#' associations, the call returns a token for getting the next set of
-#' associations.
+#' @param NextToken If the previous call to
+#' [`list_associations`][sagemaker_list_associations] didn't return the
+#' full set of associations, the call returns a token for getting the next
+#' set of associations.
 #' @param MaxResults The maximum number of associations to return in the response. The
 #' default value is 10.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AssociationSummaries = list(
+#'     list(
+#'       SourceArn = "string",
+#'       DestinationArn = "string",
+#'       SourceType = "string",
+#'       DestinationType = "string",
+#'       AssociationType = "ContributedTo"|"AssociatedWith"|"DerivedFrom"|"Produced",
+#'       SourceName = "string",
+#'       DestinationName = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CreatedBy = list(
+#'         UserProfileArn = "string",
+#'         UserProfileName = "string",
+#'         DomainId = "string"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9362,6 +13123,32 @@ sagemaker_list_associations <- function(SourceArn = NULL, DestinationArn = NULL,
 #' @param NextToken If the previous response was truncated, you receive this token. Use it
 #' in your next request to receive the next set of results.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AutoMLJobSummaries = list(
+#'     list(
+#'       AutoMLJobName = "string",
+#'       AutoMLJobArn = "string",
+#'       AutoMLJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'       AutoMLJobSecondaryStatus = "Starting"|"AnalyzingData"|"FeatureEngineering"|"ModelTuning"|"MaxCandidatesReached"|"Failed"|"Stopped"|"MaxAutoMLJobRuntimeReached"|"Stopping"|"CandidateDefinitionsGenerated",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       FailureReason = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_auto_ml_jobs(
@@ -9424,6 +13211,52 @@ sagemaker_list_auto_ml_jobs <- function(CreationTimeAfter = NULL, CreationTimeBe
 #' @param NextToken If the previous response was truncated, you receive this token. Use it
 #' in your next request to receive the next set of results.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Candidates = list(
+#'     list(
+#'       CandidateName = "string",
+#'       FinalAutoMLJobObjectiveMetric = list(
+#'         Type = "Maximize"|"Minimize",
+#'         MetricName = "Accuracy"|"MSE"|"F1"|"F1macro"|"AUC",
+#'         Value = 123.0
+#'       ),
+#'       ObjectiveStatus = "Succeeded"|"Pending"|"Failed",
+#'       CandidateSteps = list(
+#'         list(
+#'           CandidateStepType = "AWS::SageMaker::TrainingJob"|"AWS::SageMaker::TransformJob"|"AWS::SageMaker::ProcessingJob",
+#'           CandidateStepArn = "string",
+#'           CandidateStepName = "string"
+#'         )
+#'       ),
+#'       CandidateStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'       InferenceContainers = list(
+#'         list(
+#'           Image = "string",
+#'           ModelDataUrl = "string",
+#'           Environment = list(
+#'             "string"
+#'           )
+#'         )
+#'       ),
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       FailureReason = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_candidates_for_auto_ml_job(
@@ -9484,6 +13317,31 @@ sagemaker_list_candidates_for_auto_ml_job <- function(AutoMLJobName, StatusEqual
 #' @param SortBy The field to sort results by. The default is `Name`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CodeRepositorySummaryList = list(
+#'     list(
+#'       CodeRepositoryName = "string",
+#'       CodeRepositoryArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       GitConfig = list(
+#'         RepositoryUrl = "string",
+#'         Branch = "string",
+#'         SecretArn = "string"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_code_repositories(
@@ -9532,16 +13390,18 @@ sagemaker_list_code_repositories <- function(CreationTimeAfter = NULL, CreationT
 #' @description
 #' Lists model compilation jobs that satisfy various filters.
 #' 
-#' To create a model compilation job, use CreateCompilationJob. To get
+#' To create a model compilation job, use
+#' [`create_compilation_job`][sagemaker_create_compilation_job]. To get
 #' information about a particular model compilation job you have created,
-#' use DescribeCompilationJob.
+#' use [`describe_compilation_job`][sagemaker_describe_compilation_job].
 #'
 #' @usage
 #' sagemaker_list_compilation_jobs(NextToken, MaxResults,
 #'   CreationTimeAfter, CreationTimeBefore, LastModifiedTimeAfter,
 #'   LastModifiedTimeBefore, NameContains, StatusEquals, SortBy, SortOrder)
 #'
-#' @param NextToken If the result of the previous `ListCompilationJobs` request was
+#' @param NextToken If the result of the previous
+#' [`list_compilation_jobs`][sagemaker_list_compilation_jobs] request was
 #' truncated, the response includes a `NextToken`. To retrieve the next set
 #' of model compilation jobs, use the token in the next request.
 #' @param MaxResults The maximum number of model compilation jobs to return in the response.
@@ -9559,6 +13419,37 @@ sagemaker_list_code_repositories <- function(CreationTimeAfter = NULL, CreationT
 #' DescribeCompilationJobResponse$CompilationJobStatus status.
 #' @param SortBy The field by which to sort results. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CompilationJobSummaries = list(
+#'     list(
+#'       CompilationJobName = "string",
+#'       CompilationJobArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CompilationStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CompilationEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CompilationTargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm",
+#'       CompilationTargetPlatformOs = "ANDROID"|"LINUX",
+#'       CompilationTargetPlatformArch = "X86_64"|"X86"|"ARM64"|"ARM_EABI"|"ARM_EABIHF",
+#'       CompilationTargetPlatformAccelerator = "INTEL_GRAPHICS"|"MALI"|"NVIDIA",
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CompilationJobStatus = "INPROGRESS"|"COMPLETED"|"FAILED"|"STARTING"|"STOPPING"|"STOPPED"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9621,10 +13512,37 @@ sagemaker_list_compilation_jobs <- function(NextToken = NULL, MaxResults = NULL,
 #' time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
-#' @param NextToken If the previous call to `ListContexts` didn't return the full set of
-#' contexts, the call returns a token for getting the next set of contexts.
+#' @param NextToken If the previous call to [`list_contexts`][sagemaker_list_contexts]
+#' didn't return the full set of contexts, the call returns a token for
+#' getting the next set of contexts.
 #' @param MaxResults The maximum number of contexts to return in the response. The default
 #' value is 10.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ContextSummaries = list(
+#'     list(
+#'       ContextArn = "string",
+#'       ContextName = "string",
+#'       Source = list(
+#'         SourceUri = "string",
+#'         SourceType = "string",
+#'         SourceId = "string"
+#'       ),
+#'       ContextType = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9678,9 +13596,10 @@ sagemaker_list_contexts <- function(SourceUri = NULL, ContextType = NULL, Create
 #' specified endpoint.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Descending`.
-#' @param NextToken If the result of the previous `ListDataQualityJobDefinitions` request
-#' was truncated, the response includes a `NextToken`. To retrieve the next
-#' set of transform jobs, use the token in the next request.&gt;
+#' @param NextToken If the result of the previous
+#' [`list_data_quality_job_definitions`][sagemaker_list_data_quality_job_definitions]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of transform jobs, use the token in the next request.&gt;
 #' @param MaxResults The maximum number of data quality monitoring job definitions to return
 #' in the response.
 #' @param NameContains A string in the data quality monitoring job definition name. This filter
@@ -9690,6 +13609,24 @@ sagemaker_list_contexts <- function(SourceUri = NULL, ContextType = NULL, Create
 #' created before the specified time.
 #' @param CreationTimeAfter A filter that returns only data quality monitoring job definitions
 #' created after the specified time.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionSummaries = list(
+#'     list(
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringJobDefinitionArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndpointName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9751,6 +13688,26 @@ sagemaker_list_data_quality_job_definitions <- function(EndpointName = NULL, Sor
 #' @param SortBy The column to sort by.
 #' @param SortOrder What direction to sort in.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DeviceFleetSummaries = list(
+#'     list(
+#'       DeviceFleetArn = "string",
+#'       DeviceFleetName = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_device_fleets(
@@ -9811,6 +13768,35 @@ sagemaker_list_device_fleets <- function(NextToken = NULL, MaxResults = NULL, Cr
 #' models.
 #' @param DeviceFleetName Filter for fleets containing this name in their device fleet name.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DeviceSummaries = list(
+#'     list(
+#'       DeviceName = "string",
+#'       DeviceArn = "string",
+#'       Description = "string",
+#'       DeviceFleetName = "string",
+#'       IotThingName = "string",
+#'       RegistrationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LatestHeartbeat = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Models = list(
+#'         list(
+#'           ModelName = "string",
+#'           ModelVersion = "string"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_devices(
@@ -9855,6 +13841,29 @@ sagemaker_list_devices <- function(NextToken = NULL, MaxResults = NULL, LatestHe
 #' @param NextToken If the previous response was truncated, you will receive this token. Use
 #' it in your next request to receive the next set of results.
 #' @param MaxResults Returns a list up to a specified limit.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Domains = list(
+#'     list(
+#'       DomainArn = "string",
+#'       DomainId = "string",
+#'       DomainName = "string",
+#'       Status = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Url = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9907,6 +13916,30 @@ sagemaker_list_domains <- function(NextToken = NULL, MaxResults = NULL) {
 #' @param StatusEquals The job status to filter for.
 #' @param SortBy Use to specify what column to sort by.
 #' @param SortOrder What direction to sort by.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EdgePackagingJobSummaries = list(
+#'     list(
+#'       EdgePackagingJobArn = "string",
+#'       EdgePackagingJobName = "string",
+#'       EdgePackagingJobStatus = "STARTING"|"INPROGRESS"|"COMPLETED"|"FAILED"|"STOPPING"|"STOPPED",
+#'       CompilationJobName = "string",
+#'       ModelName = "string",
+#'       ModelVersion = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -9975,6 +14008,23 @@ sagemaker_list_edge_packaging_jobs <- function(NextToken = NULL, MaxResults = NU
 #' @param CreationTimeAfter A filter that returns only endpoint configurations with a creation time
 #' greater than or equal to the specified time (timestamp).
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointConfigs = list(
+#'     list(
+#'       EndpointConfigName = "string",
+#'       EndpointConfigArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_endpoint_configs(
@@ -10024,9 +14074,9 @@ sagemaker_list_endpoint_configs <- function(SortBy = NULL, SortOrder = NULL, Nex
 #'
 #' @param SortBy Sorts the list of results. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Descending`.
-#' @param NextToken If the result of a `ListEndpoints` request was truncated, the response
-#' includes a `NextToken`. To retrieve the next set of endpoints, use the
-#' token in the next request.
+#' @param NextToken If the result of a [`list_endpoints`][sagemaker_list_endpoints] request
+#' was truncated, the response includes a `NextToken`. To retrieve the next
+#' set of endpoints, use the token in the next request.
 #' @param MaxResults The maximum number of endpoints to return in the response.
 #' @param NameContains A string in endpoint names. This filter returns only endpoints whose
 #' name contains the specified string.
@@ -10039,6 +14089,27 @@ sagemaker_list_endpoint_configs <- function(SortBy = NULL, SortOrder = NULL, Nex
 #' @param LastModifiedTimeAfter A filter that returns only endpoints that were modified after the
 #' specified timestamp.
 #' @param StatusEquals A filter that returns only endpoints with the specified status.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Endpoints = list(
+#'     list(
+#'       EndpointName = "string",
+#'       EndpointArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10100,11 +14171,36 @@ sagemaker_list_endpoints <- function(SortBy = NULL, SortOrder = NULL, NextToken 
 #' time.
 #' @param SortBy The property used to sort results. The default value is `CreationTime`.
 #' @param SortOrder The sort order. The default value is `Descending`.
-#' @param NextToken If the previous call to `ListExperiments` didn't return the full set of
-#' experiments, the call returns a token for getting the next set of
-#' experiments.
+#' @param NextToken If the previous call to [`list_experiments`][sagemaker_list_experiments]
+#' didn't return the full set of experiments, the call returns a token for
+#' getting the next set of experiments.
 #' @param MaxResults The maximum number of experiments to return in the response. The default
 #' value is 10.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExperimentSummaries = list(
+#'     list(
+#'       ExperimentArn = "string",
+#'       ExperimentName = "string",
+#'       DisplayName = "string",
+#'       ExperimentSource = list(
+#'         SourceArn = "string",
+#'         SourceType = "string"
+#'       ),
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10162,8 +14258,32 @@ sagemaker_list_experiments <- function(CreatedAfter = NULL, CreatedBefore = NULL
 #' specific date and time.
 #' @param SortOrder The order in which feature groups are listed.
 #' @param SortBy The value on which the feature group list is sorted.
-#' @param MaxResults The maximum number of results returned by `ListFeatureGroups`.
-#' @param NextToken A token to resume pagination of `ListFeatureGroups` results.
+#' @param MaxResults The maximum number of results returned by
+#' [`list_feature_groups`][sagemaker_list_feature_groups].
+#' @param NextToken A token to resume pagination of
+#' [`list_feature_groups`][sagemaker_list_feature_groups] results.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FeatureGroupSummaries = list(
+#'     list(
+#'       FeatureGroupName = "string",
+#'       FeatureGroupArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       FeatureGroupStatus = "Creating"|"Created"|"CreateFailed"|"Deleting"|"DeleteFailed",
+#'       OfflineStoreStatus = list(
+#'         Status = "Active"|"Blocked"|"Disabled",
+#'         BlockedReason = "string"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10225,6 +14345,25 @@ sagemaker_list_feature_groups <- function(NameContains = NULL, FeatureGroupStatu
 #' `NextToken` will be provided in the output that you can use to resume
 #' pagination.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FlowDefinitionSummaries = list(
+#'     list(
+#'       FlowDefinitionName = "string",
+#'       FlowDefinitionArn = "string",
+#'       FlowDefinitionStatus = "Initializing"|"Active"|"Failed"|"Deleting",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       FailureReason = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_flow_definitions(
@@ -10282,6 +14421,23 @@ sagemaker_list_flow_definitions <- function(CreationTimeAfter = NULL, CreationTi
 #' `NextToken` will be provided in the output that you can use to resume
 #' pagination.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HumanTaskUiSummaries = list(
+#'     list(
+#'       HumanTaskUiName = "string",
+#'       HumanTaskUiArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_human_task_uis(
@@ -10329,9 +14485,10 @@ sagemaker_list_human_task_uis <- function(CreationTimeAfter = NULL, CreationTime
 #'   SortBy, SortOrder, NameContains, CreationTimeAfter, CreationTimeBefore,
 #'   LastModifiedTimeAfter, LastModifiedTimeBefore, StatusEquals)
 #'
-#' @param NextToken If the result of the previous `ListHyperParameterTuningJobs` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of tuning jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_hyper_parameter_tuning_jobs`][sagemaker_list_hyper_parameter_tuning_jobs]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of tuning jobs, use the token in the next request.
 #' @param MaxResults The maximum number of tuning jobs to return. The default value is 10.
 #' @param SortBy The field to sort results by. The default is `Name`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
@@ -10346,6 +14503,47 @@ sagemaker_list_human_task_uis <- function(CreationTimeAfter = NULL, CreationTime
 #' @param LastModifiedTimeBefore A filter that returns only tuning jobs that were modified before the
 #' specified time.
 #' @param StatusEquals A filter that returns only tuning jobs with the specified status.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   HyperParameterTuningJobSummaries = list(
+#'     list(
+#'       HyperParameterTuningJobName = "string",
+#'       HyperParameterTuningJobArn = "string",
+#'       HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping",
+#'       Strategy = "Bayesian"|"Random",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       HyperParameterTuningEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingJobStatusCounters = list(
+#'         Completed = 123,
+#'         InProgress = 123,
+#'         RetryableError = 123,
+#'         NonRetryableError = 123,
+#'         Stopped = 123
+#'       ),
+#'       ObjectiveStatusCounters = list(
+#'         Succeeded = 123,
+#'         Pending = 123,
+#'         Failed = 123
+#'       ),
+#'       ResourceLimits = list(
+#'         MaxNumberOfTrainingJobs = 123,
+#'         MaxParallelTrainingJobs = 123
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10413,11 +14611,35 @@ sagemaker_list_hyper_parameter_tuning_jobs <- function(NextToken = NULL, MaxResu
 #' time.
 #' @param MaxResults The maximum number of versions to return in the response. The default
 #' value is 10.
-#' @param NextToken If the previous call to `ListImageVersions` didn't return the full set
-#' of versions, the call returns a token for getting the next set of
-#' versions.
+#' @param NextToken If the previous call to
+#' [`list_image_versions`][sagemaker_list_image_versions] didn't return the
+#' full set of versions, the call returns a token for getting the next set
+#' of versions.
 #' @param SortBy The property used to sort results. The default value is `CREATION_TIME`.
 #' @param SortOrder The sort order. The default value is `DESCENDING`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ImageVersions = list(
+#'     list(
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       FailureReason = "string",
+#'       ImageArn = "string",
+#'       ImageVersionArn = "string",
+#'       ImageVersionStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED",
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Version = 123
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10486,10 +14708,35 @@ sagemaker_list_image_versions <- function(CreationTimeAfter = NULL, CreationTime
 #' value is 10.
 #' @param NameContains A filter that returns only images whose name contains the specified
 #' string.
-#' @param NextToken If the previous call to `ListImages` didn't return the full set of
-#' images, the call returns a token for getting the next set of images.
+#' @param NextToken If the previous call to [`list_images`][sagemaker_list_images] didn't
+#' return the full set of images, the call returns a token for getting the
+#' next set of images.
 #' @param SortBy The property used to sort results. The default value is `CREATION_TIME`.
 #' @param SortOrder The sort order. The default value is `DESCENDING`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Images = list(
+#'     list(
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Description = "string",
+#'       DisplayName = "string",
+#'       FailureReason = "string",
+#'       ImageArn = "string",
+#'       ImageName = "string",
+#'       ImageStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED",
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10554,14 +14801,66 @@ sagemaker_list_images <- function(CreationTimeAfter = NULL, CreationTimeBefore =
 #' time (timestamp).
 #' @param MaxResults The maximum number of labeling jobs to return in each page of the
 #' response.
-#' @param NextToken If the result of the previous `ListLabelingJobs` request was truncated,
-#' the response includes a `NextToken`. To retrieve the next set of
-#' labeling jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_labeling_jobs`][sagemaker_list_labeling_jobs] request was
+#' truncated, the response includes a `NextToken`. To retrieve the next set
+#' of labeling jobs, use the token in the next request.
 #' @param NameContains A string in the labeling job name. This filter returns only labeling
 #' jobs whose name contains the specified string.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
 #' @param StatusEquals A filter that retrieves only labeling jobs with a specific status.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LabelingJobSummaryList = list(
+#'     list(
+#'       LabelingJobName = "string",
+#'       LabelingJobArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LabelingJobStatus = "Initializing"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'       LabelCounters = list(
+#'         TotalLabeled = 123,
+#'         HumanLabeled = 123,
+#'         MachineLabeled = 123,
+#'         FailedNonRetryableError = 123,
+#'         Unlabeled = 123
+#'       ),
+#'       WorkteamArn = "string",
+#'       PreHumanTaskLambdaArn = "string",
+#'       AnnotationConsolidationLambdaArn = "string",
+#'       FailureReason = "string",
+#'       LabelingJobOutput = list(
+#'         OutputDatasetS3Uri = "string",
+#'         FinalActiveLearningModelArn = "string"
+#'       ),
+#'       InputConfig = list(
+#'         DataSource = list(
+#'           S3DataSource = list(
+#'             ManifestS3Uri = "string"
+#'           ),
+#'           SnsDataSource = list(
+#'             SnsTopicArn = "string"
+#'           )
+#'         ),
+#'         DataAttributes = list(
+#'           ContentClassifiers = list(
+#'             "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10621,9 +14920,10 @@ sagemaker_list_labeling_jobs <- function(CreationTimeAfter = NULL, CreationTimeB
 #' see labeling jobs for.
 #' @param MaxResults The maximum number of labeling jobs to return in each page of the
 #' response.
-#' @param NextToken If the result of the previous `ListLabelingJobsForWorkteam` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of labeling jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_labeling_jobs_for_workteam`][sagemaker_list_labeling_jobs_for_workteam]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of labeling jobs, use the token in the next request.
 #' @param CreationTimeAfter A filter that returns only labeling jobs created after the specified
 #' time (timestamp).
 #' @param CreationTimeBefore A filter that returns only labeling jobs created before the specified
@@ -10632,6 +14932,30 @@ sagemaker_list_labeling_jobs <- function(CreationTimeAfter = NULL, CreationTimeB
 #' contains the specified string.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   LabelingJobSummaryList = list(
+#'     list(
+#'       LabelingJobName = "string",
+#'       JobReferenceCode = "string",
+#'       WorkRequesterAccountId = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LabelCounters = list(
+#'         HumanLabeled = 123,
+#'         PendingHuman = 123,
+#'         Total = 123
+#'       ),
+#'       NumberOfHumanWorkersPerDataObject = 123
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10695,6 +15019,24 @@ sagemaker_list_labeling_jobs_for_workteam <- function(WorkteamArn, MaxResults = 
 #' time.
 #' @param CreationTimeAfter A filter that returns only model bias jobs created after a specified
 #' time.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionSummaries = list(
+#'     list(
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringJobDefinitionArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndpointName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10760,6 +15102,24 @@ sagemaker_list_model_bias_job_definitions <- function(EndpointName = NULL, SortB
 #' @param CreationTimeAfter A filter that returns only model explainability jobs created after a
 #' specified time.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionSummaries = list(
+#'     list(
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringJobDefinitionArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndpointName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_model_explainability_job_definitions(
@@ -10815,11 +15175,31 @@ sagemaker_list_model_explainability_job_definitions <- function(EndpointName = N
 #' @param MaxResults The maximum number of results to return in the response.
 #' @param NameContains A string in the model group name. This filter returns only model groups
 #' whose name contains the specified string.
-#' @param NextToken If the result of the previous `ListModelPackageGroups` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of model groups, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_model_package_groups`][sagemaker_list_model_package_groups]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of model groups, use the token in the next request.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageGroupSummaryList = list(
+#'     list(
+#'       ModelPackageGroupName = "string",
+#'       ModelPackageGroupArn = "string",
+#'       ModelPackageGroupDescription = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ModelPackageGroupStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|"DeleteFailed"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10887,12 +15267,35 @@ sagemaker_list_model_package_groups <- function(CreationTimeAfter = NULL, Creati
 #' -   `UNVERSIONED` - List only unversioined models.
 #' 
 #' -   `BOTH` - List both versioned and unversioned models.
-#' @param NextToken If the response to a previous `ListModelPackages` request was truncated,
-#' the response includes a `NextToken`. To retrieve the next set of model
-#' packages, use the token in the next request.
+#' @param NextToken If the response to a previous
+#' [`list_model_packages`][sagemaker_list_model_packages] request was
+#' truncated, the response includes a `NextToken`. To retrieve the next set
+#' of model packages, use the token in the next request.
 #' @param SortBy The parameter by which to sort the results. The default is
 #' `CreationTime`.
 #' @param SortOrder The sort order for the results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageSummaryList = list(
+#'     list(
+#'       ModelPackageName = "string",
+#'       ModelPackageGroupName = "string",
+#'       ModelPackageVersion = 123,
+#'       ModelPackageArn = "string",
+#'       ModelPackageDescription = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting",
+#'       ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -10948,12 +15351,13 @@ sagemaker_list_model_packages <- function(CreationTimeAfter = NULL, CreationTime
 #' are associated with the specified endpoint.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Descending`.
-#' @param NextToken If the result of the previous `ListModelQualityJobDefinitions` request
-#' was truncated, the response includes a `NextToken`. To retrieve the next
-#' set of model quality monitoring job definitions, use the token in the
-#' next request.
+#' @param NextToken If the result of the previous
+#' [`list_model_quality_job_definitions`][sagemaker_list_model_quality_job_definitions]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of model quality monitoring job definitions, use the token
+#' in the next request.
 #' @param MaxResults The maximum number of results to return in a call to
-#' `ListModelQualityJobDefinitions`.
+#' [`list_model_quality_job_definitions`][sagemaker_list_model_quality_job_definitions].
 #' @param NameContains A string in the transform job name. This filter returns only model
 #' quality monitoring job definitions whose name contains the specified
 #' string.
@@ -10961,6 +15365,24 @@ sagemaker_list_model_packages <- function(CreationTimeAfter = NULL, CreationTime
 #' created before the specified time.
 #' @param CreationTimeAfter A filter that returns only model quality monitoring job definitions
 #' created after the specified time.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   JobDefinitionSummaries = list(
+#'     list(
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringJobDefinitionArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndpointName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11003,7 +15425,8 @@ sagemaker_list_model_quality_job_definitions <- function(EndpointName = NULL, So
 #' Lists models created with the CreateModel API
 #'
 #' @description
-#' Lists models created with the CreateModel API.
+#' Lists models created with the [`create_model`][sagemaker_create_model]
+#' API.
 #'
 #' @usage
 #' sagemaker_list_models(SortBy, SortOrder, NextToken, MaxResults,
@@ -11011,9 +15434,9 @@ sagemaker_list_model_quality_job_definitions <- function(EndpointName = NULL, So
 #'
 #' @param SortBy Sorts the list of results. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Descending`.
-#' @param NextToken If the response to a previous `ListModels` request was truncated, the
-#' response includes a `NextToken`. To retrieve the next set of models, use
-#' the token in the next request.
+#' @param NextToken If the response to a previous [`list_models`][sagemaker_list_models]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of models, use the token in the next request.
 #' @param MaxResults The maximum number of models to return in the response.
 #' @param NameContains A string in the training job name. This filter returns only models in
 #' the training job whose name contains the specified string.
@@ -11021,6 +15444,23 @@ sagemaker_list_model_quality_job_definitions <- function(EndpointName = NULL, So
 #' (timestamp).
 #' @param CreationTimeAfter A filter that returns only models with a creation time greater than or
 #' equal to the specified time (timestamp).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Models = list(
+#'     list(
+#'       ModelName = "string",
+#'       ModelArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11092,6 +15532,34 @@ sagemaker_list_models <- function(SortBy = NULL, SortOrder = NULL, NextToken = N
 #' definitions.
 #' @param MonitoringTypeEquals A filter that returns only the monitoring job runs of the specified
 #' monitoring type.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MonitoringExecutionSummaries = list(
+#'     list(
+#'       MonitoringScheduleName = "string",
+#'       ScheduledTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MonitoringExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped",
+#'       ProcessingJobArn = "string",
+#'       EndpointName = "string",
+#'       FailureReason = "string",
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11182,6 +15650,30 @@ sagemaker_list_monitoring_executions <- function(MonitoringScheduleName = NULL, 
 #' @param MonitoringTypeEquals A filter that returns only the monitoring schedules for the specified
 #' monitoring type.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MonitoringScheduleSummaries = list(
+#'     list(
+#'       MonitoringScheduleName = "string",
+#'       MonitoringScheduleArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       MonitoringScheduleStatus = "Pending"|"Failed"|"Scheduled"|"Stopped",
+#'       EndpointName = "string",
+#'       MonitoringJobDefinitionName = "string",
+#'       MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_monitoring_schedules(
@@ -11234,16 +15726,18 @@ sagemaker_list_monitoring_schedules <- function(EndpointName = NULL, SortBy = NU
 #'
 #' @description
 #' Lists notebook instance lifestyle configurations created with the
-#' CreateNotebookInstanceLifecycleConfig API.
+#' [`create_notebook_instance_lifecycle_config`][sagemaker_create_notebook_instance_lifecycle_config]
+#' API.
 #'
 #' @usage
 #' sagemaker_list_notebook_instance_lifecycle_configs(NextToken,
 #'   MaxResults, SortBy, SortOrder, NameContains, CreationTimeBefore,
 #'   CreationTimeAfter, LastModifiedTimeBefore, LastModifiedTimeAfter)
 #'
-#' @param NextToken If the result of a `ListNotebookInstanceLifecycleConfigs` request was
-#' truncated, the response includes a `NextToken`. To get the next set of
-#' lifecycle configurations, use the token in the next request.
+#' @param NextToken If the result of a
+#' [`list_notebook_instance_lifecycle_configs`][sagemaker_list_notebook_instance_lifecycle_configs]
+#' request was truncated, the response includes a `NextToken`. To get the
+#' next set of lifecycle configurations, use the token in the next request.
 #' @param MaxResults The maximum number of lifecycle configurations to return in the
 #' response.
 #' @param SortBy Sorts the list of results. The default is `CreationTime`.
@@ -11258,6 +15752,26 @@ sagemaker_list_monitoring_schedules <- function(EndpointName = NULL, SortBy = NU
 #' before the specified time (timestamp).
 #' @param LastModifiedTimeAfter A filter that returns only lifecycle configurations that were modified
 #' after the specified time (timestamp).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NextToken = "string",
+#'   NotebookInstanceLifecycleConfigs = list(
+#'     list(
+#'       NotebookInstanceLifecycleConfigName = "string",
+#'       NotebookInstanceLifecycleConfigArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11316,10 +15830,12 @@ sagemaker_list_notebook_instance_lifecycle_configs <- function(NextToken = NULL,
 #'   NotebookInstanceLifecycleConfigNameContains,
 #'   DefaultCodeRepositoryContains, AdditionalCodeRepositoryEquals)
 #'
-#' @param NextToken If the previous call to the `ListNotebookInstances` is truncated, the
-#' response includes a `NextToken`. You can use this token in your
-#' subsequent `ListNotebookInstances` request to fetch the next set of
-#' notebook instances.
+#' @param NextToken If the previous call to the
+#' [`list_notebook_instances`][sagemaker_list_notebook_instances] is
+#' truncated, the response includes a `NextToken`. You can use this token
+#' in your subsequent
+#' [`list_notebook_instances`][sagemaker_list_notebook_instances] request
+#' to fetch the next set of notebook instances.
 #' 
 #' You might specify a filter or a sort order in your request. When
 #' response is truncated, you must use the same values for the filer and
@@ -11348,6 +15864,34 @@ sagemaker_list_notebook_instance_lifecycle_configs <- function(NextToken = NULL,
 #' string.
 #' @param AdditionalCodeRepositoryEquals A filter that returns only notebook instances with associated with the
 #' specified git repository.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   NextToken = "string",
+#'   NotebookInstances = list(
+#'     list(
+#'       NotebookInstanceName = "string",
+#'       NotebookInstanceArn = "string",
+#'       NotebookInstanceStatus = "Pending"|"InService"|"Stopping"|"Stopped"|"Failed"|"Deleting"|"Updating",
+#'       Url = "string",
+#'       InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       NotebookInstanceLifecycleConfigName = "string",
+#'       DefaultCodeRepository = "string",
+#'       AdditionalCodeRepositories = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11406,12 +15950,58 @@ sagemaker_list_notebook_instances <- function(NextToken = NULL, MaxResults = NUL
 #'   MaxResults, SortOrder)
 #'
 #' @param PipelineExecutionArn The Amazon Resource Name (ARN) of the pipeline execution.
-#' @param NextToken If the result of the previous `ListPipelineExecutionSteps` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of pipeline execution steps, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_pipeline_execution_steps`][sagemaker_list_pipeline_execution_steps]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of pipeline execution steps, use the token in the next
+#' request.
 #' @param MaxResults The maximum number of pipeline execution steps to return in the
 #' response.
 #' @param SortOrder The field by which to sort results. The default is `CreatedTime`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineExecutionSteps = list(
+#'     list(
+#'       StepName = "string",
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       StepStatus = "Starting"|"Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded",
+#'       CacheHitResult = list(
+#'         SourcePipelineExecutionArn = "string"
+#'       ),
+#'       FailureReason = "string",
+#'       Metadata = list(
+#'         TrainingJob = list(
+#'           Arn = "string"
+#'         ),
+#'         ProcessingJob = list(
+#'           Arn = "string"
+#'         ),
+#'         TransformJob = list(
+#'           Arn = "string"
+#'         ),
+#'         Model = list(
+#'           Arn = "string"
+#'         ),
+#'         RegisterModel = list(
+#'           Arn = "string"
+#'         ),
+#'         Condition = list(
+#'           Outcome = "True"|"False"
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11459,10 +16049,30 @@ sagemaker_list_pipeline_execution_steps <- function(PipelineExecutionArn = NULL,
 #' specified time.
 #' @param SortBy The field by which to sort results. The default is `CreatedTime`.
 #' @param SortOrder The sort order for results.
-#' @param NextToken If the result of the previous `ListPipelineExecutions` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of pipeline executions, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_pipeline_executions`][sagemaker_list_pipeline_executions] request
+#' was truncated, the response includes a `NextToken`. To retrieve the next
+#' set of pipeline executions, use the token in the next request.
 #' @param MaxResults The maximum number of pipeline executions to return in the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineExecutionSummaries = list(
+#'     list(
+#'       PipelineExecutionArn = "string",
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       PipelineExecutionStatus = "Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded",
+#'       PipelineExecutionDescription = "string",
+#'       PipelineExecutionDisplayName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11511,10 +16121,25 @@ sagemaker_list_pipeline_executions <- function(PipelineName, CreatedAfter = NULL
 #'   NextToken, MaxResults)
 #'
 #' @param PipelineExecutionArn &#91;required&#93; The Amazon Resource Name (ARN) of the pipeline execution.
-#' @param NextToken If the result of the previous `ListPipelineParametersForExecution`
+#' @param NextToken If the result of the previous
+#' [`list_pipeline_parameters_for_execution`][sagemaker_list_pipeline_parameters_for_execution]
 #' request was truncated, the response includes a `NextToken`. To retrieve
 #' the next set of parameters, use the token in the next request.
 #' @param MaxResults The maximum number of parameters to return in the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineParameters = list(
+#'     list(
+#'       Name = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11561,10 +16186,37 @@ sagemaker_list_pipeline_parameters_for_execution <- function(PipelineExecutionAr
 #' time.
 #' @param SortBy The field by which to sort results. The default is `CreatedTime`.
 #' @param SortOrder The sort order for results.
-#' @param NextToken If the result of the previous `ListPipelines` request was truncated, the
+#' @param NextToken If the result of the previous
+#' [`list_pipelines`][sagemaker_list_pipelines] request was truncated, the
 #' response includes a `NextToken`. To retrieve the next set of pipelines,
 #' use the token in the next request.
 #' @param MaxResults The maximum number of pipelines to return in the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineSummaries = list(
+#'     list(
+#'       PipelineArn = "string",
+#'       PipelineName = "string",
+#'       PipelineDisplayName = "string",
+#'       PipelineDescription = "string",
+#'       RoleArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastExecutionTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11626,10 +16278,37 @@ sagemaker_list_pipelines <- function(PipelineNamePrefix = NULL, CreatedAfter = N
 #' @param StatusEquals A filter that retrieves only processing jobs with a specific status.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
-#' @param NextToken If the result of the previous `ListProcessingJobs` request was
+#' @param NextToken If the result of the previous
+#' [`list_processing_jobs`][sagemaker_list_processing_jobs] request was
 #' truncated, the response includes a `NextToken`. To retrieve the next set
 #' of processing jobs, use the token in the next request.
 #' @param MaxResults The maximum number of processing jobs to return in the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProcessingJobSummaries = list(
+#'     list(
+#'       ProcessingJobName = "string",
+#'       ProcessingJobArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ProcessingEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'       FailureReason = "string",
+#'       ExitMessage = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11691,11 +16370,31 @@ sagemaker_list_processing_jobs <- function(CreationTimeAfter = NULL, CreationTim
 #' @param MaxResults The maximum number of projects to return in the response.
 #' @param NameContains A filter that returns the projects whose name contains a specified
 #' string.
-#' @param NextToken If the result of the previous `ListProjects` request was truncated, the
-#' response includes a `NextToken`. To retrieve the next set of projects,
-#' use the token in the next request.
+#' @param NextToken If the result of the previous [`list_projects`][sagemaker_list_projects]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of projects, use the token in the next request.
 #' @param SortBy The field by which to sort results. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ProjectSummaryList = list(
+#'     list(
+#'       ProjectName = "string",
+#'       ProjectDescription = "string",
+#'       ProjectArn = "string",
+#'       ProjectId = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ProjectStatus = "Pending"|"CreateInProgress"|"CreateCompleted"|"CreateFailed"|"DeleteInProgress"|"DeleteFailed"|"DeleteCompleted"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11747,10 +16446,28 @@ sagemaker_list_projects <- function(CreationTimeAfter = NULL, CreationTimeBefore
 #'
 #' @param NameContains A string in the work team name. This filter returns only work teams
 #' whose name contains the specified string.
-#' @param NextToken If the result of the previous `ListSubscribedWorkteams` request was
-#' truncated, the response includes a `NextToken`. To retrieve the next set
-#' of labeling jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_subscribed_workteams`][sagemaker_list_subscribed_workteams]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of labeling jobs, use the token in the next request.
 #' @param MaxResults The maximum number of work teams to return in each page of the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   SubscribedWorkteams = list(
+#'     list(
+#'       WorkteamArn = "string",
+#'       MarketplaceTitle = "string",
+#'       SellerName = "string",
+#'       MarketplaceDescription = "string",
+#'       ListingId = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11791,10 +16508,24 @@ sagemaker_list_subscribed_workteams <- function(NameContains = NULL, NextToken =
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
 #' retrieve.
-#' @param NextToken If the response to the previous `ListTags` request is truncated, Amazon
-#' SageMaker returns this token. To retrieve the next set of tags, use it
-#' in the subsequent request.
+#' @param NextToken If the response to the previous [`list_tags`][sagemaker_list_tags]
+#' request is truncated, Amazon SageMaker returns this token. To retrieve
+#' the next set of tags, use it in the subsequent request.
 #' @param MaxResults Maximum number of tags to return.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11835,9 +16566,10 @@ sagemaker_list_tags <- function(ResourceArn, NextToken = NULL, MaxResults = NULL
 #'   CreationTimeBefore, LastModifiedTimeAfter, LastModifiedTimeBefore,
 #'   NameContains, StatusEquals, SortBy, SortOrder)
 #'
-#' @param NextToken If the result of the previous `ListTrainingJobs` request was truncated,
-#' the response includes a `NextToken`. To retrieve the next set of
-#' training jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_training_jobs`][sagemaker_list_training_jobs] request was
+#' truncated, the response includes a `NextToken`. To retrieve the next set
+#' of training jobs, use the token in the next request.
 #' @param MaxResults The maximum number of training jobs to return in the response.
 #' @param CreationTimeAfter A filter that returns only training jobs created after the specified
 #' time (timestamp).
@@ -11852,6 +16584,30 @@ sagemaker_list_tags <- function(ResourceArn, NextToken = NULL, MaxResults = NULL
 #' @param StatusEquals A filter that retrieves only training jobs with a specific status.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrainingJobSummaries = list(
+#'     list(
+#'       TrainingJobName = "string",
+#'       TrainingJobArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11911,9 +16667,9 @@ sagemaker_list_training_jobs <- function(NextToken = NULL, MaxResults = NULL, Cr
 #'
 #' @param HyperParameterTuningJobName &#91;required&#93; The name of the tuning job whose training jobs you want to list.
 #' @param NextToken If the result of the previous
-#' `ListTrainingJobsForHyperParameterTuningJob` request was truncated, the
-#' response includes a `NextToken`. To retrieve the next set of training
-#' jobs, use the token in the next request.
+#' [`list_training_jobs_for_hyper_parameter_tuning_job`][sagemaker_list_training_jobs_for_hyper_parameter_tuning_job]
+#' request was truncated, the response includes a `NextToken`. To retrieve
+#' the next set of training jobs, use the token in the next request.
 #' @param MaxResults The maximum number of training jobs to return. The default value is 10.
 #' @param StatusEquals A filter that returns only training jobs with the specified status.
 #' @param SortBy The field to sort results by. The default is `Name`.
@@ -11921,6 +16677,42 @@ sagemaker_list_training_jobs <- function(NextToken = NULL, MaxResults = NULL, Cr
 #' If the value of this field is `FinalObjectiveMetricValue`, any training
 #' jobs that did not return an objective metric are not listed.
 #' @param SortOrder The sort order for results. The default is `Ascending`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrainingJobSummaries = list(
+#'     list(
+#'       TrainingJobDefinitionName = "string",
+#'       TrainingJobName = "string",
+#'       TrainingJobArn = "string",
+#'       TuningJobName = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'       TunedHyperParameters = list(
+#'         "string"
+#'       ),
+#'       FailureReason = "string",
+#'       FinalHyperParameterTuningJobObjectiveMetric = list(
+#'         Type = "Maximize"|"Minimize",
+#'         MetricName = "string",
+#'         Value = 123.0
+#'       ),
+#'       ObjectiveStatus = "Succeeded"|"Pending"|"Failed"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -11977,11 +16769,37 @@ sagemaker_list_training_jobs_for_hyper_parameter_tuning_job <- function(HyperPar
 #' @param StatusEquals A filter that retrieves only transform jobs with a specific status.
 #' @param SortBy The field to sort results by. The default is `CreationTime`.
 #' @param SortOrder The sort order for results. The default is `Descending`.
-#' @param NextToken If the result of the previous `ListTransformJobs` request was truncated,
-#' the response includes a `NextToken`. To retrieve the next set of
-#' transform jobs, use the token in the next request.
+#' @param NextToken If the result of the previous
+#' [`list_transform_jobs`][sagemaker_list_transform_jobs] request was
+#' truncated, the response includes a `NextToken`. To retrieve the next set
+#' of transform jobs, use the token in the next request.
 #' @param MaxResults The maximum number of transform jobs to return in the response. The
 #' default value is `10`.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TransformJobSummaries = list(
+#'     list(
+#'       TransformJobName = "string",
+#'       TransformJobArn = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TransformEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       TransformJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'       FailureReason = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12060,9 +16878,55 @@ sagemaker_list_transform_jobs <- function(CreationTimeAfter = NULL, CreationTime
 #' @param SortOrder The sort order. The default value is `Descending`.
 #' @param MaxResults The maximum number of components to return in the response. The default
 #' value is 10.
-#' @param NextToken If the previous call to `ListTrialComponents` didn't return the full set
-#' of components, the call returns a token for getting the next set of
-#' components.
+#' @param NextToken If the previous call to
+#' [`list_trial_components`][sagemaker_list_trial_components] didn't return
+#' the full set of components, the call returns a token for getting the
+#' next set of components.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentSummaries = list(
+#'     list(
+#'       TrialComponentName = "string",
+#'       TrialComponentArn = "string",
+#'       DisplayName = "string",
+#'       TrialComponentSource = list(
+#'         SourceArn = "string",
+#'         SourceType = "string"
+#'       ),
+#'       Status = list(
+#'         PrimaryStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'         Message = "string"
+#'       ),
+#'       StartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       CreatedBy = list(
+#'         UserProfileArn = "string",
+#'         UserProfileName = "string",
+#'         DomainId = "string"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedBy = list(
+#'         UserProfileArn = "string",
+#'         UserProfileName = "string",
+#'         DomainId = "string"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12127,8 +16991,34 @@ sagemaker_list_trial_components <- function(ExperimentName = NULL, TrialName = N
 #' @param SortOrder The sort order. The default value is `Descending`.
 #' @param MaxResults The maximum number of trials to return in the response. The default
 #' value is 10.
-#' @param NextToken If the previous call to `ListTrials` didn't return the full set of
-#' trials, the call returns a token for getting the next set of trials.
+#' @param NextToken If the previous call to [`list_trials`][sagemaker_list_trials] didn't
+#' return the full set of trials, the call returns a token for getting the
+#' next set of trials.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialSummaries = list(
+#'     list(
+#'       TrialArn = "string",
+#'       TrialName = "string",
+#'       DisplayName = "string",
+#'       TrialSource = list(
+#'         SourceArn = "string",
+#'         SourceType = "string"
+#'       ),
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12185,6 +17075,27 @@ sagemaker_list_trials <- function(ExperimentName = NULL, TrialComponentName = NU
 #' @param DomainIdEquals A parameter by which to filter the results.
 #' @param UserProfileNameContains A parameter by which to filter the results.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserProfiles = list(
+#'     list(
+#'       DomainId = "string",
+#'       UserProfileName = "string",
+#'       Status = "Deleting"|"Failed"|"InService"|"Pending"|"Updating"|"Update_Failed"|"Delete_Failed",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastModifiedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_user_profiles(
@@ -12236,6 +17147,45 @@ sagemaker_list_user_profiles <- function(NextToken = NULL, MaxResults = NULL, So
 #' @param NextToken A token to resume pagination.
 #' @param MaxResults The maximum number of workforces returned in the response.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workforces = list(
+#'     list(
+#'       WorkforceName = "string",
+#'       WorkforceArn = "string",
+#'       LastUpdatedDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       SourceIpConfig = list(
+#'         Cidrs = list(
+#'           "string"
+#'         )
+#'       ),
+#'       SubDomain = "string",
+#'       CognitoConfig = list(
+#'         UserPool = "string",
+#'         ClientId = "string"
+#'       ),
+#'       OidcConfig = list(
+#'         ClientId = "string",
+#'         Issuer = "string",
+#'         AuthorizationEndpoint = "string",
+#'         TokenEndpoint = "string",
+#'         UserInfoEndpoint = "string",
+#'         LogoutEndpoint = "string",
+#'         JwksUri = "string"
+#'       ),
+#'       CreateDate = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_workforces(
@@ -12282,10 +17232,54 @@ sagemaker_list_workforces <- function(SortBy = NULL, SortOrder = NULL, NameConta
 #' @param SortOrder The sort order for results. The default is `Ascending`.
 #' @param NameContains A string in the work team's name. This filter returns only work teams
 #' whose name contains the specified string.
-#' @param NextToken If the result of the previous `ListWorkteams` request was truncated, the
+#' @param NextToken If the result of the previous
+#' [`list_workteams`][sagemaker_list_workteams] request was truncated, the
 #' response includes a `NextToken`. To retrieve the next set of labeling
 #' jobs, use the token in the next request.
 #' @param MaxResults The maximum number of work teams to return in each page of the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workteams = list(
+#'     list(
+#'       WorkteamName = "string",
+#'       MemberDefinitions = list(
+#'         list(
+#'           CognitoMemberDefinition = list(
+#'             UserPool = "string",
+#'             UserGroup = "string",
+#'             ClientId = "string"
+#'           ),
+#'           OidcMemberDefinition = list(
+#'             Groups = list(
+#'               "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       WorkteamArn = "string",
+#'       WorkforceArn = "string",
+#'       ProductListingIds = list(
+#'         "string"
+#'       ),
+#'       Description = "string",
+#'       SubDomain = "string",
+#'       CreateDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       LastUpdatedDate = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       NotificationConfiguration = list(
+#'         NotificationTopicArn = "string"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12334,6 +17328,14 @@ sagemaker_list_workteams <- function(SortBy = NULL, SortOrder = NULL, NameContai
 #' @param ModelPackageGroupName &#91;required&#93; The name of the model group to add a resource policy to.
 #' @param ResourcePolicy &#91;required&#93; The resource policy for the model group.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageGroupArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$put_model_package_group_policy(
@@ -12373,6 +17375,9 @@ sagemaker_put_model_package_group_policy <- function(ModelPackageGroupName, Reso
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet.
 #' @param Devices &#91;required&#93; A list of devices to register with SageMaker Edge Manager.
 #' @param Tags The tags associated with devices.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -12431,6 +17436,20 @@ sagemaker_register_devices <- function(DeviceFleetName, Devices, Tags = NULL) {
 #' 
 #' See a list of available Human Ui Amazon Resource Names (ARNs) in
 #' UiConfig.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   RenderedContent = "string",
+#'   Errors = list(
+#'     list(
+#'       Code = "string",
+#'       Message = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12496,6 +17515,1198 @@ sagemaker_render_ui_template <- function(UiTemplate = NULL, Task, RoleArn, Human
 #' can be passed to the next `SearchRequest` to continue retrieving
 #' results.
 #' @param MaxResults The maximum number of results to return.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Results = list(
+#'     list(
+#'       TrainingJob = list(
+#'         TrainingJobName = "string",
+#'         TrainingJobArn = "string",
+#'         TuningJobArn = "string",
+#'         LabelingJobArn = "string",
+#'         AutoMLJobArn = "string",
+#'         ModelArtifacts = list(
+#'           S3ModelArtifacts = "string"
+#'         ),
+#'         TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'         SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'         FailureReason = "string",
+#'         HyperParameters = list(
+#'           "string"
+#'         ),
+#'         AlgorithmSpecification = list(
+#'           TrainingImage = "string",
+#'           AlgorithmName = "string",
+#'           TrainingInputMode = "Pipe"|"File",
+#'           MetricDefinitions = list(
+#'             list(
+#'               Name = "string",
+#'               Regex = "string"
+#'             )
+#'           ),
+#'           EnableSageMakerMetricsTimeSeries = TRUE|FALSE
+#'         ),
+#'         RoleArn = "string",
+#'         InputDataConfig = list(
+#'           list(
+#'             ChannelName = "string",
+#'             DataSource = list(
+#'               S3DataSource = list(
+#'                 S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                 S3Uri = "string",
+#'                 S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                 AttributeNames = list(
+#'                   "string"
+#'                 )
+#'               ),
+#'               FileSystemDataSource = list(
+#'                 FileSystemId = "string",
+#'                 FileSystemAccessMode = "rw"|"ro",
+#'                 FileSystemType = "EFS"|"FSxLustre",
+#'                 DirectoryPath = "string"
+#'               )
+#'             ),
+#'             ContentType = "string",
+#'             CompressionType = "None"|"Gzip",
+#'             RecordWrapperType = "None"|"RecordIO",
+#'             InputMode = "Pipe"|"File",
+#'             ShuffleConfig = list(
+#'               Seed = 123
+#'             )
+#'           )
+#'         ),
+#'         OutputDataConfig = list(
+#'           KmsKeyId = "string",
+#'           S3OutputPath = "string"
+#'         ),
+#'         ResourceConfig = list(
+#'           InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'           InstanceCount = 123,
+#'           VolumeSizeInGB = 123,
+#'           VolumeKmsKeyId = "string"
+#'         ),
+#'         VpcConfig = list(
+#'           SecurityGroupIds = list(
+#'             "string"
+#'           ),
+#'           Subnets = list(
+#'             "string"
+#'           )
+#'         ),
+#'         StoppingCondition = list(
+#'           MaxRuntimeInSeconds = 123,
+#'           MaxWaitTimeInSeconds = 123
+#'         ),
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         TrainingStartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         TrainingEndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         SecondaryStatusTransitions = list(
+#'           list(
+#'             Status = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'             StartTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             EndTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             StatusMessage = "string"
+#'           )
+#'         ),
+#'         FinalMetricDataList = list(
+#'           list(
+#'             MetricName = "string",
+#'             Value = 123.0,
+#'             Timestamp = as.POSIXct(
+#'               "2015-01-01"
+#'             )
+#'           )
+#'         ),
+#'         EnableNetworkIsolation = TRUE|FALSE,
+#'         EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'         EnableManagedSpotTraining = TRUE|FALSE,
+#'         CheckpointConfig = list(
+#'           S3Uri = "string",
+#'           LocalPath = "string"
+#'         ),
+#'         TrainingTimeInSeconds = 123,
+#'         BillableTimeInSeconds = 123,
+#'         DebugHookConfig = list(
+#'           LocalPath = "string",
+#'           S3OutputPath = "string",
+#'           HookParameters = list(
+#'             "string"
+#'           ),
+#'           CollectionConfigurations = list(
+#'             list(
+#'               CollectionName = "string",
+#'               CollectionParameters = list(
+#'                 "string"
+#'               )
+#'             )
+#'           )
+#'         ),
+#'         ExperimentConfig = list(
+#'           ExperimentName = "string",
+#'           TrialName = "string",
+#'           TrialComponentDisplayName = "string"
+#'         ),
+#'         DebugRuleConfigurations = list(
+#'           list(
+#'             RuleConfigurationName = "string",
+#'             LocalPath = "string",
+#'             S3OutputPath = "string",
+#'             RuleEvaluatorImage = "string",
+#'             InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'             VolumeSizeInGB = 123,
+#'             RuleParameters = list(
+#'               "string"
+#'             )
+#'           )
+#'         ),
+#'         TensorBoardOutputConfig = list(
+#'           LocalPath = "string",
+#'           S3OutputPath = "string"
+#'         ),
+#'         DebugRuleEvaluationStatuses = list(
+#'           list(
+#'             RuleConfigurationName = "string",
+#'             RuleEvaluationJobArn = "string",
+#'             RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped",
+#'             StatusDetails = "string",
+#'             LastModifiedTime = as.POSIXct(
+#'               "2015-01-01"
+#'             )
+#'           )
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       Experiment = list(
+#'         ExperimentName = "string",
+#'         ExperimentArn = "string",
+#'         DisplayName = "string",
+#'         Source = list(
+#'           SourceArn = "string",
+#'           SourceType = "string"
+#'         ),
+#'         Description = "string",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       Trial = list(
+#'         TrialName = "string",
+#'         TrialArn = "string",
+#'         DisplayName = "string",
+#'         ExperimentName = "string",
+#'         Source = list(
+#'           SourceArn = "string",
+#'           SourceType = "string"
+#'         ),
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         MetadataProperties = list(
+#'           CommitId = "string",
+#'           Repository = "string",
+#'           GeneratedBy = "string",
+#'           ProjectId = "string"
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         ),
+#'         TrialComponentSummaries = list(
+#'           list(
+#'             TrialComponentName = "string",
+#'             TrialComponentArn = "string",
+#'             TrialComponentSource = list(
+#'               SourceArn = "string",
+#'               SourceType = "string"
+#'             ),
+#'             CreationTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             CreatedBy = list(
+#'               UserProfileArn = "string",
+#'               UserProfileName = "string",
+#'               DomainId = "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       TrialComponent = list(
+#'         TrialComponentName = "string",
+#'         DisplayName = "string",
+#'         TrialComponentArn = "string",
+#'         Source = list(
+#'           SourceArn = "string",
+#'           SourceType = "string"
+#'         ),
+#'         Status = list(
+#'           PrimaryStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'           Message = "string"
+#'         ),
+#'         StartTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         EndTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         Parameters = list(
+#'           list(
+#'             StringValue = "string",
+#'             NumberValue = 123.0
+#'           )
+#'         ),
+#'         InputArtifacts = list(
+#'           list(
+#'             MediaType = "string",
+#'             Value = "string"
+#'           )
+#'         ),
+#'         OutputArtifacts = list(
+#'           list(
+#'             MediaType = "string",
+#'             Value = "string"
+#'           )
+#'         ),
+#'         Metrics = list(
+#'           list(
+#'             MetricName = "string",
+#'             SourceArn = "string",
+#'             TimeStamp = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             Max = 123.0,
+#'             Min = 123.0,
+#'             Last = 123.0,
+#'             Count = 123,
+#'             Avg = 123.0,
+#'             StdDev = 123.0
+#'           )
+#'         ),
+#'         MetadataProperties = list(
+#'           CommitId = "string",
+#'           Repository = "string",
+#'           GeneratedBy = "string",
+#'           ProjectId = "string"
+#'         ),
+#'         SourceDetail = list(
+#'           SourceArn = "string",
+#'           TrainingJob = list(
+#'             TrainingJobName = "string",
+#'             TrainingJobArn = "string",
+#'             TuningJobArn = "string",
+#'             LabelingJobArn = "string",
+#'             AutoMLJobArn = "string",
+#'             ModelArtifacts = list(
+#'               S3ModelArtifacts = "string"
+#'             ),
+#'             TrainingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'             SecondaryStatus = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'             FailureReason = "string",
+#'             HyperParameters = list(
+#'               "string"
+#'             ),
+#'             AlgorithmSpecification = list(
+#'               TrainingImage = "string",
+#'               AlgorithmName = "string",
+#'               TrainingInputMode = "Pipe"|"File",
+#'               MetricDefinitions = list(
+#'                 list(
+#'                   Name = "string",
+#'                   Regex = "string"
+#'                 )
+#'               ),
+#'               EnableSageMakerMetricsTimeSeries = TRUE|FALSE
+#'             ),
+#'             RoleArn = "string",
+#'             InputDataConfig = list(
+#'               list(
+#'                 ChannelName = "string",
+#'                 DataSource = list(
+#'                   S3DataSource = list(
+#'                     S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                     S3Uri = "string",
+#'                     S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                     AttributeNames = list(
+#'                       "string"
+#'                     )
+#'                   ),
+#'                   FileSystemDataSource = list(
+#'                     FileSystemId = "string",
+#'                     FileSystemAccessMode = "rw"|"ro",
+#'                     FileSystemType = "EFS"|"FSxLustre",
+#'                     DirectoryPath = "string"
+#'                   )
+#'                 ),
+#'                 ContentType = "string",
+#'                 CompressionType = "None"|"Gzip",
+#'                 RecordWrapperType = "None"|"RecordIO",
+#'                 InputMode = "Pipe"|"File",
+#'                 ShuffleConfig = list(
+#'                   Seed = 123
+#'                 )
+#'               )
+#'             ),
+#'             OutputDataConfig = list(
+#'               KmsKeyId = "string",
+#'               S3OutputPath = "string"
+#'             ),
+#'             ResourceConfig = list(
+#'               InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.p4d.24xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5n.xlarge"|"ml.c5n.2xlarge"|"ml.c5n.4xlarge"|"ml.c5n.9xlarge"|"ml.c5n.18xlarge",
+#'               InstanceCount = 123,
+#'               VolumeSizeInGB = 123,
+#'               VolumeKmsKeyId = "string"
+#'             ),
+#'             VpcConfig = list(
+#'               SecurityGroupIds = list(
+#'                 "string"
+#'               ),
+#'               Subnets = list(
+#'                 "string"
+#'               )
+#'             ),
+#'             StoppingCondition = list(
+#'               MaxRuntimeInSeconds = 123,
+#'               MaxWaitTimeInSeconds = 123
+#'             ),
+#'             CreationTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             TrainingStartTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             TrainingEndTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             LastModifiedTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             SecondaryStatusTransitions = list(
+#'               list(
+#'                 Status = "Starting"|"LaunchingMLInstances"|"PreparingTrainingStack"|"Downloading"|"DownloadingTrainingImage"|"Training"|"Uploading"|"Stopping"|"Stopped"|"MaxRuntimeExceeded"|"Completed"|"Failed"|"Interrupted"|"MaxWaitTimeExceeded"|"Updating",
+#'                 StartTime = as.POSIXct(
+#'                   "2015-01-01"
+#'                 ),
+#'                 EndTime = as.POSIXct(
+#'                   "2015-01-01"
+#'                 ),
+#'                 StatusMessage = "string"
+#'               )
+#'             ),
+#'             FinalMetricDataList = list(
+#'               list(
+#'                 MetricName = "string",
+#'                 Value = 123.0,
+#'                 Timestamp = as.POSIXct(
+#'                   "2015-01-01"
+#'                 )
+#'               )
+#'             ),
+#'             EnableNetworkIsolation = TRUE|FALSE,
+#'             EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'             EnableManagedSpotTraining = TRUE|FALSE,
+#'             CheckpointConfig = list(
+#'               S3Uri = "string",
+#'               LocalPath = "string"
+#'             ),
+#'             TrainingTimeInSeconds = 123,
+#'             BillableTimeInSeconds = 123,
+#'             DebugHookConfig = list(
+#'               LocalPath = "string",
+#'               S3OutputPath = "string",
+#'               HookParameters = list(
+#'                 "string"
+#'               ),
+#'               CollectionConfigurations = list(
+#'                 list(
+#'                   CollectionName = "string",
+#'                   CollectionParameters = list(
+#'                     "string"
+#'                   )
+#'                 )
+#'               )
+#'             ),
+#'             ExperimentConfig = list(
+#'               ExperimentName = "string",
+#'               TrialName = "string",
+#'               TrialComponentDisplayName = "string"
+#'             ),
+#'             DebugRuleConfigurations = list(
+#'               list(
+#'                 RuleConfigurationName = "string",
+#'                 LocalPath = "string",
+#'                 S3OutputPath = "string",
+#'                 RuleEvaluatorImage = "string",
+#'                 InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'                 VolumeSizeInGB = 123,
+#'                 RuleParameters = list(
+#'                   "string"
+#'                 )
+#'               )
+#'             ),
+#'             TensorBoardOutputConfig = list(
+#'               LocalPath = "string",
+#'               S3OutputPath = "string"
+#'             ),
+#'             DebugRuleEvaluationStatuses = list(
+#'               list(
+#'                 RuleConfigurationName = "string",
+#'                 RuleEvaluationJobArn = "string",
+#'                 RuleEvaluationStatus = "InProgress"|"NoIssuesFound"|"IssuesFound"|"Error"|"Stopping"|"Stopped",
+#'                 StatusDetails = "string",
+#'                 LastModifiedTime = as.POSIXct(
+#'                   "2015-01-01"
+#'                 )
+#'               )
+#'             ),
+#'             Tags = list(
+#'               list(
+#'                 Key = "string",
+#'                 Value = "string"
+#'               )
+#'             )
+#'           ),
+#'           ProcessingJob = list(
+#'             ProcessingInputs = list(
+#'               list(
+#'                 InputName = "string",
+#'                 AppManaged = TRUE|FALSE,
+#'                 S3Input = list(
+#'                   S3Uri = "string",
+#'                   LocalPath = "string",
+#'                   S3DataType = "ManifestFile"|"S3Prefix",
+#'                   S3InputMode = "Pipe"|"File",
+#'                   S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                   S3CompressionType = "None"|"Gzip"
+#'                 ),
+#'                 DatasetDefinition = list(
+#'                   AthenaDatasetDefinition = list(
+#'                     Catalog = "string",
+#'                     Database = "string",
+#'                     QueryString = "string",
+#'                     WorkGroup = "string",
+#'                     OutputS3Uri = "string",
+#'                     KmsKeyId = "string",
+#'                     OutputFormat = "PARQUET"|"ORC"|"AVRO"|"JSON"|"TEXTFILE",
+#'                     OutputCompression = "GZIP"|"SNAPPY"|"ZLIB"
+#'                   ),
+#'                   RedshiftDatasetDefinition = list(
+#'                     ClusterId = "string",
+#'                     Database = "string",
+#'                     DbUser = "string",
+#'                     QueryString = "string",
+#'                     ClusterRoleArn = "string",
+#'                     OutputS3Uri = "string",
+#'                     KmsKeyId = "string",
+#'                     OutputFormat = "PARQUET"|"CSV",
+#'                     OutputCompression = "None"|"GZIP"|"BZIP2"|"ZSTD"|"SNAPPY"
+#'                   ),
+#'                   LocalPath = "string",
+#'                   DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                   InputMode = "Pipe"|"File"
+#'                 )
+#'               )
+#'             ),
+#'             ProcessingOutputConfig = list(
+#'               Outputs = list(
+#'                 list(
+#'                   OutputName = "string",
+#'                   S3Output = list(
+#'                     S3Uri = "string",
+#'                     LocalPath = "string",
+#'                     S3UploadMode = "Continuous"|"EndOfJob"
+#'                   ),
+#'                   FeatureStoreOutput = list(
+#'                     FeatureGroupName = "string"
+#'                   ),
+#'                   AppManaged = TRUE|FALSE
+#'                 )
+#'               ),
+#'               KmsKeyId = "string"
+#'             ),
+#'             ProcessingJobName = "string",
+#'             ProcessingResources = list(
+#'               ClusterConfig = list(
+#'                 InstanceCount = 123,
+#'                 InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'                 VolumeSizeInGB = 123,
+#'                 VolumeKmsKeyId = "string"
+#'               )
+#'             ),
+#'             StoppingCondition = list(
+#'               MaxRuntimeInSeconds = 123
+#'             ),
+#'             AppSpecification = list(
+#'               ImageUri = "string",
+#'               ContainerEntrypoint = list(
+#'                 "string"
+#'               ),
+#'               ContainerArguments = list(
+#'                 "string"
+#'               )
+#'             ),
+#'             Environment = list(
+#'               "string"
+#'             ),
+#'             NetworkConfig = list(
+#'               EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'               EnableNetworkIsolation = TRUE|FALSE,
+#'               VpcConfig = list(
+#'                 SecurityGroupIds = list(
+#'                   "string"
+#'                 ),
+#'                 Subnets = list(
+#'                   "string"
+#'                 )
+#'               )
+#'             ),
+#'             RoleArn = "string",
+#'             ExperimentConfig = list(
+#'               ExperimentName = "string",
+#'               TrialName = "string",
+#'               TrialComponentDisplayName = "string"
+#'             ),
+#'             ProcessingJobArn = "string",
+#'             ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'             ExitMessage = "string",
+#'             FailureReason = "string",
+#'             ProcessingEndTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             ProcessingStartTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             LastModifiedTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             CreationTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             MonitoringScheduleArn = "string",
+#'             AutoMLJobArn = "string",
+#'             TrainingJobArn = "string",
+#'             Tags = list(
+#'               list(
+#'                 Key = "string",
+#'                 Value = "string"
+#'               )
+#'             )
+#'           ),
+#'           TransformJob = list(
+#'             TransformJobName = "string",
+#'             TransformJobArn = "string",
+#'             TransformJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+#'             FailureReason = "string",
+#'             ModelName = "string",
+#'             MaxConcurrentTransforms = 123,
+#'             ModelClientConfig = list(
+#'               InvocationsTimeoutInSeconds = 123,
+#'               InvocationsMaxRetries = 123
+#'             ),
+#'             MaxPayloadInMB = 123,
+#'             BatchStrategy = "MultiRecord"|"SingleRecord",
+#'             Environment = list(
+#'               "string"
+#'             ),
+#'             TransformInput = list(
+#'               DataSource = list(
+#'                 S3DataSource = list(
+#'                   S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                   S3Uri = "string"
+#'                 )
+#'               ),
+#'               ContentType = "string",
+#'               CompressionType = "None"|"Gzip",
+#'               SplitType = "None"|"Line"|"RecordIO"|"TFRecord"
+#'             ),
+#'             TransformOutput = list(
+#'               S3OutputPath = "string",
+#'               Accept = "string",
+#'               AssembleWith = "None"|"Line",
+#'               KmsKeyId = "string"
+#'             ),
+#'             TransformResources = list(
+#'               InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge",
+#'               InstanceCount = 123,
+#'               VolumeKmsKeyId = "string"
+#'             ),
+#'             CreationTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             TransformStartTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             TransformEndTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             LabelingJobArn = "string",
+#'             AutoMLJobArn = "string",
+#'             DataProcessing = list(
+#'               InputFilter = "string",
+#'               OutputFilter = "string",
+#'               JoinSource = "Input"|"None"
+#'             ),
+#'             ExperimentConfig = list(
+#'               ExperimentName = "string",
+#'               TrialName = "string",
+#'               TrialComponentDisplayName = "string"
+#'             ),
+#'             Tags = list(
+#'               list(
+#'                 Key = "string",
+#'                 Value = "string"
+#'               )
+#'             )
+#'           )
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         ),
+#'         Parents = list(
+#'           list(
+#'             TrialName = "string",
+#'             ExperimentName = "string"
+#'           )
+#'         )
+#'       ),
+#'       Endpoint = list(
+#'         EndpointName = "string",
+#'         EndpointArn = "string",
+#'         EndpointConfigName = "string",
+#'         ProductionVariants = list(
+#'           list(
+#'             VariantName = "string",
+#'             DeployedImages = list(
+#'               list(
+#'                 SpecifiedImage = "string",
+#'                 ResolvedImage = "string",
+#'                 ResolutionTime = as.POSIXct(
+#'                   "2015-01-01"
+#'                 )
+#'               )
+#'             ),
+#'             CurrentWeight = 123.0,
+#'             DesiredWeight = 123.0,
+#'             CurrentInstanceCount = 123,
+#'             DesiredInstanceCount = 123
+#'           )
+#'         ),
+#'         DataCaptureConfig = list(
+#'           EnableCapture = TRUE|FALSE,
+#'           CaptureStatus = "Started"|"Stopped",
+#'           CurrentSamplingPercentage = 123,
+#'           DestinationS3Uri = "string",
+#'           KmsKeyId = "string"
+#'         ),
+#'         EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed",
+#'         FailureReason = "string",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         MonitoringSchedules = list(
+#'           list(
+#'             MonitoringScheduleArn = "string",
+#'             MonitoringScheduleName = "string",
+#'             MonitoringScheduleStatus = "Pending"|"Failed"|"Scheduled"|"Stopped",
+#'             MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability",
+#'             FailureReason = "string",
+#'             CreationTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             LastModifiedTime = as.POSIXct(
+#'               "2015-01-01"
+#'             ),
+#'             MonitoringScheduleConfig = list(
+#'               ScheduleConfig = list(
+#'                 ScheduleExpression = "string"
+#'               ),
+#'               MonitoringJobDefinition = list(
+#'                 BaselineConfig = list(
+#'                   BaseliningJobName = "string",
+#'                   ConstraintsResource = list(
+#'                     S3Uri = "string"
+#'                   ),
+#'                   StatisticsResource = list(
+#'                     S3Uri = "string"
+#'                   )
+#'                 ),
+#'                 MonitoringInputs = list(
+#'                   list(
+#'                     EndpointInput = list(
+#'                       EndpointName = "string",
+#'                       LocalPath = "string",
+#'                       S3InputMode = "Pipe"|"File",
+#'                       S3DataDistributionType = "FullyReplicated"|"ShardedByS3Key",
+#'                       FeaturesAttribute = "string",
+#'                       InferenceAttribute = "string",
+#'                       ProbabilityAttribute = "string",
+#'                       ProbabilityThresholdAttribute = 123.0,
+#'                       StartTimeOffset = "string",
+#'                       EndTimeOffset = "string"
+#'                     )
+#'                   )
+#'                 ),
+#'                 MonitoringOutputConfig = list(
+#'                   MonitoringOutputs = list(
+#'                     list(
+#'                       S3Output = list(
+#'                         S3Uri = "string",
+#'                         LocalPath = "string",
+#'                         S3UploadMode = "Continuous"|"EndOfJob"
+#'                       )
+#'                     )
+#'                   ),
+#'                   KmsKeyId = "string"
+#'                 ),
+#'                 MonitoringResources = list(
+#'                   ClusterConfig = list(
+#'                     InstanceCount = 123,
+#'                     InstanceType = "ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge",
+#'                     VolumeSizeInGB = 123,
+#'                     VolumeKmsKeyId = "string"
+#'                   )
+#'                 ),
+#'                 MonitoringAppSpecification = list(
+#'                   ImageUri = "string",
+#'                   ContainerEntrypoint = list(
+#'                     "string"
+#'                   ),
+#'                   ContainerArguments = list(
+#'                     "string"
+#'                   ),
+#'                   RecordPreprocessorSourceUri = "string",
+#'                   PostAnalyticsProcessorSourceUri = "string"
+#'                 ),
+#'                 StoppingCondition = list(
+#'                   MaxRuntimeInSeconds = 123
+#'                 ),
+#'                 Environment = list(
+#'                   "string"
+#'                 ),
+#'                 NetworkConfig = list(
+#'                   EnableInterContainerTrafficEncryption = TRUE|FALSE,
+#'                   EnableNetworkIsolation = TRUE|FALSE,
+#'                   VpcConfig = list(
+#'                     SecurityGroupIds = list(
+#'                       "string"
+#'                     ),
+#'                     Subnets = list(
+#'                       "string"
+#'                     )
+#'                   )
+#'                 ),
+#'                 RoleArn = "string"
+#'               ),
+#'               MonitoringJobDefinitionName = "string",
+#'               MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'             ),
+#'             EndpointName = "string",
+#'             LastMonitoringExecutionSummary = list(
+#'               MonitoringScheduleName = "string",
+#'               ScheduledTime = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               CreationTime = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               LastModifiedTime = as.POSIXct(
+#'                 "2015-01-01"
+#'               ),
+#'               MonitoringExecutionStatus = "Pending"|"Completed"|"CompletedWithViolations"|"InProgress"|"Failed"|"Stopping"|"Stopped",
+#'               ProcessingJobArn = "string",
+#'               EndpointName = "string",
+#'               FailureReason = "string",
+#'               MonitoringJobDefinitionName = "string",
+#'               MonitoringType = "DataQuality"|"ModelQuality"|"ModelBias"|"ModelExplainability"
+#'             ),
+#'             Tags = list(
+#'               list(
+#'                 Key = "string",
+#'                 Value = "string"
+#'               )
+#'             )
+#'           )
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       ModelPackage = list(
+#'         ModelPackageName = "string",
+#'         ModelPackageGroupName = "string",
+#'         ModelPackageVersion = 123,
+#'         ModelPackageArn = "string",
+#'         ModelPackageDescription = "string",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         InferenceSpecification = list(
+#'           Containers = list(
+#'             list(
+#'               ContainerHostname = "string",
+#'               Image = "string",
+#'               ImageDigest = "string",
+#'               ModelDataUrl = "string",
+#'               ProductId = "string"
+#'             )
+#'           ),
+#'           SupportedTransformInstanceTypes = list(
+#'             "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"
+#'           ),
+#'           SupportedRealtimeInferenceInstanceTypes = list(
+#'             "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.12xlarge"|"ml.m5d.24xlarge"|"ml.c4.large"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.large"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.large"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.12xlarge"|"ml.r5.24xlarge"|"ml.r5d.large"|"ml.r5d.xlarge"|"ml.r5d.2xlarge"|"ml.r5d.4xlarge"|"ml.r5d.12xlarge"|"ml.r5d.24xlarge"|"ml.inf1.xlarge"|"ml.inf1.2xlarge"|"ml.inf1.6xlarge"|"ml.inf1.24xlarge"
+#'           ),
+#'           SupportedContentTypes = list(
+#'             "string"
+#'           ),
+#'           SupportedResponseMIMETypes = list(
+#'             "string"
+#'           )
+#'         ),
+#'         SourceAlgorithmSpecification = list(
+#'           SourceAlgorithms = list(
+#'             list(
+#'               ModelDataUrl = "string",
+#'               AlgorithmName = "string"
+#'             )
+#'           )
+#'         ),
+#'         ValidationSpecification = list(
+#'           ValidationRole = "string",
+#'           ValidationProfiles = list(
+#'             list(
+#'               ProfileName = "string",
+#'               TransformJobDefinition = list(
+#'                 MaxConcurrentTransforms = 123,
+#'                 MaxPayloadInMB = 123,
+#'                 BatchStrategy = "MultiRecord"|"SingleRecord",
+#'                 Environment = list(
+#'                   "string"
+#'                 ),
+#'                 TransformInput = list(
+#'                   DataSource = list(
+#'                     S3DataSource = list(
+#'                       S3DataType = "ManifestFile"|"S3Prefix"|"AugmentedManifestFile",
+#'                       S3Uri = "string"
+#'                     )
+#'                   ),
+#'                   ContentType = "string",
+#'                   CompressionType = "None"|"Gzip",
+#'                   SplitType = "None"|"Line"|"RecordIO"|"TFRecord"
+#'                 ),
+#'                 TransformOutput = list(
+#'                   S3OutputPath = "string",
+#'                   Accept = "string",
+#'                   AssembleWith = "None"|"Line",
+#'                   KmsKeyId = "string"
+#'                 ),
+#'                 TransformResources = list(
+#'                   InstanceType = "ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.m5.large"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge",
+#'                   InstanceCount = 123,
+#'                   VolumeKmsKeyId = "string"
+#'                 )
+#'               )
+#'             )
+#'           )
+#'         ),
+#'         ModelPackageStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting",
+#'         ModelPackageStatusDetails = list(
+#'           ValidationStatuses = list(
+#'             list(
+#'               Name = "string",
+#'               Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'               FailureReason = "string"
+#'             )
+#'           ),
+#'           ImageScanStatuses = list(
+#'             list(
+#'               Name = "string",
+#'               Status = "NotStarted"|"InProgress"|"Completed"|"Failed",
+#'               FailureReason = "string"
+#'             )
+#'           )
+#'         ),
+#'         CertifyForMarketplace = TRUE|FALSE,
+#'         ModelApprovalStatus = "Approved"|"Rejected"|"PendingManualApproval",
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         MetadataProperties = list(
+#'           CommitId = "string",
+#'           Repository = "string",
+#'           GeneratedBy = "string",
+#'           ProjectId = "string"
+#'         ),
+#'         ModelMetrics = list(
+#'           ModelQuality = list(
+#'             Statistics = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             ),
+#'             Constraints = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             )
+#'           ),
+#'           ModelDataQuality = list(
+#'             Statistics = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             ),
+#'             Constraints = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             )
+#'           ),
+#'           Bias = list(
+#'             Report = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             )
+#'           ),
+#'           Explainability = list(
+#'             Report = list(
+#'               ContentType = "string",
+#'               ContentDigest = "string",
+#'               S3Uri = "string"
+#'             )
+#'           )
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         ApprovalDescription = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       ModelPackageGroup = list(
+#'         ModelPackageGroupName = "string",
+#'         ModelPackageGroupArn = "string",
+#'         ModelPackageGroupDescription = "string",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         ModelPackageGroupStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|"DeleteFailed",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       Pipeline = list(
+#'         PipelineArn = "string",
+#'         PipelineName = "string",
+#'         PipelineDisplayName = "string",
+#'         PipelineDescription = "string",
+#'         RoleArn = "string",
+#'         PipelineStatus = "Active",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastRunTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       PipelineExecution = list(
+#'         PipelineArn = "string",
+#'         PipelineExecutionArn = "string",
+#'         PipelineExecutionDisplayName = "string",
+#'         PipelineExecutionStatus = "Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded",
+#'         PipelineExecutionDescription = "string",
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         LastModifiedTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         CreatedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         LastModifiedBy = list(
+#'           UserProfileArn = "string",
+#'           UserProfileName = "string",
+#'           DomainId = "string"
+#'         ),
+#'         PipelineParameters = list(
+#'           list(
+#'             Name = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       ),
+#'       FeatureGroup = list(
+#'         FeatureGroupArn = "string",
+#'         FeatureGroupName = "string",
+#'         RecordIdentifierFeatureName = "string",
+#'         EventTimeFeatureName = "string",
+#'         FeatureDefinitions = list(
+#'           list(
+#'             FeatureName = "string",
+#'             FeatureType = "Integral"|"Fractional"|"String"
+#'           )
+#'         ),
+#'         CreationTime = as.POSIXct(
+#'           "2015-01-01"
+#'         ),
+#'         OnlineStoreConfig = list(
+#'           SecurityConfig = list(
+#'             KmsKeyId = "string"
+#'           ),
+#'           EnableOnlineStore = TRUE|FALSE
+#'         ),
+#'         OfflineStoreConfig = list(
+#'           S3StorageConfig = list(
+#'             S3Uri = "string",
+#'             KmsKeyId = "string"
+#'           ),
+#'           DisableGlueTableCreation = TRUE|FALSE,
+#'           DataCatalogConfig = list(
+#'             TableName = "string",
+#'             Catalog = "string",
+#'             Database = "string"
+#'           )
+#'         ),
+#'         RoleArn = "string",
+#'         FeatureGroupStatus = "Creating"|"Created"|"CreateFailed"|"Deleting"|"DeleteFailed",
+#'         OfflineStoreStatus = list(
+#'           Status = "Active"|"Blocked"|"Disabled",
+#'           BlockedReason = "string"
+#'         ),
+#'         FailureReason = "string",
+#'         Description = "string",
+#'         Tags = list(
+#'           list(
+#'             Key = "string",
+#'             Value = "string"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12566,6 +18777,9 @@ sagemaker_search <- function(Resource, SearchExpression = NULL, SortBy = NULL, S
 #'
 #' @param MonitoringScheduleName &#91;required&#93; The name of the schedule to start.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$start_monitoring_schedule(
@@ -12607,6 +18821,9 @@ sagemaker_start_monitoring_schedule <- function(MonitoringScheduleName) {
 #' sagemaker_start_notebook_instance(NotebookInstanceName)
 #'
 #' @param NotebookInstanceName &#91;required&#93; The name of the notebook instance to start.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -12652,6 +18869,14 @@ sagemaker_start_notebook_instance <- function(NotebookInstanceName) {
 #' @param ClientRequestToken &#91;required&#93; A unique, case-sensitive identifier that you provide to ensure the
 #' idempotency of the operation. An idempotent operation completes no more
 #' than one time.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineExecutionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -12699,6 +18924,9 @@ sagemaker_start_pipeline_execution <- function(PipelineName, PipelineExecutionDi
 #'
 #' @param AutoMLJobName &#91;required&#93; The name of the object you are requesting.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_auto_ml_job(
@@ -12735,15 +18963,19 @@ sagemaker_stop_auto_ml_job <- function(AutoMLJobName) {
 #' This gracefully shuts the job down. If the job hasn't stopped, it sends
 #' the SIGKILL signal.
 #' 
-#' When it receives a `StopCompilationJob` request, Amazon SageMaker
-#' changes the CompilationJobSummary$CompilationJobStatus of the job to
-#' `Stopping`. After Amazon SageMaker stops the job, it sets the
+#' When it receives a
+#' [`stop_compilation_job`][sagemaker_stop_compilation_job] request, Amazon
+#' SageMaker changes the CompilationJobSummary$CompilationJobStatus of the
+#' job to `Stopping`. After Amazon SageMaker stops the job, it sets the
 #' CompilationJobSummary$CompilationJobStatus to `Stopped`.
 #'
 #' @usage
 #' sagemaker_stop_compilation_job(CompilationJobName)
 #'
 #' @param CompilationJobName &#91;required&#93; The name of the model compilation job to stop.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -12781,6 +19013,9 @@ sagemaker_stop_compilation_job <- function(CompilationJobName) {
 #' sagemaker_stop_edge_packaging_job(EdgePackagingJobName)
 #'
 #' @param EdgePackagingJobName &#91;required&#93; The name of the edge packaging job.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -12827,6 +19062,9 @@ sagemaker_stop_edge_packaging_job <- function(EdgePackagingJobName) {
 #'
 #' @param HyperParameterTuningJobName &#91;required&#93; The name of the tuning job to stop.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_hyper_parameter_tuning_job(
@@ -12866,6 +19104,9 @@ sagemaker_stop_hyper_parameter_tuning_job <- function(HyperParameterTuningJobNam
 #'
 #' @param LabelingJobName &#91;required&#93; The name of the labeling job to stop.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_labeling_job(
@@ -12903,6 +19144,9 @@ sagemaker_stop_labeling_job <- function(LabelingJobName) {
 #'
 #' @param MonitoringScheduleName &#91;required&#93; The name of the schedule to stop.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_monitoring_schedule(
@@ -12937,18 +19181,22 @@ sagemaker_stop_monitoring_schedule <- function(MonitoringScheduleName) {
 #' Amazon SageMaker disconnects the ML storage volume from it. Amazon
 #' SageMaker preserves the ML storage volume. Amazon SageMaker stops
 #' charging you for the ML compute instance when you call
-#' `StopNotebookInstance`.
+#' [`stop_notebook_instance`][sagemaker_stop_notebook_instance].
 #' 
 #' To access data on the ML storage volume for a notebook instance that has
-#' been terminated, call the `StartNotebookInstance` API.
-#' `StartNotebookInstance` launches another ML compute instance, configures
-#' it, and attaches the preserved ML storage volume so you can continue
-#' your work.
+#' been terminated, call the
+#' [`start_notebook_instance`][sagemaker_start_notebook_instance] API.
+#' [`start_notebook_instance`][sagemaker_start_notebook_instance] launches
+#' another ML compute instance, configures it, and attaches the preserved
+#' ML storage volume so you can continue your work.
 #'
 #' @usage
 #' sagemaker_stop_notebook_instance(NotebookInstanceName)
 #'
 #' @param NotebookInstanceName &#91;required&#93; The name of the notebook instance to terminate.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -12991,6 +19239,14 @@ sagemaker_stop_notebook_instance <- function(NotebookInstanceName) {
 #' idempotency of the operation. An idempotent operation completes no more
 #' than one time.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineExecutionArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_pipeline_execution(
@@ -13029,6 +19285,9 @@ sagemaker_stop_pipeline_execution <- function(PipelineExecutionArn, ClientReques
 #'
 #' @param ProcessingJobName &#91;required&#93; The name of the processing job to stop.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$stop_processing_job(
@@ -13064,14 +19323,17 @@ sagemaker_stop_processing_job <- function(ProcessingJobName) {
 #' seconds. Algorithms might use this 120-second window to save the model
 #' artifacts, so the results of the training is not lost.
 #' 
-#' When it receives a `StopTrainingJob` request, Amazon SageMaker changes
-#' the status of the job to `Stopping`. After Amazon SageMaker stops the
-#' job, it sets the status to `Stopped`.
+#' When it receives a [`stop_training_job`][sagemaker_stop_training_job]
+#' request, Amazon SageMaker changes the status of the job to `Stopping`.
+#' After Amazon SageMaker stops the job, it sets the status to `Stopped`.
 #'
 #' @usage
 #' sagemaker_stop_training_job(TrainingJobName)
 #'
 #' @param TrainingJobName &#91;required&#93; The name of the training job to stop.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -13105,7 +19367,8 @@ sagemaker_stop_training_job <- function(TrainingJobName) {
 #' @description
 #' Stops a transform job.
 #' 
-#' When Amazon SageMaker receives a `StopTransformJob` request, the status
+#' When Amazon SageMaker receives a
+#' [`stop_transform_job`][sagemaker_stop_transform_job] request, the status
 #' of the job changes to `Stopping`. After Amazon SageMaker stops the job,
 #' the status is set to `Stopped`. When you stop a transform job before it
 #' is completed, Amazon SageMaker doesn't store the job's output in Amazon
@@ -13115,6 +19378,9 @@ sagemaker_stop_training_job <- function(TrainingJobName) {
 #' sagemaker_stop_transform_job(TransformJobName)
 #'
 #' @param TransformJobName &#91;required&#93; The name of the transform job to stop.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -13157,6 +19423,14 @@ sagemaker_stop_transform_job <- function(TransformJobName) {
 #' @param Status The new status for the action.
 #' @param Properties The new list of properties. Overwrites the current property list.
 #' @param PropertiesToRemove A list of properties to remove.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ActionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13204,6 +19478,14 @@ sagemaker_update_action <- function(ActionName, Description = NULL, Status = NUL
 #'
 #' @param AppImageConfigName &#91;required&#93; The name of the AppImageConfig to update.
 #' @param KernelGatewayImageConfig The new KernelGateway app to run on the image.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   AppImageConfigArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13259,6 +19541,14 @@ sagemaker_update_app_image_config <- function(AppImageConfigName, KernelGatewayI
 #' @param Properties The new list of properties. Overwrites the current property list.
 #' @param PropertiesToRemove A list of properties to remove.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArtifactArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_artifact(
@@ -13308,7 +19598,15 @@ sagemaker_update_artifact <- function(ArtifactArn, ArtifactName = NULL, Properti
 #' have a staging label of `AWSCURRENT` and must be in the following
 #' format:
 #' 
-#' `\{"username": <i>UserName</i>, "password": <i>Password</i>\}`
+#' `{"username": UserName, "password": Password}`
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   CodeRepositoryArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13353,6 +19651,14 @@ sagemaker_update_code_repository <- function(CodeRepositoryName, GitConfig = NUL
 #' @param Description The new description for the context.
 #' @param Properties The new list of properties. Overwrites the current property list.
 #' @param PropertiesToRemove A list of properties to remove.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ContextArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13402,6 +19708,9 @@ sagemaker_update_context <- function(ContextName, Description = NULL, Properties
 #' @param Description Description of the fleet.
 #' @param OutputConfig &#91;required&#93; Output configuration for storing sample data collected by the fleet.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_device_fleet(
@@ -13445,6 +19754,9 @@ sagemaker_update_device_fleet <- function(DeviceFleetName, RoleArn = NULL, Descr
 #'
 #' @param DeviceFleetName &#91;required&#93; The name of the fleet the devices belong to.
 #' @param Devices &#91;required&#93; List of devices to register with Edge Manager agent.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -13490,6 +19802,14 @@ sagemaker_update_devices <- function(DeviceFleetName, Devices) {
 #'
 #' @param DomainId &#91;required&#93; The ID of the domain to be updated.
 #' @param DefaultUserSettings A collection of settings.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   DomainArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13571,12 +19891,13 @@ sagemaker_update_domain <- function(DomainId, DefaultUserSettings = NULL) {
 #' When Amazon SageMaker receives the request, it sets the endpoint status
 #' to `Updating`. After updating the endpoint, it sets the status to
 #' `InService`. To check the status of an endpoint, use the
-#' DescribeEndpoint API.
+#' [`describe_endpoint`][sagemaker_describe_endpoint] API.
 #' 
 #' You must not delete an `EndpointConfig` in use by an endpoint that is
-#' live or while the `UpdateEndpoint` or `CreateEndpoint` operations are
-#' being performed on the endpoint. To update an endpoint, you must create
-#' a new `EndpointConfig`.
+#' live or while the [`update_endpoint`][sagemaker_update_endpoint] or
+#' [`create_endpoint`][sagemaker_create_endpoint] operations are being
+#' performed on the endpoint. To update an endpoint, you must create a new
+#' `EndpointConfig`.
 #' 
 #' If you delete the `EndpointConfig` of an endpoint that is active or
 #' being created or updated you may lose visibility into the instance type
@@ -13605,6 +19926,14 @@ sagemaker_update_domain <- function(DomainId, DefaultUserSettings = NULL) {
 #' `EndpointConfig`. If you don't specify a value for
 #' `ExcludeAllVariantProperties`, no variant properties are overridden.
 #' @param DeploymentConfig The deployment configuration for the endpoint to be updated.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13671,7 +20000,7 @@ sagemaker_update_endpoint <- function(EndpointName, EndpointConfigName, RetainAl
 #' existing endpoint. When it receives the request, Amazon SageMaker sets
 #' the endpoint status to `Updating`. After updating the endpoint, it sets
 #' the status to `InService`. To check the status of an endpoint, use the
-#' DescribeEndpoint API.
+#' [`describe_endpoint`][sagemaker_describe_endpoint] API.
 #'
 #' @usage
 #' sagemaker_update_endpoint_weights_and_capacities(EndpointName,
@@ -13679,6 +20008,14 @@ sagemaker_update_endpoint <- function(EndpointName, EndpointConfigName, RetainAl
 #'
 #' @param EndpointName &#91;required&#93; The name of an existing Amazon SageMaker endpoint.
 #' @param DesiredWeightsAndCapacities &#91;required&#93; An object that provides new capacity and weight values for a variant.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EndpointArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13728,6 +20065,14 @@ sagemaker_update_endpoint_weights_and_capacities <- function(EndpointName, Desir
 #' unique. If `DisplayName` isn't specified, `ExperimentName` is displayed.
 #' @param Description The description of the experiment.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ExperimentArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_experiment(
@@ -13761,7 +20106,8 @@ sagemaker_update_experiment <- function(ExperimentName, DisplayName = NULL, Desc
 #'
 #' @description
 #' Updates the properties of a SageMaker image. To change the image's tags,
-#' use the AddTags and DeleteTags APIs.
+#' use the [`add_tags`][sagemaker_add_tags] and
+#' [`delete_tags`][sagemaker_delete_tags] APIs.
 #'
 #' @usage
 #' sagemaker_update_image(DeleteProperties, Description, DisplayName,
@@ -13774,6 +20120,14 @@ sagemaker_update_experiment <- function(ExperimentName, DisplayName = NULL, Desc
 #' @param ImageName &#91;required&#93; The name of the image to update.
 #' @param RoleArn The new Amazon Resource Name (ARN) for the IAM role that enables Amazon
 #' SageMaker to perform tasks on your behalf.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ImageArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -13821,6 +20175,14 @@ sagemaker_update_image <- function(DeleteProperties = NULL, Description = NULL, 
 #' @param ModelApprovalStatus &#91;required&#93; The approval status of the model.
 #' @param ApprovalDescription A description for the approval status of the model.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ModelPackageArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_model_package(
@@ -13863,6 +20225,14 @@ sagemaker_update_model_package <- function(ModelPackageArn, ModelApprovalStatus,
 #' AWS Region within an AWS account.
 #' @param MonitoringScheduleConfig &#91;required&#93; The configuration object that specifies the monitoring schedule and
 #' defines the monitoring job.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   MonitoringScheduleArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -14058,6 +20428,9 @@ sagemaker_update_monitoring_schedule <- function(MonitoringScheduleName, Monitor
 #' notebook instance, but lifecycle configuration scripts still run with
 #' root permissions.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_notebook_instance(
@@ -14106,7 +20479,8 @@ sagemaker_update_notebook_instance <- function(NotebookInstanceName, InstanceTyp
 #'
 #' @description
 #' Updates a notebook instance lifecycle configuration created with the
-#' CreateNotebookInstanceLifecycleConfig API.
+#' [`create_notebook_instance_lifecycle_config`][sagemaker_create_notebook_instance_lifecycle_config]
+#' API.
 #'
 #' @usage
 #' sagemaker_update_notebook_instance_lifecycle_config(
@@ -14118,6 +20492,9 @@ sagemaker_update_notebook_instance <- function(NotebookInstanceName, InstanceTyp
 #' @param OnStart The shell script that runs every time you start a notebook instance,
 #' including when you create the notebook instance. The shell script must
 #' be a base64-encoded string.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -14171,6 +20548,14 @@ sagemaker_update_notebook_instance_lifecycle_config <- function(NotebookInstance
 #' @param PipelineDescription The description of the pipeline.
 #' @param RoleArn The Amazon Resource Name (ARN) that the pipeline uses to execute.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_pipeline(
@@ -14214,6 +20599,14 @@ sagemaker_update_pipeline <- function(PipelineName, PipelineDisplayName = NULL, 
 #' @param PipelineExecutionArn &#91;required&#93; The Amazon Resource Name (ARN) of the pipeline execution.
 #' @param PipelineExecutionDescription The description of the pipeline execution.
 #' @param PipelineExecutionDisplayName The display name of the pipeline execution.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PipelineExecutionArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -14261,6 +20654,14 @@ sagemaker_update_pipeline_execution <- function(PipelineExecutionArn, PipelineEx
 #' profiling, and storage paths.
 #' @param ProfilerRuleConfigurations Configuration information for Debugger rules for profiling system and
 #' framework metrics.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrainingJobArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -14322,6 +20723,14 @@ sagemaker_update_training_job <- function(TrainingJobName, ProfilerConfig = NULL
 #' @param DisplayName The name of the trial as displayed. The name doesn't need to be unique.
 #' If `DisplayName` isn't specified, `TrialName` is displayed.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_trial(
@@ -14377,6 +20786,14 @@ sagemaker_update_trial <- function(TrialName, DisplayName = NULL) {
 #' @param OutputArtifacts Replaces all of the component's output artifacts with the specified
 #' artifacts.
 #' @param OutputArtifactsToRemove The output artifacts to remove from the component.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   TrialComponentArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -14454,6 +20871,14 @@ sagemaker_update_trial_component <- function(TrialComponentName, DisplayName = N
 #' @param DomainId &#91;required&#93; The domain ID.
 #' @param UserProfileName &#91;required&#93; The user profile name.
 #' @param UserSettings A collection of settings.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   UserProfileArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -14565,6 +20990,42 @@ sagemaker_update_user_profile <- function(DomainId, UserProfileName, UserSetting
 #' @param OidcConfig Use this parameter to update your OIDC Identity Provider (IdP)
 #' configuration for a workforce made using your own IdP.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workforce = list(
+#'     WorkforceName = "string",
+#'     WorkforceArn = "string",
+#'     LastUpdatedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     SourceIpConfig = list(
+#'       Cidrs = list(
+#'         "string"
+#'       )
+#'     ),
+#'     SubDomain = "string",
+#'     CognitoConfig = list(
+#'       UserPool = "string",
+#'       ClientId = "string"
+#'     ),
+#'     OidcConfig = list(
+#'       ClientId = "string",
+#'       Issuer = "string",
+#'       AuthorizationEndpoint = "string",
+#'       TokenEndpoint = "string",
+#'       UserInfoEndpoint = "string",
+#'       LogoutEndpoint = "string",
+#'       JwksUri = "string"
+#'     ),
+#'     CreateDate = as.POSIXct(
+#'       "2015-01-01"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$update_workforce(
@@ -14645,6 +21106,46 @@ sagemaker_update_workforce <- function(WorkforceName, SourceIpConfig = NULL, Oid
 #' with the work team you update.
 #' @param Description An updated description for the work team.
 #' @param NotificationConfiguration Configures SNS topic notifications for available or expiring work items
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Workteam = list(
+#'     WorkteamName = "string",
+#'     MemberDefinitions = list(
+#'       list(
+#'         CognitoMemberDefinition = list(
+#'           UserPool = "string",
+#'           UserGroup = "string",
+#'           ClientId = "string"
+#'         ),
+#'         OidcMemberDefinition = list(
+#'           Groups = list(
+#'             "string"
+#'           )
+#'         )
+#'       )
+#'     ),
+#'     WorkteamArn = "string",
+#'     WorkforceArn = "string",
+#'     ProductListingIds = list(
+#'       "string"
+#'     ),
+#'     Description = "string",
+#'     SubDomain = "string",
+#'     CreateDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     LastUpdatedDate = as.POSIXct(
+#'       "2015-01-01"
+#'     ),
+#'     NotificationConfiguration = list(
+#'       NotificationTopicArn = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

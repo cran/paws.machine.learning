@@ -7,15 +7,37 @@
 personalize_list_dataset_groups(nextToken, maxResults)
 }
 \arguments{
-\item{nextToken}{A token returned from the previous call to \code{ListDatasetGroups} for
-getting the next set of dataset groups (if they exist).}
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_dataset_groups]{list_dataset_groups}} for getting the
+next set of dataset groups (if they exist).}
 
 \item{maxResults}{The maximum number of dataset groups to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  datasetGroups = list(
+    list(
+      name = "string",
+      datasetGroupArn = "string",
+      status = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      failureReason = "string"
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Returns a list of dataset groups. The response provides the properties
 for each dataset group, including the Amazon Resource Name (ARN). For
-more information on dataset groups, see CreateDatasetGroup.
+more information on dataset groups, see
+\code{\link[=personalize_create_dataset_group]{create_dataset_group}}.
 }
 \section{Request syntax}{
 \preformatted{svc$list_dataset_groups(

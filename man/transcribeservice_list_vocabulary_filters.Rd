@@ -8,8 +8,10 @@ transcribeservice_list_vocabulary_filters(NextToken, MaxResults,
   NameContains)
 }
 \arguments{
-\item{NextToken}{If the result of the previous request to \code{ListVocabularyFilters} was
-truncated, include the \code{NextToken} to fetch the next set of collections.}
+\item{NextToken}{If the result of the previous request to
+\code{\link[=transcribeservice_list_vocabulary_filters]{list_vocabulary_filters}}
+was truncated, include the \code{NextToken} to fetch the next set of
+collections.}
 
 \item{MaxResults}{The maximum number of filters to return in the response. If there are
 fewer results in the list, this response contains only the actual
@@ -17,6 +19,21 @@ results.}
 
 \item{NameContains}{Filters the response so that it only contains vocabulary filters whose
 name contains the specified string.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  NextToken = "string",
+  VocabularyFilters = list(
+    list(
+      VocabularyFilterName = "string",
+      LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN",
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Gets information about vocabulary filters.

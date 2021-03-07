@@ -16,6 +16,56 @@ different checksum, a \code{PreconditionFailedException} exception is
 returned and Amazon Lex doesn't publish a new version. If you don't
 specify a checksum, Amazon Lex publishes the \verb{$LATEST} version.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  name = "string",
+  description = "string",
+  intents = list(
+    list(
+      intentName = "string",
+      intentVersion = "string"
+    )
+  ),
+  clarificationPrompt = list(
+    messages = list(
+      list(
+        contentType = "PlainText"|"SSML"|"CustomPayload",
+        content = "string",
+        groupNumber = 123
+      )
+    ),
+    maxAttempts = 123,
+    responseCard = "string"
+  ),
+  abortStatement = list(
+    messages = list(
+      list(
+        contentType = "PlainText"|"SSML"|"CustomPayload",
+        content = "string",
+        groupNumber = 123
+      )
+    ),
+    responseCard = "string"
+  ),
+  status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT",
+  failureReason = "string",
+  lastUpdatedDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  createdDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  idleSessionTTLInSeconds = 123,
+  voiceId = "string",
+  checksum = "string",
+  version = "string",
+  locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
+  childDirected = TRUE|FALSE,
+  enableModelImprovements = TRUE|FALSE,
+  detectSentiment = TRUE|FALSE
+)
+}
+}
 \description{
 Creates a new version of the bot based on the \verb{$LATEST} version. If the
 \verb{$LATEST} version of this resource hasn't changed since you created the
@@ -23,7 +73,8 @@ last version, Amazon Lex doesn't create a new version. It returns the
 last created version.
 
 You can update only the \verb{$LATEST} version of the bot. You can't update
-the numbered versions that you create with the \code{CreateBotVersion}
+the numbered versions that you create with the
+\code{\link[=lexmodelbuildingservice_create_bot_version]{create_bot_version}}
 operation.
 
 When you create the first version of a bot, Amazon Lex sets the version

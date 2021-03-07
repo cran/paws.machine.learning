@@ -24,9 +24,10 @@ time (timestamp).}
 \item{MaxResults}{The maximum number of labeling jobs to return in each page of the
 response.}
 
-\item{NextToken}{If the result of the previous \code{ListLabelingJobs} request was truncated,
-the response includes a \code{NextToken}. To retrieve the next set of
-labeling jobs, use the token in the next request.}
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_labeling_jobs]{list_labeling_jobs}} request was
+truncated, the response includes a \code{NextToken}. To retrieve the next set
+of labeling jobs, use the token in the next request.}
 
 \item{NameContains}{A string in the labeling job name. This filter returns only labeling
 jobs whose name contains the specified string.}
@@ -36,6 +37,55 @@ jobs whose name contains the specified string.}
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
 
 \item{StatusEquals}{A filter that retrieves only labeling jobs with a specific status.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  LabelingJobSummaryList = list(
+    list(
+      LabelingJobName = "string",
+      LabelingJobArn = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LabelingJobStatus = "Initializing"|"InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+      LabelCounters = list(
+        TotalLabeled = 123,
+        HumanLabeled = 123,
+        MachineLabeled = 123,
+        FailedNonRetryableError = 123,
+        Unlabeled = 123
+      ),
+      WorkteamArn = "string",
+      PreHumanTaskLambdaArn = "string",
+      AnnotationConsolidationLambdaArn = "string",
+      FailureReason = "string",
+      LabelingJobOutput = list(
+        OutputDatasetS3Uri = "string",
+        FinalActiveLearningModelArn = "string"
+      ),
+      InputConfig = list(
+        DataSource = list(
+          S3DataSource = list(
+            ManifestS3Uri = "string"
+          ),
+          SnsDataSource = list(
+            SnsTopicArn = "string"
+          )
+        ),
+        DataAttributes = list(
+          ContentClassifiers = list(
+            "FreeOfPersonallyIdentifiableInformation"|"FreeOfAdultContent"
+          )
+        )
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of labeling jobs.

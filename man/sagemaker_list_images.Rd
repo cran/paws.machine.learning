@@ -27,12 +27,35 @@ value is 10.}
 \item{NameContains}{A filter that returns only images whose name contains the specified
 string.}
 
-\item{NextToken}{If the previous call to \code{ListImages} didn't return the full set of
-images, the call returns a token for getting the next set of images.}
+\item{NextToken}{If the previous call to \code{\link[=sagemaker_list_images]{list_images}} didn't
+return the full set of images, the call returns a token for getting the
+next set of images.}
 
 \item{SortBy}{The property used to sort results. The default value is \code{CREATION_TIME}.}
 
 \item{SortOrder}{The sort order. The default value is \code{DESCENDING}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Images = list(
+    list(
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      Description = "string",
+      DisplayName = "string",
+      FailureReason = "string",
+      ImageArn = "string",
+      ImageName = "string",
+      ImageStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"UPDATING"|"UPDATE_FAILED"|"DELETING"|"DELETE_FAILED",
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists the images in your account and their properties. The list can be

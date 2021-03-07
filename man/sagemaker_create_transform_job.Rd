@@ -81,6 +81,12 @@ in the \emph{AWS Billing and Cost Management User Guide}.}
 
 \item{ExperimentConfig}{}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  TransformJobArn = "string"
+)
+}
+}
 \description{
 Starts a transform job. A transform job uses a trained model to get
 inferences on a dataset and saves these results to an Amazon S3 location
@@ -96,7 +102,7 @@ unique within an AWS Region in an AWS account.
 \item \code{ModelName} - Identifies the model to use. \code{ModelName} must be the
 name of an existing Amazon SageMaker model in the same AWS Region
 and AWS account. For information on creating a model, see
-CreateModel.
+\code{\link[=sagemaker_create_model]{create_model}}.
 \item \code{TransformInput} - Describes the dataset to be transformed and the
 Amazon S3 location where it is stored.
 \item \code{TransformOutput} - Identifies the Amazon S3 location where you want

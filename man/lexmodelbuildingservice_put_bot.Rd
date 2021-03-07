@@ -144,9 +144,10 @@ sidetracked halfway through placing an order. If the user doesn't
 complete the order within the specified time, Amazon Lex discards the
 slot information that it gathered, and the user must start over.
 
-If you don't include the \code{idleSessionTTLInSeconds} element in a \code{PutBot}
-operation request, Amazon Lex uses the default value. This is also true
-if the request replaces an existing bot.
+If you don't include the \code{idleSessionTTLInSeconds} element in a
+\code{\link[=lexmodelbuildingservice_put_bot]{put_bot}} operation request, Amazon
+Lex uses the default value. This is also true if the request replaces an
+existing bot.
 
 The default is 300 seconds (5 minutes).}
 
@@ -206,12 +207,72 @@ sentiment analysis. If you don't specify \code{detectSentiment}, the default
 is \code{false}.}
 
 \item{createVersion}{When set to \code{true} a new numbered version of the bot is created. This is
-the same as calling the \code{CreateBotVersion} operation. If you don't
-specify \code{createVersion}, the default is \code{false}.}
+the same as calling the
+\code{\link[=lexmodelbuildingservice_create_bot_version]{create_bot_version}}
+operation. If you don't specify \code{createVersion}, the default is \code{false}.}
 
 \item{tags}{A list of tags to add to the bot. You can only add tags when you create
-a bot, you can't use the \code{PutBot} operation to update the tags on a bot.
-To update tags, use the \code{TagResource} operation.}
+a bot, you can't use the \code{\link[=lexmodelbuildingservice_put_bot]{put_bot}}
+operation to update the tags on a bot. To update tags, use the
+\code{\link[=lexmodelbuildingservice_tag_resource]{tag_resource}} operation.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  name = "string",
+  description = "string",
+  intents = list(
+    list(
+      intentName = "string",
+      intentVersion = "string"
+    )
+  ),
+  enableModelImprovements = TRUE|FALSE,
+  nluIntentConfidenceThreshold = 123.0,
+  clarificationPrompt = list(
+    messages = list(
+      list(
+        contentType = "PlainText"|"SSML"|"CustomPayload",
+        content = "string",
+        groupNumber = 123
+      )
+    ),
+    maxAttempts = 123,
+    responseCard = "string"
+  ),
+  abortStatement = list(
+    messages = list(
+      list(
+        contentType = "PlainText"|"SSML"|"CustomPayload",
+        content = "string",
+        groupNumber = 123
+      )
+    ),
+    responseCard = "string"
+  ),
+  status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT",
+  failureReason = "string",
+  lastUpdatedDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  createdDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  idleSessionTTLInSeconds = 123,
+  voiceId = "string",
+  checksum = "string",
+  version = "string",
+  locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT",
+  childDirected = TRUE|FALSE,
+  createVersion = TRUE|FALSE,
+  detectSentiment = TRUE|FALSE,
+  tags = list(
+    list(
+      key = "string",
+      value = "string"
+    )
+  )
+)
+}
 }
 \description{
 Creates an Amazon Lex conversational bot or replaces an existing bot.

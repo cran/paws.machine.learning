@@ -12,9 +12,9 @@ sagemaker_list_app_image_configs(MaxResults, NextToken, NameContains,
 \item{MaxResults}{The maximum number of AppImageConfigs to return in the response. The
 default value is 10.}
 
-\item{NextToken}{If the previous call to \code{ListImages} didn't return the full set of
-AppImageConfigs, the call returns a token for getting the next set of
-AppImageConfigs.}
+\item{NextToken}{If the previous call to \code{\link[=sagemaker_list_images]{list_images}} didn't
+return the full set of AppImageConfigs, the call returns a token for
+getting the next set of AppImageConfigs.}
 
 \item{NameContains}{A filter that returns only AppImageConfigs whose name contains the
 specified string.}
@@ -34,6 +34,37 @@ specified time.}
 \item{SortBy}{The property used to sort results. The default value is \code{CreationTime}.}
 
 \item{SortOrder}{The sort order. The default value is \code{Descending}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  NextToken = "string",
+  AppImageConfigs = list(
+    list(
+      AppImageConfigArn = "string",
+      AppImageConfigName = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      KernelGatewayImageConfig = list(
+        KernelSpecs = list(
+          list(
+            Name = "string",
+            DisplayName = "string"
+          )
+        ),
+        FileSystemConfig = list(
+          MountPath = "string",
+          DefaultUid = 123,
+          DefaultGid = 123
+        )
+      )
+    )
+  )
+)
+}
 }
 \description{
 Lists the AppImageConfigs in your account and their properties. The list

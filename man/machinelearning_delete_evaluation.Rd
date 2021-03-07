@@ -9,16 +9,25 @@ machinelearning_delete_evaluation(EvaluationId)
 \arguments{
 \item{EvaluationId}{[required] A user-supplied ID that uniquely identifies the \code{Evaluation} to delete.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  EvaluationId = "string"
+)
+}
+}
 \description{
 Assigns the \code{DELETED} status to an \code{Evaluation}, rendering it unusable.
 
-After invoking the \code{DeleteEvaluation} operation, you can use the
-\code{GetEvaluation} operation to verify that the status of the \code{Evaluation}
-changed to \code{DELETED}.
+After invoking the
+\code{\link[=machinelearning_delete_evaluation]{delete_evaluation}} operation, you
+can use the \code{\link[=machinelearning_get_evaluation]{get_evaluation}} operation
+to verify that the status of the \code{Evaluation} changed to \code{DELETED}.
 
 Caution
 
-The results of the \code{DeleteEvaluation} operation are irreversible.
+The results of the
+\code{\link[=machinelearning_delete_evaluation]{delete_evaluation}} operation are
+irreversible.
 }
 \section{Request syntax}{
 \preformatted{svc$delete_evaluation(

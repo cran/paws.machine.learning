@@ -10,8 +10,48 @@ translate_describe_text_translation_job(JobId)
 }
 \arguments{
 \item{JobId}{[required] The identifier that Amazon Translate generated for the job. The
-StartTextTranslationJob operation returns this identifier in its
-response.}
+\code{\link[=translate_start_text_translation_job]{start_text_translation_job}}
+operation returns this identifier in its response.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  TextTranslationJobProperties = list(
+    JobId = "string",
+    JobName = "string",
+    JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED",
+    JobDetails = list(
+      TranslatedDocumentsCount = 123,
+      DocumentsWithErrorsCount = 123,
+      InputDocumentsCount = 123
+    ),
+    SourceLanguageCode = "string",
+    TargetLanguageCodes = list(
+      "string"
+    ),
+    TerminologyNames = list(
+      "string"
+    ),
+    ParallelDataNames = list(
+      "string"
+    ),
+    Message = "string",
+    SubmittedTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    EndTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    InputDataConfig = list(
+      S3Uri = "string",
+      ContentType = "string"
+    ),
+    OutputDataConfig = list(
+      S3Uri = "string"
+    ),
+    DataAccessRoleArn = "string"
+  )
+)
+}
 }
 \description{
 Gets the properties associated with an asycnhronous batch translation

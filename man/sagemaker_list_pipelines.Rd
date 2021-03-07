@@ -20,11 +20,36 @@ time.}
 
 \item{SortOrder}{The sort order for results.}
 
-\item{NextToken}{If the result of the previous \code{ListPipelines} request was truncated, the
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_pipelines]{list_pipelines}} request was truncated, the
 response includes a \code{NextToken}. To retrieve the next set of pipelines,
 use the token in the next request.}
 
 \item{MaxResults}{The maximum number of pipelines to return in the response.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  PipelineSummaries = list(
+    list(
+      PipelineArn = "string",
+      PipelineName = "string",
+      PipelineDisplayName = "string",
+      PipelineDescription = "string",
+      RoleArn = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastExecutionTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of pipelines.

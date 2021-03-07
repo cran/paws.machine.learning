@@ -14,13 +14,19 @@ sagemaker_update_endpoint_weights_and_capacities(EndpointName,
 
 \item{DesiredWeightsAndCapacities}{[required] An object that provides new capacity and weight values for a variant.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  EndpointArn = "string"
+)
+}
+}
 \description{
 Updates variant weight of one or more variants associated with an
 existing endpoint, or capacity of one variant associated with an
 existing endpoint. When it receives the request, Amazon SageMaker sets
 the endpoint status to \code{Updating}. After updating the endpoint, it sets
 the status to \code{InService}. To check the status of an endpoint, use the
-DescribeEndpoint API.
+\code{\link[=sagemaker_describe_endpoint]{describe_endpoint}} API.
 }
 \section{Request syntax}{
 \preformatted{svc$update_endpoint_weights_and_capacities(

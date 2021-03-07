@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: Amazon Web Services Machine Learning Services
-Version: 0.1.10
+Version: 0.1.11
 Authors@R: 
     c(person(given = "David",
              family = "Kretch",
@@ -51,10 +51,10 @@ Collate: 'comprehend_service.R' 'comprehend_interfaces.R'
         'transcribeservice_operations.R' 'translate_service.R'
         'translate_interfaces.R' 'translate_operations.R'
 NeedsCompilation: no
-Packaged: 2021-01-17 13:17:33 UTC; david.kretch
+Packaged: 2021-03-07 19:37:37 UTC; david.kretch
 Author: David Kretch [aut, cre],
   Adam Banker [aut],
   Amazon.com, Inc. [cph]
 Maintainer: David Kretch <david.kretch@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-01-17 13:40:03 UTC
+Date/Publication: 2021-03-07 20:40:02 UTC

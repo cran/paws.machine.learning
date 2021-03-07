@@ -15,6 +15,17 @@ NULL
 #' @param botAlias &#91;required&#93; The alias in use for the bot that contains the session data.
 #' @param userId &#91;required&#93; The identifier of the user associated with the session data.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   botName = "string",
+#'   botAlias = "string",
+#'   userId = "string",
+#'   sessionId = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_session(
@@ -63,6 +74,53 @@ lexruntimeservice_delete_session <- function(botName, botAlias, userId) {
 #' When you specify a filter, only intents with their `checkpointLabel`
 #' field set to that string are returned.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   recentIntentSummaryView = list(
+#'     list(
+#'       intentName = "string",
+#'       checkpointLabel = "string",
+#'       slots = list(
+#'         "string"
+#'       ),
+#'       confirmationStatus = "None"|"Confirmed"|"Denied",
+#'       dialogActionType = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Close"|"Delegate",
+#'       fulfillmentState = "Fulfilled"|"Failed"|"ReadyForFulfillment",
+#'       slotToElicit = "string"
+#'     )
+#'   ),
+#'   sessionAttributes = list(
+#'     "string"
+#'   ),
+#'   sessionId = "string",
+#'   dialogAction = list(
+#'     type = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Close"|"Delegate",
+#'     intentName = "string",
+#'     slots = list(
+#'       "string"
+#'     ),
+#'     slotToElicit = "string",
+#'     fulfillmentState = "Fulfilled"|"Failed"|"ReadyForFulfillment",
+#'     message = "string",
+#'     messageFormat = "PlainText"|"CustomPayload"|"SSML"|"Composite"
+#'   ),
+#'   activeContexts = list(
+#'     list(
+#'       name = "string",
+#'       timeToLive = list(
+#'         timeToLiveInSeconds = 123,
+#'         turnsToLive = 123
+#'       ),
+#'       parameters = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$get_session(
@@ -101,9 +159,9 @@ lexruntimeservice_get_session <- function(botName, botAlias, userId, checkpointL
 #' interprets the user input using the machine learning model that it built
 #' for the bot.
 #' 
-#' The `PostContent` operation supports audio input at 8kHz and 16kHz. You
-#' can use 8kHz audio to achieve higher speech recognition accuracy in
-#' telephone audio applications.
+#' The [`post_content`][lexruntimeservice_post_content] operation supports
+#' audio input at 8kHz and 16kHz. You can use 8kHz audio to achieve higher
+#' speech recognition accuracy in telephone audio applications.
 #' 
 #' In response, Amazon Lex returns the next message to convey to the user.
 #' Consider the following example messages:
@@ -271,6 +329,29 @@ lexruntimeservice_get_session <- function(botName, botAlias, userId, checkpointL
 #' list of contexts for the session. If you specify an empty list, all
 #' contexts for the session are cleared.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   contentType = "string",
+#'   intentName = "string",
+#'   nluIntentConfidence = "string",
+#'   alternativeIntents = "string",
+#'   slots = "string",
+#'   sessionAttributes = "string",
+#'   sentimentResponse = "string",
+#'   message = "string",
+#'   messageFormat = "PlainText"|"CustomPayload"|"SSML"|"Composite",
+#'   dialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed",
+#'   slotToElicit = "string",
+#'   inputTranscript = "string",
+#'   audioStream = raw,
+#'   botVersion = "string",
+#'   sessionId = "string",
+#'   activeContexts = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$post_content(
@@ -414,6 +495,74 @@ lexruntimeservice_post_content <- function(botName, botAlias, userId, sessionAtt
 #' list of contexts for the session. If you specify an empty list, all
 #' contexts for the session are cleared.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   intentName = "string",
+#'   nluIntentConfidence = list(
+#'     score = 123.0
+#'   ),
+#'   alternativeIntents = list(
+#'     list(
+#'       intentName = "string",
+#'       nluIntentConfidence = list(
+#'         score = 123.0
+#'       ),
+#'       slots = list(
+#'         "string"
+#'       )
+#'     )
+#'   ),
+#'   slots = list(
+#'     "string"
+#'   ),
+#'   sessionAttributes = list(
+#'     "string"
+#'   ),
+#'   message = "string",
+#'   sentimentResponse = list(
+#'     sentimentLabel = "string",
+#'     sentimentScore = "string"
+#'   ),
+#'   messageFormat = "PlainText"|"CustomPayload"|"SSML"|"Composite",
+#'   dialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed",
+#'   slotToElicit = "string",
+#'   responseCard = list(
+#'     version = "string",
+#'     contentType = "application/vnd.amazonaws.card.generic",
+#'     genericAttachments = list(
+#'       list(
+#'         title = "string",
+#'         subTitle = "string",
+#'         attachmentLinkUrl = "string",
+#'         imageUrl = "string",
+#'         buttons = list(
+#'           list(
+#'             text = "string",
+#'             value = "string"
+#'           )
+#'         )
+#'       )
+#'     )
+#'   ),
+#'   sessionId = "string",
+#'   botVersion = "string",
+#'   activeContexts = list(
+#'     list(
+#'       name = "string",
+#'       timeToLive = list(
+#'         timeToLiveInSeconds = 123,
+#'         turnsToLive = 123
+#'       ),
+#'       parameters = list(
+#'         "string"
+#'       )
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$post_text(
@@ -502,11 +651,15 @@ lexruntimeservice_post_text <- function(botName, botAlias, userId, sessionAttrib
 #' 
 #' -   `slotToElict`
 #' 
-#' If you send the `recentIntentSummaryView` parameter in a `PutSession`
-#' request, the contents of the new summary view replaces the old summary
-#' view. For example, if a `GetSession` request returns three intents in
-#' the summary view and you call `PutSession` with one intent in the
-#' summary view, the next call to `GetSession` will only return one intent.
+#' If you send the `recentIntentSummaryView` parameter in a
+#' [`put_session`][lexruntimeservice_put_session] request, the contents of
+#' the new summary view replaces the old summary view. For example, if a
+#' [`get_session`][lexruntimeservice_get_session] request returns three
+#' intents in the summary view and you call
+#' [`put_session`][lexruntimeservice_put_session] with one intent in the
+#' summary view, the next call to
+#' [`get_session`][lexruntimeservice_get_session] will only return one
+#' intent.
 #' @param accept The message that Amazon Lex returns in the response can be either text
 #' or speech based depending on the value of this field.
 #' 
@@ -540,6 +693,24 @@ lexruntimeservice_post_text <- function(botName, botAlias, userId, sessionAttrib
 #' If you don't specify a list of contexts, Amazon Lex will use the current
 #' list of contexts for the session. If you specify an empty list, all
 #' contexts for the session are cleared.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   contentType = "string",
+#'   intentName = "string",
+#'   slots = "string",
+#'   sessionAttributes = "string",
+#'   message = "string",
+#'   messageFormat = "PlainText"|"CustomPayload"|"SSML"|"Composite",
+#'   dialogState = "ElicitIntent"|"ConfirmIntent"|"ElicitSlot"|"Fulfilled"|"ReadyForFulfillment"|"Failed",
+#'   slotToElicit = "string",
+#'   audioStream = raw,
+#'   sessionId = "string",
+#'   activeContexts = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

@@ -14,6 +14,57 @@ Amazon S3 bucket.}
 
 \item{SummarizationAttributes}{An array of PPE types that you want to summarize.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  ProtectiveEquipmentModelVersion = "string",
+  Persons = list(
+    list(
+      BodyParts = list(
+        list(
+          Name = "FACE"|"HEAD"|"LEFT_HAND"|"RIGHT_HAND",
+          Confidence = 123.0,
+          EquipmentDetections = list(
+            list(
+              BoundingBox = list(
+                Width = 123.0,
+                Height = 123.0,
+                Left = 123.0,
+                Top = 123.0
+              ),
+              Confidence = 123.0,
+              Type = "FACE_COVER"|"HAND_COVER"|"HEAD_COVER",
+              CoversBodyPart = list(
+                Confidence = 123.0,
+                Value = TRUE|FALSE
+              )
+            )
+          )
+        )
+      ),
+      BoundingBox = list(
+        Width = 123.0,
+        Height = 123.0,
+        Left = 123.0,
+        Top = 123.0
+      ),
+      Confidence = 123.0,
+      Id = 123
+    )
+  ),
+  Summary = list(
+    PersonsWithRequiredEquipment = list(
+      123
+    ),
+    PersonsWithoutRequiredEquipment = list(
+      123
+    ),
+    PersonsIndeterminate = list(
+      123
+    )
+  )
+)
+}
+}
 \description{
 Detects Personal Protective Equipment (PPE) worn by people detected in
 an image. Amazon Rekognition can detect the following types of PPE.
@@ -27,8 +78,8 @@ You pass the input image as base64-encoded image bytes or as a reference
 to an image in an Amazon S3 bucket. The image must be either a PNG or
 JPG formatted file.
 
-\code{DetectProtectiveEquipment} detects PPE worn by up to 15 persons
-detected in an image.
+\code{\link[=rekognition_detect_protective_equipment]{detect_protective_equipment}}
+detects PPE worn by up to 15 persons detected in an image.
 
 For each person detected in the image the API returns an array of body
 parts (face, head, left-hand, right-hand). For each body part, an array

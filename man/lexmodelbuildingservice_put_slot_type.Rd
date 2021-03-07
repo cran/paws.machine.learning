@@ -62,8 +62,10 @@ If you don't specify the \code{valueSelectionStrategy}, the default is
 \code{ORIGINAL_VALUE}.}
 
 \item{createVersion}{When set to \code{true} a new numbered version of the slot type is created.
-This is the same as calling the \code{CreateSlotTypeVersion} operation. If
-you do not specify \code{createVersion}, the default is \code{false}.}
+This is the same as calling the
+\code{\link[=lexmodelbuildingservice_create_slot_type_version]{create_slot_type_version}}
+operation. If you do not specify \code{createVersion}, the default is
+\code{false}.}
 
 \item{parentSlotTypeSignature}{The built-in slot type used as the parent of the slot type. When you
 define a parent slot type, the new slot type has all of the same
@@ -73,6 +75,39 @@ Only \code{AMAZON.AlphaNumeric} is supported.}
 
 \item{slotTypeConfigurations}{Configuration information that extends the parent built-in slot type.
 The configuration is added to the settings for the parent slot type.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  name = "string",
+  description = "string",
+  enumerationValues = list(
+    list(
+      value = "string",
+      synonyms = list(
+        "string"
+      )
+    )
+  ),
+  lastUpdatedDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  createdDate = as.POSIXct(
+    "2015-01-01"
+  ),
+  version = "string",
+  checksum = "string",
+  valueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION",
+  createVersion = TRUE|FALSE,
+  parentSlotTypeSignature = "string",
+  slotTypeConfigurations = list(
+    list(
+      regexConfiguration = list(
+        pattern = "string"
+      )
+    )
+  )
+)
+}
 }
 \description{
 Creates a custom slot type or replaces an existing custom slot type.

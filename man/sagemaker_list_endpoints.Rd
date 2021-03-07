@@ -13,9 +13,9 @@ sagemaker_list_endpoints(SortBy, SortOrder, NextToken, MaxResults,
 
 \item{SortOrder}{The sort order for results. The default is \code{Descending}.}
 
-\item{NextToken}{If the result of a \code{ListEndpoints} request was truncated, the response
-includes a \code{NextToken}. To retrieve the next set of endpoints, use the
-token in the next request.}
+\item{NextToken}{If the result of a \code{\link[=sagemaker_list_endpoints]{list_endpoints}} request
+was truncated, the response includes a \code{NextToken}. To retrieve the next
+set of endpoints, use the token in the next request.}
 
 \item{MaxResults}{The maximum number of endpoints to return in the response.}
 
@@ -35,6 +35,25 @@ specified timestamp.}
 specified timestamp.}
 
 \item{StatusEquals}{A filter that returns only endpoints with the specified status.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Endpoints = list(
+    list(
+      EndpointName = "string",
+      EndpointArn = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      EndpointStatus = "OutOfService"|"Creating"|"Updating"|"SystemUpdating"|"RollingBack"|"InService"|"Deleting"|"Failed"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists endpoints.

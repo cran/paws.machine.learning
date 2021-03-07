@@ -9,6 +9,26 @@ personalize_describe_recipe(recipeArn)
 \arguments{
 \item{recipeArn}{[required] The Amazon Resource Name (ARN) of the recipe to describe.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  recipe = list(
+    name = "string",
+    recipeArn = "string",
+    algorithmArn = "string",
+    featureTransformationArn = "string",
+    status = "string",
+    description = "string",
+    creationDateTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    recipeType = "string",
+    lastUpdatedDateTime = as.POSIXct(
+      "2015-01-01"
+    )
+  )
+)
+}
+}
 \description{
 Describes a recipe.
 
@@ -21,10 +41,12 @@ before training.
 }
 
 Amazon Personalize provides a set of predefined recipes. You specify a
-recipe when you create a solution with the CreateSolution API.
-\code{CreateSolution} trains a model by using the algorithm in the specified
-recipe and a training dataset. The solution, when deployed as a
-campaign, can provide recommendations using the
+recipe when you create a solution with the
+\code{\link[=personalize_create_solution]{create_solution}} API.
+\code{\link[=personalize_create_solution]{create_solution}} trains a model by using
+the algorithm in the specified recipe and a training dataset. The
+solution, when deployed as a campaign, can provide recommendations using
+the
 \href{https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html}{GetRecommendations}
 API.
 }

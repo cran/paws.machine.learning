@@ -19,21 +19,29 @@ model that you want to train.}
 
 \item{TestingData}{[required] The dataset to use for testing.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  ProjectVersionArn = "string"
+)
+}
+}
 \description{
 Creates a new version of a model and begins training. Models are managed
 as part of an Amazon Rekognition Custom Labels project. You can specify
 one training dataset and one testing dataset. The response from
-\code{CreateProjectVersion} is an Amazon Resource Name (ARN) for the version
-of the model.
+\code{\link[=rekognition_create_project_version]{create_project_version}} is an
+Amazon Resource Name (ARN) for the version of the model.
 
 Training takes a while to complete. You can get the current status by
-calling DescribeProjectVersions.
+calling
+\code{\link[=rekognition_describe_project_versions]{describe_project_versions}}.
 
-Once training has successfully completed, call DescribeProjectVersions
-to get the training results and evaluate the model.
+Once training has successfully completed, call
+\code{\link[=rekognition_describe_project_versions]{describe_project_versions}} to
+get the training results and evaluate the model.
 
 After evaluating the model, you start the model by calling
-StartProjectVersion.
+\code{\link[=rekognition_start_project_version]{start_project_version}}.
 
 This operation requires permissions to perform the
 \code{rekognition:CreateProjectVersion} action.

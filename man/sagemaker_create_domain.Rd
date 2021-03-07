@@ -22,7 +22,7 @@ communication.}
 
 \item{Tags}{Tags to associated with the Domain. Each tag consists of a key and an
 optional value. Tag keys must be unique per resource. Tags are
-searchable using the Search API.}
+searchable using the \code{\link[=sagemaker_search]{search}} API.}
 
 \item{AppNetworkAccessType}{Specifies the VPC used for non-EFS traffic. The default value is
 \code{PublicInternetOnly}.
@@ -38,6 +38,13 @@ subnets
 \item{KmsKeyId}{SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain
 with an AWS managed customer master key (CMK) by default. For more
 control, specify a customer managed CMK.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  DomainArn = "string",
+  Url = "string"
+)
+}
 }
 \description{
 Creates a \code{Domain} used by Amazon SageMaker Studio. A domain consists of

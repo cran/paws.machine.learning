@@ -15,9 +15,10 @@ see labeling jobs for.}
 \item{MaxResults}{The maximum number of labeling jobs to return in each page of the
 response.}
 
-\item{NextToken}{If the result of the previous \code{ListLabelingJobsForWorkteam} request was
-truncated, the response includes a \code{NextToken}. To retrieve the next set
-of labeling jobs, use the token in the next request.}
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_labeling_jobs_for_workteam]{list_labeling_jobs_for_workteam}}
+request was truncated, the response includes a \code{NextToken}. To retrieve
+the next set of labeling jobs, use the token in the next request.}
 
 \item{CreationTimeAfter}{A filter that returns only labeling jobs created after the specified
 time (timestamp).}
@@ -31,6 +32,28 @@ contains the specified string.}
 \item{SortBy}{The field to sort results by. The default is \code{CreationTime}.}
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  LabelingJobSummaryList = list(
+    list(
+      LabelingJobName = "string",
+      JobReferenceCode = "string",
+      WorkRequesterAccountId = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LabelCounters = list(
+        HumanLabeled = 123,
+        PendingHuman = 123,
+        Total = 123
+      ),
+      NumberOfHumanWorkersPerDataObject = 123
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of labeling jobs assigned to a specified work team.

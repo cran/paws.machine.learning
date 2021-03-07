@@ -15,16 +15,23 @@ represents 1 hour of processing and can support up to 5 Transaction Pers
 Second (TPS). Use a higher number to increase the TPS throughput of your
 model. You are charged for the number of inference units that you use.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  Status = "TRAINING_IN_PROGRESS"|"TRAINING_COMPLETED"|"TRAINING_FAILED"|"STARTING"|"RUNNING"|"FAILED"|"STOPPING"|"STOPPED"|"DELETING"
+)
+}
+}
 \description{
 Starts the running of the version of a model. Starting a model takes a
 while to complete. To check the current state of the model, use
-DescribeProjectVersions.
+\code{\link[=rekognition_describe_project_versions]{describe_project_versions}}.
 
 Once the model is running, you can detect custom labels in new images by
-calling DetectCustomLabels.
+calling \code{\link[=rekognition_detect_custom_labels]{detect_custom_labels}}.
 
 You are charged for the amount of time that the model is running. To
-stop a running model, call StopProjectVersion.
+stop a running model, call
+\code{\link[=rekognition_stop_project_version]{stop_project_version}}.
 
 This operation requires permissions to perform the
 \code{rekognition:StartProjectVersion} action.

@@ -9,16 +9,37 @@ personalize_list_event_trackers(datasetGroupArn, nextToken, maxResults)
 \arguments{
 \item{datasetGroupArn}{The ARN of a dataset group used to filter the response.}
 
-\item{nextToken}{A token returned from the previous call to \code{ListEventTrackers} for
-getting the next set of event trackers (if they exist).}
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_event_trackers]{list_event_trackers}} for getting the
+next set of event trackers (if they exist).}
 
 \item{maxResults}{The maximum number of event trackers to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  eventTrackers = list(
+    list(
+      name = "string",
+      eventTrackerArn = "string",
+      status = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Returns the list of event trackers associated with the account. The
 response provides the properties for each event tracker, including the
 Amazon Resource Name (ARN) and tracking ID. For more information on
-event trackers, see CreateEventTracker.
+event trackers, see
+\code{\link[=personalize_create_event_tracker]{create_event_tracker}}.
 }
 \section{Request syntax}{
 \preformatted{svc$list_event_trackers(

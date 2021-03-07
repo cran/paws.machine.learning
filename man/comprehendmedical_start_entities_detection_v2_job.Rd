@@ -29,10 +29,17 @@ do not specify a key, the files are written in plain text.}
 \item{LanguageCode}{[required] The language of the input documents. All documents must be in the same
 language.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  JobId = "string"
+)
+}
+}
 \description{
 Starts an asynchronous medical entity detection job for a collection of
-documents. Use the \code{DescribeEntitiesDetectionV2Job} operation to track
-the status of a job.
+documents. Use the
+\code{\link[=comprehendmedical_describe_entities_detection_v2_job]{describe_entities_detection_v2_job}}
+operation to track the status of a job.
 }
 \section{Request syntax}{
 \preformatted{svc$start_entities_detection_v2_job(

@@ -10,14 +10,58 @@ sagemaker_list_pipeline_execution_steps(PipelineExecutionArn, NextToken,
 \arguments{
 \item{PipelineExecutionArn}{The Amazon Resource Name (ARN) of the pipeline execution.}
 
-\item{NextToken}{If the result of the previous \code{ListPipelineExecutionSteps} request was
-truncated, the response includes a \code{NextToken}. To retrieve the next set
-of pipeline execution steps, use the token in the next request.}
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_pipeline_execution_steps]{list_pipeline_execution_steps}}
+request was truncated, the response includes a \code{NextToken}. To retrieve
+the next set of pipeline execution steps, use the token in the next
+request.}
 
 \item{MaxResults}{The maximum number of pipeline execution steps to return in the
 response.}
 
 \item{SortOrder}{The field by which to sort results. The default is \code{CreatedTime}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  PipelineExecutionSteps = list(
+    list(
+      StepName = "string",
+      StartTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      EndTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      StepStatus = "Starting"|"Executing"|"Stopping"|"Stopped"|"Failed"|"Succeeded",
+      CacheHitResult = list(
+        SourcePipelineExecutionArn = "string"
+      ),
+      FailureReason = "string",
+      Metadata = list(
+        TrainingJob = list(
+          Arn = "string"
+        ),
+        ProcessingJob = list(
+          Arn = "string"
+        ),
+        TransformJob = list(
+          Arn = "string"
+        ),
+        Model = list(
+          Arn = "string"
+        ),
+        RegisterModel = list(
+          Arn = "string"
+        ),
+        Condition = list(
+          Outcome = "True"|"False"
+        )
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of \code{PipeLineExecutionStep} objects.

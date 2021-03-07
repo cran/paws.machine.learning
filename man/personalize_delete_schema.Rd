@@ -9,10 +9,13 @@ personalize_delete_schema(schemaArn)
 \arguments{
 \item{schemaArn}{[required] The Amazon Resource Name (ARN) of the schema to delete.}
 }
+\value{
+An empty list.
+}
 \description{
 Deletes a schema. Before deleting a schema, you must delete all datasets
 referencing the schema. For more information on schemas, see
-CreateSchema.
+\code{\link[=personalize_create_schema]{create_schema}}.
 }
 \section{Request syntax}{
 \preformatted{svc$delete_schema(

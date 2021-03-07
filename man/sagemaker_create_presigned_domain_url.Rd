@@ -14,6 +14,12 @@ sagemaker_create_presigned_domain_url(DomainId, UserProfileName,
 
 \item{SessionExpirationDurationInSeconds}{The session expiration duration in seconds.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  AuthorizedUrl = "string"
+)
+}
+}
 \description{
 Creates a URL for a specified UserProfile in a Domain. When accessed in
 a web browser, the user will be automatically signed in to Amazon
@@ -22,9 +28,11 @@ associated with the Domain's Amazon Elastic File System (EFS) volume.
 This operation can only be called when the authentication mode equals
 IAM.
 
-The URL that you get from a call to \code{CreatePresignedDomainUrl} is valid
-only for 5 minutes. If you try to use the URL after the 5-minute limit
-expires, you are directed to the AWS console sign-in page.
+The URL that you get from a call to
+\code{\link[=sagemaker_create_presigned_domain_url]{create_presigned_domain_url}}
+is valid only for 5 minutes. If you try to use the URL after the
+5-minute limit expires, you are directed to the AWS console sign-in
+page.
 }
 \section{Request syntax}{
 \preformatted{svc$create_presigned_domain_url(

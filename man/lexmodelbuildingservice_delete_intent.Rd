@@ -9,9 +9,13 @@ lexmodelbuildingservice_delete_intent(name)
 \arguments{
 \item{name}{[required] The name of the intent. The name is case sensitive.}
 }
+\value{
+An empty list.
+}
 \description{
 Deletes all versions of the intent, including the \verb{$LATEST} version. To
-delete a specific version of the intent, use the DeleteIntentVersion
+delete a specific version of the intent, use the
+\code{\link[=lexmodelbuildingservice_delete_intent_version]{delete_intent_version}}
 operation.
 
 You can delete a version of an intent only if it is not referenced. To
@@ -22,8 +26,8 @@ If you get the \code{ResourceInUseException} exception, it provides an
 example reference that shows where the intent is referenced. To remove
 the reference to the intent, either update the bot or delete it. If you
 get the same exception when you attempt to delete the intent again,
-repeat until the intent has no references and the call to \code{DeleteIntent}
-is successful.
+repeat until the intent has no references and the call to
+\code{\link[=lexmodelbuildingservice_delete_intent]{delete_intent}} is successful.
 
 This operation requires permission for the \code{lex:DeleteIntent} action.
 }

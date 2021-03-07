@@ -9,17 +9,37 @@ personalize_list_solutions(datasetGroupArn, nextToken, maxResults)
 \arguments{
 \item{datasetGroupArn}{The Amazon Resource Name (ARN) of the dataset group.}
 
-\item{nextToken}{A token returned from the previous call to \code{ListSolutions} for getting
-the next set of solutions (if they exist).}
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_solutions]{list_solutions}} for getting the next set
+of solutions (if they exist).}
 
 \item{maxResults}{The maximum number of solutions to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  solutions = list(
+    list(
+      name = "string",
+      solutionArn = "string",
+      status = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Returns a list of solutions that use the given dataset group. When a
 dataset group is not specified, all the solutions associated with the
 account are listed. The response provides the properties for each
 solution, including the Amazon Resource Name (ARN). For more information
-on solutions, see CreateSolution.
+on solutions, see \code{\link[=personalize_create_solution]{create_solution}}.
 }
 \section{Request syntax}{
 \preformatted{svc$list_solutions(

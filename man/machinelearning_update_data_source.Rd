@@ -12,11 +12,17 @@ machinelearning_update_data_source(DataSourceId, DataSourceName)
 \item{DataSourceName}{[required] A new user-supplied name or description of the \code{DataSource} that will
 replace the current description.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DataSourceId = "string"
+)
+}
+}
 \description{
 Updates the \code{DataSourceName} of a \code{DataSource}.
 
-You can use the \code{GetDataSource} operation to view the contents of the
-updated data element.
+You can use the \code{\link[=machinelearning_get_data_source]{get_data_source}}
+operation to view the contents of the updated data element.
 }
 \section{Request syntax}{
 \preformatted{svc$update_data_source(

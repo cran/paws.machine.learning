@@ -15,11 +15,53 @@ sagemaker_list_workteams(SortBy, SortOrder, NameContains, NextToken,
 \item{NameContains}{A string in the work team's name. This filter returns only work teams
 whose name contains the specified string.}
 
-\item{NextToken}{If the result of the previous \code{ListWorkteams} request was truncated, the
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_workteams]{list_workteams}} request was truncated, the
 response includes a \code{NextToken}. To retrieve the next set of labeling
 jobs, use the token in the next request.}
 
 \item{MaxResults}{The maximum number of work teams to return in each page of the response.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Workteams = list(
+    list(
+      WorkteamName = "string",
+      MemberDefinitions = list(
+        list(
+          CognitoMemberDefinition = list(
+            UserPool = "string",
+            UserGroup = "string",
+            ClientId = "string"
+          ),
+          OidcMemberDefinition = list(
+            Groups = list(
+              "string"
+            )
+          )
+        )
+      ),
+      WorkteamArn = "string",
+      WorkforceArn = "string",
+      ProductListingIds = list(
+        "string"
+      ),
+      Description = "string",
+      SubDomain = "string",
+      CreateDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastUpdatedDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      NotificationConfiguration = list(
+        NotificationTopicArn = "string"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of private work teams that you have defined in a region. The

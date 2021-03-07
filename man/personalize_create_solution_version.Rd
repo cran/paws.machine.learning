@@ -22,37 +22,43 @@ solution version created from the input solution using the \code{FULL} option
 and the input solution was trained with the native-recipe-hrnn-coldstart
 recipe.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  solutionVersionArn = "string"
+)
+}
+}
 \description{
 Trains or retrains an active solution. A solution is created using the
-CreateSolution operation and must be in the ACTIVE state before calling
-\code{CreateSolutionVersion}. A new version of the solution is created every
-time you call this operation.
+\code{\link[=personalize_create_solution]{create_solution}} operation and must be
+in the ACTIVE state before calling
+\code{\link[=personalize_create_solution_version]{create_solution_version}}. A new
+version of the solution is created every time you call this operation.
 
 \strong{Status}
 
 A solution version can be in one of the following states:
 \itemize{
-\item CREATE PENDING > CREATE IN\\_PROGRESS > ACTIVE -or- CREATE
+\item CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 FAILED
 }
 
-To get the status of the version, call DescribeSolutionVersion. Wait
-until the status shows as ACTIVE before calling \code{CreateCampaign}.
+To get the status of the version, call
+\code{\link[=personalize_describe_solution_version]{describe_solution_version}}.
+Wait until the status shows as ACTIVE before calling
+\code{\link[=personalize_create_campaign]{create_campaign}}.
 
 If the status shows as CREATE FAILED, the response includes a
 \code{failureReason} key, which describes why the job failed.
 
 \strong{Related APIs}
 \itemize{
-\item ListSolutionVersions
-\item DescribeSolutionVersion
-}<!-- -->
-
-\itemize{
-\item ListSolutions
-\item CreateSolution
-\item DescribeSolution
-\item DeleteSolution
+\item \code{\link[=personalize_list_solution_versions]{list_solution_versions}}
+\item \code{\link[=personalize_describe_solution_version]{describe_solution_version}}
+\item \code{\link[=personalize_list_solutions]{list_solutions}}
+\item \code{\link[=personalize_create_solution]{create_solution}}
+\item \code{\link[=personalize_describe_solution]{describe_solution}}
+\item \code{\link[=personalize_delete_solution]{delete_solution}}
 }
 }
 \section{Request syntax}{

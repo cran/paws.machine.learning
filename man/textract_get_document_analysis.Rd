@@ -9,7 +9,8 @@ textract_get_document_analysis(JobId, MaxResults, NextToken)
 }
 \arguments{
 \item{JobId}{[required] A unique identifier for the text-detection job. The \code{JobId} is returned
-from \code{StartDocumentAnalysis}. A \code{JobId} value is only valid for 7 days.}
+from \code{\link[=textract_start_document_analysis]{start_document_analysis}}. A
+\code{JobId} value is only valid for 7 days.}
 
 \item{MaxResults}{The maximum number of results to return per paginated call. The largest
 value that you can specify is 1,000. If you specify a value greater than
@@ -21,22 +22,85 @@ to retrieve), Amazon Textract returns a pagination token in the
 response. You can use this pagination token to retrieve the next set of
 blocks.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  DocumentMetadata = list(
+    Pages = 123
+  ),
+  JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS",
+  NextToken = "string",
+  Blocks = list(
+    list(
+      BlockType = "KEY_VALUE_SET"|"PAGE"|"LINE"|"WORD"|"TABLE"|"CELL"|"SELECTION_ELEMENT",
+      Confidence = 123.0,
+      Text = "string",
+      TextType = "HANDWRITING"|"PRINTED",
+      RowIndex = 123,
+      ColumnIndex = 123,
+      RowSpan = 123,
+      ColumnSpan = 123,
+      Geometry = list(
+        BoundingBox = list(
+          Width = 123.0,
+          Height = 123.0,
+          Left = 123.0,
+          Top = 123.0
+        ),
+        Polygon = list(
+          list(
+            X = 123.0,
+            Y = 123.0
+          )
+        )
+      ),
+      Id = "string",
+      Relationships = list(
+        list(
+          Type = "VALUE"|"CHILD"|"COMPLEX_FEATURES",
+          Ids = list(
+            "string"
+          )
+        )
+      ),
+      EntityTypes = list(
+        "KEY"|"VALUE"
+      ),
+      SelectionStatus = "SELECTED"|"NOT_SELECTED",
+      Page = 123
+    )
+  ),
+  Warnings = list(
+    list(
+      ErrorCode = "string",
+      Pages = list(
+        123
+      )
+    )
+  ),
+  StatusMessage = "string",
+  AnalyzeDocumentModelVersion = "string"
+)
+}
+}
 \description{
 Gets the results for an Amazon Textract asynchronous operation that
 analyzes text in a document.
 
-You start asynchronous text analysis by calling StartDocumentAnalysis,
-which returns a job identifier (\code{JobId}). When the text analysis
-operation finishes, Amazon Textract publishes a completion status to the
-Amazon Simple Notification Service (Amazon SNS) topic that's registered
-in the initial call to \code{StartDocumentAnalysis}. To get the results of
-the text-detection operation, first check that the status value
-published to the Amazon SNS topic is \code{SUCCEEDED}. If so, call
-\code{GetDocumentAnalysis}, and pass the job identifier (\code{JobId}) from the
-initial call to \code{StartDocumentAnalysis}.
+You start asynchronous text analysis by calling
+\code{\link[=textract_start_document_analysis]{start_document_analysis}}, which
+returns a job identifier (\code{JobId}). When the text analysis operation
+finishes, Amazon Textract publishes a completion status to the Amazon
+Simple Notification Service (Amazon SNS) topic that's registered in the
+initial call to
+\code{\link[=textract_start_document_analysis]{start_document_analysis}}. To get
+the results of the text-detection operation, first check that the status
+value published to the Amazon SNS topic is \code{SUCCEEDED}. If so, call
+\code{\link[=textract_get_document_analysis]{get_document_analysis}}, and pass the
+job identifier (\code{JobId}) from the initial call to
+\code{\link[=textract_start_document_analysis]{start_document_analysis}}.
 
-\code{GetDocumentAnalysis} returns an array of Block objects. The following
-types of information are returned:
+\code{\link[=textract_get_document_analysis]{get_document_analysis}} returns an
+array of Block objects. The following types of information are returned:
 \itemize{
 \item Form data (key-value pairs). The related information is returned in
 two Block objects, each of type \code{KEY_VALUE_SET}: a KEY \code{Block}
@@ -49,22 +113,24 @@ returned for each cell in a table.
 \item Lines and words of text. A LINE \code{Block} object contains one or more
 WORD \code{Block} objects. All lines and words that are detected in the
 document are returned (including text that doesn't have a
-relationship with the value of the \code{StartDocumentAnalysis}
+relationship with the value of the
+\code{\link[=textract_start_document_analysis]{start_document_analysis}}
 \code{FeatureTypes} input parameter).
 }
 
 Selection elements such as check boxes and option buttons (radio
 buttons) can be detected in form data and in tables. A
-SELECTION\\_ELEMENT \code{Block} object contains information about a selection
+SELECTION_ELEMENT \code{Block} object contains information about a selection
 element, including the selection status.
 
 Use the \code{MaxResults} parameter to limit the number of blocks that are
 returned. If there are more results than specified in \code{MaxResults}, the
 value of \code{NextToken} in the operation response contains a pagination
 token for getting the next set of results. To get the next page of
-results, call \code{GetDocumentAnalysis}, and populate the \code{NextToken}
-request parameter with the token value that's returned from the previous
-call to \code{GetDocumentAnalysis}.
+results, call \code{\link[=textract_get_document_analysis]{get_document_analysis}},
+and populate the \code{NextToken} request parameter with the token value
+that's returned from the previous call to
+\code{\link[=textract_get_document_analysis]{get_document_analysis}}.
 
 For more information, see \href{https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html}{Document Text Analysis}.
 }

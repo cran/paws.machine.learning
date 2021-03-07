@@ -9,12 +9,16 @@ personalize_delete_campaign(campaignArn)
 \arguments{
 \item{campaignArn}{[required] The Amazon Resource Name (ARN) of the campaign to delete.}
 }
+\value{
+An empty list.
+}
 \description{
 Removes a campaign by deleting the solution deployment. The solution
 that the campaign is based on is not deleted and can be redeployed when
 needed. A deleted campaign can no longer be specified in a
 \href{https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html}{GetRecommendations}
-request. For more information on campaigns, see CreateCampaign.
+request. For more information on campaigns, see
+\code{\link[=personalize_create_campaign]{create_campaign}}.
 }
 \section{Request syntax}{
 \preformatted{svc$delete_campaign(

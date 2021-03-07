@@ -20,9 +20,9 @@ NULL
 #' on the behavior of headers outside those enumerated in the request
 #' syntax.
 #' 
-#' Calls to `InvokeEndpoint` are authenticated by using AWS Signature
-#' Version 4. For information, see [Authenticating Requests (AWS Signature
-#' Version
+#' Calls to [`invoke_endpoint`][sagemakerruntime_invoke_endpoint] are
+#' authenticated by using AWS Signature Version 4. For information, see
+#' [Authenticating Requests (AWS Signature Version
 #' 4)](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
 #' in the *Amazon S3 API Reference*.
 #' 
@@ -83,6 +83,17 @@ NULL
 #' data capture on the endpoint. For information about data capture, see
 #' [Capture
 #' Data](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Body = raw,
+#'   ContentType = "string",
+#'   InvokedProductionVariant = "string",
+#'   CustomAttributes = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

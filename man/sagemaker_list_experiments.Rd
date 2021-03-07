@@ -17,12 +17,35 @@ time.}
 
 \item{SortOrder}{The sort order. The default value is \code{Descending}.}
 
-\item{NextToken}{If the previous call to \code{ListExperiments} didn't return the full set of
-experiments, the call returns a token for getting the next set of
-experiments.}
+\item{NextToken}{If the previous call to \code{\link[=sagemaker_list_experiments]{list_experiments}}
+didn't return the full set of experiments, the call returns a token for
+getting the next set of experiments.}
 
 \item{MaxResults}{The maximum number of experiments to return in the response. The default
 value is 10.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ExperimentSummaries = list(
+    list(
+      ExperimentArn = "string",
+      ExperimentName = "string",
+      DisplayName = "string",
+      ExperimentSource = list(
+        SourceArn = "string",
+        SourceType = "string"
+      ),
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists all the experiments in your account. The list can be filtered to

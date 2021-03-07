@@ -11,7 +11,7 @@ comprehend_create_entity_recognizer(RecognizerName, DataAccessRoleArn,
 \arguments{
 \item{RecognizerName}{[required] The name given to the newly created recognizer. Recognizer names can be
 a maximum of 256 characters. Alphanumeric characters, hyphens (-) and
-underscores (\\_) are allowed. The name must be unique in the
+underscores (_) are allowed. The name must be unique in the
 account/region.}
 
 \item{DataAccessRoleArn}{[required] The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM)
@@ -48,10 +48,16 @@ either of the following formats:
 (VPC) containing the resources you are using for your custom entity
 recognizer. For more information, see \href{https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html}{Amazon VPC}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  EntityRecognizerArn = "string"
+)
+}
+}
 \description{
 Creates an entity recognizer using submitted files. After your
-\code{CreateEntityRecognizer} request is submitted, you can check job status
-using the API.
+\code{\link[=comprehend_create_entity_recognizer]{create_entity_recognizer}}
+request is submitted, you can check job status using the API.
 }
 \section{Request syntax}{
 \preformatted{svc$create_entity_recognizer(

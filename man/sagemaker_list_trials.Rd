@@ -25,8 +25,32 @@ trial component.}
 \item{MaxResults}{The maximum number of trials to return in the response. The default
 value is 10.}
 
-\item{NextToken}{If the previous call to \code{ListTrials} didn't return the full set of
-trials, the call returns a token for getting the next set of trials.}
+\item{NextToken}{If the previous call to \code{\link[=sagemaker_list_trials]{list_trials}} didn't
+return the full set of trials, the call returns a token for getting the
+next set of trials.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  TrialSummaries = list(
+    list(
+      TrialArn = "string",
+      TrialName = "string",
+      DisplayName = "string",
+      TrialSource = list(
+        SourceArn = "string",
+        SourceType = "string"
+      ),
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists the trials in your account. Specify an experiment name to limit

@@ -57,6 +57,15 @@ testing, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/model-ab-test
 data capture on the endpoint. For information about data capture, see
 \href{https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html}{Capture Data}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  Body = raw,
+  ContentType = "string",
+  InvokedProductionVariant = "string",
+  CustomAttributes = "string"
+)
+}
+}
 \description{
 After you deploy a model into production using Amazon SageMaker hosting
 services, your client applications use this API to get inferences from
@@ -69,8 +78,9 @@ API. Amazon SageMaker might add additional headers. You should not rely
 on the behavior of headers outside those enumerated in the request
 syntax.
 
-Calls to \code{InvokeEndpoint} are authenticated by using AWS Signature
-Version 4. For information, see \href{https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html}{Authenticating Requests (AWS Signature Version 4)}
+Calls to \code{\link[=sagemakerruntime_invoke_endpoint]{invoke_endpoint}} are
+authenticated by using AWS Signature Version 4. For information, see
+\href{https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html}{Authenticating Requests (AWS Signature Version 4)}
 in the \emph{Amazon S3 API Reference}.
 
 A customer's model containers must respond to requests within 60

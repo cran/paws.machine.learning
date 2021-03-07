@@ -18,17 +18,39 @@ pagination token in the next request.}
 \item{maxResults}{The maximum number of slot type versions to return in the response. The
 default is 10.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  slotTypes = list(
+    list(
+      name = "string",
+      description = "string",
+      lastUpdatedDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      createdDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      version = "string"
+    )
+  ),
+  nextToken = "string"
+)
+}
+}
 \description{
 Gets information about all versions of a slot type.
 
-The \code{GetSlotTypeVersions} operation returns a \code{SlotTypeMetadata} object
-for each version of a slot type. For example, if a slot type has three
-numbered versions, the \code{GetSlotTypeVersions} operation returns four
-\code{SlotTypeMetadata} objects in the response, one for each numbered
-version and one for the \verb{$LATEST} version.
+The
+\code{\link[=lexmodelbuildingservice_get_slot_type_versions]{get_slot_type_versions}}
+operation returns a \code{SlotTypeMetadata} object for each version of a slot
+type. For example, if a slot type has three numbered versions, the
+\code{\link[=lexmodelbuildingservice_get_slot_type_versions]{get_slot_type_versions}}
+operation returns four \code{SlotTypeMetadata} objects in the response, one
+for each numbered version and one for the \verb{$LATEST} version.
 
-The \code{GetSlotTypeVersions} operation always returns at least one version,
-the \verb{$LATEST} version.
+The
+\code{\link[=lexmodelbuildingservice_get_slot_type_versions]{get_slot_type_versions}}
+operation always returns at least one version, the \verb{$LATEST} version.
 
 This operation requires permissions for the \code{lex:GetSlotTypeVersions}
 action.

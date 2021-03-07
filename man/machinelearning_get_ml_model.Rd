@@ -10,17 +10,64 @@ machinelearning_get_ml_model(MLModelId, Verbose)
 \arguments{
 \item{MLModelId}{[required] The ID assigned to the \code{MLModel} at creation.}
 
-\item{Verbose}{Specifies whether the \code{GetMLModel} operation should return \code{Recipe}.
+\item{Verbose}{Specifies whether the \code{\link[=machinelearning_get_ml_model]{get_ml_model}}
+operation should return \code{Recipe}.
 
 If true, \code{Recipe} is returned.
 
 If false, \code{Recipe} is not returned.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  MLModelId = "string",
+  TrainingDataSourceId = "string",
+  CreatedByIamUser = "string",
+  CreatedAt = as.POSIXct(
+    "2015-01-01"
+  ),
+  LastUpdatedAt = as.POSIXct(
+    "2015-01-01"
+  ),
+  Name = "string",
+  Status = "PENDING"|"INPROGRESS"|"FAILED"|"COMPLETED"|"DELETED",
+  SizeInBytes = 123,
+  EndpointInfo = list(
+    PeakRequestsPerSecond = 123,
+    CreatedAt = as.POSIXct(
+      "2015-01-01"
+    ),
+    EndpointUrl = "string",
+    EndpointStatus = "NONE"|"READY"|"UPDATING"|"FAILED"
+  ),
+  TrainingParameters = list(
+    "string"
+  ),
+  InputDataLocationS3 = "string",
+  MLModelType = "REGRESSION"|"BINARY"|"MULTICLASS",
+  ScoreThreshold = 123.0,
+  ScoreThresholdLastUpdatedAt = as.POSIXct(
+    "2015-01-01"
+  ),
+  LogUri = "string",
+  Message = "string",
+  ComputeTime = 123,
+  FinishedAt = as.POSIXct(
+    "2015-01-01"
+  ),
+  StartedAt = as.POSIXct(
+    "2015-01-01"
+  ),
+  Recipe = "string",
+  Schema = "string"
+)
+}
+}
 \description{
 Returns an \code{MLModel} that includes detailed metadata, data source
 information, and the current status of the \code{MLModel}.
 
-\code{GetMLModel} provides results in normal or verbose format.
+\code{\link[=machinelearning_get_ml_model]{get_ml_model}} provides results in
+normal or verbose format.
 }
 \section{Request syntax}{
 \preformatted{svc$get_ml_model(

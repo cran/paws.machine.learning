@@ -27,6 +27,12 @@ field: ':', '//', '/./', '/../'.
 Amazon ML needs permissions to store and retrieve the logs on your
 behalf. For information about how to set permissions, see the \href{https://docs.aws.amazon.com/machine-learning/latest/dg/}{Amazon Machine Learning Developer Guide}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  BatchPredictionId = "string"
+)
+}
+}
 \description{
 Generates predictions for a group of observations. The observations to
 process exist in one or more data files referenced by a \code{DataSource}.
@@ -34,15 +40,18 @@ This operation creates a new \code{BatchPrediction}, and uses an \code{MLModel}
 and the data files referenced by the \code{DataSource} as information
 sources.
 
-\code{CreateBatchPrediction} is an asynchronous operation. In response to
-\code{CreateBatchPrediction}, Amazon Machine Learning (Amazon ML) immediately
-returns and sets the \code{BatchPrediction} status to \code{PENDING}. After the
-\code{BatchPrediction} completes, Amazon ML sets the status to \code{COMPLETED}.
+\code{\link[=machinelearning_create_batch_prediction]{create_batch_prediction}} is
+an asynchronous operation. In response to
+\code{\link[=machinelearning_create_batch_prediction]{create_batch_prediction}},
+Amazon Machine Learning (Amazon ML) immediately returns and sets the
+\code{BatchPrediction} status to \code{PENDING}. After the \code{BatchPrediction}
+completes, Amazon ML sets the status to \code{COMPLETED}.
 
-You can poll for status updates by using the GetBatchPrediction
-operation and checking the \code{Status} parameter of the result. After the
-\code{COMPLETED} status appears, the results are available in the location
-specified by the \code{OutputUri} parameter.
+You can poll for status updates by using the
+\code{\link[=machinelearning_get_batch_prediction]{get_batch_prediction}} operation
+and checking the \code{Status} parameter of the result. After the \code{COMPLETED}
+status appears, the results are available in the location specified by
+the \code{OutputUri} parameter.
 }
 \section{Request syntax}{
 \preformatted{svc$create_batch_prediction(

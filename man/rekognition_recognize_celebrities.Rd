@@ -15,18 +15,88 @@ If you are using an AWS SDK to call Amazon Rekognition, you might not
 need to base64-encode image bytes passed using the \code{Bytes} field. For
 more information, see Images in the Amazon Rekognition developer guide.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  CelebrityFaces = list(
+    list(
+      Urls = list(
+        "string"
+      ),
+      Name = "string",
+      Id = "string",
+      Face = list(
+        BoundingBox = list(
+          Width = 123.0,
+          Height = 123.0,
+          Left = 123.0,
+          Top = 123.0
+        ),
+        Confidence = 123.0,
+        Landmarks = list(
+          list(
+            Type = "eyeLeft"|"eyeRight"|"nose"|"mouthLeft"|"mouthRight"|"leftEyeBrowLeft"|"leftEyeBrowRight"|"leftEyeBrowUp"|"rightEyeBrowLeft"|"rightEyeBrowRight"|"rightEyeBrowUp"|"leftEyeLeft"|"leftEyeRight"|"leftEyeUp"|"leftEyeDown"|"rightEyeLeft"|"rightEyeRight"|"rightEyeUp"|"rightEyeDown"|"noseLeft"|"noseRight"|"mouthUp"|"mouthDown"|"leftPupil"|"rightPupil"|"upperJawlineLeft"|"midJawlineLeft"|"chinBottom"|"midJawlineRight"|"upperJawlineRight",
+            X = 123.0,
+            Y = 123.0
+          )
+        ),
+        Pose = list(
+          Roll = 123.0,
+          Yaw = 123.0,
+          Pitch = 123.0
+        ),
+        Quality = list(
+          Brightness = 123.0,
+          Sharpness = 123.0
+        )
+      ),
+      MatchConfidence = 123.0
+    )
+  ),
+  UnrecognizedFaces = list(
+    list(
+      BoundingBox = list(
+        Width = 123.0,
+        Height = 123.0,
+        Left = 123.0,
+        Top = 123.0
+      ),
+      Confidence = 123.0,
+      Landmarks = list(
+        list(
+          Type = "eyeLeft"|"eyeRight"|"nose"|"mouthLeft"|"mouthRight"|"leftEyeBrowLeft"|"leftEyeBrowRight"|"leftEyeBrowUp"|"rightEyeBrowLeft"|"rightEyeBrowRight"|"rightEyeBrowUp"|"leftEyeLeft"|"leftEyeRight"|"leftEyeUp"|"leftEyeDown"|"rightEyeLeft"|"rightEyeRight"|"rightEyeUp"|"rightEyeDown"|"noseLeft"|"noseRight"|"mouthUp"|"mouthDown"|"leftPupil"|"rightPupil"|"upperJawlineLeft"|"midJawlineLeft"|"chinBottom"|"midJawlineRight"|"upperJawlineRight",
+          X = 123.0,
+          Y = 123.0
+        )
+      ),
+      Pose = list(
+        Roll = 123.0,
+        Yaw = 123.0,
+        Pitch = 123.0
+      ),
+      Quality = list(
+        Brightness = 123.0,
+        Sharpness = 123.0
+      )
+    )
+  ),
+  OrientationCorrection = "ROTATE_0"|"ROTATE_90"|"ROTATE_180"|"ROTATE_270"
+)
+}
+}
 \description{
 Returns an array of celebrities recognized in the input image. For more
 information, see Recognizing Celebrities in the Amazon Rekognition
 Developer Guide.
 
-\code{RecognizeCelebrities} returns the 64 largest faces in the image. It
-lists recognized celebrities in the \code{CelebrityFaces} array and
-unrecognized faces in the \code{UnrecognizedFaces} array.
-\code{RecognizeCelebrities} doesn't return celebrities whose faces aren't
-among the largest 64 faces in the image.
+\code{\link[=rekognition_recognize_celebrities]{recognize_celebrities}} returns the
+64 largest faces in the image. It lists recognized celebrities in the
+\code{CelebrityFaces} array and unrecognized faces in the \code{UnrecognizedFaces}
+array. \code{\link[=rekognition_recognize_celebrities]{recognize_celebrities}}
+doesn't return celebrities whose faces aren't among the largest 64 faces
+in the image.
 
-For each celebrity recognized, \code{RecognizeCelebrities} returns a
+For each celebrity recognized,
+\code{\link[=rekognition_recognize_celebrities]{recognize_celebrities}} returns a
 \code{Celebrity} object. The \code{Celebrity} object contains the celebrity name,
 ID, URL links to additional information, match confidence, and a
 \code{ComparedFace} object that you can use to locate the celebrity's face on
@@ -36,9 +106,10 @@ Amazon Rekognition doesn't retain information about which images a
 celebrity has been recognized in. Your application must store this
 information and use the \code{Celebrity} ID property as a unique identifier
 for the celebrity. If you don't store the celebrity name or additional
-information URLs returned by \code{RecognizeCelebrities}, you will need the
-ID to identify the celebrity in a call to the GetCelebrityInfo
-operation.
+information URLs returned by
+\code{\link[=rekognition_recognize_celebrities]{recognize_celebrities}}, you will
+need the ID to identify the celebrity in a call to the
+\code{\link[=rekognition_get_celebrity_info]{get_celebrity_info}} operation.
 
 You pass the input image either as base64-encoded image bytes or as a
 reference to an image in an Amazon S3 bucket. If you use the AWS CLI to

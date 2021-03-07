@@ -26,11 +26,36 @@ returned if any part of its name matches the substring. For example,
 "xyz" matches both "xyzabc" and "abcxyz." To return all bot channel
 associations, use a hyphen ("-") as the \code{nameContains} parameter.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  botChannelAssociations = list(
+    list(
+      name = "string",
+      description = "string",
+      botAlias = "string",
+      botName = "string",
+      createdDate = as.POSIXct(
+        "2015-01-01"
+      ),
+      type = "Facebook"|"Slack"|"Twilio-Sms"|"Kik",
+      botConfiguration = list(
+        "string"
+      ),
+      status = "IN_PROGRESS"|"CREATED"|"FAILED",
+      failureReason = "string"
+    )
+  ),
+  nextToken = "string"
+)
+}
+}
 \description{
 Returns a list of all of the channels associated with the specified bot.
 
-The \code{GetBotChannelAssociations} operation requires permissions for the
-\code{lex:GetBotChannelAssociations} action.
+The
+\code{\link[=lexmodelbuildingservice_get_bot_channel_associations]{get_bot_channel_associations}}
+operation requires permissions for the \code{lex:GetBotChannelAssociations}
+action.
 }
 \section{Request syntax}{
 \preformatted{svc$get_bot_channel_associations(

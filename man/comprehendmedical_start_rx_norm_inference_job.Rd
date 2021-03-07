@@ -29,10 +29,17 @@ do not specify a key, the files are written in plain text.}
 \item{LanguageCode}{[required] The language of the input documents. All documents must be in the same
 language.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  JobId = "string"
+)
+}
+}
 \description{
 Starts an asynchronous job to detect medication entities and link them
-to the RxNorm ontology. Use the \code{DescribeRxNormInferenceJob} operation
-to track the status of a job.
+to the RxNorm ontology. Use the
+\code{\link[=comprehendmedical_describe_rx_norm_inference_job]{describe_rx_norm_inference_job}}
+operation to track the status of a job.
 }
 \section{Request syntax}{
 \preformatted{svc$start_rx_norm_inference_job(

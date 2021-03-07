@@ -27,6 +27,12 @@ Do not use \code{CognitoConfig} if you specify values for \code{OidcConfig}.}
 and organize our workforce. Each tag consists of a key and a value, both
 of which you define.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  WorkforceArn = "string"
+)
+}
+}
 \description{
 Use this operation to create a workforce. This operation will return an
 error if a workforce already exists in the AWS Region that you specify.
@@ -34,7 +40,8 @@ You can only create one workforce in each AWS Region per AWS account.
 
 If you want to create a new workforce in an AWS Region where a workforce
 already exists, use the API operation to delete the existing workforce
-and then use \code{CreateWorkforce} to create a new workforce.
+and then use \code{\link[=sagemaker_create_workforce]{create_workforce}} to create
+a new workforce.
 
 To create a private workforce using Amazon Cognito, you must specify a
 Cognito user pool in \code{CognitoConfig}. You can also create an Amazon

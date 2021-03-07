@@ -9,6 +9,13 @@ translate_stop_text_translation_job(JobId)
 \arguments{
 \item{JobId}{[required] The job ID of the job to be stopped.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  JobId = "string",
+  JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERROR"|"FAILED"|"STOP_REQUESTED"|"STOPPED"
+)
+}
+}
 \description{
 Stops an asynchronous batch translation job that is in progress.
 
@@ -18,9 +25,11 @@ completes before it can be stopped, it is put into the \code{COMPLETED}
 state. Otherwise, the job is put into the \code{STOPPED} state.
 
 Asynchronous batch translation jobs are started with the
-StartTextTranslationJob operation. You can use the
-DescribeTextTranslationJob or ListTextTranslationJobs operations to get
-a batch translation job's \code{JobId}.
+\code{\link[=translate_start_text_translation_job]{start_text_translation_job}}
+operation. You can use the
+\code{\link[=translate_describe_text_translation_job]{describe_text_translation_job}}
+or \code{\link[=translate_list_text_translation_jobs]{list_text_translation_jobs}}
+operations to get a batch translation job's \code{JobId}.
 }
 \section{Request syntax}{
 \preformatted{svc$stop_text_translation_job(

@@ -21,23 +21,35 @@ Transcribe Medical.}
 your custom vocabulary. The URI must be in the same AWS Region as the
 resource that you are calling. The following is the format for a URI:
 
-\verb{https://s3.&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt;}
+\verb{https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>}
 
 For example:
 
 \verb{https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt}
 
-For more information about Amazon S3 object names, see \href{https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys}{Object Keys}
+For more information about Amazon S3 object names, see \href{https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingMetadata.html#object-keys}{Object Keys}
 in the \emph{Amazon S3 Developer Guide}.
 
 For more information about custom vocabularies in Amazon Transcribe
 Medical, see \href{https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary}{Medical Custom Vocabularies}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  VocabularyName = "string",
+  LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN",
+  LastModifiedTime = as.POSIXct(
+    "2015-01-01"
+  ),
+  VocabularyState = "PENDING"|"READY"|"FAILED"
+)
+}
+}
 \description{
 Updates a vocabulary with new values that you provide in a different
 text file from the one you used to create the vocabulary. The
-\code{UpdateMedicalVocabulary} operation overwrites all of the existing
-information with the values that you provide in the request.
+\code{\link[=transcribeservice_update_medical_vocabulary]{update_medical_vocabulary}}
+operation overwrites all of the existing information with the values
+that you provide in the request.
 }
 \section{Request syntax}{
 \preformatted{svc$update_medical_vocabulary(

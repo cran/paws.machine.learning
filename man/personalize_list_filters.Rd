@@ -9,10 +9,32 @@ personalize_list_filters(datasetGroupArn, nextToken, maxResults)
 \arguments{
 \item{datasetGroupArn}{The ARN of the dataset group that contains the filters.}
 
-\item{nextToken}{A token returned from the previous call to \code{ListFilters} for getting the
-next set of filters (if they exist).}
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_filters]{list_filters}} for getting the next set of
+filters (if they exist).}
 
 \item{maxResults}{The maximum number of filters to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Filters = list(
+    list(
+      name = "string",
+      filterArn = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      datasetGroupArn = "string",
+      failureReason = "string",
+      status = "string"
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Lists all filters that belong to a given dataset group.

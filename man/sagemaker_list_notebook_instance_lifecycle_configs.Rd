@@ -10,9 +10,10 @@ sagemaker_list_notebook_instance_lifecycle_configs(NextToken,
   CreationTimeAfter, LastModifiedTimeBefore, LastModifiedTimeAfter)
 }
 \arguments{
-\item{NextToken}{If the result of a \code{ListNotebookInstanceLifecycleConfigs} request was
-truncated, the response includes a \code{NextToken}. To get the next set of
-lifecycle configurations, use the token in the next request.}
+\item{NextToken}{If the result of a
+\code{\link[=sagemaker_list_notebook_instance_lifecycle_configs]{list_notebook_instance_lifecycle_configs}}
+request was truncated, the response includes a \code{NextToken}. To get the
+next set of lifecycle configurations, use the token in the next request.}
 
 \item{MaxResults}{The maximum number of lifecycle configurations to return in the
 response.}
@@ -36,9 +37,28 @@ before the specified time (timestamp).}
 \item{LastModifiedTimeAfter}{A filter that returns only lifecycle configurations that were modified
 after the specified time (timestamp).}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  NextToken = "string",
+  NotebookInstanceLifecycleConfigs = list(
+    list(
+      NotebookInstanceLifecycleConfigName = "string",
+      NotebookInstanceLifecycleConfigArn = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  )
+)
+}
+}
 \description{
 Lists notebook instance lifestyle configurations created with the
-CreateNotebookInstanceLifecycleConfig API.
+\code{\link[=sagemaker_create_notebook_instance_lifecycle_config]{create_notebook_instance_lifecycle_config}}
+API.
 }
 \section{Request syntax}{
 \preformatted{svc$list_notebook_instance_lifecycle_configs(

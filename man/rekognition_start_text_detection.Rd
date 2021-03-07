@@ -11,9 +11,10 @@ rekognition_start_text_detection(Video, ClientRequestToken,
 \item{Video}{[required]}
 
 \item{ClientRequestToken}{Idempotent token used to identify the start request. If you use the same
-token with multiple \code{StartTextDetection} requests, the same \code{JobId} is
-returned. Use \code{ClientRequestToken} to prevent the same job from being
-accidentaly started more than once.}
+token with multiple
+\code{\link[=rekognition_start_text_detection]{start_text_detection}} requests, the
+same \code{JobId} is returned. Use \code{ClientRequestToken} to prevent the same
+job from being accidentaly started more than once.}
 
 \item{NotificationChannel}{}
 
@@ -24,21 +25,28 @@ group related jobs and identify them in the completion notification.}
 \item{Filters}{Optional parameters that let you set criteria the text must meet to be
 included in your response.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  JobId = "string"
+)
+}
+}
 \description{
 Starts asynchronous detection of text in a stored video.
 
 Amazon Rekognition Video can detect text in a video stored in an Amazon
 S3 bucket. Use Video to specify the bucket name and the filename of the
-video. \code{StartTextDetection} returns a job identifier (\code{JobId}) which you
-use to get the results of the operation. When text detection is
-finished, Amazon Rekognition Video publishes a completion status to the
-Amazon Simple Notification Service topic that you specify in
-\code{NotificationChannel}.
+video. \code{\link[=rekognition_start_text_detection]{start_text_detection}}
+returns a job identifier (\code{JobId}) which you use to get the results of
+the operation. When text detection is finished, Amazon Rekognition Video
+publishes a completion status to the Amazon Simple Notification Service
+topic that you specify in \code{NotificationChannel}.
 
 To get the results of the text detection operation, first check that the
 status value published to the Amazon SNS topic is \code{SUCCEEDED}. if so,
-call GetTextDetection and pass the job identifier (\code{JobId}) from the
-initial call to \code{StartTextDetection}.
+call \code{\link[=rekognition_get_text_detection]{get_text_detection}} and pass the
+job identifier (\code{JobId}) from the initial call to
+\code{\link[=rekognition_start_text_detection]{start_text_detection}}.
 }
 \section{Request syntax}{
 \preformatted{svc$start_text_detection(

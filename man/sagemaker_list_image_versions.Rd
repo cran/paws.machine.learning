@@ -26,13 +26,35 @@ time.}
 \item{MaxResults}{The maximum number of versions to return in the response. The default
 value is 10.}
 
-\item{NextToken}{If the previous call to \code{ListImageVersions} didn't return the full set
-of versions, the call returns a token for getting the next set of
-versions.}
+\item{NextToken}{If the previous call to
+\code{\link[=sagemaker_list_image_versions]{list_image_versions}} didn't return the
+full set of versions, the call returns a token for getting the next set
+of versions.}
 
 \item{SortBy}{The property used to sort results. The default value is \code{CREATION_TIME}.}
 
 \item{SortOrder}{The sort order. The default value is \code{DESCENDING}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ImageVersions = list(
+    list(
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      FailureReason = "string",
+      ImageArn = "string",
+      ImageVersionArn = "string",
+      ImageVersionStatus = "CREATING"|"CREATED"|"CREATE_FAILED"|"DELETING"|"DELETE_FAILED",
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      Version = 123
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists the versions of a specified image and their properties. The list

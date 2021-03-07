@@ -37,10 +37,11 @@ Transcribe Medical determine the sample rate.}
 
 You must set \code{OutputBucketName} for Amazon Transcribe Medical to store
 the transcription results. Your transcript appears in the S3 location
-you specify. When you call the GetMedicalTranscriptionJob, the operation
-returns this location in the \code{TranscriptFileUri} field. The S3 bucket
-must have permissions that allow Amazon Transcribe Medical to put files
-in the bucket. For more information, see \href{https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user}{Permissions Required for IAM User Roles}.
+you specify. When you call the
+\code{\link[=transcribeservice_get_medical_transcription_job]{get_medical_transcription_job}},
+the operation returns this location in the \code{TranscriptFileUri} field.
+The S3 bucket must have permissions that allow Amazon Transcribe Medical
+to put files in the bucket. For more information, see \href{https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user}{Permissions Required for IAM User Roles}.
 
 You can specify an AWS Key Management Service (KMS) key to encrypt the
 output of your transcription using the \code{OutputEncryptionKMSKeyId}
@@ -69,8 +70,9 @@ If you specify an output key, you must also specify an S3 bucket in the
 
 \item{OutputEncryptionKMSKeyId}{The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS)
 key used to encrypt the output of the transcription job. The user
-calling the StartMedicalTranscriptionJob operation must have permission
-to use the specified KMS key.
+calling the
+\code{\link[=transcribeservice_start_medical_transcription_job]{start_medical_transcription_job}}
+operation must have permission to use the specified KMS key.
 
 You use either of the following to identify a KMS key in the current
 account:
@@ -103,6 +105,44 @@ an output location in the \code{OutputBucketName} parameter.}
 conversations between two or more speakers, e.g., a conversations
 between doctors and patients. \code{DICTATION} refers to single-speaker
 dictated speech, e.g., for clinical notes.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  MedicalTranscriptionJob = list(
+    MedicalTranscriptionJobName = "string",
+    TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED",
+    LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN",
+    MediaSampleRateHertz = 123,
+    MediaFormat = "mp3"|"mp4"|"wav"|"flac"|"ogg"|"amr"|"webm",
+    Media = list(
+      MediaFileUri = "string"
+    ),
+    Transcript = list(
+      TranscriptFileUri = "string"
+    ),
+    StartTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    CreationTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    CompletionTime = as.POSIXct(
+      "2015-01-01"
+    ),
+    FailureReason = "string",
+    Settings = list(
+      ShowSpeakerLabels = TRUE|FALSE,
+      MaxSpeakerLabels = 123,
+      ChannelIdentification = TRUE|FALSE,
+      ShowAlternatives = TRUE|FALSE,
+      MaxAlternatives = 123,
+      VocabularyName = "string"
+    ),
+    Specialty = "PRIMARYCARE",
+    Type = "CONVERSATION"|"DICTATION"
+  )
+)
+}
 }
 \description{
 Starts a batch job to transcribe medical speech to text.

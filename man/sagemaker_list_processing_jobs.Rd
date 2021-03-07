@@ -30,11 +30,36 @@ jobs whose name contains the specified string.}
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
 
-\item{NextToken}{If the result of the previous \code{ListProcessingJobs} request was
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_processing_jobs]{list_processing_jobs}} request was
 truncated, the response includes a \code{NextToken}. To retrieve the next set
 of processing jobs, use the token in the next request.}
 
 \item{MaxResults}{The maximum number of processing jobs to return in the response.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ProcessingJobSummaries = list(
+    list(
+      ProcessingJobName = "string",
+      ProcessingJobArn = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      ProcessingEndTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      LastModifiedTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      ProcessingJobStatus = "InProgress"|"Completed"|"Failed"|"Stopping"|"Stopped",
+      FailureReason = "string",
+      ExitMessage = "string"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Lists processing jobs that satisfy various filters.

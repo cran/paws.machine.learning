@@ -20,13 +20,31 @@ time.}
 \item{NameContains}{A string in the model group name. This filter returns only model groups
 whose name contains the specified string.}
 
-\item{NextToken}{If the result of the previous \code{ListModelPackageGroups} request was
-truncated, the response includes a \code{NextToken}. To retrieve the next set
-of model groups, use the token in the next request.}
+\item{NextToken}{If the result of the previous
+\code{\link[=sagemaker_list_model_package_groups]{list_model_package_groups}}
+request was truncated, the response includes a \code{NextToken}. To retrieve
+the next set of model groups, use the token in the next request.}
 
 \item{SortBy}{The field to sort results by. The default is \code{CreationTime}.}
 
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  ModelPackageGroupSummaryList = list(
+    list(
+      ModelPackageGroupName = "string",
+      ModelPackageGroupArn = "string",
+      ModelPackageGroupDescription = "string",
+      CreationTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      ModelPackageGroupStatus = "Pending"|"InProgress"|"Completed"|"Failed"|"Deleting"|"DeleteFailed"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Gets a list of the model groups in your AWS account.

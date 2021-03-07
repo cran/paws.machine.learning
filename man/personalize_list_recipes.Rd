@@ -9,10 +9,30 @@ personalize_list_recipes(recipeProvider, nextToken, maxResults)
 \arguments{
 \item{recipeProvider}{The default is \code{SERVICE}.}
 
-\item{nextToken}{A token returned from the previous call to \code{ListRecipes} for getting the
-next set of recipes (if they exist).}
+\item{nextToken}{A token returned from the previous call to
+\code{\link[=personalize_list_recipes]{list_recipes}} for getting the next set of
+recipes (if they exist).}
 
 \item{maxResults}{The maximum number of recipes to return.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  recipes = list(
+    list(
+      name = "string",
+      recipeArn = "string",
+      status = "string",
+      creationDateTime = as.POSIXct(
+        "2015-01-01"
+      ),
+      lastUpdatedDateTime = as.POSIXct(
+        "2015-01-01"
+      )
+    )
+  ),
+  nextToken = "string"
+)
+}
 }
 \description{
 Returns a list of available recipes. The response provides the

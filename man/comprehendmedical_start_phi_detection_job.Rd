@@ -28,10 +28,17 @@ do not specify a key, the files are written in plain text.}
 \item{LanguageCode}{[required] The language of the input documents. All documents must be in the same
 language.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  JobId = "string"
+)
+}
+}
 \description{
 Starts an asynchronous job to detect protected health information (PHI).
-Use the \code{DescribePHIDetectionJob} operation to track the status of a
-job.
+Use the
+\code{\link[=comprehendmedical_describe_phi_detection_job]{describe_phi_detection_job}}
+operation to track the status of a job.
 }
 \section{Request syntax}{
 \preformatted{svc$start_phi_detection_job(
