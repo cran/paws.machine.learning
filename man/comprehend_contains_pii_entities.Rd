@@ -9,9 +9,7 @@ such as name, address, bank account number, or phone number}
 comprehend_contains_pii_entities(Text, LanguageCode)
 }
 \arguments{
-\item{Text}{[required] Creates a new document classification request to analyze a single
-document in real-time, returning personally identifiable information
-(PII) entity labels.}
+\item{Text}{[required] A UTF-8 text string. The maximum string size is 100 KB.}
 
 \item{LanguageCode}{[required] The language of the input documents. Currently, English is the only
 valid language.}
@@ -19,6 +17,6 @@ valid language.}
 \description{
 Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
 
-See \url{https://paws-r.github.io/docs/comprehend/contains_pii_entities.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_contains_pii_entities/} for full documentation.
 }
 \keyword{internal}

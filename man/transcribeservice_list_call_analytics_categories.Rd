@@ -20,13 +20,13 @@ page of results, copy this string and repeat your request, including
 view all your results.}
 
 \item{MaxResults}{The maximum number of Call Analytics categories to return in each page
-of results. If there are fewer results than the value you specify, only
-the actual results are returned. If you don't specify a value, a default
-of 5 is used.}
+of results. If there are fewer results than the value that you specify,
+only the actual results are returned. If you don't specify a value, a
+default of 5 is used.}
 }
 \description{
 Provides a list of Call Analytics categories, including all rules that make up each category.
 
-See \url{https://paws-r.github.io/docs/transcribeservice/list_call_analytics_categories.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/transcribeservice_list_call_analytics_categories/} for full documentation.
 }
 \keyword{internal}

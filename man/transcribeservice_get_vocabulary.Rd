@@ -7,12 +7,12 @@
 transcribeservice_get_vocabulary(VocabularyName)
 }
 \arguments{
-\item{VocabularyName}{[required] The name of the custom vocabulary you want information about. Vocabulary
-names are case sensitive.}
+\item{VocabularyName}{[required] The name of the custom vocabulary you want information about. Custom
+vocabulary names are case sensitive.}
 }
 \description{
 Provides information about the specified custom vocabulary.
 
-See \url{https://paws-r.github.io/docs/transcribeservice/get_vocabulary.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/transcribeservice_get_vocabulary/} for full documentation.
 }
 \keyword{internal}

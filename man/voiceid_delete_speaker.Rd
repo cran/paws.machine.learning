@@ -7,13 +7,13 @@
 voiceid_delete_speaker(DomainId, SpeakerId)
 }
 \arguments{
-\item{DomainId}{[required] The identifier of the domain containing the speaker.}
+\item{DomainId}{[required] The identifier of the domain that contains the speaker.}
 
 \item{SpeakerId}{[required] The identifier of the speaker you want to delete.}
 }
 \description{
 Deletes the specified speaker from Voice ID.
 
-See \url{https://paws-r.github.io/docs/voiceid/delete_speaker.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_delete_speaker/} for full documentation.
 }
 \keyword{internal}

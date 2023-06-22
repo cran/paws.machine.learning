@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Re-ranks a list of recommended items for the given user. The first item in the list is deemed the most likely item to be of interest to the user.
 #'
-#' See [https://paws-r.github.io/docs/personalizeruntime/get_personalized_ranking.html](https://paws-r.github.io/docs/personalizeruntime/get_personalized_ranking.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/personalizeruntime_get_personalized_ranking/](https://www.paws-r-sdk.com/docs/personalizeruntime_get_personalized_ranking/) for full documentation.
 #'
 #' @param campaignArn &#91;required&#93; The Amazon Resource Name (ARN) of the campaign to use for generating the
 #' personalized ranking.
@@ -65,7 +65,7 @@ personalizeruntime_get_personalized_ranking <- function(campaignArn, inputList, 
 #' @description
 #' Returns a list of recommended items. For campaigns, the campaign's Amazon Resource Name (ARN) is required and the required user and item input depends on the recipe type used to create the solution backing the campaign as follows:
 #'
-#' See [https://paws-r.github.io/docs/personalizeruntime/get_recommendations.html](https://paws-r.github.io/docs/personalizeruntime/get_recommendations.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/personalizeruntime_get_recommendations/](https://www.paws-r-sdk.com/docs/personalizeruntime_get_recommendations/) for full documentation.
 #'
 #' @param campaignArn The Amazon Resource Name (ARN) of the campaign to use for getting
 #' recommendations.
@@ -97,23 +97,26 @@ personalizeruntime_get_personalized_ranking <- function(campaignArn, inputList, 
 #' Personalize doesn't use that portion of the expression to filter
 #' recommendations.
 #' 
-#' For more information, see [Filtering
-#' Recommendations](https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
+#' For more information, see [Filtering recommendations and user
+#' segments](https://docs.aws.amazon.com/personalize/latest/dg/filter.html).
 #' @param recommenderArn The Amazon Resource Name (ARN) of the recommender to use to get
 #' recommendations. Provide a recommender ARN if you created a Domain
 #' dataset group with a recommender for a domain use case.
+#' @param promotions The promotions to apply to the recommendation request. A promotion
+#' defines additional business rules that apply to a configurable subset of
+#' recommended items.
 #'
 #' @keywords internal
 #'
 #' @rdname personalizeruntime_get_recommendations
-personalizeruntime_get_recommendations <- function(campaignArn = NULL, itemId = NULL, userId = NULL, numResults = NULL, context = NULL, filterArn = NULL, filterValues = NULL, recommenderArn = NULL) {
+personalizeruntime_get_recommendations <- function(campaignArn = NULL, itemId = NULL, userId = NULL, numResults = NULL, context = NULL, filterArn = NULL, filterValues = NULL, recommenderArn = NULL, promotions = NULL) {
   op <- new_operation(
     name = "GetRecommendations",
     http_method = "POST",
     http_path = "/recommendations",
     paginator = list()
   )
-  input <- .personalizeruntime$get_recommendations_input(campaignArn = campaignArn, itemId = itemId, userId = userId, numResults = numResults, context = context, filterArn = filterArn, filterValues = filterValues, recommenderArn = recommenderArn)
+  input <- .personalizeruntime$get_recommendations_input(campaignArn = campaignArn, itemId = itemId, userId = userId, numResults = numResults, context = context, filterArn = filterArn, filterValues = filterValues, recommenderArn = recommenderArn, promotions = promotions)
   output <- .personalizeruntime$get_recommendations_output()
   config <- get_config()
   svc <- .personalizeruntime$service(config)

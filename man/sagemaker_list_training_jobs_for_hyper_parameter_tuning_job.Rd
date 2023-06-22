@@ -34,8 +34,8 @@ jobs that did not return an objective metric are not listed.}
 \item{SortOrder}{The sort order for results. The default is \code{Ascending}.}
 }
 \description{
-Gets a list of TrainingJobSummary objects that describe the training jobs that a hyperparameter tuning job launched.
+Gets a list of \href{https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html}{TrainingJobSummary} objects that describe the training jobs that a hyperparameter tuning job launched.
 
-See \url{https://paws-r.github.io/docs/sagemaker/list_training_jobs_for_hyper_parameter_tuning_job.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_list_training_jobs_for_hyper_parameter_tuning_job/} for full documentation.
 }
 \keyword{internal}

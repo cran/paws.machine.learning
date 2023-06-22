@@ -8,11 +8,12 @@ comprehend_describe_targeted_sentiment_detection_job(JobId)
 }
 \arguments{
 \item{JobId}{[required] The identifier that Amazon Comprehend generated for the job. The
+\code{\link[=comprehend_start_targeted_sentiment_detection_job]{start_targeted_sentiment_detection_job}}
 operation returns this identifier in its response.}
 }
 \description{
 Gets the properties associated with a targeted sentiment detection job. Use this operation to get the status of the job.
 
-See \url{https://paws-r.github.io/docs/comprehend/describe_targeted_sentiment_detection_job.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_describe_targeted_sentiment_detection_job/} for full documentation.
 }
 \keyword{internal}

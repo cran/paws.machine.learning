@@ -10,7 +10,7 @@ NULL
 #' @description
 #' After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.
 #'
-#' See [https://paws-r.github.io/docs/sagemakerruntime/invoke_endpoint.html](https://paws-r.github.io/docs/sagemakerruntime/invoke_endpoint.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sagemakerruntime_invoke_endpoint/](https://www.paws-r-sdk.com/docs/sagemakerruntime_invoke_endpoint/) for full documentation.
 #'
 #' @param EndpointName &#91;required&#93; The name of the endpoint that you specified when you created the
 #' endpoint using the
@@ -31,8 +31,8 @@ NULL
 #' request or to provide other metadata that a service endpoint was
 #' programmed to process. The value must consist of no more than 1024
 #' visible US-ASCII characters as specified in [Section 3.3.6. Field Value
-#' Components](https://www.rfc-editor.org/rfc/rfc7230#section-3.2.6) of the
-#' Hypertext Transfer Protocol (HTTP/1.1).
+#' Components](https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6)
+#' of the Hypertext Transfer Protocol (HTTP/1.1).
 #' 
 #' The code in your model is responsible for setting or updating any custom
 #' attributes in the response. If your code does not set this value in the
@@ -58,18 +58,23 @@ NULL
 #' data capture on the endpoint. For information about data capture, see
 #' [Capture
 #' Data](https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
+#' @param EnableExplanations An optional JMESPath expression used to override the
+#' `EnableExplanations` parameter of the `ClarifyExplainerConfig` API. See
+#' the
+#' [EnableExplanations](https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-online-explainability-create-endpoint.html#clarify-online-explainability-create-endpoint-enable)
+#' section in the developer guide for more information.
 #'
 #' @keywords internal
 #'
 #' @rdname sagemakerruntime_invoke_endpoint
-sagemakerruntime_invoke_endpoint <- function(EndpointName, Body, ContentType = NULL, Accept = NULL, CustomAttributes = NULL, TargetModel = NULL, TargetVariant = NULL, TargetContainerHostname = NULL, InferenceId = NULL) {
+sagemakerruntime_invoke_endpoint <- function(EndpointName, Body, ContentType = NULL, Accept = NULL, CustomAttributes = NULL, TargetModel = NULL, TargetVariant = NULL, TargetContainerHostname = NULL, InferenceId = NULL, EnableExplanations = NULL) {
   op <- new_operation(
     name = "InvokeEndpoint",
     http_method = "POST",
     http_path = "/endpoints/{EndpointName}/invocations",
     paginator = list()
   )
-  input <- .sagemakerruntime$invoke_endpoint_input(EndpointName = EndpointName, Body = Body, ContentType = ContentType, Accept = Accept, CustomAttributes = CustomAttributes, TargetModel = TargetModel, TargetVariant = TargetVariant, TargetContainerHostname = TargetContainerHostname, InferenceId = InferenceId)
+  input <- .sagemakerruntime$invoke_endpoint_input(EndpointName = EndpointName, Body = Body, ContentType = ContentType, Accept = Accept, CustomAttributes = CustomAttributes, TargetModel = TargetModel, TargetVariant = TargetVariant, TargetContainerHostname = TargetContainerHostname, InferenceId = InferenceId, EnableExplanations = EnableExplanations)
   output <- .sagemakerruntime$invoke_endpoint_output()
   config <- get_config()
   svc <- .sagemakerruntime$service(config)
@@ -86,7 +91,7 @@ sagemakerruntime_invoke_endpoint <- function(EndpointName, Body, ContentType = N
 #' @description
 #' After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner.
 #'
-#' See [https://paws-r.github.io/docs/sagemakerruntime/invoke_endpoint_async.html](https://paws-r.github.io/docs/sagemakerruntime/invoke_endpoint_async.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sagemakerruntime_invoke_endpoint_async/](https://www.paws-r-sdk.com/docs/sagemakerruntime_invoke_endpoint_async/) for full documentation.
 #'
 #' @param EndpointName &#91;required&#93; The name of the endpoint that you specified when you created the
 #' endpoint using the
@@ -116,19 +121,21 @@ sagemakerruntime_invoke_endpoint <- function(EndpointName, Body, ContentType = N
 #' an identifier for you if none is specified.
 #' @param InputLocation &#91;required&#93; The Amazon S3 URI where the inference request payload is stored.
 #' @param RequestTTLSeconds Maximum age in seconds a request can be in the queue before it is marked
-#' as expired.
+#' as expired. The default is 6 hours, or 21,600 seconds.
+#' @param InvocationTimeoutSeconds Maximum amount of time in seconds a request can be processed before it
+#' is marked as expired. The default is 15 minutes, or 900 seconds.
 #'
 #' @keywords internal
 #'
 #' @rdname sagemakerruntime_invoke_endpoint_async
-sagemakerruntime_invoke_endpoint_async <- function(EndpointName, ContentType = NULL, Accept = NULL, CustomAttributes = NULL, InferenceId = NULL, InputLocation, RequestTTLSeconds = NULL) {
+sagemakerruntime_invoke_endpoint_async <- function(EndpointName, ContentType = NULL, Accept = NULL, CustomAttributes = NULL, InferenceId = NULL, InputLocation, RequestTTLSeconds = NULL, InvocationTimeoutSeconds = NULL) {
   op <- new_operation(
     name = "InvokeEndpointAsync",
     http_method = "POST",
     http_path = "/endpoints/{EndpointName}/async-invocations",
     paginator = list()
   )
-  input <- .sagemakerruntime$invoke_endpoint_async_input(EndpointName = EndpointName, ContentType = ContentType, Accept = Accept, CustomAttributes = CustomAttributes, InferenceId = InferenceId, InputLocation = InputLocation, RequestTTLSeconds = RequestTTLSeconds)
+  input <- .sagemakerruntime$invoke_endpoint_async_input(EndpointName = EndpointName, ContentType = ContentType, Accept = Accept, CustomAttributes = CustomAttributes, InferenceId = InferenceId, InputLocation = InputLocation, RequestTTLSeconds = RequestTTLSeconds, InvocationTimeoutSeconds = InvocationTimeoutSeconds)
   output <- .sagemakerruntime$invoke_endpoint_async_output()
   config <- get_config()
   svc <- .sagemakerruntime$service(config)

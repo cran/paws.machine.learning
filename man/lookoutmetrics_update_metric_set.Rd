@@ -12,7 +12,8 @@ lookoutmetrics_update_metric_set(
   TimestampColumn = NULL,
   DimensionList = NULL,
   MetricSetFrequency = NULL,
-  MetricSource = NULL
+  MetricSource = NULL,
+  DimensionFilterList = NULL
 )
 }
 \arguments{
@@ -23,8 +24,8 @@ lookoutmetrics_update_metric_set(
 \item{MetricList}{The metric list.}
 
 \item{Offset}{After an interval ends, the amount of seconds that the detector waits
-before importing data. Offset is only supported for S3 and Redshift
-datasources.}
+before importing data. Offset is only supported for S3, Redshift, Athena
+and datasources.}
 
 \item{TimestampColumn}{The timestamp column.}
 
@@ -33,10 +34,16 @@ datasources.}
 \item{MetricSetFrequency}{The dataset's interval.}
 
 \item{MetricSource}{}
+
+\item{DimensionFilterList}{Describes a list of filters for choosing specific dimensions and
+specific values. Each filter consists of the dimension and one of its
+values that you want to include. When multiple dimensions or values are
+specified, the dimensions are joined with an AND operation and the
+values are joined with an OR operation.}
 }
 \description{
 Updates a dataset.
 
-See \url{https://paws-r.github.io/docs/lookoutmetrics/update_metric_set.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lookoutmetrics_update_metric_set/} for full documentation.
 }
 \keyword{internal}

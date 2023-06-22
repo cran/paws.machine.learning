@@ -3,12 +3,129 @@
 #' @include lexmodelsv2_service.R
 NULL
 
+#' Create a batch of custom vocabulary items for a given bot locale's
+#' custom vocabulary
+#'
+#' @description
+#' Create a batch of custom vocabulary items for a given bot locale's custom vocabulary.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_create_custom_vocabulary_item/](https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_create_custom_vocabulary_item/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The identifier of the bot associated with this custom vocabulary.
+#' @param botVersion &#91;required&#93; The identifier of the version of the bot associated with this custom
+#' vocabulary.
+#' @param localeId &#91;required&#93; The identifier of the language and locale where this custom vocabulary
+#' is used. The string must match one of the supported locales. For more
+#' information, see [Supported
+#' Languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+#' .
+#' @param customVocabularyItemList &#91;required&#93; A list of new custom vocabulary items. Each entry must contain a phrase
+#' and can optionally contain a displayAs and/or a weight.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_batch_create_custom_vocabulary_item
+lexmodelsv2_batch_create_custom_vocabulary_item <- function(botId, botVersion, localeId, customVocabularyItemList) {
+  op <- new_operation(
+    name = "BatchCreateCustomVocabularyItem",
+    http_method = "PUT",
+    http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchcreate",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$batch_create_custom_vocabulary_item_input(botId = botId, botVersion = botVersion, localeId = localeId, customVocabularyItemList = customVocabularyItemList)
+  output <- .lexmodelsv2$batch_create_custom_vocabulary_item_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$batch_create_custom_vocabulary_item <- lexmodelsv2_batch_create_custom_vocabulary_item
+
+#' Delete a batch of custom vocabulary items for a given bot locale's
+#' custom vocabulary
+#'
+#' @description
+#' Delete a batch of custom vocabulary items for a given bot locale's custom vocabulary.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_delete_custom_vocabulary_item/](https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_delete_custom_vocabulary_item/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The identifier of the bot associated with this custom vocabulary.
+#' @param botVersion &#91;required&#93; The identifier of the version of the bot associated with this custom
+#' vocabulary.
+#' @param localeId &#91;required&#93; The identifier of the language and locale where this custom vocabulary
+#' is used. The string must match one of the supported locales. For more
+#' information, see [Supported
+#' Languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+#' .
+#' @param customVocabularyItemList &#91;required&#93; A list of custom vocabulary items requested to be deleted. Each entry
+#' must contain the unique custom vocabulary entry identifier.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_batch_delete_custom_vocabulary_item
+lexmodelsv2_batch_delete_custom_vocabulary_item <- function(botId, botVersion, localeId, customVocabularyItemList) {
+  op <- new_operation(
+    name = "BatchDeleteCustomVocabularyItem",
+    http_method = "POST",
+    http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchdelete",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$batch_delete_custom_vocabulary_item_input(botId = botId, botVersion = botVersion, localeId = localeId, customVocabularyItemList = customVocabularyItemList)
+  output <- .lexmodelsv2$batch_delete_custom_vocabulary_item_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$batch_delete_custom_vocabulary_item <- lexmodelsv2_batch_delete_custom_vocabulary_item
+
+#' Update a batch of custom vocabulary items for a given bot locale's
+#' custom vocabulary
+#'
+#' @description
+#' Update a batch of custom vocabulary items for a given bot locale's custom vocabulary.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_update_custom_vocabulary_item/](https://www.paws-r-sdk.com/docs/lexmodelsv2_batch_update_custom_vocabulary_item/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The identifier of the bot associated with this custom vocabulary
+#' @param botVersion &#91;required&#93; The identifier of the version of the bot associated with this custom
+#' vocabulary.
+#' @param localeId &#91;required&#93; The identifier of the language and locale where this custom vocabulary
+#' is used. The string must match one of the supported locales. For more
+#' information, see [Supported
+#' Languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+#' .
+#' @param customVocabularyItemList &#91;required&#93; A list of custom vocabulary items with updated fields. Each entry must
+#' contain a phrase and can optionally contain a displayAs and/or a weight.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_batch_update_custom_vocabulary_item
+lexmodelsv2_batch_update_custom_vocabulary_item <- function(botId, botVersion, localeId, customVocabularyItemList) {
+  op <- new_operation(
+    name = "BatchUpdateCustomVocabularyItem",
+    http_method = "PUT",
+    http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/batchupdate",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$batch_update_custom_vocabulary_item_input(botId = botId, botVersion = botVersion, localeId = localeId, customVocabularyItemList = customVocabularyItemList)
+  output <- .lexmodelsv2$batch_update_custom_vocabulary_item_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$batch_update_custom_vocabulary_item <- lexmodelsv2_batch_update_custom_vocabulary_item
+
 #' Builds a bot, its intents, and its slot types into a specific locale
 #'
 #' @description
 #' Builds a bot, its intents, and its slot types into a specific locale. A bot can be built into multiple locales. At runtime the locale is used to choose a specific build of the bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/build_bot_locale.html](https://paws-r.github.io/docs/lexmodelsv2/build_bot_locale.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_build_bot_locale/](https://www.paws-r-sdk.com/docs/lexmodelsv2_build_bot_locale/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to build. The identifier is returned in the
 #' response from the [`create_bot`][lexmodelsv2_create_bot] operation.
@@ -45,7 +162,7 @@ lexmodelsv2_build_bot_locale <- function(botId, botVersion, localeId) {
 #' @description
 #' Creates an Amazon Lex conversational bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_bot.html](https://paws-r.github.io/docs/lexmodelsv2/create_bot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot/) for full documentation.
 #'
 #' @param botName &#91;required&#93; The name of the bot. The bot name must be unique in the account that
 #' creates the bot.
@@ -71,18 +188,20 @@ lexmodelsv2_build_bot_locale <- function(botId, botVersion, localeId) {
 #' when you create a bot. You can't use the `UpdateAlias` operation to
 #' update tags. To update tags on the test alias, use the
 #' [`tag_resource`][lexmodelsv2_tag_resource] operation.
+#' @param botType The type of a bot to create.
+#' @param botMembers The list of bot members in a network to be created.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_create_bot
-lexmodelsv2_create_bot <- function(botName, description = NULL, roleArn, dataPrivacy, idleSessionTTLInSeconds, botTags = NULL, testBotAliasTags = NULL) {
+lexmodelsv2_create_bot <- function(botName, description = NULL, roleArn, dataPrivacy, idleSessionTTLInSeconds, botTags = NULL, testBotAliasTags = NULL, botType = NULL, botMembers = NULL) {
   op <- new_operation(
     name = "CreateBot",
     http_method = "PUT",
     http_path = "/bots/",
     paginator = list()
   )
-  input <- .lexmodelsv2$create_bot_input(botName = botName, description = description, roleArn = roleArn, dataPrivacy = dataPrivacy, idleSessionTTLInSeconds = idleSessionTTLInSeconds, botTags = botTags, testBotAliasTags = testBotAliasTags)
+  input <- .lexmodelsv2$create_bot_input(botName = botName, description = description, roleArn = roleArn, dataPrivacy = dataPrivacy, idleSessionTTLInSeconds = idleSessionTTLInSeconds, botTags = botTags, testBotAliasTags = testBotAliasTags, botType = botType, botMembers = botMembers)
   output <- .lexmodelsv2$create_bot_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -97,7 +216,7 @@ lexmodelsv2_create_bot <- function(botName, description = NULL, roleArn, dataPri
 #' @description
 #' Creates an alias for the specified version of a bot. Use an alias to enable you to change the version of a bot without updating applications that use the bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_bot_alias.html](https://paws-r.github.io/docs/lexmodelsv2/create_bot_alias.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_alias/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_alias/) for full documentation.
 #'
 #' @param botAliasName &#91;required&#93; The alias to create. The name must be unique for the bot.
 #' @param description A description of the alias. Use this description to help identify the
@@ -145,7 +264,7 @@ lexmodelsv2_create_bot_alias <- function(botAliasName, description = NULL, botVe
 #' @description
 #' Creates a locale in the bot. The locale contains the intents and slot types that the bot uses in conversations with users in the specified language and locale. You must add a locale to a bot before you can add intents and slot types to the bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_bot_locale.html](https://paws-r.github.io/docs/lexmodelsv2/create_bot_locale.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_locale/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_locale/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to create the locale for.
 #' @param botVersion &#91;required&#93; The version of the bot to create the locale for. This can only be the
@@ -204,7 +323,7 @@ lexmodelsv2_create_bot_locale <- function(botId, botVersion, localeId, descripti
 #' @description
 #' Creates a new version of the bot based on the `DRAFT` version. If the `DRAFT` version of this resource hasn't changed since you created the last version, Amazon Lex doesn't create a new version, it returns the last created version.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_bot_version.html](https://paws-r.github.io/docs/lexmodelsv2/create_bot_version.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_version/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot_version/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to create the version for.
 #' @param description A description of the version. Use the description to help identify the
@@ -239,7 +358,7 @@ lexmodelsv2_create_bot_version <- function(botId, description = NULL, botVersion
 #' @description
 #' Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_export.html](https://paws-r.github.io/docs/lexmodelsv2/create_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_export/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_export/) for full documentation.
 #'
 #' @param resourceSpecification &#91;required&#93; Specifies the type of resource to export, either a bot or a bot locale.
 #' You can only specify one type of resource to export.
@@ -273,7 +392,7 @@ lexmodelsv2_create_export <- function(resourceSpecification, fileFormat, filePas
 #' @description
 #' Creates an intent.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_intent.html](https://paws-r.github.io/docs/lexmodelsv2/create_intent.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_intent/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_intent/) for full documentation.
 #'
 #' @param intentName &#91;required&#93; The name of the intent. Intent names must be unique in the locale that
 #' contains the intent and cannot match the name of any built-in intent.
@@ -341,23 +460,25 @@ lexmodelsv2_create_export <- function(resourceSpecification, fileFormat, filePas
 #' The `AMAZON.KendraSearchIntent` intent is called when Amazon Lex can't
 #' determine another intent to invoke.
 #' @param botId &#91;required&#93; The identifier of the bot associated with this intent.
-#' @param botVersion &#91;required&#93; The identifier of the version of the bot associated with this intent.
+#' @param botVersion &#91;required&#93; The version of the bot associated with this intent.
 #' @param localeId &#91;required&#93; The identifier of the language and locale where this intent is used. All
 #' of the bots, slot types, and slots used by the intent must have the same
 #' locale. For more information, see [Supported
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+#' @param initialResponseSetting Configuration settings for the response that is sent to the user at the
+#' beginning of a conversation, before eliciting slot values.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_create_intent
-lexmodelsv2_create_intent <- function(intentName, description = NULL, parentIntentSignature = NULL, sampleUtterances = NULL, dialogCodeHook = NULL, fulfillmentCodeHook = NULL, intentConfirmationSetting = NULL, intentClosingSetting = NULL, inputContexts = NULL, outputContexts = NULL, kendraConfiguration = NULL, botId, botVersion, localeId) {
+lexmodelsv2_create_intent <- function(intentName, description = NULL, parentIntentSignature = NULL, sampleUtterances = NULL, dialogCodeHook = NULL, fulfillmentCodeHook = NULL, intentConfirmationSetting = NULL, intentClosingSetting = NULL, inputContexts = NULL, outputContexts = NULL, kendraConfiguration = NULL, botId, botVersion, localeId, initialResponseSetting = NULL) {
   op <- new_operation(
     name = "CreateIntent",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/",
     paginator = list()
   )
-  input <- .lexmodelsv2$create_intent_input(intentName = intentName, description = description, parentIntentSignature = parentIntentSignature, sampleUtterances = sampleUtterances, dialogCodeHook = dialogCodeHook, fulfillmentCodeHook = fulfillmentCodeHook, intentConfirmationSetting = intentConfirmationSetting, intentClosingSetting = intentClosingSetting, inputContexts = inputContexts, outputContexts = outputContexts, kendraConfiguration = kendraConfiguration, botId = botId, botVersion = botVersion, localeId = localeId)
+  input <- .lexmodelsv2$create_intent_input(intentName = intentName, description = description, parentIntentSignature = parentIntentSignature, sampleUtterances = sampleUtterances, dialogCodeHook = dialogCodeHook, fulfillmentCodeHook = fulfillmentCodeHook, intentConfirmationSetting = intentConfirmationSetting, intentClosingSetting = intentClosingSetting, inputContexts = inputContexts, outputContexts = outputContexts, kendraConfiguration = kendraConfiguration, botId = botId, botVersion = botVersion, localeId = localeId, initialResponseSetting = initialResponseSetting)
   output <- .lexmodelsv2$create_intent_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -372,7 +493,7 @@ lexmodelsv2_create_intent <- function(intentName, description = NULL, parentInte
 #' @description
 #' Creates a new resource policy with the specified policy statements.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_resource_policy.html](https://paws-r.github.io/docs/lexmodelsv2/create_resource_policy.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_resource_policy/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_resource_policy/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that the resource
 #' policy is attached to.
@@ -410,7 +531,7 @@ lexmodelsv2_create_resource_policy <- function(resourceArn, policy) {
 #' @description
 #' Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_resource_policy_statement.html](https://paws-r.github.io/docs/lexmodelsv2/create_resource_policy_statement.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_resource_policy_statement/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_resource_policy_statement/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that the resource
 #' policy is attached to.
@@ -420,9 +541,9 @@ lexmodelsv2_create_resource_policy <- function(resourceArn, policy) {
 #' Sid](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html).
 #' @param effect &#91;required&#93; Determines whether the statement allows or denies access to the
 #' resource.
-#' @param principal &#91;required&#93; An IAM principal, such as an IAM users, IAM roles, or AWS services that
-#' is allowed or denied access to a resource. For more information, see
-#' [AWS JSON policy elements:
+#' @param principal &#91;required&#93; An IAM principal, such as an IAM user, IAM role, or Amazon Web Services
+#' services that is allowed or denied access to a resource. For more
+#' information, see [Amazon Web Services JSON policy elements:
 #' Principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
 #' @param action &#91;required&#93; The Amazon Lex action that this policy either allows or denies. The
 #' action must apply to the resource type of the specified ARN. For more
@@ -468,7 +589,7 @@ lexmodelsv2_create_resource_policy_statement <- function(resourceArn, statementI
 #' @description
 #' Creates a slot in an intent. A slot is a variable needed to fulfill an intent. For example, an `OrderPizza` intent might need slots for size, crust, and number of pizzas. For each slot, you define one or more utterances that Amazon Lex uses to elicit a response from the user.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_slot.html](https://paws-r.github.io/docs/lexmodelsv2/create_slot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_slot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_slot/) for full documentation.
 #'
 #' @param slotName &#91;required&#93; The name of the slot. Slot names must be unique within the bot that
 #' contains the slot.
@@ -492,23 +613,25 @@ lexmodelsv2_create_resource_policy_statement <- function(resourceArn, statementI
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 #' @param intentId &#91;required&#93; The identifier of the intent that contains the slot.
 #' @param multipleValuesSetting Indicates whether the slot returns multiple values in one response.
-#' Multi-value slots are only available in the en-US locale. If you set
+#' Multi-value slots are only available in the `en-US` locale. If you set
 #' this value to `true` in any other locale, Amazon Lex throws a
 #' `ValidationException`.
 #' 
 #' If the `multipleValuesSetting` is not set, the default value is `false`.
+#' @param subSlotSetting Specifications for the constituent sub slots and the expression for the
+#' composite slot.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_create_slot
-lexmodelsv2_create_slot <- function(slotName, description = NULL, slotTypeId = NULL, valueElicitationSetting, obfuscationSetting = NULL, botId, botVersion, localeId, intentId, multipleValuesSetting = NULL) {
+lexmodelsv2_create_slot <- function(slotName, description = NULL, slotTypeId = NULL, valueElicitationSetting, obfuscationSetting = NULL, botId, botVersion, localeId, intentId, multipleValuesSetting = NULL, subSlotSetting = NULL) {
   op <- new_operation(
     name = "CreateSlot",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/",
     paginator = list()
   )
-  input <- .lexmodelsv2$create_slot_input(slotName = slotName, description = description, slotTypeId = slotTypeId, valueElicitationSetting = valueElicitationSetting, obfuscationSetting = obfuscationSetting, botId = botId, botVersion = botVersion, localeId = localeId, intentId = intentId, multipleValuesSetting = multipleValuesSetting)
+  input <- .lexmodelsv2$create_slot_input(slotName = slotName, description = description, slotTypeId = slotTypeId, valueElicitationSetting = valueElicitationSetting, obfuscationSetting = obfuscationSetting, botId = botId, botVersion = botVersion, localeId = localeId, intentId = intentId, multipleValuesSetting = multipleValuesSetting, subSlotSetting = subSlotSetting)
   output <- .lexmodelsv2$create_slot_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -523,10 +646,10 @@ lexmodelsv2_create_slot <- function(slotName, description = NULL, slotTypeId = N
 #' @description
 #' Creates a custom slot type
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_slot_type.html](https://paws-r.github.io/docs/lexmodelsv2/create_slot_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_slot_type/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_slot_type/) for full documentation.
 #'
 #' @param slotTypeName &#91;required&#93; The name for the slot. A slot type name must be unique within the
-#' account.
+#' intent.
 #' @param description A description of the slot type. Use the description to help identify the
 #' slot type in lists.
 #' @param slotTypeValues A list of `SlotTypeValue` objects that defines the values that the slot
@@ -537,15 +660,15 @@ lexmodelsv2_create_slot <- function(slotName, description = NULL, slotTypeId = N
 #' list of possible values. The field can be set to one of the following
 #' values:
 #' 
-#' -   `OriginalValue` - Returns the value entered by the user, if the user
-#'     value is similar to the slot value.
+#' -   `ORIGINAL_VALUE` - Returns the value entered by the user, if the
+#'     user value is similar to the slot value.
 #' 
-#' -   `TopResolution` - If there is a resolution list for the slot, return
-#'     the first value in the resolution list. If there is no resolution
-#'     list, return null.
+#' -   `TOP_RESOLUTION` - If there is a resolution list for the slot,
+#'     return the first value in the resolution list. If there is no
+#'     resolution list, return null.
 #' 
 #' If you don't specify the `valueSelectionSetting` parameter, the default
-#' is `OriginalValue`.
+#' is `ORIGINAL_VALUE`.
 #' @param parentSlotTypeSignature The built-in slot type used as a parent of this slot type. When you
 #' define a parent slot type, the new slot type has the configuration of
 #' the parent slot type.
@@ -559,18 +682,19 @@ lexmodelsv2_create_slot <- function(slotName, description = NULL, slotTypeId = N
 #' locale. For more information, see [Supported
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 #' @param externalSourceSetting Sets the type of external information used to create the slot type.
+#' @param compositeSlotTypeSetting Specifications for a composite slot type.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_create_slot_type
-lexmodelsv2_create_slot_type <- function(slotTypeName, description = NULL, slotTypeValues = NULL, valueSelectionSetting = NULL, parentSlotTypeSignature = NULL, botId, botVersion, localeId, externalSourceSetting = NULL) {
+lexmodelsv2_create_slot_type <- function(slotTypeName, description = NULL, slotTypeValues = NULL, valueSelectionSetting = NULL, parentSlotTypeSignature = NULL, botId, botVersion, localeId, externalSourceSetting = NULL, compositeSlotTypeSetting = NULL) {
   op <- new_operation(
     name = "CreateSlotType",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/",
     paginator = list()
   )
-  input <- .lexmodelsv2$create_slot_type_input(slotTypeName = slotTypeName, description = description, slotTypeValues = slotTypeValues, valueSelectionSetting = valueSelectionSetting, parentSlotTypeSignature = parentSlotTypeSignature, botId = botId, botVersion = botVersion, localeId = localeId, externalSourceSetting = externalSourceSetting)
+  input <- .lexmodelsv2$create_slot_type_input(slotTypeName = slotTypeName, description = description, slotTypeValues = slotTypeValues, valueSelectionSetting = valueSelectionSetting, parentSlotTypeSignature = parentSlotTypeSignature, botId = botId, botVersion = botVersion, localeId = localeId, externalSourceSetting = externalSourceSetting, compositeSlotTypeSetting = compositeSlotTypeSetting)
   output <- .lexmodelsv2$create_slot_type_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -580,13 +704,44 @@ lexmodelsv2_create_slot_type <- function(slotTypeName, description = NULL, slotT
 }
 .lexmodelsv2$operations$create_slot_type <- lexmodelsv2_create_slot_type
 
+#' Create a report that describes the differences between the bot and the
+#' test set
+#'
+#' @description
+#' Create a report that describes the differences between the bot and the test set.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_test_set_discrepancy_report/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_test_set_discrepancy_report/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The test set Id for the test set discrepancy report.
+#' @param target &#91;required&#93; The target bot for the test set discrepancy report.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_create_test_set_discrepancy_report
+lexmodelsv2_create_test_set_discrepancy_report <- function(testSetId, target) {
+  op <- new_operation(
+    name = "CreateTestSetDiscrepancyReport",
+    http_method = "POST",
+    http_path = "/testsets/{testSetId}/testsetdiscrepancy",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$create_test_set_discrepancy_report_input(testSetId = testSetId, target = target)
+  output <- .lexmodelsv2$create_test_set_discrepancy_report_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$create_test_set_discrepancy_report <- lexmodelsv2_create_test_set_discrepancy_report
+
 #' Gets a pre-signed S3 write URL that you use to upload the zip archive
 #' when importing a bot or a bot locale
 #'
 #' @description
 #' Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/create_upload_url.html](https://paws-r.github.io/docs/lexmodelsv2/create_upload_url.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_create_upload_url/](https://www.paws-r-sdk.com/docs/lexmodelsv2_create_upload_url/) for full documentation.
 #'
 #' @keywords internal
 #'
@@ -613,11 +768,14 @@ lexmodelsv2_create_upload_url <- function() {
 #' @description
 #' Deletes all versions of a bot, including the `Draft` version. To delete a specific version, use the [`delete_bot_version`][lexmodelsv2_delete_bot_version] operation.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_bot.html](https://paws-r.github.io/docs/lexmodelsv2/delete_bot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to delete.
-#' @param skipResourceInUseCheck When `true`, Amazon Lex doesn't check to see if another resource, such
-#' as an alias, is using the bot before it is deleted.
+#' @param skipResourceInUseCheck By default, Amazon Lex checks if any other resource, such as an alias or
+#' bot network, is using the bot version before it is deleted and throws a
+#' `ResourceInUseException` exception if the bot is being used by another
+#' resource. Set this parameter to `true` to skip this check and remove the
+#' bot even if it is being used by another resource.
 #'
 #' @keywords internal
 #'
@@ -644,12 +802,15 @@ lexmodelsv2_delete_bot <- function(botId, skipResourceInUseCheck = NULL) {
 #' @description
 #' Deletes the specified bot alias.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_bot_alias.html](https://paws-r.github.io/docs/lexmodelsv2/delete_bot_alias.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_alias/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_alias/) for full documentation.
 #'
 #' @param botAliasId &#91;required&#93; The unique identifier of the bot alias to delete.
 #' @param botId &#91;required&#93; The unique identifier of the bot associated with the alias to delete.
-#' @param skipResourceInUseCheck When this parameter is true, Amazon Lex doesn't check to see if any
-#' other resource is using the alias before it is deleted.
+#' @param skipResourceInUseCheck By default, Amazon Lex checks if any other resource, such as a bot
+#' network, is using the bot alias before it is deleted and throws a
+#' `ResourceInUseException` exception if the alias is being used by another
+#' resource. Set this parameter to `true` to skip this check and remove the
+#' alias even if it is being used by another resource.
 #'
 #' @keywords internal
 #'
@@ -676,7 +837,7 @@ lexmodelsv2_delete_bot_alias <- function(botAliasId, botId, skipResourceInUseChe
 #' @description
 #' Removes a locale from a bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_bot_locale.html](https://paws-r.github.io/docs/lexmodelsv2/delete_bot_locale.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_locale/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_locale/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the locale.
 #' @param botVersion &#91;required&#93; The version of the bot that contains the locale.
@@ -708,17 +869,17 @@ lexmodelsv2_delete_bot_locale <- function(botId, botVersion, localeId) {
 #' Deletes a specific version of a bot
 #'
 #' @description
-#' Deletes a specific version of a bot. To delete all version of a bot, use the [`delete_bot`][lexmodelsv2_delete_bot] operation.
+#' Deletes a specific version of a bot. To delete all versions of a bot, use the [`delete_bot`][lexmodelsv2_delete_bot] operation.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_bot_version.html](https://paws-r.github.io/docs/lexmodelsv2/delete_bot_version.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_version/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_bot_version/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot that contains the version.
 #' @param botVersion &#91;required&#93; The version of the bot to delete.
-#' @param skipResourceInUseCheck By default, the [`delete_bot_version`][lexmodelsv2_delete_bot_version]
-#' operations throws a `ResourceInUseException` exception if you try to
-#' delete a bot version that has an alias pointing at it. Set the
-#' `skipResourceInUseCheck` parameter to `true` to skip this check and
-#' remove the version even if an alias points to it.
+#' @param skipResourceInUseCheck By default, Amazon Lex checks if any other resource, such as an alias or
+#' bot network, is using the bot version before it is deleted and throws a
+#' `ResourceInUseException` exception if the version is being used by
+#' another resource. Set this parameter to `true` to skip this check and
+#' remove the version even if it is being used by another resource.
 #'
 #' @keywords internal
 #'
@@ -746,7 +907,7 @@ lexmodelsv2_delete_bot_version <- function(botId, botVersion, skipResourceInUseC
 #' @description
 #' Removes a custom vocabulary from the specified locale in the specified bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_custom_vocabulary.html](https://paws-r.github.io/docs/lexmodelsv2/delete_custom_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_custom_vocabulary/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_custom_vocabulary/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot to remove the custom vocabulary from.
 #' @param botVersion &#91;required&#93; The version of the bot to remove the custom vocabulary from.
@@ -779,7 +940,7 @@ lexmodelsv2_delete_custom_vocabulary <- function(botId, botVersion, localeId) {
 #' @description
 #' Removes a previous export and the associated files stored in an S3 bucket.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_export.html](https://paws-r.github.io/docs/lexmodelsv2/delete_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_export/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_export/) for full documentation.
 #'
 #' @param exportId &#91;required&#93; The unique identifier of the export to delete.
 #'
@@ -808,7 +969,7 @@ lexmodelsv2_delete_export <- function(exportId) {
 #' @description
 #' Removes a previous import and the associated file stored in an S3 bucket.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_import.html](https://paws-r.github.io/docs/lexmodelsv2/delete_import.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_import/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_import/) for full documentation.
 #'
 #' @param importId &#91;required&#93; The unique identifier of the import to delete.
 #'
@@ -837,7 +998,7 @@ lexmodelsv2_delete_import <- function(importId) {
 #' @description
 #' Removes the specified intent.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_intent.html](https://paws-r.github.io/docs/lexmodelsv2/delete_intent.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_intent/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_intent/) for full documentation.
 #'
 #' @param intentId &#91;required&#93; The unique identifier of the intent to delete.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the intent.
@@ -872,7 +1033,7 @@ lexmodelsv2_delete_intent <- function(intentId, botId, botVersion, localeId) {
 #' @description
 #' Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_resource_policy.html](https://paws-r.github.io/docs/lexmodelsv2/delete_resource_policy.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_resource_policy/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_resource_policy/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that has the
 #' resource policy attached.
@@ -907,7 +1068,7 @@ lexmodelsv2_delete_resource_policy <- function(resourceArn, expectedRevisionId =
 #' @description
 #' Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_resource_policy_statement.html](https://paws-r.github.io/docs/lexmodelsv2/delete_resource_policy_statement.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_resource_policy_statement/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_resource_policy_statement/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that the resource
 #' policy is attached to.
@@ -944,7 +1105,7 @@ lexmodelsv2_delete_resource_policy_statement <- function(resourceArn, statementI
 #' @description
 #' Deletes the specified slot from an intent.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_slot.html](https://paws-r.github.io/docs/lexmodelsv2/delete_slot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_slot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_slot/) for full documentation.
 #'
 #' @param slotId &#91;required&#93; The identifier of the slot to delete.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the slot to delete.
@@ -980,7 +1141,7 @@ lexmodelsv2_delete_slot <- function(slotId, botId, botVersion, localeId, intentI
 #' @description
 #' Deletes a slot type from a bot locale.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_slot_type.html](https://paws-r.github.io/docs/lexmodelsv2/delete_slot_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_slot_type/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_slot_type/) for full documentation.
 #'
 #' @param slotTypeId &#91;required&#93; The identifier of the slot type to delete.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the slot type.
@@ -1015,12 +1176,41 @@ lexmodelsv2_delete_slot_type <- function(slotTypeId, botId, botVersion, localeId
 }
 .lexmodelsv2$operations$delete_slot_type <- lexmodelsv2_delete_slot_type
 
+#' The action to delete the selected test set
+#'
+#' @description
+#' The action to delete the selected test set.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_test_set/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_test_set/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The test set Id of the test set to be deleted.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_delete_test_set
+lexmodelsv2_delete_test_set <- function(testSetId) {
+  op <- new_operation(
+    name = "DeleteTestSet",
+    http_method = "DELETE",
+    http_path = "/testsets/{testSetId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$delete_test_set_input(testSetId = testSetId)
+  output <- .lexmodelsv2$delete_test_set_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$delete_test_set <- lexmodelsv2_delete_test_set
+
 #' Deletes stored utterances
 #'
 #' @description
 #' Deletes stored utterances.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/delete_utterances.html](https://paws-r.github.io/docs/lexmodelsv2/delete_utterances.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_utterances/](https://www.paws-r-sdk.com/docs/lexmodelsv2_delete_utterances/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the utterances.
 #' @param localeId The identifier of the language and locale where the utterances were
@@ -1059,7 +1249,7 @@ lexmodelsv2_delete_utterances <- function(botId, localeId = NULL, sessionId = NU
 #' @description
 #' Provides metadata information about a bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_bot.html](https://paws-r.github.io/docs/lexmodelsv2/describe_bot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot to describe.
 #'
@@ -1088,7 +1278,7 @@ lexmodelsv2_describe_bot <- function(botId) {
 #' @description
 #' Get information about a specific bot alias.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_bot_alias.html](https://paws-r.github.io/docs/lexmodelsv2/describe_bot_alias.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_alias/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_alias/) for full documentation.
 #'
 #' @param botAliasId &#91;required&#93; The identifier of the bot alias to describe.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the bot alias to describe.
@@ -1118,10 +1308,10 @@ lexmodelsv2_describe_bot_alias <- function(botAliasId, botId) {
 #' @description
 #' Describes the settings that a bot has for a specific locale.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_bot_locale.html](https://paws-r.github.io/docs/lexmodelsv2/describe_bot_locale.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_locale/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_locale/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot associated with the locale.
-#' @param botVersion &#91;required&#93; The identifier of the version of the bot associated with the locale.
+#' @param botVersion &#91;required&#93; The version of the bot associated with the locale.
 #' @param localeId &#91;required&#93; The unique identifier of the locale to describe. The string must match
 #' one of the supported locales. For more information, see [Supported
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
@@ -1151,7 +1341,7 @@ lexmodelsv2_describe_bot_locale <- function(botId, botVersion, localeId) {
 #' @description
 #' Provides metadata information about a bot recommendation. This information will enable you to get a description on the request inputs, to download associated transcripts after processing is complete, and to download intents and slot-types generated by the bot recommendation.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_bot_recommendation.html](https://paws-r.github.io/docs/lexmodelsv2/describe_bot_recommendation.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_recommendation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_recommendation/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot associated with the bot recommendation.
 #' @param botVersion &#91;required&#93; The version of the bot associated with the bot recommendation.
@@ -1186,7 +1376,7 @@ lexmodelsv2_describe_bot_recommendation <- function(botId, botVersion, localeId,
 #' @description
 #' Provides metadata about a version of a bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_bot_version.html](https://paws-r.github.io/docs/lexmodelsv2/describe_bot_version.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_version/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_bot_version/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot containing the version to return metadata for.
 #' @param botVersion &#91;required&#93; The version of the bot to return metadata for.
@@ -1216,7 +1406,7 @@ lexmodelsv2_describe_bot_version <- function(botId, botVersion) {
 #' @description
 #' Provides metadata information about a custom vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_custom_vocabulary_metadata.html](https://paws-r.github.io/docs/lexmodelsv2/describe_custom_vocabulary_metadata.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_custom_vocabulary_metadata/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_custom_vocabulary_metadata/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the custom vocabulary.
 #' @param botVersion &#91;required&#93; The bot version of the bot to return metadata for.
@@ -1248,7 +1438,7 @@ lexmodelsv2_describe_custom_vocabulary_metadata <- function(botId, botVersion, l
 #' @description
 #' Gets information about a specific export.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_export.html](https://paws-r.github.io/docs/lexmodelsv2/describe_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_export/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_export/) for full documentation.
 #'
 #' @param exportId &#91;required&#93; The unique identifier of the export to describe.
 #'
@@ -1277,7 +1467,7 @@ lexmodelsv2_describe_export <- function(exportId) {
 #' @description
 #' Gets information about a specific import.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_import.html](https://paws-r.github.io/docs/lexmodelsv2/describe_import.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_import/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_import/) for full documentation.
 #'
 #' @param importId &#91;required&#93; The unique identifier of the import to describe.
 #'
@@ -1306,7 +1496,7 @@ lexmodelsv2_describe_import <- function(importId) {
 #' @description
 #' Returns metadata about an intent.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_intent.html](https://paws-r.github.io/docs/lexmodelsv2/describe_intent.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_intent/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_intent/) for full documentation.
 #'
 #' @param intentId &#91;required&#93; The identifier of the intent to describe.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the intent.
@@ -1341,7 +1531,7 @@ lexmodelsv2_describe_intent <- function(intentId, botId, botVersion, localeId) {
 #' @description
 #' Gets the resource policy and policy revision for a bot or bot alias.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_resource_policy.html](https://paws-r.github.io/docs/lexmodelsv2/describe_resource_policy.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_resource_policy/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_resource_policy/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that the resource
 #' policy is attached to.
@@ -1371,7 +1561,7 @@ lexmodelsv2_describe_resource_policy <- function(resourceArn) {
 #' @description
 #' Gets metadata information about a slot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_slot.html](https://paws-r.github.io/docs/lexmodelsv2/describe_slot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_slot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_slot/) for full documentation.
 #'
 #' @param slotId &#91;required&#93; The unique identifier for the slot.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the slot.
@@ -1407,7 +1597,7 @@ lexmodelsv2_describe_slot <- function(slotId, botId, botVersion, localeId, inten
 #' @description
 #' Gets metadata information about a slot type.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/describe_slot_type.html](https://paws-r.github.io/docs/lexmodelsv2/describe_slot_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_slot_type/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_slot_type/) for full documentation.
 #'
 #' @param slotTypeId &#91;required&#93; The identifier of the slot type.
 #' @param botId &#91;required&#93; The identifier of the bot associated with the slot type.
@@ -1437,12 +1627,158 @@ lexmodelsv2_describe_slot_type <- function(slotTypeId, botId, botVersion, locale
 }
 .lexmodelsv2$operations$describe_slot_type <- lexmodelsv2_describe_slot_type
 
+#' Gets metadata information about the test execution
+#'
+#' @description
+#' Gets metadata information about the test execution.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_execution/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_execution/) for full documentation.
+#'
+#' @param testExecutionId &#91;required&#93; The execution Id of the test set execution.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_describe_test_execution
+lexmodelsv2_describe_test_execution <- function(testExecutionId) {
+  op <- new_operation(
+    name = "DescribeTestExecution",
+    http_method = "GET",
+    http_path = "/testexecutions/{testExecutionId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$describe_test_execution_input(testExecutionId = testExecutionId)
+  output <- .lexmodelsv2$describe_test_execution_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$describe_test_execution <- lexmodelsv2_describe_test_execution
+
+#' Gets metadata information about the test set
+#'
+#' @description
+#' Gets metadata information about the test set.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The test set Id for the test set request.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_describe_test_set
+lexmodelsv2_describe_test_set <- function(testSetId) {
+  op <- new_operation(
+    name = "DescribeTestSet",
+    http_method = "GET",
+    http_path = "/testsets/{testSetId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$describe_test_set_input(testSetId = testSetId)
+  output <- .lexmodelsv2$describe_test_set_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$describe_test_set <- lexmodelsv2_describe_test_set
+
+#' Gets metadata information about the test set discrepancy report
+#'
+#' @description
+#' Gets metadata information about the test set discrepancy report.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set_discrepancy_report/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set_discrepancy_report/) for full documentation.
+#'
+#' @param testSetDiscrepancyReportId &#91;required&#93; The unique identifier of the test set discrepancy report.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_describe_test_set_discrepancy_report
+lexmodelsv2_describe_test_set_discrepancy_report <- function(testSetDiscrepancyReportId) {
+  op <- new_operation(
+    name = "DescribeTestSetDiscrepancyReport",
+    http_method = "GET",
+    http_path = "/testsetdiscrepancy/{testSetDiscrepancyReportId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$describe_test_set_discrepancy_report_input(testSetDiscrepancyReportId = testSetDiscrepancyReportId)
+  output <- .lexmodelsv2$describe_test_set_discrepancy_report_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$describe_test_set_discrepancy_report <- lexmodelsv2_describe_test_set_discrepancy_report
+
+#' Gets metadata information about the test set generation
+#'
+#' @description
+#' Gets metadata information about the test set generation.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set_generation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_describe_test_set_generation/) for full documentation.
+#'
+#' @param testSetGenerationId &#91;required&#93; The unique identifier of the test set generation.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_describe_test_set_generation
+lexmodelsv2_describe_test_set_generation <- function(testSetGenerationId) {
+  op <- new_operation(
+    name = "DescribeTestSetGeneration",
+    http_method = "GET",
+    http_path = "/testsetgenerations/{testSetGenerationId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$describe_test_set_generation_input(testSetGenerationId = testSetGenerationId)
+  output <- .lexmodelsv2$describe_test_set_generation_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$describe_test_set_generation <- lexmodelsv2_describe_test_set_generation
+
+#' The pre-signed Amazon S3 URL to download the test execution result
+#' artifacts
+#'
+#' @description
+#' The pre-signed Amazon S3 URL to download the test execution result artifacts.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_get_test_execution_artifacts_url/](https://www.paws-r-sdk.com/docs/lexmodelsv2_get_test_execution_artifacts_url/) for full documentation.
+#'
+#' @param testExecutionId &#91;required&#93; The unique identifier of the completed test execution.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_get_test_execution_artifacts_url
+lexmodelsv2_get_test_execution_artifacts_url <- function(testExecutionId) {
+  op <- new_operation(
+    name = "GetTestExecutionArtifactsUrl",
+    http_method = "GET",
+    http_path = "/testexecutions/{testExecutionId}/artifacturl",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$get_test_execution_artifacts_url_input(testExecutionId = testExecutionId)
+  output <- .lexmodelsv2$get_test_execution_artifacts_url_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$get_test_execution_artifacts_url <- lexmodelsv2_get_test_execution_artifacts_url
+
 #' Provides a list of utterances that users have sent to the bot
 #'
 #' @description
 #' Provides a list of utterances that users have sent to the bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_aggregated_utterances.html](https://paws-r.github.io/docs/lexmodelsv2/list_aggregated_utterances.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_aggregated_utterances/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_aggregated_utterances/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot associated with this request.
 #' @param botAliasId The identifier of the bot alias associated with this request. If you
@@ -1495,7 +1831,7 @@ lexmodelsv2_list_aggregated_utterances <- function(botId, botAliasId = NULL, bot
 #' @description
 #' Gets a list of aliases for the specified bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_bot_aliases.html](https://paws-r.github.io/docs/lexmodelsv2/list_bot_aliases.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_aliases/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_aliases/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to list aliases for.
 #' @param maxResults The maximum number of aliases to return in each page of results. If
@@ -1532,7 +1868,7 @@ lexmodelsv2_list_bot_aliases <- function(botId, maxResults = NULL, nextToken = N
 #' @description
 #' Gets a list of locales for the specified bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_bot_locales.html](https://paws-r.github.io/docs/lexmodelsv2/list_bot_locales.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_locales/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_locales/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to list locales for.
 #' @param botVersion &#91;required&#93; The version of the bot to list locales for.
@@ -1575,7 +1911,7 @@ lexmodelsv2_list_bot_locales <- function(botId, botVersion, sortBy = NULL, filte
 #' @description
 #' Get a list of bot recommendations that meet the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_bot_recommendations.html](https://paws-r.github.io/docs/lexmodelsv2/list_bot_recommendations.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_recommendations/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_recommendations/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the bot recommendation
 #' list.
@@ -1615,7 +1951,7 @@ lexmodelsv2_list_bot_recommendations <- function(botId, botVersion, localeId, ma
 #' @description
 #' Gets information about all of the versions of a bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_bot_versions.html](https://paws-r.github.io/docs/lexmodelsv2/list_bot_versions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_versions/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bot_versions/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot to list versions for.
 #' @param sortBy Specifies sorting parameters for the list of versions. You can specify
@@ -1654,7 +1990,7 @@ lexmodelsv2_list_bot_versions <- function(botId, sortBy = NULL, maxResults = NUL
 #' @description
 #' Gets a list of available bots.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_bots.html](https://paws-r.github.io/docs/lexmodelsv2/list_bots.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bots/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_bots/) for full documentation.
 #'
 #' @param sortBy Specifies sorting parameters for the list of bots. You can specify that
 #' the list be sorted by bot name in ascending or descending order.
@@ -1700,7 +2036,7 @@ lexmodelsv2_list_bots <- function(sortBy = NULL, filters = NULL, maxResults = NU
 #' @description
 #' Gets a list of built-in intents provided by Amazon Lex that you can use in your bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_built_in_intents.html](https://paws-r.github.io/docs/lexmodelsv2/list_built_in_intents.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_built_in_intents/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_built_in_intents/) for full documentation.
 #'
 #' @param localeId &#91;required&#93; The identifier of the language and locale of the intents to list. The
 #' string must match one of the supported locales. For more information,
@@ -1743,7 +2079,7 @@ lexmodelsv2_list_built_in_intents <- function(localeId, sortBy = NULL, maxResult
 #' @description
 #' Gets a list of built-in slot types that meet the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_built_in_slot_types.html](https://paws-r.github.io/docs/lexmodelsv2/list_built_in_slot_types.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_built_in_slot_types/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_built_in_slot_types/) for full documentation.
 #'
 #' @param localeId &#91;required&#93; The identifier of the language and locale of the slot types to list. The
 #' string must match one of the supported locales. For more information,
@@ -1782,12 +2118,50 @@ lexmodelsv2_list_built_in_slot_types <- function(localeId, sortBy = NULL, maxRes
 }
 .lexmodelsv2$operations$list_built_in_slot_types <- lexmodelsv2_list_built_in_slot_types
 
+#' Paginated list of custom vocabulary items for a given bot locale's
+#' custom vocabulary
+#'
+#' @description
+#' Paginated list of custom vocabulary items for a given bot locale's custom vocabulary.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_custom_vocabulary_items/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_custom_vocabulary_items/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The identifier of the version of the bot associated with this custom
+#' vocabulary.
+#' @param botVersion &#91;required&#93; The bot version of the bot to the list custom vocabulary request.
+#' @param localeId &#91;required&#93; The identifier of the language and locale where this custom vocabulary
+#' is used. The string must match one of the supported locales. For more
+#' information, see Supported languages
+#' (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+#' @param maxResults The maximum number of items returned by the list operation.
+#' @param nextToken The nextToken identifier to the list custom vocabulary request.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_list_custom_vocabulary_items
+lexmodelsv2_list_custom_vocabulary_items <- function(botId, botVersion, localeId, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListCustomVocabularyItems",
+    http_method = "POST",
+    http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/customvocabulary/DEFAULT/list",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$list_custom_vocabulary_items_input(botId = botId, botVersion = botVersion, localeId = localeId, maxResults = maxResults, nextToken = nextToken)
+  output <- .lexmodelsv2$list_custom_vocabulary_items_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$list_custom_vocabulary_items <- lexmodelsv2_list_custom_vocabulary_items
+
 #' Lists the exports for a bot, bot locale, or custom vocabulary
 #'
 #' @description
 #' Lists the exports for a bot, bot locale, or custom vocabulary. Exports are kept in the list for 7 days.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_exports.html](https://paws-r.github.io/docs/lexmodelsv2/list_exports.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_exports/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_exports/) for full documentation.
 #'
 #' @param botId The unique identifier that Amazon Lex assigned to the bot.
 #' @param botVersion The version of the bot to list exports for.
@@ -1837,7 +2211,7 @@ lexmodelsv2_list_exports <- function(botId = NULL, botVersion = NULL, sortBy = N
 #' @description
 #' Lists the imports for a bot, bot locale, or custom vocabulary. Imports are kept in the list for 7 days.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_imports.html](https://paws-r.github.io/docs/lexmodelsv2/list_imports.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_imports/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_imports/) for full documentation.
 #'
 #' @param botId The unique identifier that Amazon Lex assigned to the bot.
 #' @param botVersion The version of the bot to list imports for.
@@ -1887,7 +2261,7 @@ lexmodelsv2_list_imports <- function(botId = NULL, botVersion = NULL, sortBy = N
 #' @description
 #' Get a list of intents that meet the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_intents.html](https://paws-r.github.io/docs/lexmodelsv2/list_intents.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_intents/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_intents/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the intent.
 #' @param botVersion &#91;required&#93; The version of the bot that contains the intent.
@@ -1939,9 +2313,9 @@ lexmodelsv2_list_intents <- function(botId, botVersion, localeId, sortBy = NULL,
 #' that you can use in your bot
 #'
 #' @description
-#' Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
+#' Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_recommended_intents.html](https://paws-r.github.io/docs/lexmodelsv2/list_recommended_intents.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_recommended_intents/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_recommended_intents/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot associated with the recommended
 #' intents.
@@ -1982,7 +2356,7 @@ lexmodelsv2_list_recommended_intents <- function(botId, botVersion, localeId, bo
 #' @description
 #' Gets a list of slot types that match the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_slot_types.html](https://paws-r.github.io/docs/lexmodelsv2/list_slot_types.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_slot_types/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_slot_types/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the slot types.
 #' @param botVersion &#91;required&#93; The version of the bot that contains the slot type.
@@ -2031,7 +2405,7 @@ lexmodelsv2_list_slot_types <- function(botId, botVersion, localeId, sortBy = NU
 #' @description
 #' Gets a list of slots that match the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_slots.html](https://paws-r.github.io/docs/lexmodelsv2/list_slots.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_slots/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_slots/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The identifier of the bot that contains the slot.
 #' @param botVersion &#91;required&#93; The version of the bot that contains the slot.
@@ -2080,7 +2454,7 @@ lexmodelsv2_list_slots <- function(botId, botVersion, localeId, intentId, sortBy
 #' @description
 #' Gets a list of tags associated with a resource. Only bots, bot aliases, and bot channels can have tags associated with them.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/list_tags_for_resource.html](https://paws-r.github.io/docs/lexmodelsv2/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_tags_for_resource/) for full documentation.
 #'
 #' @param resourceARN &#91;required&#93; The Amazon Resource Name (ARN) of the resource to get a list of tags
 #' for.
@@ -2105,12 +2479,158 @@ lexmodelsv2_list_tags_for_resource <- function(resourceARN) {
 }
 .lexmodelsv2$operations$list_tags_for_resource <- lexmodelsv2_list_tags_for_resource
 
+#' Gets a list of test execution result items
+#'
+#' @description
+#' Gets a list of test execution result items.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_execution_result_items/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_execution_result_items/) for full documentation.
+#'
+#' @param testExecutionId &#91;required&#93; The unique identifier of the test execution to list the result items.
+#' @param resultFilterBy &#91;required&#93; The filter for the list of results from the test set execution.
+#' @param maxResults The maximum number of test execution result items to return in each
+#' page. If there are fewer results than the max page size, only the actual
+#' number of results are returned.
+#' @param nextToken If the response from the
+#' [`list_test_execution_result_items`][lexmodelsv2_list_test_execution_result_items]
+#' operation contains more results than specified in the `maxResults`
+#' parameter, a token is returned in the response. Use that token in the
+#' `nextToken` parameter to return the next page of results.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_list_test_execution_result_items
+lexmodelsv2_list_test_execution_result_items <- function(testExecutionId, resultFilterBy, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListTestExecutionResultItems",
+    http_method = "POST",
+    http_path = "/testexecutions/{testExecutionId}/results",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$list_test_execution_result_items_input(testExecutionId = testExecutionId, resultFilterBy = resultFilterBy, maxResults = maxResults, nextToken = nextToken)
+  output <- .lexmodelsv2$list_test_execution_result_items_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$list_test_execution_result_items <- lexmodelsv2_list_test_execution_result_items
+
+#' The list of test set executions
+#'
+#' @description
+#' The list of test set executions.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_executions/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_executions/) for full documentation.
+#'
+#' @param sortBy The sort order of the test set executions.
+#' @param maxResults The maximum number of test executions to return in each page. If there
+#' are fewer results than the max page size, only the actual number of
+#' results are returned.
+#' @param nextToken If the response from the ListTestExecutions operation contains more
+#' results than specified in the maxResults parameter, a token is returned
+#' in the response. Use that token in the nextToken parameter to return the
+#' next page of results.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_list_test_executions
+lexmodelsv2_list_test_executions <- function(sortBy = NULL, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListTestExecutions",
+    http_method = "POST",
+    http_path = "/testexecutions",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$list_test_executions_input(sortBy = sortBy, maxResults = maxResults, nextToken = nextToken)
+  output <- .lexmodelsv2$list_test_executions_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$list_test_executions <- lexmodelsv2_list_test_executions
+
+#' The list of test set records
+#'
+#' @description
+#' The list of test set records.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_set_records/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_set_records/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The identifier of the test set to list its test set records.
+#' @param maxResults The maximum number of test set records to return in each page. If there
+#' are fewer records than the max page size, only the actual number of
+#' records are returned.
+#' @param nextToken If the response from the ListTestSetRecords operation contains more
+#' results than specified in the maxResults parameter, a token is returned
+#' in the response. Use that token in the nextToken parameter to return the
+#' next page of results.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_list_test_set_records
+lexmodelsv2_list_test_set_records <- function(testSetId, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListTestSetRecords",
+    http_method = "POST",
+    http_path = "/testsets/{testSetId}/records",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$list_test_set_records_input(testSetId = testSetId, maxResults = maxResults, nextToken = nextToken)
+  output <- .lexmodelsv2$list_test_set_records_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$list_test_set_records <- lexmodelsv2_list_test_set_records
+
+#' The list of the test sets
+#'
+#' @description
+#' The list of the test sets
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_sets/](https://www.paws-r-sdk.com/docs/lexmodelsv2_list_test_sets/) for full documentation.
+#'
+#' @param sortBy The sort order for the list of test sets.
+#' @param maxResults The maximum number of test sets to return in each page. If there are
+#' fewer results than the max page size, only the actual number of results
+#' are returned.
+#' @param nextToken If the response from the ListTestSets operation contains more results
+#' than specified in the maxResults parameter, a token is returned in the
+#' response. Use that token in the nextToken parameter to return the next
+#' page of results.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_list_test_sets
+lexmodelsv2_list_test_sets <- function(sortBy = NULL, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListTestSets",
+    http_method = "POST",
+    http_path = "/testsets",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$list_test_sets_input(sortBy = sortBy, maxResults = maxResults, nextToken = nextToken)
+  output <- .lexmodelsv2$list_test_sets_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$list_test_sets <- lexmodelsv2_list_test_sets
+
 #' Search for associated transcripts that meet the specified criteria
 #'
 #' @description
 #' Search for associated transcripts that meet the specified criteria.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/search_associated_transcripts.html](https://paws-r.github.io/docs/lexmodelsv2/search_associated_transcripts.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_search_associated_transcripts/](https://www.paws-r-sdk.com/docs/lexmodelsv2_search_associated_transcripts/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot associated with the transcripts that
 #' you are searching.
@@ -2159,7 +2679,7 @@ lexmodelsv2_search_associated_transcripts <- function(botId, botVersion, localeI
 #' @description
 #' Use this to provide your transcript data, and to start the bot recommendation process.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/start_bot_recommendation.html](https://paws-r.github.io/docs/lexmodelsv2/start_bot_recommendation.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_start_bot_recommendation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_start_bot_recommendation/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot containing the bot recommendation.
 #' @param botVersion &#91;required&#93; The version of the bot containing the bot recommendation.
@@ -2199,7 +2719,7 @@ lexmodelsv2_start_bot_recommendation <- function(botId, botVersion, localeId, tr
 #' @description
 #' Starts importing a bot, bot locale, or custom vocabulary from a zip archive that you uploaded to an S3 bucket.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/start_import.html](https://paws-r.github.io/docs/lexmodelsv2/start_import.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_start_import/](https://www.paws-r-sdk.com/docs/lexmodelsv2_start_import/) for full documentation.
 #'
 #' @param importId &#91;required&#93; The unique identifier for the import. It is included in the response
 #' from the [`create_upload_url`][lexmodelsv2_create_upload_url] operation.
@@ -2232,12 +2752,122 @@ lexmodelsv2_start_import <- function(importId, resourceSpecification, mergeStrat
 }
 .lexmodelsv2$operations$start_import <- lexmodelsv2_start_import
 
+#' The action to start test set execution
+#'
+#' @description
+#' The action to start test set execution.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_start_test_execution/](https://www.paws-r-sdk.com/docs/lexmodelsv2_start_test_execution/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The test set Id for the test set execution.
+#' @param target &#91;required&#93; The target bot for the test set execution.
+#' @param apiMode &#91;required&#93; Indicates whether we use streaming or non-streaming APIs for the test
+#' set execution. For streaming, StartConversation Runtime API is used.
+#' Whereas, for non-streaming, RecognizeUtterance and RecognizeText Amazon
+#' Lex Runtime API are used.
+#' @param testExecutionModality Indicates whether audio or text is used.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_start_test_execution
+lexmodelsv2_start_test_execution <- function(testSetId, target, apiMode, testExecutionModality = NULL) {
+  op <- new_operation(
+    name = "StartTestExecution",
+    http_method = "POST",
+    http_path = "/testsets/{testSetId}/testexecutions",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$start_test_execution_input(testSetId = testSetId, target = target, apiMode = apiMode, testExecutionModality = testExecutionModality)
+  output <- .lexmodelsv2$start_test_execution_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$start_test_execution <- lexmodelsv2_start_test_execution
+
+#' The action to start the generation of test set
+#'
+#' @description
+#' The action to start the generation of test set.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_start_test_set_generation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_start_test_set_generation/) for full documentation.
+#'
+#' @param testSetName &#91;required&#93; The test set name for the test set generation request.
+#' @param description The test set description for the test set generation request.
+#' @param storageLocation &#91;required&#93; The Amazon S3 storage location for the test set generation.
+#' @param generationDataSource &#91;required&#93; The data source for the test set generation.
+#' @param roleArn &#91;required&#93; The roleARN used for any operation in the test set to access resources
+#' in the Amazon Web Services account.
+#' @param testSetTags A list of tags to add to the test set. You can only add tags when you
+#' import/generate a new test set. You can't use the
+#' [`update_test_set`][lexmodelsv2_update_test_set] operation to update
+#' tags. To update tags, use the [`tag_resource`][lexmodelsv2_tag_resource]
+#' operation.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_start_test_set_generation
+lexmodelsv2_start_test_set_generation <- function(testSetName, description = NULL, storageLocation, generationDataSource, roleArn, testSetTags = NULL) {
+  op <- new_operation(
+    name = "StartTestSetGeneration",
+    http_method = "PUT",
+    http_path = "/testsetgenerations",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$start_test_set_generation_input(testSetName = testSetName, description = description, storageLocation = storageLocation, generationDataSource = generationDataSource, roleArn = roleArn, testSetTags = testSetTags)
+  output <- .lexmodelsv2$start_test_set_generation_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$start_test_set_generation <- lexmodelsv2_start_test_set_generation
+
+#' Stop an already running Bot Recommendation request
+#'
+#' @description
+#' Stop an already running Bot Recommendation request.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_stop_bot_recommendation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_stop_bot_recommendation/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The unique identifier of the bot containing the bot recommendation to be
+#' stopped.
+#' @param botVersion &#91;required&#93; The version of the bot containing the bot recommendation.
+#' @param localeId &#91;required&#93; The identifier of the language and locale of the bot recommendation to
+#' stop. The string must match one of the supported locales. For more
+#' information, see [Supported
+#' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+#' @param botRecommendationId &#91;required&#93; The unique identifier of the bot recommendation to be stopped.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_stop_bot_recommendation
+lexmodelsv2_stop_bot_recommendation <- function(botId, botVersion, localeId, botRecommendationId) {
+  op <- new_operation(
+    name = "StopBotRecommendation",
+    http_method = "PUT",
+    http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/botrecommendations/{botRecommendationId}/stopbotrecommendation",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$stop_bot_recommendation_input(botId = botId, botVersion = botVersion, localeId = localeId, botRecommendationId = botRecommendationId)
+  output <- .lexmodelsv2$stop_bot_recommendation_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$stop_bot_recommendation <- lexmodelsv2_stop_bot_recommendation
+
 #' Adds the specified tags to the specified resource
 #'
 #' @description
 #' Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/tag_resource.html](https://paws-r.github.io/docs/lexmodelsv2/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_tag_resource/](https://www.paws-r-sdk.com/docs/lexmodelsv2_tag_resource/) for full documentation.
 #'
 #' @param resourceARN &#91;required&#93; The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to
 #' tag.
@@ -2269,7 +2899,7 @@ lexmodelsv2_tag_resource <- function(resourceARN, tags) {
 #' @description
 #' Removes tags from a bot, bot alias, or bot channel.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/untag_resource.html](https://paws-r.github.io/docs/lexmodelsv2/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_untag_resource/](https://www.paws-r-sdk.com/docs/lexmodelsv2_untag_resource/) for full documentation.
 #'
 #' @param resourceARN &#91;required&#93; The Amazon Resource Name (ARN) of the resource to remove the tags from.
 #' @param tagKeys &#91;required&#93; A list of tag keys to remove from the resource. If a tag key does not
@@ -2300,7 +2930,7 @@ lexmodelsv2_untag_resource <- function(resourceARN, tagKeys) {
 #' @description
 #' Updates the configuration of an existing bot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_bot.html](https://paws-r.github.io/docs/lexmodelsv2/update_bot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot to update. This identifier is returned
 #' by the [`create_bot`][lexmodelsv2_create_bot] operation.
@@ -2319,18 +2949,21 @@ lexmodelsv2_untag_resource <- function(resourceARN, tagKeys) {
 #' Lex deletes any data provided before the timeout.
 #' 
 #' You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
+#' @param botType The type of the bot to be updated.
+#' @param botMembers The list of bot members in the network associated with the update
+#' action.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_update_bot
-lexmodelsv2_update_bot <- function(botId, botName, description = NULL, roleArn, dataPrivacy, idleSessionTTLInSeconds) {
+lexmodelsv2_update_bot <- function(botId, botName, description = NULL, roleArn, dataPrivacy, idleSessionTTLInSeconds, botType = NULL, botMembers = NULL) {
   op <- new_operation(
     name = "UpdateBot",
     http_method = "PUT",
     http_path = "/bots/{botId}/",
     paginator = list()
   )
-  input <- .lexmodelsv2$update_bot_input(botId = botId, botName = botName, description = description, roleArn = roleArn, dataPrivacy = dataPrivacy, idleSessionTTLInSeconds = idleSessionTTLInSeconds)
+  input <- .lexmodelsv2$update_bot_input(botId = botId, botName = botName, description = description, roleArn = roleArn, dataPrivacy = dataPrivacy, idleSessionTTLInSeconds = idleSessionTTLInSeconds, botType = botType, botMembers = botMembers)
   output <- .lexmodelsv2$update_bot_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -2345,7 +2978,7 @@ lexmodelsv2_update_bot <- function(botId, botName, description = NULL, roleArn, 
 #' @description
 #' Updates the configuration of an existing bot alias.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_bot_alias.html](https://paws-r.github.io/docs/lexmodelsv2/update_bot_alias.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_alias/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_alias/) for full documentation.
 #'
 #' @param botAliasId &#91;required&#93; The unique identifier of the bot alias.
 #' @param botAliasName &#91;required&#93; The new name to assign to the bot alias.
@@ -2382,7 +3015,7 @@ lexmodelsv2_update_bot_alias <- function(botAliasId, botAliasName, description =
 #' @description
 #' Updates the settings that a bot has for a specific locale.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_bot_locale.html](https://paws-r.github.io/docs/lexmodelsv2/update_bot_locale.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_locale/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_locale/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot that contains the locale.
 #' @param botVersion &#91;required&#93; The version of the bot that contains the locale to be updated. The
@@ -2422,7 +3055,7 @@ lexmodelsv2_update_bot_locale <- function(botId, botVersion, localeId, descripti
 #' @description
 #' Updates an existing bot recommendation request.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_bot_recommendation.html](https://paws-r.github.io/docs/lexmodelsv2/update_bot_recommendation.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_recommendation/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_bot_recommendation/) for full documentation.
 #'
 #' @param botId &#91;required&#93; The unique identifier of the bot containing the bot recommendation to be
 #' updated.
@@ -2461,7 +3094,7 @@ lexmodelsv2_update_bot_recommendation <- function(botId, botVersion, localeId, b
 #' @description
 #' Updates the password used to protect an export zip archive.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_export.html](https://paws-r.github.io/docs/lexmodelsv2/update_export.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_export/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_export/) for full documentation.
 #'
 #' @param exportId &#91;required&#93; The unique identifier Amazon Lex assigned to the export.
 #' @param filePassword The new password to use to encrypt the export zip archive.
@@ -2491,7 +3124,7 @@ lexmodelsv2_update_export <- function(exportId, filePassword = NULL) {
 #' @description
 #' Updates the settings for an intent.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_intent.html](https://paws-r.github.io/docs/lexmodelsv2/update_intent.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_intent/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_intent/) for full documentation.
 #'
 #' @param intentId &#91;required&#93; The unique identifier of the intent to update.
 #' @param intentName &#91;required&#93; The new name for the intent.
@@ -2520,18 +3153,20 @@ lexmodelsv2_update_export <- function(exportId, filePassword = NULL) {
 #' string must match one of the supported locales. For more information,
 #' see [Supported
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+#' @param initialResponseSetting Configuration settings for a response sent to the user before Amazon Lex
+#' starts eliciting slots.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_update_intent
-lexmodelsv2_update_intent <- function(intentId, intentName, description = NULL, parentIntentSignature = NULL, sampleUtterances = NULL, dialogCodeHook = NULL, fulfillmentCodeHook = NULL, slotPriorities = NULL, intentConfirmationSetting = NULL, intentClosingSetting = NULL, inputContexts = NULL, outputContexts = NULL, kendraConfiguration = NULL, botId, botVersion, localeId) {
+lexmodelsv2_update_intent <- function(intentId, intentName, description = NULL, parentIntentSignature = NULL, sampleUtterances = NULL, dialogCodeHook = NULL, fulfillmentCodeHook = NULL, slotPriorities = NULL, intentConfirmationSetting = NULL, intentClosingSetting = NULL, inputContexts = NULL, outputContexts = NULL, kendraConfiguration = NULL, botId, botVersion, localeId, initialResponseSetting = NULL) {
   op <- new_operation(
     name = "UpdateIntent",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/",
     paginator = list()
   )
-  input <- .lexmodelsv2$update_intent_input(intentId = intentId, intentName = intentName, description = description, parentIntentSignature = parentIntentSignature, sampleUtterances = sampleUtterances, dialogCodeHook = dialogCodeHook, fulfillmentCodeHook = fulfillmentCodeHook, slotPriorities = slotPriorities, intentConfirmationSetting = intentConfirmationSetting, intentClosingSetting = intentClosingSetting, inputContexts = inputContexts, outputContexts = outputContexts, kendraConfiguration = kendraConfiguration, botId = botId, botVersion = botVersion, localeId = localeId)
+  input <- .lexmodelsv2$update_intent_input(intentId = intentId, intentName = intentName, description = description, parentIntentSignature = parentIntentSignature, sampleUtterances = sampleUtterances, dialogCodeHook = dialogCodeHook, fulfillmentCodeHook = fulfillmentCodeHook, slotPriorities = slotPriorities, intentConfirmationSetting = intentConfirmationSetting, intentClosingSetting = intentClosingSetting, inputContexts = inputContexts, outputContexts = outputContexts, kendraConfiguration = kendraConfiguration, botId = botId, botVersion = botVersion, localeId = localeId, initialResponseSetting = initialResponseSetting)
   output <- .lexmodelsv2$update_intent_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -2547,7 +3182,7 @@ lexmodelsv2_update_intent <- function(intentId, intentName, description = NULL, 
 #' @description
 #' Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_resource_policy.html](https://paws-r.github.io/docs/lexmodelsv2/update_resource_policy.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_resource_policy/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_resource_policy/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the bot or bot alias that the resource
 #' policy is attached to.
@@ -2591,7 +3226,7 @@ lexmodelsv2_update_resource_policy <- function(resourceArn, policy, expectedRevi
 #' @description
 #' Updates the settings for a slot.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_slot.html](https://paws-r.github.io/docs/lexmodelsv2/update_slot.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_slot/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_slot/) for full documentation.
 #'
 #' @param slotId &#91;required&#93; The unique identifier for the slot to update.
 #' @param slotName &#91;required&#93; The new name for the slot.
@@ -2614,18 +3249,20 @@ lexmodelsv2_update_resource_policy <- function(resourceArn, policy, expectedRevi
 #' `ValidationException`.
 #' 
 #' If the `multipleValuesSetting` is not set, the default value is `false`.
+#' @param subSlotSetting Specifications for the constituent sub slots and the expression for the
+#' composite slot.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_update_slot
-lexmodelsv2_update_slot <- function(slotId, slotName, description = NULL, slotTypeId = NULL, valueElicitationSetting, obfuscationSetting = NULL, botId, botVersion, localeId, intentId, multipleValuesSetting = NULL) {
+lexmodelsv2_update_slot <- function(slotId, slotName, description = NULL, slotTypeId = NULL, valueElicitationSetting, obfuscationSetting = NULL, botId, botVersion, localeId, intentId, multipleValuesSetting = NULL, subSlotSetting = NULL) {
   op <- new_operation(
     name = "UpdateSlot",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/intents/{intentId}/slots/{slotId}/",
     paginator = list()
   )
-  input <- .lexmodelsv2$update_slot_input(slotId = slotId, slotName = slotName, description = description, slotTypeId = slotTypeId, valueElicitationSetting = valueElicitationSetting, obfuscationSetting = obfuscationSetting, botId = botId, botVersion = botVersion, localeId = localeId, intentId = intentId, multipleValuesSetting = multipleValuesSetting)
+  input <- .lexmodelsv2$update_slot_input(slotId = slotId, slotName = slotName, description = description, slotTypeId = slotTypeId, valueElicitationSetting = valueElicitationSetting, obfuscationSetting = obfuscationSetting, botId = botId, botVersion = botVersion, localeId = localeId, intentId = intentId, multipleValuesSetting = multipleValuesSetting, subSlotSetting = subSlotSetting)
   output <- .lexmodelsv2$update_slot_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -2640,7 +3277,7 @@ lexmodelsv2_update_slot <- function(slotId, slotName, description = NULL, slotTy
 #' @description
 #' Updates the configuration of an existing slot type.
 #'
-#' See [https://paws-r.github.io/docs/lexmodelsv2/update_slot_type.html](https://paws-r.github.io/docs/lexmodelsv2/update_slot_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_slot_type/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_slot_type/) for full documentation.
 #'
 #' @param slotTypeId &#91;required&#93; The unique identifier of the slot type to update.
 #' @param slotTypeName &#91;required&#93; The new name of the slot type.
@@ -2658,18 +3295,19 @@ lexmodelsv2_update_slot <- function(slotId, slotName, description = NULL, slotTy
 #' information, see [Supported
 #' languages](https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 #' @param externalSourceSetting 
+#' @param compositeSlotTypeSetting Specifications for a composite slot type.
 #'
 #' @keywords internal
 #'
 #' @rdname lexmodelsv2_update_slot_type
-lexmodelsv2_update_slot_type <- function(slotTypeId, slotTypeName, description = NULL, slotTypeValues = NULL, valueSelectionSetting = NULL, parentSlotTypeSignature = NULL, botId, botVersion, localeId, externalSourceSetting = NULL) {
+lexmodelsv2_update_slot_type <- function(slotTypeId, slotTypeName, description = NULL, slotTypeValues = NULL, valueSelectionSetting = NULL, parentSlotTypeSignature = NULL, botId, botVersion, localeId, externalSourceSetting = NULL, compositeSlotTypeSetting = NULL) {
   op <- new_operation(
     name = "UpdateSlotType",
     http_method = "PUT",
     http_path = "/bots/{botId}/botversions/{botVersion}/botlocales/{localeId}/slottypes/{slotTypeId}/",
     paginator = list()
   )
-  input <- .lexmodelsv2$update_slot_type_input(slotTypeId = slotTypeId, slotTypeName = slotTypeName, description = description, slotTypeValues = slotTypeValues, valueSelectionSetting = valueSelectionSetting, parentSlotTypeSignature = parentSlotTypeSignature, botId = botId, botVersion = botVersion, localeId = localeId, externalSourceSetting = externalSourceSetting)
+  input <- .lexmodelsv2$update_slot_type_input(slotTypeId = slotTypeId, slotTypeName = slotTypeName, description = description, slotTypeValues = slotTypeValues, valueSelectionSetting = valueSelectionSetting, parentSlotTypeSignature = parentSlotTypeSignature, botId = botId, botVersion = botVersion, localeId = localeId, externalSourceSetting = externalSourceSetting, compositeSlotTypeSetting = compositeSlotTypeSetting)
   output <- .lexmodelsv2$update_slot_type_output()
   config <- get_config()
   svc <- .lexmodelsv2$service(config)
@@ -2678,3 +3316,34 @@ lexmodelsv2_update_slot_type <- function(slotTypeId, slotTypeName, description =
   return(response)
 }
 .lexmodelsv2$operations$update_slot_type <- lexmodelsv2_update_slot_type
+
+#' The action to update the test set
+#'
+#' @description
+#' The action to update the test set.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexmodelsv2_update_test_set/](https://www.paws-r-sdk.com/docs/lexmodelsv2_update_test_set/) for full documentation.
+#'
+#' @param testSetId &#91;required&#93; The test set Id for which update test operation to be performed.
+#' @param testSetName &#91;required&#93; The new test set name.
+#' @param description The new test set description.
+#'
+#' @keywords internal
+#'
+#' @rdname lexmodelsv2_update_test_set
+lexmodelsv2_update_test_set <- function(testSetId, testSetName, description = NULL) {
+  op <- new_operation(
+    name = "UpdateTestSet",
+    http_method = "PUT",
+    http_path = "/testsets/{testSetId}",
+    paginator = list()
+  )
+  input <- .lexmodelsv2$update_test_set_input(testSetId = testSetId, testSetName = testSetName, description = description)
+  output <- .lexmodelsv2$update_test_set_output()
+  config <- get_config()
+  svc <- .lexmodelsv2$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexmodelsv2$operations$update_test_set <- lexmodelsv2_update_test_set

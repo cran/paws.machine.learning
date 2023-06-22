@@ -13,7 +13,8 @@ sagemaker_update_workforce(
 }
 \arguments{
 \item{WorkforceName}{[required] The name of the private workforce that you want to update. You can find
-your workforce name by using the operation.}
+your workforce name by using the
+\code{\link[=sagemaker_list_workforces]{list_workforces}} operation.}
 
 \item{SourceIpConfig}{A list of one to ten worker IP address ranges
 (\href{https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html}{CIDRs})
@@ -29,6 +30,6 @@ configuration for a workforce made using your own IdP.}
 \description{
 Use this operation to update your workforce. You can use this operation to require that workers use specific IP addresses to work on tasks and to update your OpenID Connect (OIDC) Identity Provider (IdP) workforce configuration.
 
-See \url{https://paws-r.github.io/docs/sagemaker/update_workforce.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_update_workforce/} for full documentation.
 }
 \keyword{internal}

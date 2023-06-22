@@ -7,8 +7,8 @@
 comprehend_detect_key_phrases(Text, LanguageCode)
 }
 \arguments{
-\item{Text}{[required] A UTF-8 text string. Each string must contain fewer that 5,000 bytes of
-UTF-8 encoded characters.}
+\item{Text}{[required] A UTF-8 text string. The string must contain less than 100 KB of UTF-8
+encoded characters.}
 
 \item{LanguageCode}{[required] The language of the input documents. You can specify any of the primary
 languages supported by Amazon Comprehend. All documents must be in the
@@ -17,6 +17,6 @@ same language.}
 \description{
 Detects the key noun phrases found in the text.
 
-See \url{https://paws-r.github.io/docs/comprehend/detect_key_phrases.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_detect_key_phrases/} for full documentation.
 }
 \keyword{internal}

@@ -10,8 +10,8 @@ textract_analyze_id(DocumentPages)
 \item{DocumentPages}{[required] The document being passed to AnalyzeID.}
 }
 \description{
-Analyzes identity documents for relevant information. This information is extracted and returned as \code{IdentityDocumentFields}, which records both the normalized field and value of the extracted text.Unlike other Amazon Textract operations, \code{\link[=textract_analyze_id]{analyze_id}} doesn't return any Geometry data.
+Analyzes identity documents for relevant information. This information is extracted and returned as \code{IdentityDocumentFields}, which records both the normalized field and value of the extracted text. Unlike other Amazon Textract operations, \code{\link[=textract_analyze_id]{analyze_id}} doesn't return any Geometry data.
 
-See \url{https://paws-r.github.io/docs/textract/analyze_id.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/textract_analyze_id/} for full documentation.
 }
 \keyword{internal}

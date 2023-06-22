@@ -11,7 +11,9 @@ lexmodelsv2_create_bot(
   dataPrivacy,
   idleSessionTTLInSeconds,
   botTags = NULL,
-  testBotAliasTags = NULL
+  testBotAliasTags = NULL,
+  botType = NULL,
+  botMembers = NULL
 )
 }
 \arguments{
@@ -45,10 +47,14 @@ operation to update tags. To update tags, use the
 when you create a bot. You can't use the \code{UpdateAlias} operation to
 update tags. To update tags on the test alias, use the
 \code{\link[=lexmodelsv2_tag_resource]{tag_resource}} operation.}
+
+\item{botType}{The type of a bot to create.}
+
+\item{botMembers}{The list of bot members in a network to be created.}
 }
 \description{
 Creates an Amazon Lex conversational bot.
 
-See \url{https://paws-r.github.io/docs/lexmodelsv2/create_bot.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lexmodelsv2_create_bot/} for full documentation.
 }
 \keyword{internal}

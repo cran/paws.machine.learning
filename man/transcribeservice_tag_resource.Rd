@@ -13,7 +13,7 @@ have the format
 \code{arn:partition:service:region:account-id:resource-type/resource-id}.
 
 For example,
-\code{arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name}.
+\code{arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name}.
 
 Valid values for \code{resource-type} are: \code{transcription-job},
 \code{medical-transcription-job}, \code{vocabulary}, \code{medical-vocabulary},
@@ -27,6 +27,6 @@ To learn more about using tags with Amazon Transcribe, refer to \href{https://do
 \description{
 Adds one or more custom tags, each in the form of a key:value pair, to the specified resource.
 
-See \url{https://paws-r.github.io/docs/transcribeservice/tag_resource.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/transcribeservice_tag_resource/} for full documentation.
 }
 \keyword{internal}

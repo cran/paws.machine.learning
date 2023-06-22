@@ -70,7 +70,7 @@ text in the response.
 \item If the value begins with \verb{audio/}, Amazon Lex V2 returns speech in
 the response. Amazon Lex V2 uses Amazon Polly to generate the speech
 using the configuration that you specified in the
-\code{requestContentType} parameter. For example, if you specify
+\code{responseContentType} parameter. For example, if you specify
 \code{audio/mpeg} as the value, Amazon Lex V2 returns speech in the MPEG
 format.
 \item If the value is \code{audio/pcm}, the speech returned is \code{audio/pcm} at
@@ -91,6 +91,6 @@ the \code{requestContentType} parameter.}
 \description{
 Sends user input to Amazon Lex V2. You can send text or speech. Clients use this API to send text and audio requests to Amazon Lex V2 at runtime. Amazon Lex V2 interprets the user input using the machine learning model built for the bot.
 
-See \url{https://paws-r.github.io/docs/lexruntimev2/recognize_utterance.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lexruntimev2_recognize_utterance/} for full documentation.
 }
 \keyword{internal}

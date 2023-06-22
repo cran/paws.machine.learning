@@ -47,17 +47,17 @@ numbers, and spaces representable in UTF-8, and the following
 characters: + - = . _ : / @.
 \item Tag keys and values are case sensitive.
 \item Do not use \verb{aws:}, \verb{AWS:}, or any upper or lowercase combination of
-such as a prefix for keys as it is reserved for AWS use. You cannot
-edit or delete tag keys with this prefix. Values can have this
-prefix. If a tag value has \code{aws} as its prefix but the key does not,
-then Forecast considers it to be a user tag and will count against
-the limit of 50 tags. Tags with only the key prefix of \code{aws} do not
-count against your tags per resource limit.
+such as a prefix for keys as it is reserved for Amazon Web Services
+use. You cannot edit or delete tag keys with this prefix. Values can
+have this prefix. If a tag value has \code{aws} as its prefix but the key
+does not, then Forecast considers it to be a user tag and will count
+against the limit of 50 tags. Tags with only the key prefix of \code{aws}
+do not count against your tags per resource limit.
 }}
 }
 \description{
 Creates a dataset group, which holds a collection of related datasets. You can add datasets to the dataset group when you create the dataset group, or later by using the \code{\link[=forecastservice_update_dataset_group]{update_dataset_group}} operation.
 
-See \url{https://paws-r.github.io/docs/forecastservice/create_dataset_group.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/forecastservice_create_dataset_group/} for full documentation.
 }
 \keyword{internal}

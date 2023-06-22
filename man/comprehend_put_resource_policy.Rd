@@ -33,8 +33,8 @@ version, don't use this parameter. Amazon Comprehend creates the
 revision ID for you.}
 }
 \description{
-Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another AWS account to import the custom model, which replicates it in Amazon Comprehend in their account.
+Attaches a resource-based policy to a custom model. You can use this policy to authorize an entity in another Amazon Web Services account to import the custom model, which replicates it in Amazon Comprehend in their account.
 
-See \url{https://paws-r.github.io/docs/comprehend/put_resource_policy.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_put_resource_policy/} for full documentation.
 }
 \keyword{internal}

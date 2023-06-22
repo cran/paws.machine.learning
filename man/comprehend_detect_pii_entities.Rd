@@ -8,8 +8,7 @@ identifiable information (PII) and returns information about them}
 comprehend_detect_pii_entities(Text, LanguageCode)
 }
 \arguments{
-\item{Text}{[required] A UTF-8 text string. Each string must contain fewer that 5,000 bytes of
-UTF-8 encoded characters.}
+\item{Text}{[required] A UTF-8 text string. The maximum string size is 100 KB.}
 
 \item{LanguageCode}{[required] The language of the input documents. Currently, English is the only
 valid language.}
@@ -17,6 +16,6 @@ valid language.}
 \description{
 Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
 
-See \url{https://paws-r.github.io/docs/comprehend/detect_pii_entities.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_detect_pii_entities/} for full documentation.
 }
 \keyword{internal}

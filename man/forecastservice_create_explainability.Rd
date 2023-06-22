@@ -30,8 +30,8 @@ and time points for the Explainability.}
 
 \item{Schema}{}
 
-\item{EnableVisualization}{Create an Explainability visualization that is viewable within the AWS
-console.}
+\item{EnableVisualization}{Create an Explainability visualization that is viewable within the
+Amazon Web Services console.}
 
 \item{StartDateTime}{If \code{TimePointGranularity} is set to \code{SPECIFIC}, define the first point
 for the Explainability.
@@ -71,6 +71,6 @@ resource limit. You cannot edit or delete tag keys with this prefix.
 \description{
 Explainability is only available for Forecasts and Predictors generated from an AutoPredictor (\code{\link[=forecastservice_create_auto_predictor]{create_auto_predictor}})
 
-See \url{https://paws-r.github.io/docs/forecastservice/create_explainability.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/forecastservice_create_explainability/} for full documentation.
 }
 \keyword{internal}

@@ -20,9 +20,9 @@ page of results, copy this string and repeat your request, including
 view all your results.}
 
 \item{MaxResults}{The maximum number of custom vocabularies to return in each page of
-results. If there are fewer results than the value you specify, only the
-actual results are returned. If you don't specify a value, a default of
-5 is used.}
+results. If there are fewer results than the value that you specify,
+only the actual results are returned. If you don't specify a value, a
+default of 5 is used.}
 
 \item{StateEquals}{Returns only custom vocabularies with the specified state. Vocabularies
 are ordered by creation date, with the newest vocabulary first. If you
@@ -35,6 +35,6 @@ The search is not case sensitive.}
 \description{
 Provides a list of custom vocabularies that match the specified criteria. If no criteria are specified, all custom vocabularies are returned.
 
-See \url{https://paws-r.github.io/docs/transcribeservice/list_vocabularies.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/transcribeservice_list_vocabularies/} for full documentation.
 }
 \keyword{internal}

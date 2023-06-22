@@ -7,13 +7,13 @@
 voiceid_describe_speaker_enrollment_job(DomainId, JobId)
 }
 \arguments{
-\item{DomainId}{[required] The identifier of the domain containing the speaker enrollment job.}
+\item{DomainId}{[required] The identifier of the domain that contains the speaker enrollment job.}
 
 \item{JobId}{[required] The identifier of the speaker enrollment job you are describing.}
 }
 \description{
 Describes the specified speaker enrollment job.
 
-See \url{https://paws-r.github.io/docs/voiceid/describe_speaker_enrollment_job.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_describe_speaker_enrollment_job/} for full documentation.
 }
 \keyword{internal}

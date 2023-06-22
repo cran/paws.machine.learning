@@ -13,12 +13,13 @@ lexmodelsv2_create_slot_type(
   botId,
   botVersion,
   localeId,
-  externalSourceSetting = NULL
+  externalSourceSetting = NULL,
+  compositeSlotTypeSetting = NULL
 )
 }
 \arguments{
 \item{slotTypeName}{[required] The name for the slot. A slot type name must be unique within the
-account.}
+intent.}
 
 \item{description}{A description of the slot type. Use the description to help identify the
 slot type in lists.}
@@ -32,15 +33,15 @@ resolves for a slot.}
 list of possible values. The field can be set to one of the following
 values:
 \itemize{
-\item \code{OriginalValue} - Returns the value entered by the user, if the user
-value is similar to the slot value.
-\item \code{TopResolution} - If there is a resolution list for the slot, return
-the first value in the resolution list. If there is no resolution
-list, return null.
+\item \code{ORIGINAL_VALUE} - Returns the value entered by the user, if the
+user value is similar to the slot value.
+\item \code{TOP_RESOLUTION} - If there is a resolution list for the slot,
+return the first value in the resolution list. If there is no
+resolution list, return null.
 }
 
 If you don't specify the \code{valueSelectionSetting} parameter, the default
-is \code{OriginalValue}.}
+is \code{ORIGINAL_VALUE}.}
 
 \item{parentSlotTypeSignature}{The built-in slot type used as a parent of this slot type. When you
 define a parent slot type, the new slot type has the configuration of
@@ -58,10 +59,12 @@ bots, intents, and slots used by the slot type must have the same
 locale. For more information, see \href{https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html}{Supported languages}.}
 
 \item{externalSourceSetting}{Sets the type of external information used to create the slot type.}
+
+\item{compositeSlotTypeSetting}{Specifications for a composite slot type.}
 }
 \description{
 Creates a custom slot type
 
-See \url{https://paws-r.github.io/docs/lexmodelsv2/create_slot_type.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lexmodelsv2_create_slot_type/} for full documentation.
 }
 \keyword{internal}

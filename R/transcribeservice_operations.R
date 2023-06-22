@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Creates a new Call Analytics category.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/create_call_analytics_category.html](https://paws-r.github.io/docs/transcribeservice/create_call_analytics_category.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_create_call_analytics_category/](https://www.paws-r-sdk.com/docs/transcribeservice_create_call_analytics_category/) for full documentation.
 #'
 #' @param CategoryName &#91;required&#93; A unique name, chosen by you, for your Call Analytics category. It's
 #' helpful to use a detailed naming system that will make sense to you in
@@ -17,24 +17,36 @@ NULL
 #' like `test-category`.
 #' 
 #' Category names are case sensitive.
-#' @param Rules &#91;required&#93; Rules define a Call Analytics category. When creating a new Call
-#' Analytics category, you must create between 1 and 20 rules for that
-#' category. For each rule, you specify a filter you want applied to the
-#' attributes of a call. For example, you can choose a sentiment filter
-#' that detects if a customer's sentiment was positive during the last 30
-#' seconds of the call.
+#' @param Rules &#91;required&#93; Rules define a Call Analytics category. When creating a new category,
+#' you must create between 1 and 20 rules for that category. For each rule,
+#' you specify a filter you want applied to the attributes of a call. For
+#' example, you can choose a sentiment filter that detects if a customer's
+#' sentiment was positive during the last 30 seconds of the call.
+#' @param InputType Choose whether you want to create a real-time or a post-call category
+#' for your Call Analytics transcription.
+#' 
+#' Specifying `POST_CALL` assigns your category to post-call
+#' transcriptions; categories with this input type cannot be applied to
+#' streaming (real-time) transcriptions.
+#' 
+#' Specifying `REAL_TIME` assigns your category to streaming
+#' transcriptions; categories with this input type cannot be applied to
+#' post-call transcriptions.
+#' 
+#' If you do not include `InputType`, your category is created as a
+#' post-call category by default.
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_create_call_analytics_category
-transcribeservice_create_call_analytics_category <- function(CategoryName, Rules) {
+transcribeservice_create_call_analytics_category <- function(CategoryName, Rules, InputType = NULL) {
   op <- new_operation(
     name = "CreateCallAnalyticsCategory",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$create_call_analytics_category_input(CategoryName = CategoryName, Rules = Rules)
+  input <- .transcribeservice$create_call_analytics_category_input(CategoryName = CategoryName, Rules = Rules, InputType = InputType)
   output <- .transcribeservice$create_call_analytics_category_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)
@@ -49,23 +61,23 @@ transcribeservice_create_call_analytics_category <- function(CategoryName, Rules
 #' @description
 #' Creates a new custom language model.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/create_language_model.html](https://paws-r.github.io/docs/transcribeservice/create_language_model.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_create_language_model/](https://www.paws-r-sdk.com/docs/transcribeservice_create_language_model/) for full documentation.
 #'
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of your model. Each
-#' language model must contain terms in only one language, and the language
-#' you select for your model must match the language of your training and
-#' tuning data.
+#' custom language model must contain terms in only one language, and the
+#' language you select for your custom language model must match the
+#' language of your training and tuning data.
 #' 
 #' For a list of supported languages and their associated language codes,
 #' refer to the [Supported
 #' languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-#' table. Note that U.S. English (`en-US`) is the only language supported
+#' table. Note that US English (`en-US`) is the only language supported
 #' with Amazon Transcribe Medical.
 #' 
 #' A custom language model can only be used to transcribe files in the same
-#' language as the model. For example, if you create a language model using
-#' US English (`en-US`), you can only apply this model to files that
-#' contain English audio.
+#' language as the model. For example, if you create a custom language
+#' model using US English (`en-US`), you can only apply this model to files
+#' that contain English audio.
 #' @param BaseModelName &#91;required&#93; The Amazon Transcribe standard language model, or base model, used to
 #' create your custom language model. Amazon Transcribe offers two options
 #' for base models: Wideband and Narrowband.
@@ -76,9 +88,9 @@ transcribeservice_create_call_analytics_category <- function(CategoryName, Rules
 #' @param ModelName &#91;required&#93; A unique name, chosen by you, for your custom language model.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
-#' within an Amazon Web Services account. If you try to create a new
-#' language model with the same name as an existing language model, you get
-#' a `ConflictException` error.
+#' within an Amazon Web Services account. If you try to create a new custom
+#' language model with the same name as an existing custom language model,
+#' you get a `ConflictException` error.
 #' @param InputDataConfig &#91;required&#93; Contains the Amazon S3 location of the training data you want to use to
 #' create a new custom language model, and permissions to access this
 #' location.
@@ -122,14 +134,14 @@ transcribeservice_create_language_model <- function(LanguageCode, BaseModelName,
 #' @description
 #' Creates a new custom medical vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/create_medical_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/create_medical_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_create_medical_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_create_medical_vocabulary/) for full documentation.
 #'
 #' @param VocabularyName &#91;required&#93; A unique name, chosen by you, for your new custom medical vocabulary.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
-#' within an Amazon Web Services account. If you try to create a new
-#' medical vocabulary with the same name as an existing medical vocabulary,
-#' you get a `ConflictException` error.
+#' within an Amazon Web Services account. If you try to create a new custom
+#' medical vocabulary with the same name as an existing custom medical
+#' vocabulary, you get a `ConflictException` error.
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of the entries in your
 #' custom vocabulary. US English (`en-US`) is the only language supported
 #' with Amazon Transcribe Medical.
@@ -139,7 +151,8 @@ transcribeservice_create_language_model <- function(LanguageCode, BaseModelName,
 #' 
 #' Here's an example URI path: `s3://DOC-EXAMPLE-BUCKET/my-vocab-file.txt`
 #' @param Tags Adds one or more custom tags, each in the form of a key:value pair, to a
-#' new medical vocabulary at the time you create this new vocabulary.
+#' new custom medical vocabulary at the time you create this new custom
+#' vocabulary.
 #' 
 #' To learn more about using tags with Amazon Transcribe, refer to [Tagging
 #' resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
@@ -169,39 +182,41 @@ transcribeservice_create_medical_vocabulary <- function(VocabularyName, Language
 #' @description
 #' Creates a new custom vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/create_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/create_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_create_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_create_vocabulary/) for full documentation.
 #'
 #' @param VocabularyName &#91;required&#93; A unique name, chosen by you, for your new custom vocabulary.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
-#' within an Amazon Web Services account. If you try to create a new
-#' vocabulary with the same name as an existing vocabulary, you get a
-#' `ConflictException` error.
+#' within an Amazon Web Services account. If you try to create a new custom
+#' vocabulary with the same name as an existing custom vocabulary, you get
+#' a `ConflictException` error.
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of the entries in your
-#' custom vocabulary. Each vocabulary must contain terms in only one
+#' custom vocabulary. Each custom vocabulary must contain terms in only one
 #' language.
 #' 
 #' A custom vocabulary can only be used to transcribe files in the same
-#' language as the vocabulary. For example, if you create a vocabulary
-#' using US English (`en-US`), you can only apply this vocabulary to files
-#' that contain English audio.
+#' language as the custom vocabulary. For example, if you create a custom
+#' vocabulary using US English (`en-US`), you can only apply this custom
+#' vocabulary to files that contain English audio.
 #' 
 #' For a list of supported languages and their associated language codes,
 #' refer to the [Supported
 #' languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 #' table.
-#' @param Phrases Use this parameter if you want to create your vocabulary by including
-#' all desired terms, as comma-separated values, within your request. The
-#' other option for creating your vocabulary is to save your entries in a
-#' text file and upload them to an Amazon S3 bucket, then specify the
-#' location of your file using the `VocabularyFileUri` parameter.
+#' @param Phrases Use this parameter if you want to create your custom vocabulary by
+#' including all desired terms, as comma-separated values, within your
+#' request. The other option for creating your custom vocabulary is to save
+#' your entries in a text file and upload them to an Amazon S3 bucket, then
+#' specify the location of your file using the `VocabularyFileUri`
+#' parameter.
 #' 
 #' Note that if you include `Phrases` in your request, you cannot use
 #' `VocabularyFileUri`; you must choose one or the other.
 #' 
 #' Each language has a character set that contains all allowed characters
 #' for that specific language. If you use unsupported characters, your
-#' vocabulary filter request fails. Refer to [Character Sets for Custom
+#' custom vocabulary filter request fails. Refer to [Character Sets for
+#' Custom
 #' Vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
 #' to get the character set for your language.
 #' @param VocabularyFileUri The Amazon S3 location of the text file that contains your custom
@@ -213,22 +228,34 @@ transcribeservice_create_medical_vocabulary <- function(VocabularyName, Language
 #' Note that if you include `VocabularyFileUri` in your request, you cannot
 #' use the `Phrases` flag; you must choose one or the other.
 #' @param Tags Adds one or more custom tags, each in the form of a key:value pair, to a
-#' new custom vocabulary at the time you create this new vocabulary.
+#' new custom vocabulary at the time you create this new custom vocabulary.
 #' 
 #' To learn more about using tags with Amazon Transcribe, refer to [Tagging
 #' resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+#' @param DataAccessRoleArn The Amazon Resource Name (ARN) of an IAM role that has permissions to
+#' access the Amazon S3 bucket that contains your input files (in this
+#' case, your custom vocabulary). If the role that you specify doesn’t have
+#' the appropriate permissions to access the specified Amazon S3 location,
+#' your request fails.
+#' 
+#' IAM role ARNs have the format
+#' `arn:partition:iam::account:role/role-name-with-path`. For example:
+#' `arn:aws:iam::111122223333:role/Admin`.
+#' 
+#' For more information, see [IAM
+#' ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_create_vocabulary
-transcribeservice_create_vocabulary <- function(VocabularyName, LanguageCode, Phrases = NULL, VocabularyFileUri = NULL, Tags = NULL) {
+transcribeservice_create_vocabulary <- function(VocabularyName, LanguageCode, Phrases = NULL, VocabularyFileUri = NULL, Tags = NULL, DataAccessRoleArn = NULL) {
   op <- new_operation(
     name = "CreateVocabulary",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$create_vocabulary_input(VocabularyName = VocabularyName, LanguageCode = LanguageCode, Phrases = Phrases, VocabularyFileUri = VocabularyFileUri, Tags = Tags)
+  input <- .transcribeservice$create_vocabulary_input(VocabularyName = VocabularyName, LanguageCode = LanguageCode, Phrases = Phrases, VocabularyFileUri = VocabularyFileUri, Tags = Tags, DataAccessRoleArn = DataAccessRoleArn)
   output <- .transcribeservice$create_vocabulary_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)
@@ -243,29 +270,29 @@ transcribeservice_create_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' @description
 #' Creates a new custom vocabulary filter.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/create_vocabulary_filter.html](https://paws-r.github.io/docs/transcribeservice/create_vocabulary_filter.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_create_vocabulary_filter/](https://www.paws-r-sdk.com/docs/transcribeservice_create_vocabulary_filter/) for full documentation.
 #'
 #' @param VocabularyFilterName &#91;required&#93; A unique name, chosen by you, for your new custom vocabulary filter.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
-#' within an Amazon Web Services account. If you try to create a new
-#' vocabulary filter with the same name as an existing vocabulary filter,
-#' you get a `ConflictException` error.
+#' within an Amazon Web Services account. If you try to create a new custom
+#' vocabulary filter with the same name as an existing custom vocabulary
+#' filter, you get a `ConflictException` error.
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of the entries in your
-#' vocabulary filter. Each vocabulary filter must contain terms in only one
-#' language.
+#' vocabulary filter. Each custom vocabulary filter must contain terms in
+#' only one language.
 #' 
-#' A vocabulary filter can only be used to transcribe files in the same
-#' language as the filter. For example, if you create a vocabulary filter
-#' using US English (`en-US`), you can only apply this filter to files that
-#' contain English audio.
+#' A custom vocabulary filter can only be used to transcribe files in the
+#' same language as the filter. For example, if you create a custom
+#' vocabulary filter using US English (`en-US`), you can only apply this
+#' filter to files that contain English audio.
 #' 
 #' For a list of supported languages and their associated language codes,
 #' refer to the [Supported
 #' languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 #' table.
-#' @param Words Use this parameter if you want to create your vocabulary filter by
-#' including all desired terms, as comma-separated values, within your
+#' @param Words Use this parameter if you want to create your custom vocabulary filter
+#' by including all desired terms, as comma-separated values, within your
 #' request. The other option for creating your vocabulary filter is to save
 #' your entries in a text file and upload them to an Amazon S3 bucket, then
 #' specify the location of your file using the `VocabularyFilterFileUri`
@@ -276,7 +303,8 @@ transcribeservice_create_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' 
 #' Each language has a character set that contains all allowed characters
 #' for that specific language. If you use unsupported characters, your
-#' vocabulary filter request fails. Refer to [Character Sets for Custom
+#' custom vocabulary filter request fails. Refer to [Character Sets for
+#' Custom
 #' Vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
 #' to get the character set for your language.
 #' @param VocabularyFilterFileUri The Amazon S3 location of the text file that contains your custom
@@ -289,22 +317,35 @@ transcribeservice_create_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' Note that if you include `VocabularyFilterFileUri` in your request, you
 #' cannot use `Words`; you must choose one or the other.
 #' @param Tags Adds one or more custom tags, each in the form of a key:value pair, to a
-#' new custom vocabulary filter at the time you create this new filter.
+#' new custom vocabulary filter at the time you create this new vocabulary
+#' filter.
 #' 
 #' To learn more about using tags with Amazon Transcribe, refer to [Tagging
 #' resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+#' @param DataAccessRoleArn The Amazon Resource Name (ARN) of an IAM role that has permissions to
+#' access the Amazon S3 bucket that contains your input files (in this
+#' case, your custom vocabulary filter). If the role that you specify
+#' doesn’t have the appropriate permissions to access the specified Amazon
+#' S3 location, your request fails.
+#' 
+#' IAM role ARNs have the format
+#' `arn:partition:iam::account:role/role-name-with-path`. For example:
+#' `arn:aws:iam::111122223333:role/Admin`.
+#' 
+#' For more information, see [IAM
+#' ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_create_vocabulary_filter
-transcribeservice_create_vocabulary_filter <- function(VocabularyFilterName, LanguageCode, Words = NULL, VocabularyFilterFileUri = NULL, Tags = NULL) {
+transcribeservice_create_vocabulary_filter <- function(VocabularyFilterName, LanguageCode, Words = NULL, VocabularyFilterFileUri = NULL, Tags = NULL, DataAccessRoleArn = NULL) {
   op <- new_operation(
     name = "CreateVocabularyFilter",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$create_vocabulary_filter_input(VocabularyFilterName = VocabularyFilterName, LanguageCode = LanguageCode, Words = Words, VocabularyFilterFileUri = VocabularyFilterFileUri, Tags = Tags)
+  input <- .transcribeservice$create_vocabulary_filter_input(VocabularyFilterName = VocabularyFilterName, LanguageCode = LanguageCode, Words = Words, VocabularyFilterFileUri = VocabularyFilterFileUri, Tags = Tags, DataAccessRoleArn = DataAccessRoleArn)
   output <- .transcribeservice$create_vocabulary_filter_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)
@@ -319,7 +360,7 @@ transcribeservice_create_vocabulary_filter <- function(VocabularyFilterName, Lan
 #' @description
 #' Deletes a Call Analytics category. To use this operation, specify the name of the category you want to delete using `CategoryName`. Category names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_call_analytics_category.html](https://paws-r.github.io/docs/transcribeservice/delete_call_analytics_category.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_call_analytics_category/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_call_analytics_category/) for full documentation.
 #'
 #' @param CategoryName &#91;required&#93; The name of the Call Analytics category you want to delete. Category
 #' names are case sensitive.
@@ -349,7 +390,7 @@ transcribeservice_delete_call_analytics_category <- function(CategoryName) {
 #' @description
 #' Deletes a Call Analytics job. To use this operation, specify the name of the job you want to delete using `CallAnalyticsJobName`. Job names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_call_analytics_job.html](https://paws-r.github.io/docs/transcribeservice/delete_call_analytics_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_call_analytics_job/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_call_analytics_job/) for full documentation.
 #'
 #' @param CallAnalyticsJobName &#91;required&#93; The name of the Call Analytics job you want to delete. Job names are
 #' case sensitive.
@@ -377,9 +418,9 @@ transcribeservice_delete_call_analytics_job <- function(CallAnalyticsJobName) {
 #' Deletes a custom language model
 #'
 #' @description
-#' Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using `ModelName`. Language model names are case sensitive.
+#' Deletes a custom language model. To use this operation, specify the name of the language model you want to delete using `ModelName`. custom language model names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_language_model.html](https://paws-r.github.io/docs/transcribeservice/delete_language_model.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_language_model/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_language_model/) for full documentation.
 #'
 #' @param ModelName &#91;required&#93; The name of the custom language model you want to delete. Model names
 #' are case sensitive.
@@ -409,7 +450,7 @@ transcribeservice_delete_language_model <- function(ModelName) {
 #' @description
 #' Deletes a medical transcription job. To use this operation, specify the name of the job you want to delete using `MedicalTranscriptionJobName`. Job names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_medical_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/delete_medical_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_medical_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_medical_transcription_job/) for full documentation.
 #'
 #' @param MedicalTranscriptionJobName &#91;required&#93; The name of the medical transcription job you want to delete. Job names
 #' are case sensitive.
@@ -437,12 +478,12 @@ transcribeservice_delete_medical_transcription_job <- function(MedicalTranscript
 #' Deletes a custom medical vocabulary
 #'
 #' @description
-#' Deletes a custom medical vocabulary. To use this operation, specify the name of the vocabulary you want to delete using `VocabularyName`. Vocabulary names are case sensitive.
+#' Deletes a custom medical vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using `VocabularyName`. Custom vocabulary names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_medical_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/delete_medical_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_medical_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_medical_vocabulary/) for full documentation.
 #'
-#' @param VocabularyName &#91;required&#93; The name of the custom medical vocabulary you want to delete. Vocabulary
-#' names are case sensitive.
+#' @param VocabularyName &#91;required&#93; The name of the custom medical vocabulary you want to delete. Custom
+#' medical vocabulary names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -469,7 +510,7 @@ transcribeservice_delete_medical_vocabulary <- function(VocabularyName) {
 #' @description
 #' Deletes a transcription job. To use this operation, specify the name of the job you want to delete using `TranscriptionJobName`. Job names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/delete_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_transcription_job/) for full documentation.
 #'
 #' @param TranscriptionJobName &#91;required&#93; The name of the transcription job you want to delete. Job names are case
 #' sensitive.
@@ -497,12 +538,12 @@ transcribeservice_delete_transcription_job <- function(TranscriptionJobName) {
 #' Deletes a custom vocabulary
 #'
 #' @description
-#' Deletes a custom vocabulary. To use this operation, specify the name of the vocabulary you want to delete using `VocabularyName`. Vocabulary names are case sensitive.
+#' Deletes a custom vocabulary. To use this operation, specify the name of the custom vocabulary you want to delete using `VocabularyName`. Custom vocabulary names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/delete_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_vocabulary/) for full documentation.
 #'
-#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want to delete. Vocabulary names
-#' are case sensitive.
+#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want to delete. Custom vocabulary
+#' names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -524,15 +565,15 @@ transcribeservice_delete_vocabulary <- function(VocabularyName) {
 }
 .transcribeservice$operations$delete_vocabulary <- transcribeservice_delete_vocabulary
 
-#' Deletes a vocabulary filter
+#' Deletes a custom vocabulary filter
 #'
 #' @description
-#' Deletes a vocabulary filter. To use this operation, specify the name of the vocabulary filter you want to delete using `VocabularyFilterName`. Vocabulary filter names are case sensitive.
+#' Deletes a custom vocabulary filter. To use this operation, specify the name of the custom vocabulary filter you want to delete using `VocabularyFilterName`. Custom vocabulary filter names are case sensitive.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/delete_vocabulary_filter.html](https://paws-r.github.io/docs/transcribeservice/delete_vocabulary_filter.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_delete_vocabulary_filter/](https://www.paws-r-sdk.com/docs/transcribeservice_delete_vocabulary_filter/) for full documentation.
 #'
-#' @param VocabularyFilterName &#91;required&#93; The name of the custom vocabulary filter you want to delete. Vocabulary
-#' filter names are case sensitive.
+#' @param VocabularyFilterName &#91;required&#93; The name of the custom vocabulary filter you want to delete. Custom
+#' vocabulary filter names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -559,7 +600,7 @@ transcribeservice_delete_vocabulary_filter <- function(VocabularyFilterName) {
 #' @description
 #' Provides information about the specified custom language model.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/describe_language_model.html](https://paws-r.github.io/docs/transcribeservice/describe_language_model.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_describe_language_model/](https://www.paws-r-sdk.com/docs/transcribeservice_describe_language_model/) for full documentation.
 #'
 #' @param ModelName &#91;required&#93; The name of the custom language model you want information about. Model
 #' names are case sensitive.
@@ -589,7 +630,7 @@ transcribeservice_describe_language_model <- function(ModelName) {
 #' @description
 #' Provides information about the specified Call Analytics category.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_call_analytics_category.html](https://paws-r.github.io/docs/transcribeservice/get_call_analytics_category.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_call_analytics_category/](https://www.paws-r-sdk.com/docs/transcribeservice_get_call_analytics_category/) for full documentation.
 #'
 #' @param CategoryName &#91;required&#93; The name of the Call Analytics category you want information about.
 #' Category names are case sensitive.
@@ -619,7 +660,7 @@ transcribeservice_get_call_analytics_category <- function(CategoryName) {
 #' @description
 #' Provides information about the specified Call Analytics job.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_call_analytics_job.html](https://paws-r.github.io/docs/transcribeservice/get_call_analytics_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_call_analytics_job/](https://www.paws-r-sdk.com/docs/transcribeservice_get_call_analytics_job/) for full documentation.
 #'
 #' @param CallAnalyticsJobName &#91;required&#93; The name of the Call Analytics job you want information about. Job names
 #' are case sensitive.
@@ -649,7 +690,7 @@ transcribeservice_get_call_analytics_job <- function(CallAnalyticsJobName) {
 #' @description
 #' Provides information about the specified medical transcription job.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_medical_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/get_medical_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_medical_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_get_medical_transcription_job/) for full documentation.
 #'
 #' @param MedicalTranscriptionJobName &#91;required&#93; The name of the medical transcription job you want information about.
 #' Job names are case sensitive.
@@ -679,10 +720,10 @@ transcribeservice_get_medical_transcription_job <- function(MedicalTranscription
 #' @description
 #' Provides information about the specified custom medical vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_medical_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/get_medical_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_medical_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_get_medical_vocabulary/) for full documentation.
 #'
 #' @param VocabularyName &#91;required&#93; The name of the custom medical vocabulary you want information about.
-#' Vocabulary names are case sensitive.
+#' Custom medical vocabulary names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -709,7 +750,7 @@ transcribeservice_get_medical_vocabulary <- function(VocabularyName) {
 #' @description
 #' Provides information about the specified transcription job.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/get_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_get_transcription_job/) for full documentation.
 #'
 #' @param TranscriptionJobName &#91;required&#93; The name of the transcription job you want information about. Job names
 #' are case sensitive.
@@ -739,10 +780,10 @@ transcribeservice_get_transcription_job <- function(TranscriptionJobName) {
 #' @description
 #' Provides information about the specified custom vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/get_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_get_vocabulary/) for full documentation.
 #'
-#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want information about. Vocabulary
-#' names are case sensitive.
+#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want information about. Custom
+#' vocabulary names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -769,10 +810,10 @@ transcribeservice_get_vocabulary <- function(VocabularyName) {
 #' @description
 #' Provides information about the specified custom vocabulary filter.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/get_vocabulary_filter.html](https://paws-r.github.io/docs/transcribeservice/get_vocabulary_filter.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_get_vocabulary_filter/](https://www.paws-r-sdk.com/docs/transcribeservice_get_vocabulary_filter/) for full documentation.
 #'
 #' @param VocabularyFilterName &#91;required&#93; The name of the custom vocabulary filter you want information about.
-#' Vocabulary filter names are case sensitive.
+#' Custom vocabulary filter names are case sensitive.
 #'
 #' @keywords internal
 #'
@@ -800,7 +841,7 @@ transcribeservice_get_vocabulary_filter <- function(VocabularyFilterName) {
 #' @description
 #' Provides a list of Call Analytics categories, including all rules that make up each category.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_call_analytics_categories.html](https://paws-r.github.io/docs/transcribeservice/list_call_analytics_categories.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_call_analytics_categories/](https://www.paws-r-sdk.com/docs/transcribeservice_list_call_analytics_categories/) for full documentation.
 #'
 #' @param NextToken If your
 #' [`list_call_analytics_categories`][transcribeservice_list_call_analytics_categories]
@@ -810,9 +851,9 @@ transcribeservice_get_vocabulary_filter <- function(VocabularyFilterName) {
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of Call Analytics categories to return in each page
-#' of results. If there are fewer results than the value you specify, only
-#' the actual results are returned. If you don't specify a value, a default
-#' of 5 is used.
+#' of results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #'
 #' @keywords internal
 #'
@@ -839,7 +880,7 @@ transcribeservice_list_call_analytics_categories <- function(NextToken = NULL, M
 #' @description
 #' Provides a list of Call Analytics jobs that match the specified criteria. If no criteria are specified, all Call Analytics jobs are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_call_analytics_jobs.html](https://paws-r.github.io/docs/transcribeservice/list_call_analytics_jobs.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_call_analytics_jobs/](https://www.paws-r-sdk.com/docs/transcribeservice_list_call_analytics_jobs/) for full documentation.
 #'
 #' @param Status Returns only Call Analytics jobs with the specified status. Jobs are
 #' ordered by creation date, with the newest job first. If you don't
@@ -854,9 +895,9 @@ transcribeservice_list_call_analytics_categories <- function(NextToken = NULL, M
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of Call Analytics jobs to return in each page of
-#' results. If there are fewer results than the value you specify, only the
-#' actual results are returned. If you don't specify a value, a default of
-#' 5 is used.
+#' results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #'
 #' @keywords internal
 #'
@@ -882,9 +923,9 @@ transcribeservice_list_call_analytics_jobs <- function(Status = NULL, JobNameCon
 #' criteria
 #'
 #' @description
-#' Provides a list of custom language models that match the specified criteria. If no criteria are specified, all language models are returned.
+#' Provides a list of custom language models that match the specified criteria. If no criteria are specified, all custom language models are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_language_models.html](https://paws-r.github.io/docs/transcribeservice/list_language_models.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_language_models/](https://www.paws-r-sdk.com/docs/transcribeservice_list_language_models/) for full documentation.
 #'
 #' @param StatusEquals Returns only custom language models with the specified status. Language
 #' models are ordered by creation date, with the newest model first. If you
@@ -898,9 +939,9 @@ transcribeservice_list_call_analytics_jobs <- function(Status = NULL, JobNameCon
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of custom language models to return in each page of
-#' results. If there are fewer results than the value you specify, only the
-#' actual results are returned. If you don't specify a value, a default of
-#' 5 is used.
+#' results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #'
 #' @keywords internal
 #'
@@ -928,7 +969,7 @@ transcribeservice_list_language_models <- function(StatusEquals = NULL, NameCont
 #' @description
 #' Provides a list of medical transcription jobs that match the specified criteria. If no criteria are specified, all medical transcription jobs are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_medical_transcription_jobs.html](https://paws-r.github.io/docs/transcribeservice/list_medical_transcription_jobs.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_medical_transcription_jobs/](https://www.paws-r-sdk.com/docs/transcribeservice_list_medical_transcription_jobs/) for full documentation.
 #'
 #' @param Status Returns only medical transcription jobs with the specified status. Jobs
 #' are ordered by creation date, with the newest job first. If you don't
@@ -943,9 +984,9 @@ transcribeservice_list_language_models <- function(StatusEquals = NULL, NameCont
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of medical transcription jobs to return in each page
-#' of results. If there are fewer results than the value you specify, only
-#' the actual results are returned. If you don't specify a value, a default
-#' of 5 is used.
+#' of results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #'
 #' @keywords internal
 #'
@@ -973,7 +1014,7 @@ transcribeservice_list_medical_transcription_jobs <- function(Status = NULL, Job
 #' @description
 #' Provides a list of custom medical vocabularies that match the specified criteria. If no criteria are specified, all custom medical vocabularies are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_medical_vocabularies.html](https://paws-r.github.io/docs/transcribeservice/list_medical_vocabularies.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_medical_vocabularies/](https://www.paws-r-sdk.com/docs/transcribeservice_list_medical_vocabularies/) for full documentation.
 #'
 #' @param NextToken If your
 #' [`list_medical_vocabularies`][transcribeservice_list_medical_vocabularies]
@@ -983,12 +1024,12 @@ transcribeservice_list_medical_transcription_jobs <- function(Status = NULL, Job
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of custom medical vocabularies to return in each page
-#' of results. If there are fewer results than the value you specify, only
-#' the actual results are returned. If you don't specify a value, a default
-#' of 5 is used.
+#' of results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #' @param StateEquals Returns only custom medical vocabularies with the specified state.
-#' Vocabularies are ordered by creation date, with the newest vocabulary
-#' first. If you don't include `StateEquals`, all custom medical
+#' Custom vocabularies are ordered by creation date, with the newest
+#' vocabulary first. If you don't include `StateEquals`, all custom medical
 #' vocabularies are returned.
 #' @param NameContains Returns only the custom medical vocabularies that contain the specified
 #' string. The search is not case sensitive.
@@ -1019,14 +1060,14 @@ transcribeservice_list_medical_vocabularies <- function(NextToken = NULL, MaxRes
 #' @description
 #' Lists all tags associated with the specified transcription job, vocabulary, model, or resource.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_tags_for_resource.html](https://paws-r.github.io/docs/transcribeservice/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/transcribeservice_list_tags_for_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; Returns a list of all tags associated with the specified Amazon Resource
 #' Name (ARN). ARNs have the format
 #' `arn:partition:service:region:account-id:resource-type/resource-id`.
 #' 
 #' For example,
-#' `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+#' `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
 #' 
 #' Valid values for `resource-type` are: `transcription-job`,
 #' `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -1057,7 +1098,7 @@ transcribeservice_list_tags_for_resource <- function(ResourceArn) {
 #' @description
 #' Provides a list of transcription jobs that match the specified criteria. If no criteria are specified, all transcription jobs are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_transcription_jobs.html](https://paws-r.github.io/docs/transcribeservice/list_transcription_jobs.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_transcription_jobs/](https://www.paws-r-sdk.com/docs/transcribeservice_list_transcription_jobs/) for full documentation.
 #'
 #' @param Status Returns only transcription jobs with the specified status. Jobs are
 #' ordered by creation date, with the newest job first. If you don't
@@ -1072,9 +1113,9 @@ transcribeservice_list_tags_for_resource <- function(ResourceArn) {
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of transcription jobs to return in each page of
-#' results. If there are fewer results than the value you specify, only the
-#' actual results are returned. If you don't specify a value, a default of
-#' 5 is used.
+#' results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #'
 #' @keywords internal
 #'
@@ -1101,7 +1142,7 @@ transcribeservice_list_transcription_jobs <- function(Status = NULL, JobNameCont
 #' @description
 #' Provides a list of custom vocabularies that match the specified criteria. If no criteria are specified, all custom vocabularies are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_vocabularies.html](https://paws-r.github.io/docs/transcribeservice/list_vocabularies.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_vocabularies/](https://www.paws-r-sdk.com/docs/transcribeservice_list_vocabularies/) for full documentation.
 #'
 #' @param NextToken If your [`list_vocabularies`][transcribeservice_list_vocabularies]
 #' request returns more results than can be displayed, `NextToken` is
@@ -1110,9 +1151,9 @@ transcribeservice_list_transcription_jobs <- function(Status = NULL, JobNameCont
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of custom vocabularies to return in each page of
-#' results. If there are fewer results than the value you specify, only the
-#' actual results are returned. If you don't specify a value, a default of
-#' 5 is used.
+#' results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #' @param StateEquals Returns only custom vocabularies with the specified state. Vocabularies
 #' are ordered by creation date, with the newest vocabulary first. If you
 #' don't include `StateEquals`, all custom medical vocabularies are
@@ -1146,7 +1187,7 @@ transcribeservice_list_vocabularies <- function(NextToken = NULL, MaxResults = N
 #' @description
 #' Provides a list of custom vocabulary filters that match the specified criteria. If no criteria are specified, all custom vocabularies are returned.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/list_vocabulary_filters.html](https://paws-r.github.io/docs/transcribeservice/list_vocabulary_filters.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_list_vocabulary_filters/](https://www.paws-r-sdk.com/docs/transcribeservice_list_vocabulary_filters/) for full documentation.
 #'
 #' @param NextToken If your
 #' [`list_vocabulary_filters`][transcribeservice_list_vocabulary_filters]
@@ -1156,9 +1197,9 @@ transcribeservice_list_vocabularies <- function(NextToken = NULL, MaxResults = N
 #' `NextToken` with the value of the copied string. Repeat as needed to
 #' view all your results.
 #' @param MaxResults The maximum number of custom vocabulary filters to return in each page
-#' of results. If there are fewer results than the value you specify, only
-#' the actual results are returned. If you don't specify a value, a default
-#' of 5 is used.
+#' of results. If there are fewer results than the value that you specify,
+#' only the actual results are returned. If you don't specify a value, a
+#' default of 5 is used.
 #' @param NameContains Returns only the custom vocabulary filters that contain the specified
 #' string. The search is not case sensitive.
 #'
@@ -1188,7 +1229,7 @@ transcribeservice_list_vocabulary_filters <- function(NextToken = NULL, MaxResul
 #' @description
 #' Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/start_call_analytics_job.html](https://paws-r.github.io/docs/transcribeservice/start_call_analytics_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_start_call_analytics_job/](https://www.paws-r-sdk.com/docs/transcribeservice_start_call_analytics_job/) for full documentation.
 #'
 #' @param CallAnalyticsJobName &#91;required&#93; A unique name, chosen by you, for your Call Analytics job.
 #' 
@@ -1196,7 +1237,8 @@ transcribeservice_list_vocabulary_filters <- function(NextToken = NULL, MaxResul
 #' within an Amazon Web Services account. If you try to create a new job
 #' with the same name as an existing job, you get a `ConflictException`
 #' error.
-#' @param Media &#91;required&#93; 
+#' @param Media &#91;required&#93; Describes the Amazon S3 location of the media file you want to use in
+#' your Call Analytics request.
 #' @param OutputLocation The Amazon S3 location where you want your Call Analytics transcription
 #' output stored. You can use any of the following formats to specify the
 #' output location:
@@ -1251,11 +1293,11 @@ transcribeservice_list_vocabulary_filters <- function(NextToken = NULL, MaxResul
 #' If you specify a KMS key to encrypt your output, you must also specify
 #' an output location using the `OutputLocation` parameter.
 #' 
-#' Note that the user making the request must have permission to use the
+#' Note that the role making the request must have permission to use the
 #' specified KMS key.
 #' @param DataAccessRoleArn The Amazon Resource Name (ARN) of an IAM role that has permissions to
 #' access the Amazon S3 bucket that contains your input files. If the role
-#' you specify doesn’t have the appropriate permissions to access the
+#' that you specify doesn’t have the appropriate permissions to access the
 #' specified Amazon S3 location, your request fails.
 #' 
 #' IAM role ARNs have the format
@@ -1267,10 +1309,10 @@ transcribeservice_list_vocabulary_filters <- function(NextToken = NULL, MaxResul
 #' @param Settings Specify additional optional settings in your request, including content
 #' redaction; allows you to apply custom language models, vocabulary
 #' filters, and custom vocabularies to your Call Analytics job.
-#' @param ChannelDefinitions Allows you to specify which speaker is on which channel. For example, if
-#' your agent is the first participant to speak, you would set `ChannelId`
-#' to `0` (to indicate the first channel) and `ParticipantRole` to `AGENT`
-#' (to indicate that it's the agent speaking).
+#' @param ChannelDefinitions Makes it possible to specify which speaker is on which channel. For
+#' example, if your agent is the first participant to speak, you would set
+#' `ChannelId` to `0` (to indicate the first channel) and `ParticipantRole`
+#' to `AGENT` (to indicate that it's the agent speaking).
 #'
 #' @keywords internal
 #'
@@ -1299,12 +1341,12 @@ transcribeservice_start_call_analytics_job <- function(CallAnalyticsJobName, Med
 #' @description
 #' Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/start_medical_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/start_medical_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_start_medical_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_start_medical_transcription_job/) for full documentation.
 #'
 #' @param MedicalTranscriptionJobName &#91;required&#93; A unique name, chosen by you, for your medical transcription job. The
-#' name you specify is also used as the default name of your transcription
-#' output file. If you want to specify a different name for your
-#' transcription output, use the `OutputKey` parameter.
+#' name that you specify is also used as the default name of your
+#' transcription output file. If you want to specify a different name for
+#' your transcription output, use the `OutputKey` parameter.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
 #' within an Amazon Web Services account. If you try to create a new job
@@ -1314,14 +1356,15 @@ transcribeservice_start_call_analytics_job <- function(CallAnalyticsJobName, Med
 #' file. US English (`en-US`) is the only valid value for medical
 #' transcription jobs. Any other value you enter for language code results
 #' in a `BadRequestException` error.
-#' @param MediaSampleRateHertz The sample rate, in Hertz, of the audio track in your input media file.
+#' @param MediaSampleRateHertz The sample rate, in hertz, of the audio track in your input media file.
 #' 
 #' If you don't specify the media sample rate, Amazon Transcribe Medical
 #' determines it for you. If you specify the sample rate, it must match the
 #' rate detected by Amazon Transcribe Medical; if there's a mismatch
-#' between the value you specify and the value detected, your job fails.
-#' Therefore, in most cases, it's advised to omit `MediaSampleRateHertz`
-#' and let Amazon Transcribe Medical determine the sample rate.
+#' between the value that you specify and the value detected, your job
+#' fails. Therefore, in most cases, it's advised to omit
+#' `MediaSampleRateHertz` and let Amazon Transcribe Medical determine the
+#' sample rate.
 #' @param MediaFormat Specify the format of your input media file.
 #' @param Media &#91;required&#93; 
 #' @param OutputBucketName &#91;required&#93; The name of the Amazon S3 bucket where you want your medical
@@ -1343,10 +1386,6 @@ transcribeservice_start_call_analytics_job <- function(CallAnalyticsJobName, Med
 #' Services Management Console](https://console.aws.amazon.com/s3/home).
 #' See also [Permissions Required for IAM User
 #' Roles](https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-#' 
-#' If you don't specify `OutputBucketName`, your transcript is placed in a
-#' service-managed Amazon S3 bucket and you are provided with a URI to
-#' access your transcript.
 #' @param OutputKey Use in combination with `OutputBucketName` to specify the output
 #' location of your transcript and, optionally, a unique name for your
 #' output file. The default name for your transcription output is the same
@@ -1411,7 +1450,7 @@ transcribeservice_start_call_analytics_job <- function(CallAnalyticsJobName, Med
 #' If you specify a KMS key to encrypt your output, you must also specify
 #' an output location using the `OutputLocation` parameter.
 #' 
-#' Note that the user making the request must have permission to use the
+#' Note that the role making the request must have permission to use the
 #' specified KMS key.
 #' @param KMSEncryptionContext A map of plain text, non-secret key:value pairs, known as encryption
 #' context pairs, that provide an added layer of security for your data.
@@ -1420,8 +1459,8 @@ transcribeservice_start_call_analytics_job <- function(CallAnalyticsJobName, Med
 #' and [Asymmetric keys in
 #' KMS](https://docs.aws.amazon.com/transcribe/latest/dg/).
 #' @param Settings Specify additional optional settings in your request, including channel
-#' identification, alternative transcriptions, and speaker labeling; allows
-#' you to apply custom vocabularies to your transcription job.
+#' identification, alternative transcriptions, and speaker partitioning.
+#' You can use that to apply custom vocabularies to your transcription job.
 #' @param ContentIdentificationType Labels all personal health information (PHI) identified in your
 #' transcript. For more information, see [Identifying personal health
 #' information (PHI) in a
@@ -1468,12 +1507,12 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' @description
 #' Transcribes the audio from a media file and applies any additional Request Parameters you choose to include in your request.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/start_transcription_job.html](https://paws-r.github.io/docs/transcribeservice/start_transcription_job.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_start_transcription_job/](https://www.paws-r-sdk.com/docs/transcribeservice_start_transcription_job/) for full documentation.
 #'
-#' @param TranscriptionJobName &#91;required&#93; A unique name, chosen by you, for your transcription job. The name you
-#' specify is also used as the default name of your transcription output
-#' file. If you want to specify a different name for your transcription
-#' output, use the `OutputKey` parameter.
+#' @param TranscriptionJobName &#91;required&#93; A unique name, chosen by you, for your transcription job. The name that
+#' you specify is also used as the default name of your transcription
+#' output file. If you want to specify a different name for your
+#' transcription output, use the `OutputKey` parameter.
 #' 
 #' This name is case sensitive, cannot contain spaces, and must be unique
 #' within an Amazon Web Services account. If you try to create a new job
@@ -1497,14 +1536,14 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' 
 #' To transcribe speech in Modern Standard Arabic (`ar-SA`), your media
 #' file must be encoded at a sample rate of 16,000 Hz or higher.
-#' @param MediaSampleRateHertz The sample rate, in Hertz, of the audio track in your input media file.
+#' @param MediaSampleRateHertz The sample rate, in hertz, of the audio track in your input media file.
 #' 
 #' If you don't specify the media sample rate, Amazon Transcribe determines
 #' it for you. If you specify the sample rate, it must match the rate
-#' detected by Amazon Transcribe; if there's a mismatch between the value
-#' you specify and the value detected, your job fails. Therefore, in most
-#' cases, it's advised to omit `MediaSampleRateHertz` and let Amazon
-#' Transcribe determine the sample rate.
+#' detected by Amazon Transcribe. If there's a mismatch between the value
+#' that you specify and the value detected, your job fails. In most cases,
+#' you can omit `MediaSampleRateHertz` and let Amazon Transcribe determine
+#' the sample rate.
 #' @param MediaFormat Specify the format of your input media file.
 #' @param Media &#91;required&#93; Describes the Amazon S3 location of the media file you want to use in
 #' your request.
@@ -1594,7 +1633,7 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' If you specify a KMS key to encrypt your output, you must also specify
 #' an output location using the `OutputLocation` parameter.
 #' 
-#' Note that the user making the request must have permission to use the
+#' Note that the role making the request must have permission to use the
 #' specified KMS key.
 #' @param KMSEncryptionContext A map of plain text, non-secret key:value pairs, known as encryption
 #' context pairs, that provide an added layer of security for your data.
@@ -1603,8 +1642,8 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' and [Asymmetric keys in
 #' KMS](https://docs.aws.amazon.com/transcribe/latest/dg/).
 #' @param Settings Specify additional optional settings in your request, including channel
-#' identification, alternative transcriptions, speaker labeling; allows you
-#' to apply custom vocabularies and vocabulary filters.
+#' identification, alternative transcriptions, speaker partitioning. You
+#' can use that to apply custom vocabularies and vocabulary filters.
 #' 
 #' If you want to include a custom vocabulary or a custom vocabulary filter
 #' (or both) with your request but **do not** want to use automatic
@@ -1622,7 +1661,7 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' 
 #' For more information, see [Custom language
 #' models](https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
-#' @param JobExecutionSettings Allows you to control how your transcription job is processed.
+#' @param JobExecutionSettings Makes it possible to control how your transcription job is processed.
 #' Currently, the only `JobExecutionSettings` modification you can choose
 #' is enabling job queueing using the `AllowDeferredExecution`
 #' sub-parameter.
@@ -1630,45 +1669,52 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' If you include `JobExecutionSettings` in your request, you must also
 #' include the sub-parameters: `AllowDeferredExecution` and
 #' `DataAccessRoleArn`.
-#' @param ContentRedaction Allows you to redact or flag specified personally identifiable
+#' @param ContentRedaction Makes it possible to redact or flag specified personally identifiable
 #' information (PII) in your transcript. If you use `ContentRedaction`, you
 #' must also include the sub-parameters: `PiiEntityTypes`,
 #' `RedactionOutput`, and `RedactionType`.
 #' @param IdentifyLanguage Enables automatic language identification in your transcription job
-#' request.
+#' request. Use this parameter if your media file contains only one
+#' language. If your media contains multiple languages, use
+#' `IdentifyMultipleLanguages` instead.
 #' 
 #' If you include `IdentifyLanguage`, you can optionally include a list of
 #' language codes, using `LanguageOptions`, that you think may be present
-#' in your media file. Including language options can improve transcription
-#' accuracy.
+#' in your media file. Including `LanguageOptions` restricts
+#' `IdentifyLanguage` to only the language options that you specify, which
+#' can improve transcription accuracy.
 #' 
 #' If you want to apply a custom language model, a custom vocabulary, or a
 #' custom vocabulary filter to your automatic language identification
 #' request, include `LanguageIdSettings` with the relevant sub-parameters
-#' (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`).
+#' (`VocabularyName`, `LanguageModelName`, and `VocabularyFilterName`). If
+#' you include `LanguageIdSettings`, also include `LanguageOptions`.
 #' 
 #' Note that you must include one of `LanguageCode`, `IdentifyLanguage`, or
 #' `IdentifyMultipleLanguages` in your request. If you include more than
 #' one of these parameters, your transcription job fails.
 #' @param IdentifyMultipleLanguages Enables automatic multi-language identification in your transcription
 #' job request. Use this parameter if your media file contains more than
-#' one language.
+#' one language. If your media contains only one language, use
+#' `IdentifyLanguage` instead.
 #' 
 #' If you include `IdentifyMultipleLanguages`, you can optionally include a
 #' list of language codes, using `LanguageOptions`, that you think may be
-#' present in your media file. Including language options can improve
-#' transcription accuracy.
+#' present in your media file. Including `LanguageOptions` restricts
+#' `IdentifyLanguage` to only the language options that you specify, which
+#' can improve transcription accuracy.
 #' 
 #' If you want to apply a custom vocabulary or a custom vocabulary filter
 #' to your automatic language identification request, include
 #' `LanguageIdSettings` with the relevant sub-parameters (`VocabularyName`
-#' and `VocabularyFilterName`).
+#' and `VocabularyFilterName`). If you include `LanguageIdSettings`, also
+#' include `LanguageOptions`.
 #' 
 #' Note that you must include one of `LanguageCode`, `IdentifyLanguage`, or
 #' `IdentifyMultipleLanguages` in your request. If you include more than
 #' one of these parameters, your transcription job fails.
 #' @param LanguageOptions You can specify two or more language codes that represent the languages
-#' you think may be present in your media; including more than five is not
+#' you think may be present in your media. Including more than five is not
 #' recommended. If you're unsure what languages are present, do not include
 #' this parameter.
 #' 
@@ -1687,34 +1733,35 @@ transcribeservice_start_medical_transcription_job <- function(MedicalTranscripti
 #' 
 #' To learn more about using tags with Amazon Transcribe, refer to [Tagging
 #' resources](https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
-#' @param LanguageIdSettings If using automatic language identification (`IdentifyLanguage`) in your
-#' request and you want to apply a custom language model, a custom
-#' vocabulary, or a custom vocabulary filter, include `LanguageIdSettings`
-#' with the relevant sub-parameters (`VocabularyName`, `LanguageModelName`,
-#' and `VocabularyFilterName`).
+#' @param LanguageIdSettings If using automatic language identification in your request and you want
+#' to apply a custom language model, a custom vocabulary, or a custom
+#' vocabulary filter, include `LanguageIdSettings` with the relevant
+#' sub-parameters (`VocabularyName`, `LanguageModelName`, and
+#' `VocabularyFilterName`). Note that multi-language identification
+#' (`IdentifyMultipleLanguages`) doesn't support custom language models.
 #' 
-#' You can specify two or more language codes that represent the languages
-#' you think may be present in your media; including more than five is not
-#' recommended. Each language code you include can have an associated
-#' custom language model, custom vocabulary, and custom vocabulary filter.
-#' The languages you specify must match the languages of the specified
-#' custom language models, custom vocabularies, and custom vocabulary
-#' filters.
+#' `LanguageIdSettings` supports two to five language codes. Each language
+#' code you include can have an associated custom language model, custom
+#' vocabulary, and custom vocabulary filter. The language codes that you
+#' specify must match the languages of the associated custom language
+#' models, custom vocabularies, and custom vocabulary filters.
 #' 
-#' To include language options using `IdentifyLanguage` **without**
-#' including a custom language model, a custom vocabulary, or a custom
-#' vocabulary filter, use `LanguageOptions` instead of
-#' `LanguageIdSettings`. Including language options can improve the
-#' accuracy of automatic language identification.
+#' It's recommended that you include `LanguageOptions` when using
+#' `LanguageIdSettings` to ensure that the correct language dialect is
+#' identified. For example, if you specify a custom vocabulary that is in
+#' `en-US` but Amazon Transcribe determines that the language spoken in
+#' your media is `en-AU`, your custom vocabulary *is not* applied to your
+#' transcription. If you include `LanguageOptions` and include `en-US` as
+#' the only English language dialect, your custom vocabulary *is* applied
+#' to your transcription.
 #' 
 #' If you want to include a custom language model with your request but
 #' **do not** want to use automatic language identification, use instead
-#' the `` parameter with the `LanguageModelName` sub-parameter.
-#' 
-#' If you want to include a custom vocabulary or a custom vocabulary filter
-#' (or both) with your request but **do not** want to use automatic
-#' language identification, use instead the `` parameter with the
-#' `VocabularyName` or `VocabularyFilterName` (or both) sub-parameter.
+#' the `` parameter with the `LanguageModelName` sub-parameter. If you want
+#' to include a custom vocabulary or a custom vocabulary filter (or both)
+#' with your request but **do not** want to use automatic language
+#' identification, use instead the `` parameter with the `VocabularyName`
+#' or `VocabularyFilterName` (or both) sub-parameter.
 #'
 #' @keywords internal
 #'
@@ -1742,14 +1789,14 @@ transcribeservice_start_transcription_job <- function(TranscriptionJobName, Lang
 #' @description
 #' Adds one or more custom tags, each in the form of a key:value pair, to the specified resource.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/tag_resource.html](https://paws-r.github.io/docs/transcribeservice/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_tag_resource/](https://www.paws-r-sdk.com/docs/transcribeservice_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource you want to tag. ARNs
 #' have the format
 #' `arn:partition:service:region:account-id:resource-type/resource-id`.
 #' 
 #' For example,
-#' `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+#' `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
 #' 
 #' Valid values for `resource-type` are: `transcription-job`,
 #' `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -1785,14 +1832,14 @@ transcribeservice_tag_resource <- function(ResourceArn, Tags) {
 #' @description
 #' Removes the specified tags from the specified Amazon Transcribe resource.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/untag_resource.html](https://paws-r.github.io/docs/transcribeservice/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_untag_resource/](https://www.paws-r-sdk.com/docs/transcribeservice_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the Amazon Transcribe resource you
 #' want to remove tags from. ARNs have the format
 #' `arn:partition:service:region:account-id:resource-type/resource-id`.
 #' 
 #' For example,
-#' `arn:aws:transcribe:us-west-2:account-id:transcription-job/transcription-job-name`.
+#' `arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name`.
 #' 
 #' Valid values for `resource-type` are: `transcription-job`,
 #' `medical-transcription-job`, `vocabulary`, `medical-vocabulary`,
@@ -1825,25 +1872,30 @@ transcribeservice_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' Updates the specified Call Analytics category with new rules. Note that the [`update_call_analytics_category`][transcribeservice_update_call_analytics_category] operation overwrites all existing rules contained in the specified category. You cannot append additional rules onto an existing category.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/update_call_analytics_category.html](https://paws-r.github.io/docs/transcribeservice/update_call_analytics_category.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_update_call_analytics_category/](https://www.paws-r-sdk.com/docs/transcribeservice_update_call_analytics_category/) for full documentation.
 #'
 #' @param CategoryName &#91;required&#93; The name of the Call Analytics category you want to update. Category
 #' names are case sensitive.
 #' @param Rules &#91;required&#93; The rules used for the updated Call Analytics category. The rules you
 #' provide in this field replace the ones that are currently being used in
 #' the specified category.
+#' @param InputType Choose whether you want to update a real-time or a post-call category.
+#' The input type you specify must match the input type specified when the
+#' category was created. For example, if you created a category with the
+#' `POST_CALL` input type, you must use `POST_CALL` as the input type when
+#' updating this category.
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_update_call_analytics_category
-transcribeservice_update_call_analytics_category <- function(CategoryName, Rules) {
+transcribeservice_update_call_analytics_category <- function(CategoryName, Rules, InputType = NULL) {
   op <- new_operation(
     name = "UpdateCallAnalyticsCategory",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$update_call_analytics_category_input(CategoryName = CategoryName, Rules = Rules)
+  input <- .transcribeservice$update_call_analytics_category_input(CategoryName = CategoryName, Rules = Rules, InputType = InputType)
   output <- .transcribeservice$update_call_analytics_category_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)
@@ -1856,12 +1908,12 @@ transcribeservice_update_call_analytics_category <- function(CategoryName, Rules
 #' Updates an existing custom medical vocabulary with new values
 #'
 #' @description
-#' Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+#' Updates an existing custom medical vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/update_medical_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/update_medical_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_update_medical_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_update_medical_vocabulary/) for full documentation.
 #'
-#' @param VocabularyName &#91;required&#93; The name of the custom medical vocabulary you want to update. Vocabulary
-#' names are case sensitive.
+#' @param VocabularyName &#91;required&#93; The name of the custom medical vocabulary you want to update. Custom
+#' medical vocabulary names are case sensitive.
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of the entries in the
 #' custom vocabulary you want to update. US English (`en-US`) is the only
 #' language supported with Amazon Transcribe Medical.
@@ -1894,37 +1946,39 @@ transcribeservice_update_medical_vocabulary <- function(VocabularyName, Language
 #' Updates an existing custom vocabulary with new values
 #'
 #' @description
-#' Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing vocabulary.
+#' Updates an existing custom vocabulary with new values. This operation overwrites all existing information with your new values; you cannot append new terms onto an existing custom vocabulary.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/update_vocabulary.html](https://paws-r.github.io/docs/transcribeservice/update_vocabulary.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_update_vocabulary/](https://www.paws-r-sdk.com/docs/transcribeservice_update_vocabulary/) for full documentation.
 #'
-#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want to update. Vocabulary names
-#' are case sensitive.
+#' @param VocabularyName &#91;required&#93; The name of the custom vocabulary you want to update. Custom vocabulary
+#' names are case sensitive.
 #' @param LanguageCode &#91;required&#93; The language code that represents the language of the entries in the
-#' custom vocabulary you want to update. Each vocabulary must contain terms
-#' in only one language.
+#' custom vocabulary you want to update. Each custom vocabulary must
+#' contain terms in only one language.
 #' 
 #' A custom vocabulary can only be used to transcribe files in the same
-#' language as the vocabulary. For example, if you create a vocabulary
-#' using US English (`en-US`), you can only apply this vocabulary to files
-#' that contain English audio.
+#' language as the custom vocabulary. For example, if you create a custom
+#' vocabulary using US English (`en-US`), you can only apply this custom
+#' vocabulary to files that contain English audio.
 #' 
 #' For a list of supported languages and their associated language codes,
 #' refer to the [Supported
 #' languages](https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 #' table.
-#' @param Phrases Use this parameter if you want to update your vocabulary by including
-#' all desired terms, as comma-separated values, within your request. The
-#' other option for updating your vocabulary is to save your entries in a
-#' text file and upload them to an Amazon S3 bucket, then specify the
-#' location of your file using the `VocabularyFileUri` parameter.
+#' @param Phrases Use this parameter if you want to update your custom vocabulary by
+#' including all desired terms, as comma-separated values, within your
+#' request. The other option for updating your custom vocabulary is to save
+#' your entries in a text file and upload them to an Amazon S3 bucket, then
+#' specify the location of your file using the `VocabularyFileUri`
+#' parameter.
 #' 
 #' Note that if you include `Phrases` in your request, you cannot use
 #' `VocabularyFileUri`; you must choose one or the other.
 #' 
 #' Each language has a character set that contains all allowed characters
 #' for that specific language. If you use unsupported characters, your
-#' vocabulary filter request fails. Refer to [Character Sets for Custom
+#' custom vocabulary filter request fails. Refer to [Character Sets for
+#' Custom
 #' Vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
 #' to get the character set for your language.
 #' @param VocabularyFileUri The Amazon S3 location of the text file that contains your custom
@@ -1935,18 +1989,30 @@ transcribeservice_update_medical_vocabulary <- function(VocabularyName, Language
 #' 
 #' Note that if you include `VocabularyFileUri` in your request, you cannot
 #' use the `Phrases` flag; you must choose one or the other.
+#' @param DataAccessRoleArn The Amazon Resource Name (ARN) of an IAM role that has permissions to
+#' access the Amazon S3 bucket that contains your input files (in this
+#' case, your custom vocabulary). If the role that you specify doesn’t have
+#' the appropriate permissions to access the specified Amazon S3 location,
+#' your request fails.
+#' 
+#' IAM role ARNs have the format
+#' `arn:partition:iam::account:role/role-name-with-path`. For example:
+#' `arn:aws:iam::111122223333:role/Admin`.
+#' 
+#' For more information, see [IAM
+#' ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_update_vocabulary
-transcribeservice_update_vocabulary <- function(VocabularyName, LanguageCode, Phrases = NULL, VocabularyFileUri = NULL) {
+transcribeservice_update_vocabulary <- function(VocabularyName, LanguageCode, Phrases = NULL, VocabularyFileUri = NULL, DataAccessRoleArn = NULL) {
   op <- new_operation(
     name = "UpdateVocabulary",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$update_vocabulary_input(VocabularyName = VocabularyName, LanguageCode = LanguageCode, Phrases = Phrases, VocabularyFileUri = VocabularyFileUri)
+  input <- .transcribeservice$update_vocabulary_input(VocabularyName = VocabularyName, LanguageCode = LanguageCode, Phrases = Phrases, VocabularyFileUri = VocabularyFileUri, DataAccessRoleArn = DataAccessRoleArn)
   output <- .transcribeservice$update_vocabulary_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)
@@ -1959,14 +2025,14 @@ transcribeservice_update_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' Updates an existing custom vocabulary filter with a new list of words
 #'
 #' @description
-#' Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing vocabulary filter.
+#' Updates an existing custom vocabulary filter with a new list of words. The new list you provide overwrites all previous entries; you cannot append new terms onto an existing custom vocabulary filter.
 #'
-#' See [https://paws-r.github.io/docs/transcribeservice/update_vocabulary_filter.html](https://paws-r.github.io/docs/transcribeservice/update_vocabulary_filter.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/transcribeservice_update_vocabulary_filter/](https://www.paws-r-sdk.com/docs/transcribeservice_update_vocabulary_filter/) for full documentation.
 #'
-#' @param VocabularyFilterName &#91;required&#93; The name of the custom vocabulary filter you want to update. Vocabulary
-#' filter names are case sensitive.
-#' @param Words Use this parameter if you want to update your vocabulary filter by
-#' including all desired terms, as comma-separated values, within your
+#' @param VocabularyFilterName &#91;required&#93; The name of the custom vocabulary filter you want to update. Custom
+#' vocabulary filter names are case sensitive.
+#' @param Words Use this parameter if you want to update your custom vocabulary filter
+#' by including all desired terms, as comma-separated values, within your
 #' request. The other option for updating your vocabulary filter is to save
 #' your entries in a text file and upload them to an Amazon S3 bucket, then
 #' specify the location of your file using the `VocabularyFilterFileUri`
@@ -1977,7 +2043,8 @@ transcribeservice_update_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' 
 #' Each language has a character set that contains all allowed characters
 #' for that specific language. If you use unsupported characters, your
-#' vocabulary filter request fails. Refer to [Character Sets for Custom
+#' custom vocabulary filter request fails. Refer to [Character Sets for
+#' Custom
 #' Vocabularies](https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html)
 #' to get the character set for your language.
 #' @param VocabularyFilterFileUri The Amazon S3 location of the text file that contains your custom
@@ -1989,18 +2056,30 @@ transcribeservice_update_vocabulary <- function(VocabularyName, LanguageCode, Ph
 #' 
 #' Note that if you include `VocabularyFilterFileUri` in your request, you
 #' cannot use `Words`; you must choose one or the other.
+#' @param DataAccessRoleArn The Amazon Resource Name (ARN) of an IAM role that has permissions to
+#' access the Amazon S3 bucket that contains your input files (in this
+#' case, your custom vocabulary filter). If the role that you specify
+#' doesn’t have the appropriate permissions to access the specified Amazon
+#' S3 location, your request fails.
+#' 
+#' IAM role ARNs have the format
+#' `arn:partition:iam::account:role/role-name-with-path`. For example:
+#' `arn:aws:iam::111122223333:role/Admin`.
+#' 
+#' For more information, see [IAM
+#' ARNs](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
 #'
 #' @keywords internal
 #'
 #' @rdname transcribeservice_update_vocabulary_filter
-transcribeservice_update_vocabulary_filter <- function(VocabularyFilterName, Words = NULL, VocabularyFilterFileUri = NULL) {
+transcribeservice_update_vocabulary_filter <- function(VocabularyFilterName, Words = NULL, VocabularyFilterFileUri = NULL, DataAccessRoleArn = NULL) {
   op <- new_operation(
     name = "UpdateVocabularyFilter",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .transcribeservice$update_vocabulary_filter_input(VocabularyFilterName = VocabularyFilterName, Words = Words, VocabularyFilterFileUri = VocabularyFilterFileUri)
+  input <- .transcribeservice$update_vocabulary_filter_input(VocabularyFilterName = VocabularyFilterName, Words = Words, VocabularyFilterFileUri = VocabularyFilterFileUri, DataAccessRoleArn = DataAccessRoleArn)
   output <- .transcribeservice$update_vocabulary_filter_output()
   config <- get_config()
   svc <- .transcribeservice$service(config)

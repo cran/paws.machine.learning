@@ -8,11 +8,12 @@ comprehend_describe_document_classification_job(JobId)
 }
 \arguments{
 \item{JobId}{[required] The identifier that Amazon Comprehend generated for the job. The
+\code{\link[=comprehend_start_document_classification_job]{start_document_classification_job}}
 operation returns this identifier in its response.}
 }
 \description{
 Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
 
-See \url{https://paws-r.github.io/docs/comprehend/describe_document_classification_job.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_describe_document_classification_job/} for full documentation.
 }
 \keyword{internal}

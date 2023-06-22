@@ -13,12 +13,13 @@ voiceid_list_fraudster_registration_jobs(
 )
 }
 \arguments{
-\item{DomainId}{[required] The identifier of the domain containing the fraudster registration Jobs.}
+\item{DomainId}{[required] The identifier of the domain that contains the fraudster registration
+Jobs.}
 
 \item{JobStatus}{Provides the status of your fraudster registration job.}
 
 \item{MaxResults}{The maximum number of results that are returned per call. You can use
-\code{NextToken} to obtain further pages of results. The default is 100; the
+\code{NextToken} to obtain more pages of results. The default is 100; the
 maximum allowed page size is also 100.}
 
 \item{NextToken}{If \code{NextToken} is returned, there are more results available. The value
@@ -29,6 +30,6 @@ arguments unchanged. Each pagination token expires after 24 hours.}
 \description{
 Lists all the fraudster registration jobs in the domain with the given \code{JobStatus}. If \code{JobStatus} is not provided, this lists all fraudster registration jobs in the given domain.
 
-See \url{https://paws-r.github.io/docs/voiceid/list_fraudster_registration_jobs.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_list_fraudster_registration_jobs/} for full documentation.
 }
 \keyword{internal}

@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Activates an anomaly detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/activate_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/activate_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_activate_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_activate_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The ARN of the anomaly detector.
 #'
@@ -37,7 +37,7 @@ lookoutmetrics_activate_anomaly_detector <- function(AnomalyDetectorArn) {
 #' @description
 #' Runs a backtest for anomaly detection for the specified resource.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/back_test_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/back_test_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_back_test_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_back_test_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #'
@@ -66,7 +66,7 @@ lookoutmetrics_back_test_anomaly_detector <- function(AnomalyDetectorArn) {
 #' @description
 #' Creates an alert for an anomaly detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/create_alert.html](https://paws-r.github.io/docs/lookoutmetrics/create_alert.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_create_alert/](https://www.paws-r-sdk.com/docs/lookoutmetrics_create_alert/) for full documentation.
 #'
 #' @param AlertName &#91;required&#93; The name of the alert.
 #' @param AlertSensitivityThreshold An integer from 0 to 100 specifying the alert sensitivity threshold.
@@ -104,7 +104,7 @@ lookoutmetrics_create_alert <- function(AlertName, AlertSensitivityThreshold = N
 #' @description
 #' Creates an anomaly detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/create_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/create_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_create_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_create_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorName &#91;required&#93; The name of the detector.
 #' @param AnomalyDetectorDescription A description of the detector.
@@ -139,15 +139,15 @@ lookoutmetrics_create_anomaly_detector <- function(AnomalyDetectorName, AnomalyD
 #' @description
 #' Creates a dataset.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/create_metric_set.html](https://paws-r.github.io/docs/lookoutmetrics/create_metric_set.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_create_metric_set/](https://www.paws-r-sdk.com/docs/lookoutmetrics_create_metric_set/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The ARN of the anomaly detector that will use the dataset.
 #' @param MetricSetName &#91;required&#93; The name of the dataset.
 #' @param MetricSetDescription A description of the dataset you are creating.
 #' @param MetricList &#91;required&#93; A list of metrics that the dataset will contain.
 #' @param Offset After an interval ends, the amount of seconds that the detector waits
-#' before importing data. Offset is only supported for S3 and Redshift
-#' datasources.
+#' before importing data. Offset is only supported for S3, Redshift, Athena
+#' and datasources.
 #' @param TimestampColumn Contains information about the column used for tracking time in your
 #' source data.
 #' @param DimensionList A list of the fields you want to treat as dimensions.
@@ -157,18 +157,19 @@ lookoutmetrics_create_anomaly_detector <- function(AnomalyDetectorName, AnomalyD
 #' @param Tags A list of
 #' [tags](https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html)
 #' to apply to the dataset.
+#' @param DimensionFilterList A list of filters that specify which data is kept for anomaly detection.
 #'
 #' @keywords internal
 #'
 #' @rdname lookoutmetrics_create_metric_set
-lookoutmetrics_create_metric_set <- function(AnomalyDetectorArn, MetricSetName, MetricSetDescription = NULL, MetricList, Offset = NULL, TimestampColumn = NULL, DimensionList = NULL, MetricSetFrequency = NULL, MetricSource, Timezone = NULL, Tags = NULL) {
+lookoutmetrics_create_metric_set <- function(AnomalyDetectorArn, MetricSetName, MetricSetDescription = NULL, MetricList, Offset = NULL, TimestampColumn = NULL, DimensionList = NULL, MetricSetFrequency = NULL, MetricSource, Timezone = NULL, Tags = NULL, DimensionFilterList = NULL) {
   op <- new_operation(
     name = "CreateMetricSet",
     http_method = "POST",
     http_path = "/CreateMetricSet",
     paginator = list()
   )
-  input <- .lookoutmetrics$create_metric_set_input(AnomalyDetectorArn = AnomalyDetectorArn, MetricSetName = MetricSetName, MetricSetDescription = MetricSetDescription, MetricList = MetricList, Offset = Offset, TimestampColumn = TimestampColumn, DimensionList = DimensionList, MetricSetFrequency = MetricSetFrequency, MetricSource = MetricSource, Timezone = Timezone, Tags = Tags)
+  input <- .lookoutmetrics$create_metric_set_input(AnomalyDetectorArn = AnomalyDetectorArn, MetricSetName = MetricSetName, MetricSetDescription = MetricSetDescription, MetricList = MetricList, Offset = Offset, TimestampColumn = TimestampColumn, DimensionList = DimensionList, MetricSetFrequency = MetricSetFrequency, MetricSource = MetricSource, Timezone = Timezone, Tags = Tags, DimensionFilterList = DimensionFilterList)
   output <- .lookoutmetrics$create_metric_set_output()
   config <- get_config()
   svc <- .lookoutmetrics$service(config)
@@ -183,7 +184,7 @@ lookoutmetrics_create_metric_set <- function(AnomalyDetectorArn, MetricSetName, 
 #' @description
 #' Deactivates an anomaly detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/deactivate_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/deactivate_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_deactivate_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_deactivate_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #'
@@ -212,7 +213,7 @@ lookoutmetrics_deactivate_anomaly_detector <- function(AnomalyDetectorArn) {
 #' @description
 #' Deletes an alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/delete_alert.html](https://paws-r.github.io/docs/lookoutmetrics/delete_alert.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_delete_alert/](https://www.paws-r-sdk.com/docs/lookoutmetrics_delete_alert/) for full documentation.
 #'
 #' @param AlertArn &#91;required&#93; The ARN of the alert to delete.
 #'
@@ -241,7 +242,7 @@ lookoutmetrics_delete_alert <- function(AlertArn) {
 #' @description
 #' Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any configured datasets and alerts.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/delete_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/delete_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_delete_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_delete_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The ARN of the detector to delete.
 #'
@@ -270,7 +271,7 @@ lookoutmetrics_delete_anomaly_detector <- function(AnomalyDetectorArn) {
 #' @description
 #' Describes an alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/describe_alert.html](https://paws-r.github.io/docs/lookoutmetrics/describe_alert.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_alert/](https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_alert/) for full documentation.
 #'
 #' @param AlertArn &#91;required&#93; The ARN of the alert to describe.
 #'
@@ -300,7 +301,7 @@ lookoutmetrics_describe_alert <- function(AlertArn) {
 #' @description
 #' Returns information about the status of the specified anomaly detection jobs.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/describe_anomaly_detection_executions.html](https://paws-r.github.io/docs/lookoutmetrics/describe_anomaly_detection_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_anomaly_detection_executions/](https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_anomaly_detection_executions/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param Timestamp The timestamp of the anomaly detection job.
@@ -333,7 +334,7 @@ lookoutmetrics_describe_anomaly_detection_executions <- function(AnomalyDetector
 #' @description
 #' Describes a detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/describe_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/describe_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The ARN of the detector to describe.
 #'
@@ -362,7 +363,7 @@ lookoutmetrics_describe_anomaly_detector <- function(AnomalyDetectorArn) {
 #' @description
 #' Describes a dataset.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/describe_metric_set.html](https://paws-r.github.io/docs/lookoutmetrics/describe_metric_set.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_metric_set/](https://www.paws-r-sdk.com/docs/lookoutmetrics_describe_metric_set/) for full documentation.
 #'
 #' @param MetricSetArn &#91;required&#93; The ARN of the dataset.
 #'
@@ -391,7 +392,7 @@ lookoutmetrics_describe_metric_set <- function(MetricSetArn) {
 #' @description
 #' Detects an Amazon S3 dataset's file format, interval, and offset.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/detect_metric_set_config.html](https://paws-r.github.io/docs/lookoutmetrics/detect_metric_set_config.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_detect_metric_set_config/](https://www.paws-r-sdk.com/docs/lookoutmetrics_detect_metric_set_config/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; An anomaly detector ARN.
 #' @param AutoDetectionMetricSource &#91;required&#93; A data source.
@@ -421,7 +422,7 @@ lookoutmetrics_detect_metric_set_config <- function(AnomalyDetectorArn, AutoDete
 #' @description
 #' Returns details about a group of anomalous metrics.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/get_anomaly_group.html](https://paws-r.github.io/docs/lookoutmetrics/get_anomaly_group.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_get_anomaly_group/](https://www.paws-r-sdk.com/docs/lookoutmetrics_get_anomaly_group/) for full documentation.
 #'
 #' @param AnomalyGroupId &#91;required&#93; The ID of the anomaly group.
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
@@ -446,12 +447,43 @@ lookoutmetrics_get_anomaly_group <- function(AnomalyGroupId, AnomalyDetectorArn)
 }
 .lookoutmetrics$operations$get_anomaly_group <- lookoutmetrics_get_anomaly_group
 
+#' Returns details about the requested data quality metrics
+#'
+#' @description
+#' Returns details about the requested data quality metrics.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_get_data_quality_metrics/](https://www.paws-r-sdk.com/docs/lookoutmetrics_get_data_quality_metrics/) for full documentation.
+#'
+#' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector that you want to
+#' investigate.
+#' @param MetricSetArn The Amazon Resource Name (ARN) of a specific data quality metric set.
+#'
+#' @keywords internal
+#'
+#' @rdname lookoutmetrics_get_data_quality_metrics
+lookoutmetrics_get_data_quality_metrics <- function(AnomalyDetectorArn, MetricSetArn = NULL) {
+  op <- new_operation(
+    name = "GetDataQualityMetrics",
+    http_method = "POST",
+    http_path = "/GetDataQualityMetrics",
+    paginator = list()
+  )
+  input <- .lookoutmetrics$get_data_quality_metrics_input(AnomalyDetectorArn = AnomalyDetectorArn, MetricSetArn = MetricSetArn)
+  output <- .lookoutmetrics$get_data_quality_metrics_output()
+  config <- get_config()
+  svc <- .lookoutmetrics$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lookoutmetrics$operations$get_data_quality_metrics <- lookoutmetrics_get_data_quality_metrics
+
 #' Get feedback for an anomaly group
 #'
 #' @description
 #' Get feedback for an anomaly group.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/get_feedback.html](https://paws-r.github.io/docs/lookoutmetrics/get_feedback.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_get_feedback/](https://www.paws-r-sdk.com/docs/lookoutmetrics_get_feedback/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param AnomalyGroupTimeSeriesFeedback &#91;required&#93; The anomalous metric and group ID.
@@ -484,7 +516,7 @@ lookoutmetrics_get_feedback <- function(AnomalyDetectorArn, AnomalyGroupTimeSeri
 #' @description
 #' Returns a selection of sample records from an Amazon S3 datasource.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/get_sample_data.html](https://paws-r.github.io/docs/lookoutmetrics/get_sample_data.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_get_sample_data/](https://www.paws-r-sdk.com/docs/lookoutmetrics_get_sample_data/) for full documentation.
 #'
 #' @param S3SourceConfig A datasource bucket in Amazon S3.
 #'
@@ -513,7 +545,7 @@ lookoutmetrics_get_sample_data <- function(S3SourceConfig = NULL) {
 #' @description
 #' Lists the alerts attached to a detector.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_alerts.html](https://paws-r.github.io/docs/lookoutmetrics/list_alerts.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_alerts/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_alerts/) for full documentation.
 #'
 #' @param AnomalyDetectorArn The ARN of the alert's detector.
 #' @param NextToken If the result of the previous request is truncated, the response
@@ -546,7 +578,7 @@ lookoutmetrics_list_alerts <- function(AnomalyDetectorArn = NULL, NextToken = NU
 #' @description
 #' Lists the detectors in the current AWS Region.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_detectors.html](https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_detectors.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_detectors/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_detectors/) for full documentation.
 #'
 #' @param MaxResults The maximum number of results to return.
 #' @param NextToken If the result of the previous request was truncated, the response
@@ -579,7 +611,7 @@ lookoutmetrics_list_anomaly_detectors <- function(MaxResults = NULL, NextToken =
 #' @description
 #' Returns a list of measures that are potential causes or effects of an anomaly group.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_related_metrics.html](https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_related_metrics.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_related_metrics/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_related_metrics/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param AnomalyGroupId &#91;required&#93; The ID of the anomaly group.
@@ -615,7 +647,7 @@ lookoutmetrics_list_anomaly_group_related_metrics <- function(AnomalyDetectorArn
 #' @description
 #' Returns a list of anomaly groups.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_summaries.html](https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_summaries.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_summaries/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_summaries/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param SensitivityThreshold &#91;required&#93; The minimum severity score for inclusion in the output.
@@ -648,7 +680,7 @@ lookoutmetrics_list_anomaly_group_summaries <- function(AnomalyDetectorArn, Sens
 #' @description
 #' Gets a list of anomalous metrics for a measure in an anomaly group.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_time_series.html](https://paws-r.github.io/docs/lookoutmetrics/list_anomaly_group_time_series.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_time_series/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_anomaly_group_time_series/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param AnomalyGroupId &#91;required&#93; The ID of the anomaly group.
@@ -682,7 +714,7 @@ lookoutmetrics_list_anomaly_group_time_series <- function(AnomalyDetectorArn, An
 #' @description
 #' Lists the datasets in the current AWS Region.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_metric_sets.html](https://paws-r.github.io/docs/lookoutmetrics/list_metric_sets.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_metric_sets/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_metric_sets/) for full documentation.
 #'
 #' @param AnomalyDetectorArn The ARN of the anomaly detector containing the metrics sets to list.
 #' @param MaxResults The maximum number of results to return.
@@ -715,7 +747,7 @@ lookoutmetrics_list_metric_sets <- function(AnomalyDetectorArn = NULL, MaxResult
 #' @description
 #' Gets a list of [tags](https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) for a detector, dataset, or alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/list_tags_for_resource.html](https://paws-r.github.io/docs/lookoutmetrics/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/lookoutmetrics_list_tags_for_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The resource's Amazon Resource Name (ARN).
 #'
@@ -744,7 +776,7 @@ lookoutmetrics_list_tags_for_resource <- function(ResourceArn) {
 #' @description
 #' Add feedback for an anomalous metric.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/put_feedback.html](https://paws-r.github.io/docs/lookoutmetrics/put_feedback.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_put_feedback/](https://www.paws-r-sdk.com/docs/lookoutmetrics_put_feedback/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The Amazon Resource Name (ARN) of the anomaly detector.
 #' @param AnomalyGroupTimeSeriesFeedback &#91;required&#93; Feedback for an anomalous metric.
@@ -774,7 +806,7 @@ lookoutmetrics_put_feedback <- function(AnomalyDetectorArn, AnomalyGroupTimeSeri
 #' @description
 #' Adds [tags](https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to a detector, dataset, or alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/tag_resource.html](https://paws-r.github.io/docs/lookoutmetrics/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_tag_resource/](https://www.paws-r-sdk.com/docs/lookoutmetrics_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The resource's Amazon Resource Name (ARN).
 #' @param Tags &#91;required&#93; Tags to apply to the resource. Tag keys and values can contain letters,
@@ -805,7 +837,7 @@ lookoutmetrics_tag_resource <- function(ResourceArn, Tags) {
 #' @description
 #' Removes [tags](https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) from a detector, dataset, or alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/untag_resource.html](https://paws-r.github.io/docs/lookoutmetrics/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_untag_resource/](https://www.paws-r-sdk.com/docs/lookoutmetrics_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The resource's Amazon Resource Name (ARN).
 #' @param TagKeys &#91;required&#93; Keys to remove from the resource's tags.
@@ -835,7 +867,7 @@ lookoutmetrics_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' Make changes to an existing alert.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/update_alert.html](https://paws-r.github.io/docs/lookoutmetrics/update_alert.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_update_alert/](https://www.paws-r-sdk.com/docs/lookoutmetrics_update_alert/) for full documentation.
 #'
 #' @param AlertArn &#91;required&#93; The ARN of the alert to update.
 #' @param AlertDescription A description of the alert.
@@ -869,7 +901,7 @@ lookoutmetrics_update_alert <- function(AlertArn, AlertDescription = NULL, Alert
 #' @description
 #' Updates a detector. After activation, you can only change a detector's ingestion delay and description.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/update_anomaly_detector.html](https://paws-r.github.io/docs/lookoutmetrics/update_anomaly_detector.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_update_anomaly_detector/](https://www.paws-r-sdk.com/docs/lookoutmetrics_update_anomaly_detector/) for full documentation.
 #'
 #' @param AnomalyDetectorArn &#91;required&#93; The ARN of the detector to update.
 #' @param KmsKeyArn The Amazon Resource Name (ARN) of an AWS KMS encryption key.
@@ -902,30 +934,35 @@ lookoutmetrics_update_anomaly_detector <- function(AnomalyDetectorArn, KmsKeyArn
 #' @description
 #' Updates a dataset.
 #'
-#' See [https://paws-r.github.io/docs/lookoutmetrics/update_metric_set.html](https://paws-r.github.io/docs/lookoutmetrics/update_metric_set.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/lookoutmetrics_update_metric_set/](https://www.paws-r-sdk.com/docs/lookoutmetrics_update_metric_set/) for full documentation.
 #'
 #' @param MetricSetArn &#91;required&#93; The ARN of the dataset to update.
 #' @param MetricSetDescription The dataset's description.
 #' @param MetricList The metric list.
 #' @param Offset After an interval ends, the amount of seconds that the detector waits
-#' before importing data. Offset is only supported for S3 and Redshift
-#' datasources.
+#' before importing data. Offset is only supported for S3, Redshift, Athena
+#' and datasources.
 #' @param TimestampColumn The timestamp column.
 #' @param DimensionList The dimension list.
 #' @param MetricSetFrequency The dataset's interval.
 #' @param MetricSource 
+#' @param DimensionFilterList Describes a list of filters for choosing specific dimensions and
+#' specific values. Each filter consists of the dimension and one of its
+#' values that you want to include. When multiple dimensions or values are
+#' specified, the dimensions are joined with an AND operation and the
+#' values are joined with an OR operation.
 #'
 #' @keywords internal
 #'
 #' @rdname lookoutmetrics_update_metric_set
-lookoutmetrics_update_metric_set <- function(MetricSetArn, MetricSetDescription = NULL, MetricList = NULL, Offset = NULL, TimestampColumn = NULL, DimensionList = NULL, MetricSetFrequency = NULL, MetricSource = NULL) {
+lookoutmetrics_update_metric_set <- function(MetricSetArn, MetricSetDescription = NULL, MetricList = NULL, Offset = NULL, TimestampColumn = NULL, DimensionList = NULL, MetricSetFrequency = NULL, MetricSource = NULL, DimensionFilterList = NULL) {
   op <- new_operation(
     name = "UpdateMetricSet",
     http_method = "POST",
     http_path = "/UpdateMetricSet",
     paginator = list()
   )
-  input <- .lookoutmetrics$update_metric_set_input(MetricSetArn = MetricSetArn, MetricSetDescription = MetricSetDescription, MetricList = MetricList, Offset = Offset, TimestampColumn = TimestampColumn, DimensionList = DimensionList, MetricSetFrequency = MetricSetFrequency, MetricSource = MetricSource)
+  input <- .lookoutmetrics$update_metric_set_input(MetricSetArn = MetricSetArn, MetricSetDescription = MetricSetDescription, MetricList = MetricList, Offset = Offset, TimestampColumn = TimestampColumn, DimensionList = DimensionList, MetricSetFrequency = MetricSetFrequency, MetricSource = MetricSource, DimensionFilterList = DimensionFilterList)
   output <- .lookoutmetrics$update_metric_set_output()
   config <- get_config()
   svc <- .lookoutmetrics$service(config)

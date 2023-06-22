@@ -15,11 +15,13 @@ frauddetector_update_detector_version_status(
 
 \item{detectorVersionId}{[required] The detector version ID.}
 
-\item{status}{[required] The new status.}
+\item{status}{[required] The new status.
+
+The only supported values are \code{ACTIVE} and \code{INACTIVE}}
 }
 \description{
 Updates the detector version’s status. You can perform the following promotions or demotions using \code{\link[=frauddetector_update_detector_version_status]{update_detector_version_status}}: \code{DRAFT} to \code{ACTIVE}, \code{ACTIVE} to \code{INACTIVE}, and \code{INACTIVE} to \code{ACTIVE}.
 
-See \url{https://paws-r.github.io/docs/frauddetector/update_detector_version_status.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/frauddetector_update_detector_version_status/} for full documentation.
 }
 \keyword{internal}

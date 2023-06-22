@@ -7,11 +7,11 @@
 voiceid_describe_domain(DomainId)
 }
 \arguments{
-\item{DomainId}{[required] The identifier of the domain you are describing.}
+\item{DomainId}{[required] The identifier of the domain that you are describing.}
 }
 \description{
 Describes the specified domain.
 
-See \url{https://paws-r.github.io/docs/voiceid/describe_domain.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_describe_domain/} for full documentation.
 }
 \keyword{internal}

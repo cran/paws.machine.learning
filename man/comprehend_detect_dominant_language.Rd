@@ -7,12 +7,12 @@
 comprehend_detect_dominant_language(Text)
 }
 \arguments{
-\item{Text}{[required] A UTF-8 text string. Each string should contain at least 20 characters
-and must contain fewer that 5,000 bytes of UTF-8 encoded characters.}
+\item{Text}{[required] A UTF-8 text string. The string must contain at least 20 characters. The
+maximum string size is 100 KB.}
 }
 \description{
 Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see \href{https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html}{Amazon Comprehend Supported Languages}.
 
-See \url{https://paws-r.github.io/docs/comprehend/detect_dominant_language.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_detect_dominant_language/} for full documentation.
 }
 \keyword{internal}

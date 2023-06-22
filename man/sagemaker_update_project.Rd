@@ -24,7 +24,7 @@ provisioning artifact ID. For more information, see \href{https://docs.aws.amazo
 
 \item{Tags}{An array of key-value pairs. You can use tags to categorize your Amazon
 Web Services resources in different ways, for example, by purpose,
-owner, or environment. For more information, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging Amazon Web Services Resources}.
+owner, or environment. For more information, see \href{https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html}{Tagging Amazon Web Services Resources}.
 In addition, the project must have tag update constraints set in order
 to include this parameter in the request. For more information, see
 \href{https://docs.aws.amazon.com/servicecatalog/latest/adminguide/constraints-resourceupdate.html}{Amazon Web Services Service Catalog Tag Update Constraints}.}
@@ -32,6 +32,6 @@ to include this parameter in the request. For more information, see
 \description{
 Updates a machine learning (ML) project that is created from a template that sets up an ML pipeline from training to deploying an approved model.
 
-See \url{https://paws-r.github.io/docs/sagemaker/update_project.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_update_project/} for full documentation.
 }
 \keyword{internal}

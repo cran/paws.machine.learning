@@ -65,7 +65,7 @@ This parameter is optional for unversioned models, and does not apply to
 versioned models.}
 
 \item{Tags}{A list of key value pairs associated with the model. For more
-information, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging Amazon Web Services resources}
+information, see \href{https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html}{Tagging Amazon Web Services resources}
 in the \emph{Amazon Web Services General Reference Guide}.}
 
 \item{ModelApprovalStatus}{Whether the model is approved for deployment.
@@ -103,8 +103,12 @@ Recommender: \code{"IMAGE_CLASSIFICATION"} | \code{"OBJECT_DETECTION"} |
 Specify "OTHER" if none of the tasks listed fit your use case.}
 
 \item{SamplePayloadUrl}{The Amazon Simple Storage Service (Amazon S3) path where the sample
-payload are stored. This path must point to a single gzip compressed tar
-archive (.tar.gz suffix).}
+payload is stored. This path must point to a single gzip compressed tar
+archive (.tar.gz suffix). This archive can hold multiple files that are
+all equally used in the load test. Each file in the archive must satisfy
+the size constraints of the
+\href{https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax}{InvokeEndpoint}
+call.}
 
 \item{AdditionalInferenceSpecifications}{An array of additional Inference Specification objects. Each additional
 Inference Specification specifies artifacts based on this model package
@@ -114,6 +118,6 @@ Neo to store the compiled artifacts.}
 \description{
 Creates a model package that you can use to create SageMaker models or list on Amazon Web Services Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to model packages listed on Amazon Web Services Marketplace to create models in SageMaker.
 
-See \url{https://paws-r.github.io/docs/sagemaker/create_model_package.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_create_model_package/} for full documentation.
 }
 \keyword{internal}

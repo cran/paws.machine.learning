@@ -10,7 +10,7 @@ voiceid_list_speakers(DomainId, MaxResults = NULL, NextToken = NULL)
 \item{DomainId}{[required] The identifier of the domain.}
 
 \item{MaxResults}{The maximum number of results that are returned per call. You can use
-\code{NextToken} to obtain further pages of results. The default is 100; the
+\code{NextToken} to obtain more pages of results. The default is 100; the
 maximum allowed page size is also 100.}
 
 \item{NextToken}{If \code{NextToken} is returned, there are more results available. The value
@@ -21,6 +21,6 @@ arguments unchanged. Each pagination token expires after 24 hours.}
 \description{
 Lists all speakers in a specified domain.
 
-See \url{https://paws-r.github.io/docs/voiceid/list_speakers.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_list_speakers/} for full documentation.
 }
 \keyword{internal}

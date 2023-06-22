@@ -7,13 +7,13 @@
 voiceid_describe_fraudster(DomainId, FraudsterId)
 }
 \arguments{
-\item{DomainId}{[required] The identifier of the domain containing the fraudster.}
+\item{DomainId}{[required] The identifier of the domain that contains the fraudster.}
 
 \item{FraudsterId}{[required] The identifier of the fraudster you are describing.}
 }
 \description{
 Describes the specified fraudster.
 
-See \url{https://paws-r.github.io/docs/voiceid/describe_fraudster.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/voiceid_describe_fraudster/} for full documentation.
 }
 \keyword{internal}

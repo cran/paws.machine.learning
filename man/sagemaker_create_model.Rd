@@ -37,12 +37,14 @@ have the \code{iam:PassRole} permission.}
 
 \item{Tags}{An array of key-value pairs. You can use tags to categorize your Amazon
 Web Services resources in different ways, for example, by purpose,
-owner, or environment. For more information, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging Amazon Web Services Resources}.}
+owner, or environment. For more information, see \href{https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html}{Tagging Amazon Web Services Resources}.}
 
-\item{VpcConfig}{A VpcConfig object that specifies the VPC that you want your model to
-connect to. Control access to and from your model container by
-configuring the VPC. \code{VpcConfig} is used in hosting services and in
-batch transform. For more information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html}{Protect Endpoints by Using an Amazon Virtual Private Cloud}
+\item{VpcConfig}{A
+\href{https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html}{VpcConfig}
+object that specifies the VPC that you want your model to connect to.
+Control access to and from your model container by configuring the VPC.
+\code{VpcConfig} is used in hosting services and in batch transform. For more
+information, see \href{https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html}{Protect Endpoints by Using an Amazon Virtual Private Cloud}
 and \href{https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html}{Protect Data in Batch Transform Jobs by Using an Amazon Virtual Private Cloud}.}
 
 \item{EnableNetworkIsolation}{Isolates the model container. No inbound or outbound network calls can
@@ -51,6 +53,6 @@ be made to or from the model container.}
 \description{
 Creates a model in SageMaker. In the request, you name the model and describe a primary container. For the primary container, you specify the Docker image that contains inference code, artifacts (from prior training), and a custom environment map that the inference code uses when you deploy the model for predictions.
 
-See \url{https://paws-r.github.io/docs/sagemaker/create_model.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_create_model/} for full documentation.
 }
 \keyword{internal}

@@ -8,7 +8,7 @@ NULL
 #' @description
 #' Analyzes an input document for relationships between detected items.
 #'
-#' See [https://paws-r.github.io/docs/textract/analyze_document.html](https://paws-r.github.io/docs/textract/analyze_document.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_analyze_document/](https://www.paws-r-sdk.com/docs/textract_analyze_document/) for full documentation.
 #'
 #' @param Document &#91;required&#93; The input document as base64-encoded bytes or an Amazon S3 object. If
 #' you use the AWS CLI to call Amazon Textract operations, you can't pass
@@ -19,10 +19,13 @@ NULL
 #' to base64-encode image bytes that are passed using the `Bytes` field.
 #' @param FeatureTypes &#91;required&#93; A list of the types of analysis to perform. Add TABLES to the list to
 #' return information about the tables that are detected in the input
-#' document. Add FORMS to return detected form data. To perform both types
-#' of analysis, add TABLES and FORMS to `FeatureTypes`. All lines and words
-#' detected in the document are included in the response (including text
-#' that isn't related to the value of `FeatureTypes`).
+#' document. Add FORMS to return detected form data. Add SIGNATURES to
+#' return the locations of detected signatures. To perform both forms and
+#' table analysis, add TABLES and FORMS to `FeatureTypes`. To detect
+#' signatures within form data and table data, add SIGNATURES to either
+#' TABLES or FORMS. All lines and words detected in the document are
+#' included in the response (including text that isn't related to the value
+#' of `FeatureTypes`).
 #' @param HumanLoopConfig Sets the configuration for the human in the loop workflow for analyzing
 #' documents.
 #' @param QueriesConfig Contains Queries and the alias for those Queries, as determined by the
@@ -54,7 +57,7 @@ textract_analyze_document <- function(Document, FeatureTypes, HumanLoopConfig = 
 #' @description
 #' [`analyze_expense`][textract_analyze_expense] synchronously analyzes an input document for financially related relationships between text.
 #'
-#' See [https://paws-r.github.io/docs/textract/analyze_expense.html](https://paws-r.github.io/docs/textract/analyze_expense.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_analyze_expense/](https://www.paws-r-sdk.com/docs/textract_analyze_expense/) for full documentation.
 #'
 #' @param Document &#91;required&#93; 
 #'
@@ -81,9 +84,9 @@ textract_analyze_expense <- function(Document) {
 #' Analyzes identity documents for relevant information
 #'
 #' @description
-#' Analyzes identity documents for relevant information. This information is extracted and returned as `IdentityDocumentFields`, which records both the normalized field and value of the extracted text.Unlike other Amazon Textract operations, [`analyze_id`][textract_analyze_id] doesn't return any Geometry data.
+#' Analyzes identity documents for relevant information. This information is extracted and returned as `IdentityDocumentFields`, which records both the normalized field and value of the extracted text. Unlike other Amazon Textract operations, [`analyze_id`][textract_analyze_id] doesn't return any Geometry data.
 #'
-#' See [https://paws-r.github.io/docs/textract/analyze_id.html](https://paws-r.github.io/docs/textract/analyze_id.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_analyze_id/](https://www.paws-r-sdk.com/docs/textract_analyze_id/) for full documentation.
 #'
 #' @param DocumentPages &#91;required&#93; The document being passed to AnalyzeID.
 #'
@@ -110,9 +113,9 @@ textract_analyze_id <- function(DocumentPages) {
 #' Detects text in the input document
 #'
 #' @description
-#' Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG, PNG, PDF, or TIFF format. [`detect_document_text`][textract_detect_document_text] returns the detected text in an array of Block objects.
+#' Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be in one of the following image formats: JPEG, PNG, PDF, or TIFF. [`detect_document_text`][textract_detect_document_text] returns the detected text in an array of Block objects.
 #'
-#' See [https://paws-r.github.io/docs/textract/detect_document_text.html](https://paws-r.github.io/docs/textract/detect_document_text.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_detect_document_text/](https://www.paws-r-sdk.com/docs/textract_detect_document_text/) for full documentation.
 #'
 #' @param Document &#91;required&#93; The input document as base64-encoded bytes or an Amazon S3 object. If
 #' you use the AWS CLI to call Amazon Textract operations, you can't pass
@@ -147,7 +150,7 @@ textract_detect_document_text <- function(Document) {
 #' @description
 #' Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document.
 #'
-#' See [https://paws-r.github.io/docs/textract/get_document_analysis.html](https://paws-r.github.io/docs/textract/get_document_analysis.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_get_document_analysis/](https://www.paws-r-sdk.com/docs/textract_get_document_analysis/) for full documentation.
 #'
 #' @param JobId &#91;required&#93; A unique identifier for the text-detection job. The `JobId` is returned
 #' from [`start_document_analysis`][textract_start_document_analysis]. A
@@ -187,7 +190,7 @@ textract_get_document_analysis <- function(JobId, MaxResults = NULL, NextToken =
 #' @description
 #' Gets the results for an Amazon Textract asynchronous operation that detects text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.
 #'
-#' See [https://paws-r.github.io/docs/textract/get_document_text_detection.html](https://paws-r.github.io/docs/textract/get_document_text_detection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_get_document_text_detection/](https://www.paws-r-sdk.com/docs/textract_get_document_text_detection/) for full documentation.
 #'
 #' @param JobId &#91;required&#93; A unique identifier for the text detection job. The `JobId` is returned
 #' from
@@ -228,7 +231,7 @@ textract_get_document_text_detection <- function(JobId, MaxResults = NULL, NextT
 #' @description
 #' Gets the results for an Amazon Textract asynchronous operation that analyzes invoices and receipts. Amazon Textract finds contact information, items purchased, and vendor name, from input invoices and receipts.
 #'
-#' See [https://paws-r.github.io/docs/textract/get_expense_analysis.html](https://paws-r.github.io/docs/textract/get_expense_analysis.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_get_expense_analysis/](https://www.paws-r-sdk.com/docs/textract_get_expense_analysis/) for full documentation.
 #'
 #' @param JobId &#91;required&#93; A unique identifier for the text detection job. The `JobId` is returned
 #' from [`start_expense_analysis`][textract_start_expense_analysis]. A
@@ -261,6 +264,77 @@ textract_get_expense_analysis <- function(JobId, MaxResults = NULL, NextToken = 
 }
 .textract$operations$get_expense_analysis <- textract_get_expense_analysis
 
+#' Gets the results for an Amazon Textract asynchronous operation that
+#' analyzes text in a lending document
+#'
+#' @description
+#' Gets the results for an Amazon Textract asynchronous operation that analyzes text in a lending document.
+#'
+#' See [https://www.paws-r-sdk.com/docs/textract_get_lending_analysis/](https://www.paws-r-sdk.com/docs/textract_get_lending_analysis/) for full documentation.
+#'
+#' @param JobId &#91;required&#93; A unique identifier for the lending or text-detection job. The `JobId`
+#' is returned from
+#' [`start_lending_analysis`][textract_start_lending_analysis]. A `JobId`
+#' value is only valid for 7 days.
+#' @param MaxResults The maximum number of results to return per paginated call. The largest
+#' value that you can specify is 30. If you specify a value greater than
+#' 30, a maximum of 30 results is returned. The default value is 30.
+#' @param NextToken If the previous response was incomplete, Amazon Textract returns a
+#' pagination token in the response. You can use this pagination token to
+#' retrieve the next set of lending results.
+#'
+#' @keywords internal
+#'
+#' @rdname textract_get_lending_analysis
+textract_get_lending_analysis <- function(JobId, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "GetLendingAnalysis",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .textract$get_lending_analysis_input(JobId = JobId, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .textract$get_lending_analysis_output()
+  config <- get_config()
+  svc <- .textract$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.textract$operations$get_lending_analysis <- textract_get_lending_analysis
+
+#' Gets summarized results for the StartLendingAnalysis operation, which
+#' analyzes text in a lending document
+#'
+#' @description
+#' Gets summarized results for the [`start_lending_analysis`][textract_start_lending_analysis] operation, which analyzes text in a lending document. The returned summary consists of information about documents grouped together by a common document type. Information like detected signatures, page numbers, and split documents is returned with respect to the type of grouped document.
+#'
+#' See [https://www.paws-r-sdk.com/docs/textract_get_lending_analysis_summary/](https://www.paws-r-sdk.com/docs/textract_get_lending_analysis_summary/) for full documentation.
+#'
+#' @param JobId &#91;required&#93; A unique identifier for the lending or text-detection job. The `JobId`
+#' is returned from StartLendingAnalysis. A `JobId` value is only valid for
+#' 7 days.
+#'
+#' @keywords internal
+#'
+#' @rdname textract_get_lending_analysis_summary
+textract_get_lending_analysis_summary <- function(JobId) {
+  op <- new_operation(
+    name = "GetLendingAnalysisSummary",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .textract$get_lending_analysis_summary_input(JobId = JobId)
+  output <- .textract$get_lending_analysis_summary_output()
+  config <- get_config()
+  svc <- .textract$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.textract$operations$get_lending_analysis_summary <- textract_get_lending_analysis_summary
+
 #' Starts the asynchronous analysis of an input document for relationships
 #' between detected items such as key-value pairs, tables, and selection
 #' elements
@@ -268,7 +342,7 @@ textract_get_expense_analysis <- function(JobId, MaxResults = NULL, NextToken = 
 #' @description
 #' Starts the asynchronous analysis of an input document for relationships between detected items such as key-value pairs, tables, and selection elements.
 #'
-#' See [https://paws-r.github.io/docs/textract/start_document_analysis.html](https://paws-r.github.io/docs/textract/start_document_analysis.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_start_document_analysis/](https://www.paws-r-sdk.com/docs/textract_start_document_analysis/) for full documentation.
 #'
 #' @param DocumentLocation &#91;required&#93; The location of the document to be processed.
 #' @param FeatureTypes &#91;required&#93; A list of the types of analysis to perform. Add TABLES to the list to
@@ -325,7 +399,7 @@ textract_start_document_analysis <- function(DocumentLocation, FeatureTypes, Cli
 #' @description
 #' Starts the asynchronous detection of text in a document. Amazon Textract can detect lines of text and the words that make up a line of text.
 #'
-#' See [https://paws-r.github.io/docs/textract/start_document_text_detection.html](https://paws-r.github.io/docs/textract/start_document_text_detection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_start_document_text_detection/](https://www.paws-r-sdk.com/docs/textract_start_document_text_detection/) for full documentation.
 #'
 #' @param DocumentLocation &#91;required&#93; The location of the document to be processed.
 #' @param ClientRequestToken The idempotent token that's used to identify the start request. If you
@@ -376,7 +450,7 @@ textract_start_document_text_detection <- function(DocumentLocation, ClientReque
 #' @description
 #' Starts the asynchronous analysis of invoices or receipts for data like contact information, items purchased, and vendor names.
 #'
-#' See [https://paws-r.github.io/docs/textract/start_expense_analysis.html](https://paws-r.github.io/docs/textract/start_expense_analysis.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/textract_start_expense_analysis/](https://www.paws-r-sdk.com/docs/textract_start_expense_analysis/) for full documentation.
 #'
 #' @param DocumentLocation &#91;required&#93; The location of the document to be processed.
 #' @param ClientRequestToken The idempotent token that's used to identify the start request. If you
@@ -420,3 +494,50 @@ textract_start_expense_analysis <- function(DocumentLocation, ClientRequestToken
   return(response)
 }
 .textract$operations$start_expense_analysis <- textract_start_expense_analysis
+
+#' Starts the classification and analysis of an input document
+#'
+#' @description
+#' Starts the classification and analysis of an input document. [`start_lending_analysis`][textract_start_lending_analysis] initiates the classification and analysis of a packet of lending documents. [`start_lending_analysis`][textract_start_lending_analysis] operates on a document file located in an Amazon S3 bucket.
+#'
+#' See [https://www.paws-r-sdk.com/docs/textract_start_lending_analysis/](https://www.paws-r-sdk.com/docs/textract_start_lending_analysis/) for full documentation.
+#'
+#' @param DocumentLocation &#91;required&#93; 
+#' @param ClientRequestToken The idempotent token that you use to identify the start request. If you
+#' use the same token with multiple
+#' [`start_lending_analysis`][textract_start_lending_analysis] requests,
+#' the same `JobId` is returned. Use `ClientRequestToken` to prevent the
+#' same job from being accidentally started more than once. For more
+#' information, see [Calling Amazon Textract Asynchronous
+#' Operations](https://docs.aws.amazon.com/textract/latest/dg/).
+#' @param JobTag An identifier that you specify to be included in the completion
+#' notification published to the Amazon SNS topic. For example, you can use
+#' `JobTag` to identify the type of document that the completion
+#' notification corresponds to (such as a tax form or a receipt).
+#' @param NotificationChannel 
+#' @param OutputConfig 
+#' @param KMSKeyId The KMS key used to encrypt the inference results. This can be in either
+#' Key ID or Key Alias format. When a KMS key is provided, the KMS key will
+#' be used for server-side encryption of the objects in the customer
+#' bucket. When this parameter is not enabled, the result will be encrypted
+#' server side, using SSE-S3.
+#'
+#' @keywords internal
+#'
+#' @rdname textract_start_lending_analysis
+textract_start_lending_analysis <- function(DocumentLocation, ClientRequestToken = NULL, JobTag = NULL, NotificationChannel = NULL, OutputConfig = NULL, KMSKeyId = NULL) {
+  op <- new_operation(
+    name = "StartLendingAnalysis",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .textract$start_lending_analysis_input(DocumentLocation = DocumentLocation, ClientRequestToken = ClientRequestToken, JobTag = JobTag, NotificationChannel = NotificationChannel, OutputConfig = OutputConfig, KMSKeyId = KMSKeyId)
+  output <- .textract$start_lending_analysis_output()
+  config <- get_config()
+  svc <- .textract$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.textract$operations$start_lending_analysis <- textract_start_lending_analysis

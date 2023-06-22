@@ -15,7 +15,8 @@ lexmodelsv2_update_slot(
   botVersion,
   localeId,
   intentId,
-  multipleValuesSetting = NULL
+  multipleValuesSetting = NULL,
+  subSlotSetting = NULL
 )
 }
 \arguments{
@@ -49,10 +50,13 @@ this value to \code{true} in any other locale, Amazon Lex throws a
 \code{ValidationException}.
 
 If the \code{multipleValuesSetting} is not set, the default value is \code{false}.}
+
+\item{subSlotSetting}{Specifications for the constituent sub slots and the expression for the
+composite slot.}
 }
 \description{
 Updates the settings for a slot.
 
-See \url{https://paws-r.github.io/docs/lexmodelsv2/update_slot.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lexmodelsv2_update_slot/} for full documentation.
 }
 \keyword{internal}

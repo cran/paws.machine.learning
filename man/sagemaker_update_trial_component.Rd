@@ -32,23 +32,29 @@ displayed.}
 \item{EndTime}{When the component ended.}
 
 \item{Parameters}{Replaces all of the component's hyperparameters with the specified
-hyperparameters.}
+hyperparameters or add new hyperparameters. Existing hyperparameters are
+replaced if the trial component is updated with an identical
+hyperparameter key.}
 
 \item{ParametersToRemove}{The hyperparameters to remove from the component.}
 
 \item{InputArtifacts}{Replaces all of the component's input artifacts with the specified
-artifacts.}
+artifacts or adds new input artifacts. Existing input artifacts are
+replaced if the trial component is updated with an identical input
+artifact key.}
 
 \item{InputArtifactsToRemove}{The input artifacts to remove from the component.}
 
 \item{OutputArtifacts}{Replaces all of the component's output artifacts with the specified
-artifacts.}
+artifacts or adds new output artifacts. Existing output artifacts are
+replaced if the trial component is updated with an identical output
+artifact key.}
 
 \item{OutputArtifactsToRemove}{The output artifacts to remove from the component.}
 }
 \description{
 Updates one or more properties of a trial component.
 
-See \url{https://paws-r.github.io/docs/sagemaker/update_trial_component.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sagemaker_update_trial_component/} for full documentation.
 }
 \keyword{internal}

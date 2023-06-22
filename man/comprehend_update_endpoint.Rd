@@ -8,7 +8,8 @@ comprehend_update_endpoint(
   EndpointArn,
   DesiredModelArn = NULL,
   DesiredInferenceUnits = NULL,
-  DesiredDataAccessRoleArn = NULL
+  DesiredDataAccessRoleArn = NULL,
+  FlywheelArn = NULL
 )
 }
 \arguments{
@@ -22,10 +23,12 @@ characters per second.}
 
 \item{DesiredDataAccessRoleArn}{Data access role ARN to use in case the new model is encrypted with a
 customer CMK.}
+
+\item{FlywheelArn}{The Amazon Resource Number (ARN) of the flywheel}
 }
 \description{
 Updates information about the specified endpoint. For information about endpoints, see \href{https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html}{Managing endpoints}.
 
-See \url{https://paws-r.github.io/docs/comprehend/update_endpoint.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_update_endpoint/} for full documentation.
 }
 \keyword{internal}

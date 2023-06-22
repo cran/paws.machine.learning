@@ -29,13 +29,13 @@ page of results, copy this string and repeat your request, including
 view all your results.}
 
 \item{MaxResults}{The maximum number of medical transcription jobs to return in each page
-of results. If there are fewer results than the value you specify, only
-the actual results are returned. If you don't specify a value, a default
-of 5 is used.}
+of results. If there are fewer results than the value that you specify,
+only the actual results are returned. If you don't specify a value, a
+default of 5 is used.}
 }
 \description{
 Provides a list of medical transcription jobs that match the specified criteria. If no criteria are specified, all medical transcription jobs are returned.
 
-See \url{https://paws-r.github.io/docs/transcribeservice/list_medical_transcription_jobs.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/transcribeservice_list_medical_transcription_jobs/} for full documentation.
 }
 \keyword{internal}

@@ -35,8 +35,8 @@ results. If there are fewer results than the max page size, only the
 actual number of results are returned.}
 }
 \description{
-Gets a list of recommended intents provided by the bot recommendation that you can use in your bot.
+Gets a list of recommended intents provided by the bot recommendation that you can use in your bot. Intents in the response are ordered by relevance.
 
-See \url{https://paws-r.github.io/docs/lexmodelsv2/list_recommended_intents.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/lexmodelsv2_list_recommended_intents/} for full documentation.
 }
 \keyword{internal}

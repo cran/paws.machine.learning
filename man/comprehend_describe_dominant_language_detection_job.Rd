@@ -8,11 +8,12 @@ comprehend_describe_dominant_language_detection_job(JobId)
 }
 \arguments{
 \item{JobId}{[required] The identifier that Amazon Comprehend generated for the job. The
+\code{\link[=comprehend_start_dominant_language_detection_job]{start_dominant_language_detection_job}}
 operation returns this identifier in its response.}
 }
 \description{
 Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
 
-See \url{https://paws-r.github.io/docs/comprehend/describe_dominant_language_detection_job.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/comprehend_describe_dominant_language_detection_job/} for full documentation.
 }
 \keyword{internal}
