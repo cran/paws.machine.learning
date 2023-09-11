@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: 'Amazon Web Services' Machine Learning Services
-Version: 0.3.0
+Version: 0.4.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -14,7 +14,7 @@ Description: Interface to 'Amazon Web Services' machine learning services,
 License: Apache License (>= 2.0)
 URL: https://github.com/paws-r/paws
 BugReports: https://github.com/paws-r/paws/issues
-Imports: paws.common (>= 0.5.4)
+Imports: paws.common (>= 0.6.0)
 Suggests: testthat
 Encoding: UTF-8
 RoxygenNote: 7.2.3
@@ -51,10 +51,10 @@ Collate: 'augmentedairuntime_service.R'
         'personalizeruntime_interfaces.R'
         'personalizeruntime_operations.R' 'polly_service.R'
         'polly_interfaces.R' 'polly_operations.R'
-        'rekognition_service.R' 'rekognition_interfaces.R'
-        'rekognition_operations.R' 'sagemaker_service.R'
-        'sagemaker_interfaces.R' 'sagemaker_operations.R'
-        'sagemakeredgemanager_service.R'
+        'reexports_paws.common.R' 'rekognition_service.R'
+        'rekognition_interfaces.R' 'rekognition_operations.R'
+        'sagemaker_service.R' 'sagemaker_interfaces.R'
+        'sagemaker_operations.R' 'sagemakeredgemanager_service.R'
         'sagemakeredgemanager_interfaces.R'
         'sagemakeredgemanager_operations.R'
         'sagemakerfeaturestoreruntime_service.R'
@@ -69,11 +69,11 @@ Collate: 'augmentedairuntime_service.R'
         'voiceid_service.R' 'voiceid_interfaces.R'
         'voiceid_operations.R'
 NeedsCompilation: no
-Packaged: 2023-06-22 08:26:19 UTC; dyfanjones
+Packaged: 2023-09-11 15:36:01 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-06-22 12:42:36 UTC
+Date/Publication: 2023-09-11 18:50:06 UTC
