@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: 'Amazon Web Services' Machine Learning Services
-Version: 0.4.0
+Version: 0.5.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -20,7 +20,10 @@ Encoding: UTF-8
 RoxygenNote: 7.2.3
 Collate: 'augmentedairuntime_service.R'
         'augmentedairuntime_interfaces.R'
-        'augmentedairuntime_operations.R' 'comprehend_service.R'
+        'augmentedairuntime_operations.R' 'bedrock_service.R'
+        'bedrock_interfaces.R' 'bedrock_operations.R'
+        'bedrockruntime_service.R' 'bedrockruntime_interfaces.R'
+        'bedrockruntime_operations.R' 'comprehend_service.R'
         'comprehend_interfaces.R' 'comprehend_operations.R'
         'comprehendmedical_service.R' 'comprehendmedical_interfaces.R'
         'comprehendmedical_operations.R' 'elasticinference_service.R'
@@ -60,20 +63,25 @@ Collate: 'augmentedairuntime_service.R'
         'sagemakerfeaturestoreruntime_service.R'
         'sagemakerfeaturestoreruntime_interfaces.R'
         'sagemakerfeaturestoreruntime_operations.R'
-        'sagemakerruntime_service.R' 'sagemakerruntime_interfaces.R'
-        'sagemakerruntime_operations.R' 'textract_service.R'
-        'textract_interfaces.R' 'textract_operations.R'
-        'transcribeservice_service.R' 'transcribeservice_interfaces.R'
+        'sagemakergeospatialcapabilities_service.R'
+        'sagemakergeospatialcapabilities_interfaces.R'
+        'sagemakergeospatialcapabilities_operations.R'
+        'sagemakermetrics_service.R' 'sagemakermetrics_interfaces.R'
+        'sagemakermetrics_operations.R' 'sagemakerruntime_service.R'
+        'sagemakerruntime_interfaces.R' 'sagemakerruntime_operations.R'
+        'textract_service.R' 'textract_interfaces.R'
+        'textract_operations.R' 'transcribeservice_service.R'
+        'transcribeservice_interfaces.R'
         'transcribeservice_operations.R' 'translate_service.R'
         'translate_interfaces.R' 'translate_operations.R'
         'voiceid_service.R' 'voiceid_interfaces.R'
         'voiceid_operations.R'
 NeedsCompilation: no
-Packaged: 2023-09-11 15:36:01 UTC; dyfanjones
+Packaged: 2024-01-09 17:41:26 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-09-11 18:50:06 UTC
+Date/Publication: 2024-01-09 22:40:03 UTC

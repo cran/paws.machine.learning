@@ -19,12 +19,13 @@ sagemaker_create_model_package(
   MetadataProperties = NULL,
   ModelMetrics = NULL,
   ClientToken = NULL,
-  CustomerMetadataProperties = NULL,
-  DriftCheckBaselines = NULL,
   Domain = NULL,
   Task = NULL,
   SamplePayloadUrl = NULL,
-  AdditionalInferenceSpecifications = NULL
+  CustomerMetadataProperties = NULL,
+  DriftCheckBaselines = NULL,
+  AdditionalInferenceSpecifications = NULL,
+  SkipModelValidation = NULL
 )
 }
 \arguments{
@@ -86,13 +87,6 @@ For versioned models, the value of this parameter must be set to
 
 \item{ClientToken}{A unique token that guarantees that the call to this API is idempotent.}
 
-\item{CustomerMetadataProperties}{The metadata properties associated with the model package versions.}
-
-\item{DriftCheckBaselines}{Represents the drift check baselines that can be used when the model
-monitor is set using the model package. For more information, see the
-topic on \href{https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection}{Drift Detection against Previous Baselines in SageMaker Pipelines}
-in the \emph{Amazon SageMaker Developer Guide}.}
-
 \item{Domain}{The machine learning domain of your model package and its components.
 Common machine learning domains include computer vision and natural
 language processing.}
@@ -114,10 +108,19 @@ the size constraints of the
 \href{https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_RequestSyntax}{InvokeEndpoint}
 call.}
 
+\item{CustomerMetadataProperties}{The metadata properties associated with the model package versions.}
+
+\item{DriftCheckBaselines}{Represents the drift check baselines that can be used when the model
+monitor is set using the model package. For more information, see the
+topic on \href{https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines-quality-clarify-baseline-lifecycle.html#pipelines-quality-clarify-baseline-drift-detection}{Drift Detection against Previous Baselines in SageMaker Pipelines}
+in the \emph{Amazon SageMaker Developer Guide}.}
+
 \item{AdditionalInferenceSpecifications}{An array of additional Inference Specification objects. Each additional
 Inference Specification specifies artifacts based on this model package
 that can be used on inference endpoints. Generally used with SageMaker
 Neo to store the compiled artifacts.}
+
+\item{SkipModelValidation}{Indicates if you want to skip model validation.}
 }
 \description{
 Creates a model package that you can use to create SageMaker models or list on Amazon Web Services Marketplace, or a versioned model that is part of a model group. Buyers can subscribe to model packages listed on Amazon Web Services Marketplace to create models in SageMaker.

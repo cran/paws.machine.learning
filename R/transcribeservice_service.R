@@ -25,33 +25,33 @@ NULL
 #' config
 #' Optional configuration of credentials, endpoint, and/or region.
 #' \itemize{
-#' \item{\strong{credentials}:} {\itemize{
-#' \item{\strong{creds}:} {\itemize{
-#' \item{\strong{access_key_id}:} {AWS access key ID}
-#' \item{\strong{secret_access_key}:} {AWS secret access key}
-#' \item{\strong{session_token}:} {AWS temporary session token}
+#' \item{\strong{credentials}: \itemize{
+#' \item{\strong{creds}: \itemize{
+#' \item{\strong{access_key_id}: AWS access key ID}
+#' \item{\strong{secret_access_key}: AWS secret access key}
+#' \item{\strong{session_token}: AWS temporary session token}
 #' }}
-#' \item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-#' \item{\strong{anonymous}:} {Set anonymous credentials.}
-#' \item{\strong{endpoint}:} {The complete URL to use for the constructed client.}
-#' \item{\strong{region}:} {The AWS Region used in instantiating the client.}
+#' \item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+#' \item{\strong{anonymous}: Set anonymous credentials.}
 #' }}
-#' \item{\strong{close_connection}:} {Immediately close all HTTP connections.}
-#' \item{\strong{timeout}:} {The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
-#' \item{\strong{s3_force_path_style}:} {Set this to `true` to force the request to use path-style addressing, i.e. `http://s3.amazonaws.com/BUCKET/KEY`.}
-#' \item{\strong{sts_regional_endpoint}:} {Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+#' \item{\strong{endpoint}: The complete URL to use for the constructed client.}
+#' \item{\strong{region}: The AWS Region used in instantiating the client.}
+#' \item{\strong{close_connection}: Immediately close all HTTP connections.}
+#' \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
+#' \item{\strong{s3_force_path_style}: Set this to `true` to force the request to use path-style addressing, i.e. `http://s3.amazonaws.com/BUCKET/KEY`.}
+#' \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
 #' }
 #' @param
 #' credentials
 #' Optional credentials shorthand for the config parameter
 #' \itemize{
-#' \item{\strong{creds}:} {\itemize{
-#' \item{\strong{access_key_id}:} {AWS access key ID}
-#' \item{\strong{secret_access_key}:} {AWS secret access key}
-#' \item{\strong{session_token}:} {AWS temporary session token}
+#' \item{\strong{creds}: \itemize{
+#' \item{\strong{access_key_id}: AWS access key ID}
+#' \item{\strong{secret_access_key}: AWS secret access key}
+#' \item{\strong{session_token}: AWS temporary session token}
 #' }}
-#' \item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-#' \item{\strong{anonymous}:} {Set anonymous credentials.}
+#' \item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+#' \item{\strong{anonymous}: Set anonymous credentials.}
 #' }
 #' @param
 #' endpoint
@@ -112,6 +112,7 @@ NULL
 #'  \link[=transcribeservice_delete_call_analytics_category]{delete_call_analytics_category} \tab Deletes a Call Analytics category\cr
 #'  \link[=transcribeservice_delete_call_analytics_job]{delete_call_analytics_job} \tab Deletes a Call Analytics job\cr
 #'  \link[=transcribeservice_delete_language_model]{delete_language_model} \tab Deletes a custom language model\cr
+#'  \link[=transcribeservice_delete_medical_scribe_job]{delete_medical_scribe_job} \tab Deletes a Medical Scribe job\cr
 #'  \link[=transcribeservice_delete_medical_transcription_job]{delete_medical_transcription_job} \tab Deletes a medical transcription job\cr
 #'  \link[=transcribeservice_delete_medical_vocabulary]{delete_medical_vocabulary} \tab Deletes a custom medical vocabulary\cr
 #'  \link[=transcribeservice_delete_transcription_job]{delete_transcription_job} \tab Deletes a transcription job\cr
@@ -120,6 +121,7 @@ NULL
 #'  \link[=transcribeservice_describe_language_model]{describe_language_model} \tab Provides information about the specified custom language model\cr
 #'  \link[=transcribeservice_get_call_analytics_category]{get_call_analytics_category} \tab Provides information about the specified Call Analytics category\cr
 #'  \link[=transcribeservice_get_call_analytics_job]{get_call_analytics_job} \tab Provides information about the specified Call Analytics job\cr
+#'  \link[=transcribeservice_get_medical_scribe_job]{get_medical_scribe_job} \tab Provides information about the specified Medical Scribe job\cr
 #'  \link[=transcribeservice_get_medical_transcription_job]{get_medical_transcription_job} \tab Provides information about the specified medical transcription job\cr
 #'  \link[=transcribeservice_get_medical_vocabulary]{get_medical_vocabulary} \tab Provides information about the specified custom medical vocabulary\cr
 #'  \link[=transcribeservice_get_transcription_job]{get_transcription_job} \tab Provides information about the specified transcription job\cr
@@ -128,6 +130,7 @@ NULL
 #'  \link[=transcribeservice_list_call_analytics_categories]{list_call_analytics_categories} \tab Provides a list of Call Analytics categories, including all rules that make up each category\cr
 #'  \link[=transcribeservice_list_call_analytics_jobs]{list_call_analytics_jobs} \tab Provides a list of Call Analytics jobs that match the specified criteria\cr
 #'  \link[=transcribeservice_list_language_models]{list_language_models} \tab Provides a list of custom language models that match the specified criteria\cr
+#'  \link[=transcribeservice_list_medical_scribe_jobs]{list_medical_scribe_jobs} \tab Provides a list of Medical Scribe jobs that match the specified criteria\cr
 #'  \link[=transcribeservice_list_medical_transcription_jobs]{list_medical_transcription_jobs} \tab Provides a list of medical transcription jobs that match the specified criteria\cr
 #'  \link[=transcribeservice_list_medical_vocabularies]{list_medical_vocabularies} \tab Provides a list of custom medical vocabularies that match the specified criteria\cr
 #'  \link[=transcribeservice_list_tags_for_resource]{list_tags_for_resource} \tab Lists all tags associated with the specified transcription job, vocabulary, model, or resource\cr
@@ -135,6 +138,7 @@ NULL
 #'  \link[=transcribeservice_list_vocabularies]{list_vocabularies} \tab Provides a list of custom vocabularies that match the specified criteria\cr
 #'  \link[=transcribeservice_list_vocabulary_filters]{list_vocabulary_filters} \tab Provides a list of custom vocabulary filters that match the specified criteria\cr
 #'  \link[=transcribeservice_start_call_analytics_job]{start_call_analytics_job} \tab Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request\cr
+#'  \link[=transcribeservice_start_medical_scribe_job]{start_medical_scribe_job} \tab Transcribes patient-clinician conversations and generates clinical notes\cr
 #'  \link[=transcribeservice_start_medical_transcription_job]{start_medical_transcription_job} \tab Transcribes the audio from a medical dictation or conversation and applies any additional Request Parameters you choose to include in your request\cr
 #'  \link[=transcribeservice_start_transcription_job]{start_transcription_job} \tab Transcribes the audio from a media file and applies any additional Request Parameters you choose to include in your request\cr
 #'  \link[=transcribeservice_tag_resource]{tag_resource} \tab Adds one or more custom tags, each in the form of a key:value pair, to the specified resource\cr

@@ -14,32 +14,32 @@ personalize(
 \arguments{
 \item{config}{Optional configuration of credentials, endpoint, and/or region.
 \itemize{
-\item{\strong{credentials}:} {\itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{credentials}: \itemize{
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
-\item{\strong{endpoint}:} {The complete URL to use for the constructed client.}
-\item{\strong{region}:} {The AWS Region used in instantiating the client.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
-\item{\strong{close_connection}:} {Immediately close all HTTP connections.}
-\item{\strong{timeout}:} {The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
-\item{\strong{s3_force_path_style}:} {Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
-\item{\strong{sts_regional_endpoint}:} {Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{endpoint}: The complete URL to use for the constructed client.}
+\item{\strong{region}: The AWS Region used in instantiating the client.}
+\item{\strong{close_connection}: Immediately close all HTTP connections.}
+\item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
+\item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
+\item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
 \itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
 
 \item{endpoint}{Optional shorthand for complete URL to use for the constructed client.}
@@ -95,7 +95,7 @@ add individualized recommendations to customers.
 \section{Operations}{
 
 \tabular{ll}{
-\link[=personalize_create_batch_inference_job]{create_batch_inference_job} \tab Creates a batch inference job\cr
+\link[=personalize_create_batch_inference_job]{create_batch_inference_job} \tab Generates batch recommendations based on a list of items or users stored in Amazon S3 and exports the recommendations to an Amazon S3 bucket\cr
 \link[=personalize_create_batch_segment_job]{create_batch_segment_job} \tab Creates a batch segment job\cr
 \link[=personalize_create_campaign]{create_campaign} \tab Creates a campaign that deploys a solution version\cr
 \link[=personalize_create_dataset]{create_dataset} \tab Creates an empty dataset and adds it to the specified dataset group\cr
@@ -158,7 +158,7 @@ add individualized recommendations to customers.
 \link[=personalize_stop_solution_version_creation]{stop_solution_version_creation} \tab Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS\cr
 \link[=personalize_tag_resource]{tag_resource} \tab Add a list of tags to a resource\cr
 \link[=personalize_untag_resource]{untag_resource} \tab Remove tags that are attached to a resource\cr
-\link[=personalize_update_campaign]{update_campaign} \tab Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter\cr
+\link[=personalize_update_campaign]{update_campaign} \tab Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's minProvisionedTPS, or modify your campaign's configuration, such as the exploration configuration\cr
 \link[=personalize_update_dataset]{update_dataset} \tab Update a dataset to replace its schema with a new or existing one\cr
 \link[=personalize_update_metric_attribution]{update_metric_attribution} \tab Updates a metric attribution\cr
 \link[=personalize_update_recommender]{update_recommender} \tab Updates the recommender to modify the recommender configuration
