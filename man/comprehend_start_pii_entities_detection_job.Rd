@@ -37,8 +37,8 @@ Comprehend read access to your input data.}
 
 \item{JobName}{The identifier of the job.}
 
-\item{LanguageCode}{[required] The language of the input documents. Currently, English is the only
-valid language.}
+\item{LanguageCode}{[required] The language of the input documents. Enter the language code for English
+(en) or Spanish (es).}
 
 \item{ClientRequestToken}{A unique identifier for the request. If you don't set the client request
 token, Amazon Comprehend generates one.}

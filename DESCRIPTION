@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: 'Amazon Web Services' Machine Learning Services
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -17,7 +17,7 @@ BugReports: https://github.com/paws-r/paws/issues
 Imports: paws.common (>= 0.6.0)
 Suggests: testthat
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Collate: 'augmentedairuntime_service.R'
         'augmentedairuntime_interfaces.R'
         'augmentedairuntime_operations.R' 'bedrock_service.R'
@@ -77,11 +77,11 @@ Collate: 'augmentedairuntime_service.R'
         'voiceid_service.R' 'voiceid_interfaces.R'
         'voiceid_operations.R'
 NeedsCompilation: no
-Packaged: 2024-01-09 17:41:26 UTC; dyfanjones
+Packaged: 2024-05-10 13:18:45 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-01-09 22:40:03 UTC
+Date/Publication: 2024-05-10 16:30:02 UTC
