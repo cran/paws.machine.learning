@@ -17,12 +17,13 @@ bedrockruntime_invoke_model(
 }
 \arguments{
 \item{body}{[required] The prompt and inference parameters in the format specified in the
-\code{contentType} in the header. To see the format and content of the
-request and response bodies for different models, refer to \href{https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html}{Inference parameters}.
+\code{contentType} in the header. You must provide the body in JSON format.
+To see the format and content of the request and response bodies for
+different models, refer to \href{https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html}{Inference parameters}.
 For more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/inference.html}{Run inference}
 in the Bedrock User Guide.}
 
-\item{contentType}{The MIME type of the input data in the request. The default value is
+\item{contentType}{The MIME type of the input data in the request. You must specify
 \code{application/json}.}
 
 \item{accept}{The desired MIME type of the inference body in the response. The default
@@ -42,6 +43,11 @@ in the Amazon Bedrock User Guide.
 it. Then specify the ARN of the resulting provisioned model. For
 more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html}{Use a custom model in Amazon Bedrock}
 in the Amazon Bedrock User Guide.
+\item If you use an \href{https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-import-model.html}{imported model},
+specify the ARN of the imported model. You can get the model ARN
+from a successful call to
+\href{https://docs.aws.amazon.com/bedrock/latest/APIReference/API_CreateModelImportJob.html}{CreateModelImportJob}
+or from the Imported models page in the Amazon Bedrock console.
 }}
 
 \item{trace}{Specifies whether to enable or disable the Bedrock trace. If enabled,

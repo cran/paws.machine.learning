@@ -10,6 +10,7 @@ sagemaker_create_workteam(
   MemberDefinitions,
   Description,
   NotificationConfiguration = NULL,
+  WorkerAccessConfiguration = NULL,
   Tags = NULL
 )
 }
@@ -33,7 +34,7 @@ create a workforce. All of the \code{CognitoMemberDefinition} objects that
 make up the member definition must have the same \code{ClientId} and
 \code{UserPool} values. To add a Amazon Cognito user group to an existing
 worker pool, see Adding groups to a User Pool. For more information
-about user pools, see \href{https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools.html}{Amazon Cognito User Pools}.
+about user pools, see \href{https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html}{Amazon Cognito User Pools}.
 
 For workforces created using your own OIDC IdP, specify the user groups
 that you want to include in your private work team in
@@ -43,6 +44,11 @@ that you want to include in your private work team in
 
 \item{NotificationConfiguration}{Configures notification of workers regarding available or expiring work
 items.}
+
+\item{WorkerAccessConfiguration}{Use this optional parameter to constrain access to an Amazon S3 resource
+based on the IP address using supported IAM global condition keys. The
+Amazon S3 resource is accessed in the worker portal using a Amazon S3
+presigned URL.}
 
 \item{Tags}{An array of key-value pairs.
 

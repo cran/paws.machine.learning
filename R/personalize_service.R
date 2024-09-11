@@ -94,6 +94,7 @@ NULL
 #'  \link[=personalize_create_batch_inference_job]{create_batch_inference_job} \tab Generates batch recommendations based on a list of items or users stored in Amazon S3 and exports the recommendations to an Amazon S3 bucket\cr
 #'  \link[=personalize_create_batch_segment_job]{create_batch_segment_job} \tab Creates a batch segment job\cr
 #'  \link[=personalize_create_campaign]{create_campaign} \tab You incur campaign costs while it is active\cr
+#'  \link[=personalize_create_data_deletion_job]{create_data_deletion_job} \tab Creates a batch job that deletes all references to specific users from an Amazon Personalize dataset group in batches\cr
 #'  \link[=personalize_create_dataset]{create_dataset} \tab Creates an empty dataset and adds it to the specified dataset group\cr
 #'  \link[=personalize_create_dataset_export_job]{create_dataset_export_job} \tab Creates a job that exports data from your dataset to an Amazon S3 bucket\cr
 #'  \link[=personalize_create_dataset_group]{create_dataset_group} \tab Creates an empty dataset group\cr
@@ -103,7 +104,7 @@ NULL
 #'  \link[=personalize_create_metric_attribution]{create_metric_attribution} \tab Creates a metric attribution\cr
 #'  \link[=personalize_create_recommender]{create_recommender} \tab Creates a recommender with the recipe (a Domain dataset group use case) you specify\cr
 #'  \link[=personalize_create_schema]{create_schema} \tab Creates an Amazon Personalize schema from the specified schema string\cr
-#'  \link[=personalize_create_solution]{create_solution} \tab After you create a solution, you can’t change its configuration\cr
+#'  \link[=personalize_create_solution]{create_solution} \tab By default, all new solutions use automatic training\cr
 #'  \link[=personalize_create_solution_version]{create_solution_version} \tab Trains or retrains an active solution in a Custom dataset group\cr
 #'  \link[=personalize_delete_campaign]{delete_campaign} \tab Removes a campaign by deleting the solution deployment\cr
 #'  \link[=personalize_delete_dataset]{delete_dataset} \tab Deletes a dataset\cr
@@ -118,6 +119,7 @@ NULL
 #'  \link[=personalize_describe_batch_inference_job]{describe_batch_inference_job} \tab Gets the properties of a batch inference job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate the recommendations\cr
 #'  \link[=personalize_describe_batch_segment_job]{describe_batch_segment_job} \tab Gets the properties of a batch segment job including name, Amazon Resource Name (ARN), status, input and output configurations, and the ARN of the solution version used to generate segments\cr
 #'  \link[=personalize_describe_campaign]{describe_campaign} \tab Describes the given campaign, including its status\cr
+#'  \link[=personalize_describe_data_deletion_job]{describe_data_deletion_job} \tab Describes the data deletion job created by CreateDataDeletionJob, including the job status\cr
 #'  \link[=personalize_describe_dataset]{describe_dataset} \tab Describes the given dataset\cr
 #'  \link[=personalize_describe_dataset_export_job]{describe_dataset_export_job} \tab Describes the dataset export job created by CreateDatasetExportJob, including the export job status\cr
 #'  \link[=personalize_describe_dataset_group]{describe_dataset_group} \tab Describes the given dataset group\cr
@@ -135,6 +137,7 @@ NULL
 #'  \link[=personalize_list_batch_inference_jobs]{list_batch_inference_jobs} \tab Gets a list of the batch inference jobs that have been performed off of a solution version\cr
 #'  \link[=personalize_list_batch_segment_jobs]{list_batch_segment_jobs} \tab Gets a list of the batch segment jobs that have been performed off of a solution version that you specify\cr
 #'  \link[=personalize_list_campaigns]{list_campaigns} \tab Returns a list of campaigns that use the given solution\cr
+#'  \link[=personalize_list_data_deletion_jobs]{list_data_deletion_jobs} \tab Returns a list of data deletion jobs for a dataset group ordered by creation time, with the most recent first\cr
 #'  \link[=personalize_list_dataset_export_jobs]{list_dataset_export_jobs} \tab Returns a list of dataset export jobs that use the given dataset\cr
 #'  \link[=personalize_list_dataset_groups]{list_dataset_groups} \tab Returns a list of dataset groups\cr
 #'  \link[=personalize_list_dataset_import_jobs]{list_dataset_import_jobs} \tab Returns a list of dataset import jobs that use the given dataset\cr
@@ -157,7 +160,8 @@ NULL
 #'  \link[=personalize_update_campaign]{update_campaign} \tab Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's minProvisionedTPS, or modify your campaign's configuration\cr
 #'  \link[=personalize_update_dataset]{update_dataset} \tab Update a dataset to replace its schema with a new or existing one\cr
 #'  \link[=personalize_update_metric_attribution]{update_metric_attribution} \tab Updates a metric attribution\cr
-#'  \link[=personalize_update_recommender]{update_recommender} \tab Updates the recommender to modify the recommender configuration
+#'  \link[=personalize_update_recommender]{update_recommender} \tab Updates the recommender to modify the recommender configuration\cr
+#'  \link[=personalize_update_solution]{update_solution} \tab Updates an Amazon Personalize solution to use a different automatic training configuration
 #' }
 #'
 #' @return
@@ -197,7 +201,7 @@ personalize <- function(config = list(), credentials = list(), endpoint = NULL, 
   target_prefix = "AmazonPersonalize"
 )
 
-.personalize$service <- function(config = list()) {
+.personalize$service <- function(config = list(), op = NULL) {
   handlers <- new_handlers("jsonrpc", "v4")
-  new_service(.personalize$metadata, handlers, config)
+  new_service(.personalize$metadata, handlers, config, op)
 }
