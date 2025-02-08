@@ -16,6 +16,7 @@ sagemaker_create_domain(
   HomeEfsFileSystemKmsKeyId = NULL,
   KmsKeyId = NULL,
   AppSecurityGroupManagement = NULL,
+  TagPropagation = NULL,
   DefaultSpaceSettings = NULL
 )
 }
@@ -51,13 +52,13 @@ Domain launches.}
 \code{PublicInternetOnly}.
 \itemize{
 \item \code{PublicInternetOnly} - Non-EFS traffic is through a VPC managed by
-Amazon SageMaker, which allows direct internet access
+Amazon SageMaker AI, which allows direct internet access
 \item \code{VpcOnly} - All traffic is through the specified VPC and subnets
 }}
 
 \item{HomeEfsFileSystemKmsKeyId}{Use \code{KmsKeyId}.}
 
-\item{KmsKeyId}{SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS volumes
+\item{KmsKeyId}{SageMaker AI uses Amazon Web Services KMS to encrypt EFS and EBS volumes
 attached to the domain with an Amazon Web Services managed key by
 default. For more control, specify a customer managed key.}
 
@@ -68,7 +69,10 @@ inter-app communication in \code{VPCOnly} mode. Required when
 is provided. If setting up the domain for use with RStudio, this value
 must be set to \code{Service}.}
 
-\item{DefaultSpaceSettings}{The default settings used to create a space.}
+\item{TagPropagation}{Indicates whether custom tag propagation is supported for the domain.
+Defaults to \code{DISABLED}.}
+
+\item{DefaultSpaceSettings}{The default settings for shared spaces that users create in the domain.}
 }
 \description{
 Creates a \code{Domain}. A domain consists of an associated Amazon Elastic File System volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. Users within a domain can share notebook files and other artifacts with each other.

@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: 'Amazon Web Services' Machine Learning Services
-Version: 0.7.0
+Version: 0.8.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -12,9 +12,10 @@ Description: Interface to 'Amazon Web Services' machine learning services,
     language processing, speech recognition, translation, and more
     <https://aws.amazon.com/machine-learning/>.
 License: Apache License (>= 2.0)
-URL: https://github.com/paws-r/paws
+URL: https://github.com/paws-r/paws,
+        https://paws-r.r-universe.dev/paws.machine.learning
 BugReports: https://github.com/paws-r/paws/issues
-Imports: paws.common (>= 0.7.5)
+Imports: paws.common (>= 0.8.0)
 Suggests: testthat
 Encoding: UTF-8
 RoxygenNote: 7.3.2
@@ -22,6 +23,16 @@ Collate: 'augmentedairuntime_service.R'
         'augmentedairuntime_interfaces.R'
         'augmentedairuntime_operations.R' 'bedrock_service.R'
         'bedrock_interfaces.R' 'bedrock_operations.R'
+        'bedrockagent_service.R' 'bedrockagent_interfaces.R'
+        'bedrockagent_operations.R' 'bedrockagentruntime_service.R'
+        'bedrockagentruntime_interfaces.R'
+        'bedrockagentruntime_operations.R'
+        'bedrockdataautomation_service.R'
+        'bedrockdataautomation_interfaces.R'
+        'bedrockdataautomation_operations.R'
+        'bedrockdataautomationruntime_service.R'
+        'bedrockdataautomationruntime_interfaces.R'
+        'bedrockdataautomationruntime_operations.R'
         'bedrockruntime_service.R' 'bedrockruntime_interfaces.R'
         'bedrockruntime_operations.R' 'comprehend_service.R'
         'comprehend_interfaces.R' 'comprehend_operations.R'
@@ -77,11 +88,11 @@ Collate: 'augmentedairuntime_service.R'
         'voiceid_service.R' 'voiceid_interfaces.R'
         'voiceid_operations.R'
 NeedsCompilation: no
-Packaged: 2024-09-11 08:29:16 UTC; dyfanjones
+Packaged: 2025-02-08 17:03:52 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2024-09-11 22:51:15 UTC
+Date/Publication: 2025-02-08 19:40:02 UTC

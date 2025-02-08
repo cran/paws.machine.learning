@@ -24,7 +24,8 @@ lexruntimev2_delete_session <- function(botId, botAliasId, localeId, sessionId) 
     http_method = "DELETE",
     http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .lexruntimev2$delete_session_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId)
   output <- .lexruntimev2$delete_session_output()
@@ -57,7 +58,8 @@ lexruntimev2_get_session <- function(botId, botAliasId, localeId, sessionId) {
     http_method = "GET",
     http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .lexruntimev2$get_session_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId)
   output <- .lexruntimev2$get_session_output()
@@ -107,7 +109,8 @@ lexruntimev2_put_session <- function(botId, botAliasId, localeId, sessionId, mes
     http_method = "POST",
     http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .lexruntimev2$put_session_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId, messages = messages, sessionState = sessionState, requestAttributes = requestAttributes, responseContentType = responseContentType)
   output <- .lexruntimev2$put_session_output()
@@ -147,7 +150,8 @@ lexruntimev2_recognize_text <- function(botId, botAliasId, localeId, sessionId, 
     http_method = "POST",
     http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .lexruntimev2$recognize_text_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId, text = text, sessionState = sessionState, requestAttributes = requestAttributes)
   output <- .lexruntimev2$recognize_text_output()
@@ -243,7 +247,8 @@ lexruntimev2_recognize_utterance <- function(botId, botAliasId, localeId, sessio
     http_method = "POST",
     http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .lexruntimev2$recognize_utterance_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId, sessionState = sessionState, requestAttributes = requestAttributes, requestContentType = requestContentType, responseContentType = responseContentType, inputStream = inputStream)
   output <- .lexruntimev2$recognize_utterance_output()
@@ -254,3 +259,43 @@ lexruntimev2_recognize_utterance <- function(botId, botAliasId, localeId, sessio
   return(response)
 }
 .lexruntimev2$operations$recognize_utterance <- lexruntimev2_recognize_utterance
+
+#' Starts an HTTP/2 bidirectional event stream that enables you to send
+#' audio, text, or DTMF input in real time
+#'
+#' @description
+#' Starts an HTTP/2 bidirectional event stream that enables you to send audio, text, or DTMF input in real time. After your application starts a conversation, users send input to Amazon Lex V2 as a stream of events. Amazon Lex V2 processes the incoming events and responds with streaming text or audio events.
+#'
+#' See [https://www.paws-r-sdk.com/docs/lexruntimev2_start_conversation/](https://www.paws-r-sdk.com/docs/lexruntimev2_start_conversation/) for full documentation.
+#'
+#' @param botId &#91;required&#93; The identifier of the bot to process the request.
+#' @param botAliasId &#91;required&#93; The alias identifier in use for the bot that processes the request.
+#' @param localeId &#91;required&#93; The locale where the session is in use.
+#' @param sessionId &#91;required&#93; The identifier of the user session that is having the conversation.
+#' @param conversationMode The conversation type that you are using the Amazon Lex V2. If the
+#' conversation mode is `AUDIO` you can send both audio and DTMF
+#' information. If the mode is `TEXT` you can only send text.
+#' @param requestEventStream &#91;required&#93; Represents the stream of events to Amazon Lex V2 from your application.
+#' The events are encoded as HTTP/2 data frames.
+#'
+#' @keywords internal
+#'
+#' @rdname lexruntimev2_start_conversation
+lexruntimev2_start_conversation <- function(botId, botAliasId, localeId, sessionId, conversationMode = NULL, requestEventStream) {
+  op <- new_operation(
+    name = "StartConversation",
+    http_method = "POST",
+    http_path = "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = TRUE
+  )
+  input <- .lexruntimev2$start_conversation_input(botId = botId, botAliasId = botAliasId, localeId = localeId, sessionId = sessionId, conversationMode = conversationMode, requestEventStream = requestEventStream)
+  output <- .lexruntimev2$start_conversation_output()
+  config <- get_config()
+  svc <- .lexruntimev2$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.lexruntimev2$operations$start_conversation <- lexruntimev2_start_conversation
