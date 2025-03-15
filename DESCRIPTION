@@ -1,6 +1,6 @@
 Package: paws.machine.learning
 Title: 'Amazon Web Services' Machine Learning Services
-Version: 0.8.0
+Version: 0.9.0
 Authors@R: c(
     person("David", "Kretch", , "david.kretch@gmail.com", role = "aut"),
     person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
@@ -37,8 +37,7 @@ Collate: 'augmentedairuntime_service.R'
         'bedrockruntime_operations.R' 'comprehend_service.R'
         'comprehend_interfaces.R' 'comprehend_operations.R'
         'comprehendmedical_service.R' 'comprehendmedical_interfaces.R'
-        'comprehendmedical_operations.R' 'elasticinference_service.R'
-        'elasticinference_interfaces.R' 'elasticinference_operations.R'
+        'comprehendmedical_operations.R'
         'forecastqueryservice_service.R'
         'forecastqueryservice_interfaces.R'
         'forecastqueryservice_operations.R' 'forecastservice_service.R'
@@ -88,11 +87,11 @@ Collate: 'augmentedairuntime_service.R'
         'voiceid_service.R' 'voiceid_interfaces.R'
         'voiceid_operations.R'
 NeedsCompilation: no
-Packaged: 2025-02-08 17:03:52 UTC; dyfanjones
+Packaged: 2025-03-14 09:22:41 UTC; dyfanjones
 Author: David Kretch [aut],
   Adam Banker [aut],
   Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
 Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-02-08 19:40:02 UTC
+Date/Publication: 2025-03-15 06:50:02 UTC
