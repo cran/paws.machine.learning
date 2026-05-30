@@ -5,7 +5,7 @@ NULL
 #' Amazon SageMaker Runtime
 #'
 #' @description
-#' The Amazon SageMaker runtime API.
+#' The Amazon SageMaker AI runtime API.
 #'
 #' @param
 #' config
@@ -90,8 +90,8 @@ NULL
 #'
 #' @section Operations:
 #' \tabular{ll}{
-#'  \link[=sagemakerruntime_invoke_endpoint]{invoke_endpoint} \tab After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint\cr
-#'  \link[=sagemakerruntime_invoke_endpoint_async]{invoke_endpoint_async} \tab After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner\cr
+#'  \link[=sagemakerruntime_invoke_endpoint]{invoke_endpoint} \tab After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint\cr
+#'  \link[=sagemakerruntime_invoke_endpoint_async]{invoke_endpoint_async} \tab After you deploy a model into production using Amazon SageMaker AI hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner\cr
 #'  \link[=sagemakerruntime_invoke_endpoint_with_response_stream]{invoke_endpoint_with_response_stream} \tab Invokes a model at the specified endpoint to return the inference response as a stream
 #' }
 #'
@@ -124,7 +124,7 @@ sagemakerruntime <- function(config = list(), credentials = list(), endpoint = N
 
 .sagemakerruntime$metadata <- list(
   service_name = "runtime.sagemaker",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.sagemaker.{region}.amazonaws.eu", global = FALSE)),
   service_id = "SageMaker Runtime",
   api_version = "2017-05-13",
   signing_name = "sagemaker",

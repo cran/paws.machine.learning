@@ -5,14 +5,7 @@ NULL
 #' AWS Comprehend Medical
 #'
 #' @description
-#' Amazon Comprehend Medical extracts structured information from
-#' unstructured clinical text. Use these actions to gain insight in your
-#' documents. Amazon Comprehend Medical only detects entities in English
-#' language texts. Amazon Comprehend Medical places limits on the sizes of
-#' files allowed for different API operations. To learn more, see
-#' [Guidelines and
-#' quotas](https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html)
-#' in the *Amazon Comprehend Medical Developer Guide*.
+#' Amazon Comprehend Medical extracts structured information from unstructured clinical text. Use these actions to gain insight in your documents. Amazon Comprehend Medical only detects entities in English language texts. Amazon Comprehend Medical places limits on the sizes of files allowed for different API operations. To learn more, see [Guidelines and quotas](https://docs.aws.amazon.com/comprehend-medical/latest/dev/comprehendmedical-quotas.html) in the *Amazon Comprehend Medical Developer Guide*.
 #'
 #' @param
 #' config
@@ -154,7 +147,7 @@ comprehendmedical <- function(config = list(), credentials = list(), endpoint = 
 
 .comprehendmedical$metadata <- list(
   service_name = "comprehendmedical",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "comprehendmedical.{region}.amazonaws.eu", global = FALSE)),
   service_id = "ComprehendMedical",
   api_version = "2018-10-30",
   signing_name = "comprehendmedical",
@@ -163,6 +156,6 @@ comprehendmedical <- function(config = list(), credentials = list(), endpoint = 
 )
 
 .comprehendmedical$service <- function(config = list(), op = NULL) {
-  handlers <- new_handlers("jsonrpc", "v4")
+  handlers <- new_handlers("smithyrpcv2cbor", "v4")
   new_service(.comprehendmedical$metadata, handlers, config, op)
 }

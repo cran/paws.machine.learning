@@ -5,12 +5,9 @@ NULL
 #' Amazon SageMaker Feature Store Runtime
 #'
 #' @description
-#' Contains all data plane API operations and data types for the Amazon
-#' SageMaker Feature Store. Use this API to put, delete, and retrieve (get)
-#' features from a feature store.
+#' Contains all data plane API operations and data types for the Amazon SageMaker Feature Store. Use this API to put, delete, and retrieve (get) features from a feature store.
 #' 
-#' Use the following operations to configure your `OnlineStore` and
-#' `OfflineStore` features, and to create and manage feature groups:
+#' Use the following operations to configure your `OnlineStore` and `OfflineStore` features, and to create and manage feature groups:
 #' 
 #' -   [CreateFeatureGroup](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateFeatureGroup.html)
 #' 
@@ -138,7 +135,7 @@ sagemakerfeaturestoreruntime <- function(config = list(), credentials = list(), 
 
 .sagemakerfeaturestoreruntime$metadata <- list(
   service_name = "sagemakerfeaturestoreruntime",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "featurestore-runtime.sagemaker.{region}.amazonaws.eu", global = FALSE)),
   service_id = "SageMaker FeatureStore Runtime",
   api_version = "2020-07-01",
   signing_name = "sagemaker",

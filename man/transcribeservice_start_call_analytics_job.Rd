@@ -19,93 +19,44 @@ transcribeservice_start_call_analytics_job(
 \arguments{
 \item{CallAnalyticsJobName}{[required] A unique name, chosen by you, for your Call Analytics job.
 
-This name is case sensitive, cannot contain spaces, and must be unique
-within an Amazon Web Services account. If you try to create a new job
-with the same name as an existing job, you get a \code{ConflictException}
-error.}
+This name is case sensitive, cannot contain spaces, and must be unique within an Amazon Web Services account. If you try to create a new job with the same name as an existing job, you get a \code{ConflictException} error.}
 
-\item{Media}{[required] Describes the Amazon S3 location of the media file you want to use in
-your Call Analytics request.}
+\item{Media}{[required] Describes the Amazon S3 location of the media file you want to use in your Call Analytics request.}
 
-\item{OutputLocation}{The Amazon S3 location where you want your Call Analytics transcription
-output stored. You can use any of the following formats to specify the
-output location:
+\item{OutputLocation}{The Amazon S3 location where you want your Call Analytics transcription output stored. You can use any of the following formats to specify the output location:
 \enumerate{
 \item s3://DOC-EXAMPLE-BUCKET
 \item s3://DOC-EXAMPLE-BUCKET/my-output-folder/
 \item s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
 }
 
-Unless you specify a file name (option 3), the name of your output file
-has a default value that matches the name you specified for your
-transcription job using the \code{CallAnalyticsJobName} parameter.
+Unless you specify a file name (option 3), the name of your output file has a default value that matches the name you specified for your transcription job using the \code{CallAnalyticsJobName} parameter.
 
-You can specify a KMS key to encrypt your output using the
-\code{OutputEncryptionKMSKeyId} parameter. If you do not specify a KMS key,
-Amazon Transcribe uses the default Amazon S3 key for server-side
-encryption.
+You can specify a KMS key to encrypt your output using the \code{OutputEncryptionKMSKeyId} parameter. If you do not specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption.
 
-If you do not specify \code{OutputLocation}, your transcript is placed in a
-service-managed Amazon S3 bucket and you are provided with a URI to
-access your transcript.}
+If you do not specify \code{OutputLocation}, your transcript is placed in a service-managed Amazon S3 bucket and you are provided with a URI to access your transcript.}
 
-\item{OutputEncryptionKMSKeyId}{The KMS key you want to use to encrypt your Call Analytics output.
+\item{OutputEncryptionKMSKeyId}{The Amazon Resource Name (ARN) of a KMS key that you want to use to encrypt your Call Analytics output.
 
-If using a key located in the \strong{current} Amazon Web Services account,
-you can specify your KMS key in one of four ways:
-\enumerate{
-\item Use the KMS key ID itself. For example,
-\verb{1234abcd-12ab-34cd-56ef-1234567890ab}.
-\item Use an alias for the KMS key ID. For example, \code{alias/ExampleAlias}.
-\item Use the Amazon Resource Name (ARN) for the KMS key ID. For example,
-\verb{arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab}.
-\item Use the ARN for the KMS key alias. For example,
-\code{arn:aws:kms:region:account-ID:alias/ExampleAlias}.
-}
+KMS key ARNs have the format \code{arn:partition:kms:region:account:key/key-id}. For example: \verb{arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab}. For more information, see \href{https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN}{KMS key ARNs}.
 
-If using a key located in a \strong{different} Amazon Web Services account
-than the current Amazon Web Services account, you can specify your KMS
-key in one of two ways:
-\enumerate{
-\item Use the ARN for the KMS key ID. For example,
-\verb{arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab}.
-\item Use the ARN for the KMS key alias. For example,
-\code{arn:aws:kms:region:account-ID:alias/ExampleAlias}.
-}
+If you do not specify an encryption key, your output is encrypted with the default Amazon S3 key (SSE-S3).
 
-If you do not specify an encryption key, your output is encrypted with
-the default Amazon S3 key (SSE-S3).
+Note that the role making the request and the role specified in the \code{DataAccessRoleArn} request parameter (if present) must have permission to use the specified KMS key.}
 
-If you specify a KMS key to encrypt your output, you must also specify
-an output location using the \code{OutputLocation} parameter.
+\item{DataAccessRoleArn}{The Amazon Resource Name (ARN) of an IAM role that has permissions to access the Amazon S3 bucket that contains your input files. If the role that you specify doesn’t have the appropriate permissions to access the specified Amazon S3 location, your request fails.
 
-Note that the role making the request must have permission to use the
-specified KMS key.}
-
-\item{DataAccessRoleArn}{The Amazon Resource Name (ARN) of an IAM role that has permissions to
-access the Amazon S3 bucket that contains your input files. If the role
-that you specify doesn’t have the appropriate permissions to access the
-specified Amazon S3 location, your request fails.
-
-IAM role ARNs have the format
-\code{arn:partition:iam::account:role/role-name-with-path}. For example:
-\verb{arn:aws:iam::111122223333:role/Admin}.
+IAM role ARNs have the format \code{arn:partition:iam::account:role/role-name-with-path}. For example: \verb{arn:aws:iam::111122223333:role/Admin}.
 
 For more information, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns}{IAM ARNs}.}
 
-\item{Settings}{Specify additional optional settings in your request, including content
-redaction; allows you to apply custom language models, vocabulary
-filters, and custom vocabularies to your Call Analytics job.}
+\item{Settings}{Specify additional optional settings in your request, including content redaction; allows you to apply custom language models, vocabulary filters, and custom vocabularies to your Call Analytics job.}
 
-\item{Tags}{Adds one or more custom tags, each in the form of a key:value pair, to a
-new call analytics job at the time you start this new job.
+\item{Tags}{Adds one or more custom tags, each in the form of a key:value pair, to a new call analytics job at the time you start this new job.
 
 To learn more about using tags with Amazon Transcribe, refer to \href{https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html}{Tagging resources}.}
 
-\item{ChannelDefinitions}{Makes it possible to specify which speaker is on which channel. For
-example, if your agent is the first participant to speak, you would set
-\code{ChannelId} to \code{0} (to indicate the first channel) and \code{ParticipantRole}
-to \code{AGENT} (to indicate that it's the agent speaking).}
+\item{ChannelDefinitions}{Makes it possible to specify which speaker is on which channel. For example, if your agent is the first participant to speak, you would set \code{ChannelId} to \code{0} (to indicate the first channel) and \code{ParticipantRole} to \code{AGENT} (to indicate that it's the agent speaking).}
 }
 \description{
 Transcribes the audio from a customer service call and applies any additional Request Parameters you choose to include in your request.

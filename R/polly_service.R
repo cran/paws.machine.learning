@@ -5,13 +5,9 @@ NULL
 #' Amazon Polly
 #'
 #' @description
-#' Amazon Polly is a web service that makes it easy to synthesize speech
-#' from text.
+#' Amazon Polly is a web service that makes it easy to synthesize speech from text.
 #' 
-#' The Amazon Polly service provides API operations for synthesizing
-#' high-quality speech from plain text and Speech Synthesis Markup Language
-#' (SSML), along with managing pronunciations lexicons that enable you to
-#' get the best results for your application domain.
+#' The Amazon Polly service provides API operations for synthesizing high-quality speech from plain text and Speech Synthesis Markup Language (SSML), along with managing pronunciations lexicons that enable you to get the best results for your application domain.
 #'
 #' @param
 #' config
@@ -104,6 +100,7 @@ NULL
 #'  \link[=polly_list_lexicons]{list_lexicons} \tab Returns a list of pronunciation lexicons stored in an Amazon Web Services Region\cr
 #'  \link[=polly_list_speech_synthesis_tasks]{list_speech_synthesis_tasks} \tab Returns a list of SpeechSynthesisTask objects ordered by their creation date\cr
 #'  \link[=polly_put_lexicon]{put_lexicon} \tab Stores a pronunciation lexicon in an Amazon Web Services Region\cr
+#'  \link[=polly_start_speech_synthesis_stream]{start_speech_synthesis_stream} \tab Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection\cr
 #'  \link[=polly_start_speech_synthesis_task]{start_speech_synthesis_task} \tab Allows the creation of an asynchronous synthesis task, by starting a new SpeechSynthesisTask\cr
 #'  \link[=polly_synthesize_speech]{synthesize_speech} \tab Synthesizes UTF-8 input, plain text or SSML, to a stream of bytes
 #' }
@@ -137,7 +134,7 @@ polly <- function(config = list(), credentials = list(), endpoint = NULL, region
 
 .polly$metadata <- list(
   service_name = "polly",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "polly.{region}.amazonaws.eu", global = FALSE)),
   service_id = "Polly",
   api_version = "2016-06-10",
   signing_name = "polly",

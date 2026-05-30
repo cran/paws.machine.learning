@@ -5,8 +5,7 @@ NULL
 #' Agents for Amazon Bedrock
 #'
 #' @description
-#' Describes the API operations for creating and managing Amazon Bedrock
-#' agents.
+#' Describes the API operations for creating and managing Amazon Bedrock agents.
 #'
 #' @param
 #' config
@@ -127,7 +126,7 @@ NULL
 #'  \link[=bedrockagent_get_flow_alias]{get_flow_alias} \tab Retrieves information about a flow\cr
 #'  \link[=bedrockagent_get_flow_version]{get_flow_version} \tab Retrieves information about a version of a flow\cr
 #'  \link[=bedrockagent_get_ingestion_job]{get_ingestion_job} \tab Gets information about a data ingestion job\cr
-#'  \link[=bedrockagent_get_knowledge_base]{get_knowledge_base} \tab Gets information about a knoweldge base\cr
+#'  \link[=bedrockagent_get_knowledge_base]{get_knowledge_base} \tab Gets information about a knowledge base\cr
 #'  \link[=bedrockagent_get_knowledge_base_documents]{get_knowledge_base_documents} \tab Retrieves specific documents from a data source that is connected to a knowledge base\cr
 #'  \link[=bedrockagent_get_prompt]{get_prompt} \tab Retrieves information about the working draft (DRAFT version) of a prompt or a version of it, depending on whether you include the promptVersion field or not\cr
 #'  \link[=bedrockagent_ingest_knowledge_base_documents]{ingest_knowledge_base_documents} \tab Ingests documents directly into the knowledge base that is connected to the data source\cr
@@ -194,11 +193,11 @@ bedrockagent <- function(config = list(), credentials = list(), endpoint = NULL,
 
 .bedrockagent$metadata <- list(
   service_name = "bedrockagent",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "bedrock-agent.{region}.amazonaws.eu", global = FALSE)),
   service_id = "Bedrock Agent",
   api_version = "2023-06-05",
   signing_name = "bedrock",
-  json_version = "1.1",
+  json_version = "",
   target_prefix = ""
 )
 

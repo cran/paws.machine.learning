@@ -5,18 +5,7 @@ NULL
 #' Amazon Lex Runtime Service
 #'
 #' @description
-#' Amazon Lex provides both build and runtime endpoints. Each endpoint
-#' provides a set of operations (API). Your conversational bot uses the
-#' runtime API to understand user utterances (user input text or voice).
-#' For example, suppose a user says "I want pizza", your bot sends this
-#' input to Amazon Lex using the runtime API. Amazon Lex recognizes that
-#' the user request is for the OrderPizza intent (one of the intents
-#' defined in the bot). Then Amazon Lex engages in user conversation on
-#' behalf of the bot to elicit required information (slot values, such as
-#' pizza size and crust type), and then performs fulfillment activity (that
-#' you configured when you created the bot). You use the build-time API to
-#' create and manage your Amazon Lex bot. For a list of build-time
-#' operations, see the build-time API, .
+#' Amazon Lex provides both build and runtime endpoints. Each endpoint provides a set of operations (API). Your conversational bot uses the runtime API to understand user utterances (user input text or voice). For example, suppose a user says "I want pizza", your bot sends this input to Amazon Lex using the runtime API. Amazon Lex recognizes that the user request is for the OrderPizza intent (one of the intents defined in the bot). Then Amazon Lex engages in user conversation on behalf of the bot to elicit required information (slot values, such as pizza size and crust type), and then performs fulfillment activity (that you configured when you created the bot). You use the build-time API to create and manage your Amazon Lex bot. For a list of build-time operations, see the build-time API, .
 #'
 #' @param
 #' config
@@ -137,7 +126,7 @@ lexruntimeservice <- function(config = list(), credentials = list(), endpoint = 
 
 .lexruntimeservice$metadata <- list(
   service_name = "runtime.lex",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "runtime.lex.{region}.amazonaws.eu", global = FALSE)),
   service_id = "Lex Runtime Service",
   api_version = "2016-11-28",
   signing_name = "lex",

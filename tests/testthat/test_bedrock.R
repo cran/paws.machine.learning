@@ -1,7 +1,23 @@
 svc <- paws::bedrock()
 
+test_that("list_advanced_prompt_optimization_jobs", {
+  expect_error(svc$list_advanced_prompt_optimization_jobs(), NA)
+})
+
+test_that("list_automated_reasoning_policies", {
+  expect_error(svc$list_automated_reasoning_policies(), NA)
+})
+
+test_that("list_custom_model_deployments", {
+  expect_error(svc$list_custom_model_deployments(), NA)
+})
+
 test_that("list_custom_models", {
   expect_error(svc$list_custom_models(), NA)
+})
+
+test_that("list_enforced_guardrails_configuration", {
+  expect_error(svc$list_enforced_guardrails_configuration(), NA)
 })
 
 test_that("list_evaluation_jobs", {

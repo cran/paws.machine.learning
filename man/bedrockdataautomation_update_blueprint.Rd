@@ -7,15 +7,18 @@
 bedrockdataautomation_update_blueprint(
   blueprintArn,
   schema,
-  blueprintStage = NULL
+  blueprintStage = NULL,
+  encryptionConfiguration = NULL
 )
 }
 \arguments{
 \item{blueprintArn}{[required] ARN generated at the server side when a Blueprint is created}
 
-\item{schema}{[required]}
+\item{schema}{[required] Schema of the blueprint}
 
-\item{blueprintStage}{}
+\item{blueprintStage}{Stage of the Blueprint}
+
+\item{encryptionConfiguration}{KMS Encryption Configuration}
 }
 \description{
 Updates an existing Amazon Bedrock Data Automation Blueprint

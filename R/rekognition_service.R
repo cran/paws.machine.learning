@@ -5,16 +5,7 @@ NULL
 #' Amazon Rekognition
 #'
 #' @description
-#' This is the API Reference for [Amazon Rekognition
-#' Image](https://docs.aws.amazon.com/rekognition/latest/dg/images.html),
-#' [Amazon Rekognition Custom
-#' Labels](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html),
-#' [Amazon Rekognition Stored
-#' Video](https://docs.aws.amazon.com/rekognition/latest/dg/video.html),
-#' [Amazon Rekognition Streaming
-#' Video](https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html).
-#' It provides descriptions of actions, data types, common parameters, and
-#' common errors.
+#' This is the API Reference for [Amazon Rekognition Image](https://docs.aws.amazon.com/rekognition/latest/dg/images.html), [Amazon Rekognition Custom Labels](https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/what-is.html), [Amazon Rekognition Stored Video](https://docs.aws.amazon.com/rekognition/latest/dg/video.html), [Amazon Rekognition Streaming Video](https://docs.aws.amazon.com/rekognition/latest/dg/streaming-video.html). It provides descriptions of actions, data types, common parameters, and common errors.
 #' 
 #' **Amazon Rekognition Image**
 #' 
@@ -300,7 +291,7 @@ NULL
 #'  \link[=rekognition_get_face_search]{get_face_search} \tab Gets the face search results for Amazon Rekognition Video face search started by StartFaceSearch\cr
 #'  \link[=rekognition_get_label_detection]{get_label_detection} \tab Gets the label detection results of a Amazon Rekognition Video analysis started by StartLabelDetection\cr
 #'  \link[=rekognition_get_media_analysis_job]{get_media_analysis_job} \tab Retrieves the results for a given media analysis job\cr
-#'  \link[=rekognition_get_person_tracking]{get_person_tracking} \tab Gets the path tracking results of a Amazon Rekognition Video analysis started by StartPersonTracking\cr
+#'  \link[=rekognition_get_person_tracking]{get_person_tracking} \tab End of support notice: On October 31, 2025, AWS will discontinue support for Amazon Rekognition People Pathing\cr
 #'  \link[=rekognition_get_segment_detection]{get_segment_detection} \tab Gets the segment detection results of a Amazon Rekognition Video analysis started by StartSegmentDetection\cr
 #'  \link[=rekognition_get_text_detection]{get_text_detection} \tab Gets the text detection results of a Amazon Rekognition Video analysis started by StartTextDetection\cr
 #'  \link[=rekognition_index_faces]{index_faces} \tab Detects faces in the input image and adds them to the specified collection\cr
@@ -325,7 +316,7 @@ NULL
 #'  \link[=rekognition_start_face_search]{start_face_search} \tab Starts the asynchronous search for faces in a collection that match the faces of persons detected in a stored video\cr
 #'  \link[=rekognition_start_label_detection]{start_label_detection} \tab Starts asynchronous detection of labels in a stored video\cr
 #'  \link[=rekognition_start_media_analysis_job]{start_media_analysis_job} \tab Initiates a new media analysis job\cr
-#'  \link[=rekognition_start_person_tracking]{start_person_tracking} \tab Starts the asynchronous tracking of a person's path in a stored video\cr
+#'  \link[=rekognition_start_person_tracking]{start_person_tracking} \tab End of support notice: On October 31, 2025, AWS will discontinue support for Amazon Rekognition People Pathing\cr
 #'  \link[=rekognition_start_project_version]{start_project_version} \tab This operation applies only to Amazon Rekognition Custom Labels\cr
 #'  \link[=rekognition_start_segment_detection]{start_segment_detection} \tab Starts asynchronous detection of segment detection in a stored video\cr
 #'  \link[=rekognition_start_stream_processor]{start_stream_processor} \tab Starts processing a stream processor\cr
@@ -367,7 +358,7 @@ rekognition <- function(config = list(), credentials = list(), endpoint = NULL, 
 
 .rekognition$metadata <- list(
   service_name = "rekognition",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "rekognition.{region}.amazonaws.eu", global = FALSE)),
   service_id = "Rekognition",
   api_version = "2016-06-27",
   signing_name = "rekognition",

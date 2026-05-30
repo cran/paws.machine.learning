@@ -7,6 +7,7 @@
 lexmodelsv2_update_intent(
   intentId,
   intentName,
+  intentDisplayName = NULL,
   description = NULL,
   parentIntentSignature = NULL,
   sampleUtterances = NULL,
@@ -22,7 +23,8 @@ lexmodelsv2_update_intent(
   botVersion,
   localeId,
   initialResponseSetting = NULL,
-  qnAIntentConfiguration = NULL
+  qnAIntentConfiguration = NULL,
+  qInConnectIntentConfiguration = NULL
 )
 }
 \arguments{
@@ -30,33 +32,27 @@ lexmodelsv2_update_intent(
 
 \item{intentName}{[required] The new name for the intent.}
 
+\item{intentDisplayName}{The new display name for the intent.}
+
 \item{description}{The new description of the intent.}
 
-\item{parentIntentSignature}{The signature of the new built-in intent to use as the parent of this
-intent.}
+\item{parentIntentSignature}{The signature of the new built-in intent to use as the parent of this intent.}
 
 \item{sampleUtterances}{New utterances used to invoke the intent.}
 
-\item{dialogCodeHook}{The new Lambda function to use between each turn of the conversation
-with the bot.}
+\item{dialogCodeHook}{The new Lambda function to use between each turn of the conversation with the bot.}
 
-\item{fulfillmentCodeHook}{The new Lambda function to call when all of the intents required slots
-are provided and the intent is ready for fulfillment.}
+\item{fulfillmentCodeHook}{The new Lambda function to call when all of the intents required slots are provided and the intent is ready for fulfillment.}
 
-\item{slotPriorities}{A new list of slots and their priorities that are contained by the
-intent.}
+\item{slotPriorities}{A new list of slots and their priorities that are contained by the intent.}
 
-\item{intentConfirmationSetting}{New prompts that Amazon Lex sends to the user to confirm the completion
-of an intent.}
+\item{intentConfirmationSetting}{New prompts that Amazon Lex sends to the user to confirm the completion of an intent.}
 
-\item{intentClosingSetting}{The new response that Amazon Lex sends the user when the intent is
-closed.}
+\item{intentClosingSetting}{The new response that Amazon Lex sends the user when the intent is closed.}
 
-\item{inputContexts}{A new list of contexts that must be active in order for Amazon Lex to
-consider the intent.}
+\item{inputContexts}{A new list of contexts that must be active in order for Amazon Lex to consider the intent.}
 
-\item{outputContexts}{A new list of contexts that Amazon Lex activates when the intent is
-fulfilled.}
+\item{outputContexts}{A new list of contexts that Amazon Lex activates when the intent is fulfilled.}
 
 \item{kendraConfiguration}{New configuration settings for connecting to an Amazon Kendra index.}
 
@@ -64,17 +60,13 @@ fulfilled.}
 
 \item{botVersion}{[required] The version of the bot that contains the intent. Must be \code{DRAFT}.}
 
-\item{localeId}{[required] The identifier of the language and locale where this intent is used. The
-string must match one of the supported locales. For more information,
-see \href{https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html}{Supported languages}.}
+\item{localeId}{[required] The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see \href{https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html}{Supported languages}.}
 
-\item{initialResponseSetting}{Configuration settings for a response sent to the user before Amazon Lex
-starts eliciting slots.}
+\item{initialResponseSetting}{Configuration settings for a response sent to the user before Amazon Lex starts eliciting slots.}
 
-\item{qnAIntentConfiguration}{Specifies the configuration of the built-in \code{Amazon.QnAIntent}. The
-\code{AMAZON.QnAIntent} intent is called when Amazon Lex can't determine
-another intent to invoke. If you specify this field, you can't specify
-the \code{kendraConfiguration} field.}
+\item{qnAIntentConfiguration}{Specifies the configuration of the built-in \code{Amazon.QnAIntent}. The \code{AMAZON.QnAIntent} intent is called when Amazon Lex can't determine another intent to invoke. If you specify this field, you can't specify the \code{kendraConfiguration} field.}
+
+\item{qInConnectIntentConfiguration}{Qinconnect intent configuration details for the update intent request.}
 }
 \description{
 Updates the settings for an intent.

@@ -1,5 +1,29 @@
 svc <- paws::sagemaker()
 
+test_that("list_ai_benchmark_jobs", {
+  expect_error(svc$list_ai_benchmark_jobs(), NA)
+})
+
+test_that("list_ai_benchmark_jobs", {
+  expect_error(svc$list_ai_benchmark_jobs(MaxResults = 20), NA)
+})
+
+test_that("list_ai_recommendation_jobs", {
+  expect_error(svc$list_ai_recommendation_jobs(), NA)
+})
+
+test_that("list_ai_recommendation_jobs", {
+  expect_error(svc$list_ai_recommendation_jobs(MaxResults = 20), NA)
+})
+
+test_that("list_ai_workload_configs", {
+  expect_error(svc$list_ai_workload_configs(), NA)
+})
+
+test_that("list_ai_workload_configs", {
+  expect_error(svc$list_ai_workload_configs(MaxResults = 20), NA)
+})
+
 test_that("list_actions", {
   expect_error(svc$list_actions(), NA)
 })
@@ -262,6 +286,14 @@ test_that("list_lineage_groups", {
 
 test_that("list_lineage_groups", {
   expect_error(svc$list_lineage_groups(MaxResults = 20), NA)
+})
+
+test_that("list_mlflow_apps", {
+  expect_error(svc$list_mlflow_apps(), NA)
+})
+
+test_that("list_mlflow_apps", {
+  expect_error(svc$list_mlflow_apps(MaxResults = 20), NA)
 })
 
 test_that("list_mlflow_tracking_servers", {

@@ -7,7 +7,12 @@ provide with the request}
 \usage{
 bedrockagentruntime_invoke_inline_agent(
   actionGroups = NULL,
+  agentCollaboration = NULL,
+  agentName = NULL,
   bedrockModelConfigurations = NULL,
+  collaboratorConfigurations = NULL,
+  collaborators = NULL,
+  customOrchestration = NULL,
   customerEncryptionKeyArn = NULL,
   enableTrace = NULL,
   endSession = NULL,
@@ -18,73 +23,65 @@ bedrockagentruntime_invoke_inline_agent(
   inputText = NULL,
   instruction,
   knowledgeBases = NULL,
+  orchestrationType = NULL,
+  promptCreationConfigurations = NULL,
   promptOverrideConfiguration = NULL,
   sessionId,
   streamingConfigurations = NULL
 )
 }
 \arguments{
-\item{actionGroups}{A list of action groups with each action group defining the action the
-inline agent needs to carry out.}
+\item{actionGroups}{A list of action groups with each action group defining the action the inline agent needs to carry out.}
+
+\item{agentCollaboration}{Defines how the inline collaborator agent handles information across multiple collaborator agents to coordinate a final response. The inline collaborator agent can also be the supervisor.}
+
+\item{agentName}{The name for the agent.}
 
 \item{bedrockModelConfigurations}{Model settings for the request.}
 
-\item{customerEncryptionKeyArn}{The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use
-to encrypt your inline agent.}
+\item{collaboratorConfigurations}{Settings for an inline agent collaborator called with \code{\link[=bedrockagentruntime_invoke_inline_agent]{invoke_inline_agent}}.}
 
-\item{enableTrace}{Specifies whether to turn on the trace or not to track the agent's
-reasoning process. For more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html}{Using trace}.
+\item{collaborators}{List of collaborator inline agents.}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{ </p>
-}\if{html}{\out{</div>}}}
+\item{customOrchestration}{Contains details of the custom orchestration configured for the agent.}
+
+\item{customerEncryptionKeyArn}{The Amazon Resource Name (ARN) of the Amazon Web Services KMS key to use to encrypt your inline agent.}
+
+\item{enableTrace}{Specifies whether to turn on the trace or not to track the agent's reasoning process. For more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html}{Using trace}.}
 
 \item{endSession}{Specifies whether to end the session with the inline agent or not.}
 
-\item{foundationModel}{[required] The \href{https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html#model-ids-arns}{model identifier (ID)}
-of the model to use for orchestration by the inline agent. For example,
-\verb{meta.llama3-1-70b-instruct-v1:0}.}
+\item{foundationModel}{[required] The \href{https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html#model-ids-arns}{model identifier (ID)} of the model to use for orchestration by the inline agent. For example, \verb{meta.llama3-1-70b-instruct-v1:0}.}
 
-\item{guardrailConfiguration}{The
-\href{https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html}{guardrails}
-to assign to the inline agent.}
+\item{guardrailConfiguration}{The \href{https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html}{guardrails} to assign to the inline agent.}
 
-\item{idleSessionTTLInSeconds}{The number of seconds for which the inline agent should maintain session
-information. After this time expires, the subsequent
-\code{\link[=bedrockagentruntime_invoke_inline_agent]{invoke_inline_agent}} request
-begins a new session.
+\item{idleSessionTTLInSeconds}{The number of seconds for which the inline agent should maintain session information. After this time expires, the subsequent \code{\link[=bedrockagentruntime_invoke_inline_agent]{invoke_inline_agent}} request begins a new session.
 
-A user interaction remains active for the amount of time specified. If
-no conversation occurs during this time, the session expires and the
-data provided before the timeout is deleted.}
+A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and the data provided before the timeout is deleted.}
 
-\item{inlineSessionState}{Parameters that specify the various attributes of a sessions. You can
-include attributes for the session or prompt or, if you configured an
-action group to return control, results from invocation of the action
-group. For more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html}{Control session context}.
+\item{inlineSessionState}{Parameters that specify the various attributes of a sessions. You can include attributes for the session or prompt or, if you configured an action group to return control, results from invocation of the action group. For more information, see \href{https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html}{Control session context}.
 
-If you include \code{returnControlInvocationResults} in the \code{sessionState}
-field, the \code{inputText} field will be ignored.}
+If you include \code{returnControlInvocationResults} in the \code{sessionState} field, the \code{inputText} field will be ignored.}
 
 \item{inputText}{The prompt text to send to the agent.
 
-If you include \code{returnControlInvocationResults} in the \code{sessionState}
-field, the \code{inputText} field will be ignored.}
+If you include \code{returnControlInvocationResults} in the \code{sessionState} field, the \code{inputText} field will be ignored.}
 
-\item{instruction}{[required] The instructions that tell the inline agent what it should do and how it
-should interact with users.}
+\item{instruction}{[required] The instructions that tell the inline agent what it should do and how it should interact with users.}
 
 \item{knowledgeBases}{Contains information of the knowledge bases to associate with.}
 
-\item{promptOverrideConfiguration}{Configurations for advanced prompts used to override the default prompts
-to enhance the accuracy of the inline agent.}
+\item{orchestrationType}{Specifies the type of orchestration strategy for the agent. This is set to DEFAULT orchestration type, by default.}
 
-\item{sessionId}{[required] The unique identifier of the session. Use the same value across requests
-to continue the same conversation.}
+\item{promptCreationConfigurations}{Specifies parameters that control how the service populates the agent prompt for an \code{\link[=bedrockagentruntime_invoke_inline_agent]{invoke_inline_agent}} request. You can control which aspects of previous invocations in the same agent session the service uses to populate the agent prompt. This gives you more granular control over the contextual history that is used to process the current request.}
+
+\item{promptOverrideConfiguration}{Configurations for advanced prompts used to override the default prompts to enhance the accuracy of the inline agent.}
+
+\item{sessionId}{[required] The unique identifier of the session. Use the same value across requests to continue the same conversation.}
 
 \item{streamingConfigurations}{Specifies the configurations for streaming.
 
-To use agent streaming, you need permissions to perform the
-\code{bedrock:InvokeModelWithResponseStream} action.}
+To use agent streaming, you need permissions to perform the \code{bedrock:InvokeModelWithResponseStream} action.}
 }
 \description{
 Invokes an inline Amazon Bedrock agent using the configurations you provide with the request.
