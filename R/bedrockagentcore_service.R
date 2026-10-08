@@ -26,6 +26,7 @@ NULL
 #' \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
 #' \item{\strong{s3_force_path_style}: Set this to `true` to force the request to use path-style addressing, i.e. `http://s3.amazonaws.com/BUCKET/KEY`.}
 #' \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+#' \item{\strong{use_dual_stack}: Set this to `true` to use the dualstack (IPv4 and IPv6) endpoint for a service, where available, falling back to the regular endpoint when it isn't. Defaults to the `AWS_USE_DUALSTACK_ENDPOINT` environment variable when unset.}
 #' }
 #' @param
 #' credentials
@@ -64,7 +65,8 @@ NULL
 #'     close_connection = "logical",
 #'     timeout = "numeric",
 #'     s3_force_path_style = "logical",
-#'     sts_regional_endpoint = "string"
+#'     sts_regional_endpoint = "string",
+#'     use_dual_stack = "logical"
 #'   ),
 #'   credentials = list(
 #'     creds = list(
@@ -100,6 +102,7 @@ NULL
 #'  \link[=bedrockagentcore_create_payment_session]{create_payment_session} \tab Create a new payment session\cr
 #'  \link[=bedrockagentcore_delete_ab_test]{delete_ab_test} \tab Deletes an A/B test and its associated gateway rules\cr
 #'  \link[=bedrockagentcore_delete_batch_evaluation]{delete_batch_evaluation} \tab Deletes a batch evaluation and its associated results\cr
+#'  \link[=bedrockagentcore_delete_capacity_provider_session]{delete_capacity_provider_session} \tab Deletes a session associated with a capacity provider in Amazon Bedrock AgentCore and makes the session unavailable for further use\cr
 #'  \link[=bedrockagentcore_delete_event]{delete_event} \tab Deletes an event from an AgentCore Memory resource\cr
 #'  \link[=bedrockagentcore_delete_memory_record]{delete_memory_record} \tab Deletes a memory record from an AgentCore Memory resource\cr
 #'  \link[=bedrockagentcore_delete_payment_instrument]{delete_payment_instrument} \tab Deletes a payment instrument\cr
@@ -123,6 +126,7 @@ NULL
 #'  \link[=bedrockagentcore_get_workload_access_token]{get_workload_access_token} \tab Obtains a workload access token for agentic workloads not acting on behalf of a user\cr
 #'  \link[=bedrockagentcore_get_workload_access_token_for_jwt]{get_workload_access_token_for_jwt} \tab Obtains a workload access token for agentic workloads acting on behalf of a user, using a JWT token\cr
 #'  \link[=bedrockagentcore_get_workload_access_token_for_user_id]{get_workload_access_token_for_user_id} \tab Obtains a workload access token for agentic workloads acting on behalf of a user, using the user's ID\cr
+#'  \link[=bedrockagentcore_ingest_data]{ingest_data} \tab Submits content directly for ingestion to generate long-term memory records in a AgentCore Memory resource\cr
 #'  \link[=bedrockagentcore_invoke_agent_runtime]{invoke_agent_runtime} \tab Sends a request to an agent or tool hosted in an Amazon Bedrock AgentCore Runtime and receives responses in real-time\cr
 #'  \link[=bedrockagentcore_invoke_agent_runtime_command]{invoke_agent_runtime_command} \tab Executes a command in a runtime session container and streams the output back to the caller\cr
 #'  \link[=bedrockagentcore_invoke_browser]{invoke_browser} \tab Invokes an operating system-level action on a browser session in Amazon Bedrock AgentCore\cr

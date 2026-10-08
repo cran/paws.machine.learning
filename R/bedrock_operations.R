@@ -3,14 +3,14 @@
 #' @include bedrock_service.R
 NULL
 
-#' Batch delete the specified advanced prompt optimization jobs
+#' Deletes one or more advanced prompt optimization jobs
 #'
 #' @description
-#' Batch delete the specified advanced prompt optimization jobs.
+#' Deletes one or more advanced prompt optimization jobs.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrock_batch_delete_advanced_prompt_optimization_job/](https://www.paws-r-sdk.com/docs/bedrock_batch_delete_advanced_prompt_optimization_job/) for full documentation.
 #'
-#' @param jobIdentifiers &#91;required&#93; List of advanced prompt optimization job identifiers to delete.
+#' @param jobIdentifiers &#91;required&#93; A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.
 #'
 #' @keywords internal
 #'
@@ -22,7 +22,8 @@ bedrock_batch_delete_advanced_prompt_optimization_job <- function(jobIdentifiers
     http_path = "/advanced-prompt-optimization-job/batch-delete",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$batch_delete_advanced_prompt_optimization_job_input(jobIdentifiers = jobIdentifiers)
   output <- .bedrock$batch_delete_advanced_prompt_optimization_job_output()
@@ -53,7 +54,8 @@ bedrock_batch_delete_evaluation_job <- function(jobIdentifiers) {
     http_path = "/evaluation-jobs/batch-delete",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$batch_delete_evaluation_job_input(jobIdentifiers = jobIdentifiers)
   output <- .bedrock$batch_delete_evaluation_job_output()
@@ -85,7 +87,8 @@ bedrock_cancel_automated_reasoning_policy_build_workflow <- function(policyArn, 
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/cancel",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$cancel_automated_reasoning_policy_build_workflow_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId)
   output <- .bedrock$cancel_automated_reasoning_policy_build_workflow_output()
@@ -97,21 +100,21 @@ bedrock_cancel_automated_reasoning_policy_build_workflow <- function(policyArn, 
 }
 .bedrock$operations$cancel_automated_reasoning_policy_build_workflow <- bedrock_cancel_automated_reasoning_policy_build_workflow
 
-#' Creates an asynchronous batch job for advanced prompt optimization
+#' Creates an advanced prompt optimization job
 #'
 #' @description
-#' Creates an asynchronous batch job for advanced prompt optimization.
+#' Creates an advanced prompt optimization job. The job optimizes your prompt templates for specific models using your evaluation dataset and criteria.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrock_create_advanced_prompt_optimization_job/](https://www.paws-r-sdk.com/docs/bedrock_create_advanced_prompt_optimization_job/) for full documentation.
 #'
-#' @param jobName &#91;required&#93; Name of the advanced prompt optimization job.
-#' @param jobDescription Description of the advanced prompt optimization job.
-#' @param clientToken Idempotency token for the request.
-#' @param inputConfig &#91;required&#93; Input data configuration for the advanced prompt optimization job.
-#' @param outputConfig &#91;required&#93; Output data configuration for the advanced prompt optimization job.
-#' @param encryptionKeyArn KMS key ARN for encrypting output data.
-#' @param tags Tags to associate with the job.
-#' @param modelConfigurations &#91;required&#93; Model configurations for advanced prompt optimization.
+#' @param jobName &#91;required&#93; A name for the advanced prompt optimization job.
+#' @param jobDescription A description of the advanced prompt optimization job.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.
+#' @param inputConfig &#91;required&#93; Specifies the S3 location of your JSONL input file containing prompt templates and evaluation samples.
+#' @param outputConfig &#91;required&#93; Specifies the S3 location where optimization results will be stored.
+#' @param encryptionKeyArn The Amazon Resource Name (ARN) of the KMS key used for encrypting the output data. If not specified, the output is encrypted with an Amazon-owned KMS key.
+#' @param tags Tags to associate with the advanced prompt optimization job.
+#' @param modelConfigurations &#91;required&#93; A list of model configurations specifying the target models for prompt optimization. You can specify up to 5 models.
 #'
 #' @keywords internal
 #'
@@ -123,7 +126,8 @@ bedrock_create_advanced_prompt_optimization_job <- function(jobName, jobDescript
     http_path = "/advanced-prompt-optimization-jobs",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_advanced_prompt_optimization_job_input(jobName = jobName, jobDescription = jobDescription, clientToken = clientToken, inputConfig = inputConfig, outputConfig = outputConfig, encryptionKeyArn = encryptionKeyArn, tags = tags, modelConfigurations = modelConfigurations)
   output <- .bedrock$create_advanced_prompt_optimization_job_output()
@@ -159,7 +163,8 @@ bedrock_create_automated_reasoning_policy <- function(name, description = NULL, 
     http_path = "/automated-reasoning-policies",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_automated_reasoning_policy_input(name = name, description = description, clientRequestToken = clientRequestToken, policyDefinition = policyDefinition, kmsKeyId = kmsKeyId, tags = tags)
   output <- .bedrock$create_automated_reasoning_policy_output()
@@ -209,7 +214,8 @@ bedrock_create_automated_reasoning_policy_test_case <- function(policyArn, guard
     http_path = "/automated-reasoning-policies/{policyArn}/test-cases",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_automated_reasoning_policy_test_case_input(policyArn = policyArn, guardContent = guardContent, queryContent = queryContent, expectedAggregatedFindingsResult = expectedAggregatedFindingsResult, clientRequestToken = clientRequestToken, confidenceThreshold = confidenceThreshold)
   output <- .bedrock$create_automated_reasoning_policy_test_case_output()
@@ -243,7 +249,8 @@ bedrock_create_automated_reasoning_policy_version <- function(policyArn, clientR
     http_path = "/automated-reasoning-policies/{policyArn}/versions",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_automated_reasoning_policy_version_input(policyArn = policyArn, clientRequestToken = clientRequestToken, lastUpdatedDefinitionHash = lastUpdatedDefinitionHash, tags = tags)
   output <- .bedrock$create_automated_reasoning_policy_version_output()
@@ -263,11 +270,16 @@ bedrock_create_automated_reasoning_policy_version <- function(policyArn, clientR
 #' See [https://www.paws-r-sdk.com/docs/bedrock_create_custom_model/](https://www.paws-r-sdk.com/docs/bedrock_create_custom_model/) for full documentation.
 #'
 #' @param modelName &#91;required&#93; A unique name for the custom model.
-#' @param modelSourceConfig &#91;required&#93; The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.
+#' @param modelSourceConfig The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.
+#' @param customModelDataSource The data source for the custom model. Use this field to specify a SageMaker AI model package ARN as the source for your custom model. Amazon Bedrock resolves the model package to retrieve the model artifacts.
+#' 
+#' You can specify either `customModelDataSource` or `modelSourceConfig`, but not both.
 #' @param modelKmsKeyArn The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the custom model. If you don't provide a KMS key, Amazon Bedrock uses an Amazon Web Services-managed KMS key to encrypt the model.
 #' 
 #' If you provide a customer managed KMS key, your Amazon Bedrock service role must have permissions to use it. For more information see [Encryption of imported models](https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html).
 #' @param roleArn The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see [Setting up an IAM service role for importing models](https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html) in the Amazon Bedrock User Guide.
+#' 
+#' This field is required when you use `modelSourceConfig` with an Amazon S3 data source. It is not required when you use `customModelDataSource` with a model package ARN, because Amazon Bedrock uses its own credentials to access the model artifacts.
 #' @param modelTags A list of key-value pairs to associate with the custom model resource. You can use these tags to organize and identify your resources.
 #' 
 #' For more information, see [Tagging resources](https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html) in the [Amazon Bedrock User Guide](https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html).
@@ -276,16 +288,17 @@ bedrock_create_automated_reasoning_policy_version <- function(policyArn, clientR
 #' @keywords internal
 #'
 #' @rdname bedrock_create_custom_model
-bedrock_create_custom_model <- function(modelName, modelSourceConfig, modelKmsKeyArn = NULL, roleArn = NULL, modelTags = NULL, clientRequestToken = NULL) {
+bedrock_create_custom_model <- function(modelName, modelSourceConfig = NULL, customModelDataSource = NULL, modelKmsKeyArn = NULL, roleArn = NULL, modelTags = NULL, clientRequestToken = NULL) {
   op <- new_operation(
     name = "CreateCustomModel",
     http_method = "POST",
     http_path = "/custom-models/create-custom-model",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrock$create_custom_model_input(modelName = modelName, modelSourceConfig = modelSourceConfig, modelKmsKeyArn = modelKmsKeyArn, roleArn = roleArn, modelTags = modelTags, clientRequestToken = clientRequestToken)
+  input <- .bedrock$create_custom_model_input(modelName = modelName, modelSourceConfig = modelSourceConfig, customModelDataSource = customModelDataSource, modelKmsKeyArn = modelKmsKeyArn, roleArn = roleArn, modelTags = modelTags, clientRequestToken = clientRequestToken)
   output <- .bedrock$create_custom_model_output()
   config <- get_config()
   svc <- .bedrock$service(config, op)
@@ -318,7 +331,8 @@ bedrock_create_custom_model_deployment <- function(modelDeploymentName, modelArn
     http_path = "/model-customization/custom-model-deployments",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_custom_model_deployment_input(modelDeploymentName = modelDeploymentName, modelArn = modelArn, description = description, tags = tags, clientRequestToken = clientRequestToken)
   output <- .bedrock$create_custom_model_deployment_output()
@@ -360,7 +374,8 @@ bedrock_create_evaluation_job <- function(jobName, jobDescription = NULL, client
     http_path = "/evaluation-jobs",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_evaluation_job_input(jobName = jobName, jobDescription = jobDescription, clientRequestToken = clientRequestToken, roleArn = roleArn, customerEncryptionKeyId = customerEncryptionKeyId, jobTags = jobTags, applicationType = applicationType, evaluationConfig = evaluationConfig, inferenceConfig = inferenceConfig, outputDataConfig = outputDataConfig)
   output <- .bedrock$create_evaluation_job_output()
@@ -392,7 +407,8 @@ bedrock_create_foundation_model_agreement <- function(offerToken, modelId) {
     http_path = "/create-foundation-model-agreement",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_foundation_model_agreement_input(offerToken = offerToken, modelId = modelId)
   output <- .bedrock$create_foundation_model_agreement_output()
@@ -439,7 +455,8 @@ bedrock_create_guardrail <- function(name, description = NULL, topicPolicyConfig
     http_path = "/guardrails",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_guardrail_input(name = name, description = description, topicPolicyConfig = topicPolicyConfig, contentPolicyConfig = contentPolicyConfig, wordPolicyConfig = wordPolicyConfig, sensitiveInformationPolicyConfig = sensitiveInformationPolicyConfig, contextualGroundingPolicyConfig = contextualGroundingPolicyConfig, automatedReasoningPolicyConfig = automatedReasoningPolicyConfig, crossRegionConfig = crossRegionConfig, blockedInputMessaging = blockedInputMessaging, blockedOutputsMessaging = blockedOutputsMessaging, kmsKeyId = kmsKeyId, tags = tags, clientRequestToken = clientRequestToken)
   output <- .bedrock$create_guardrail_output()
@@ -472,7 +489,8 @@ bedrock_create_guardrail_version <- function(guardrailIdentifier, description = 
     http_path = "/guardrails/{guardrailIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_guardrail_version_input(guardrailIdentifier = guardrailIdentifier, description = description, clientRequestToken = clientRequestToken)
   output <- .bedrock$create_guardrail_version_output()
@@ -508,7 +526,8 @@ bedrock_create_inference_profile <- function(inferenceProfileName, description =
     http_path = "/inference-profiles",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_inference_profile_input(inferenceProfileName = inferenceProfileName, description = description, clientRequestToken = clientRequestToken, modelSource = modelSource, tags = tags)
   output <- .bedrock$create_inference_profile_output()
@@ -544,7 +563,8 @@ bedrock_create_marketplace_model_endpoint <- function(modelSourceIdentifier, end
     http_path = "/marketplace-model/endpoints",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_marketplace_model_endpoint_input(modelSourceIdentifier = modelSourceIdentifier, endpointConfig = endpointConfig, acceptEula = acceptEula, endpointName = endpointName, clientRequestToken = clientRequestToken, tags = tags)
   output <- .bedrock$create_marketplace_model_endpoint_output()
@@ -579,7 +599,8 @@ bedrock_create_model_copy_job <- function(sourceModelArn, targetModelName, model
     http_path = "/model-copy-jobs",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_model_copy_job_input(sourceModelArn = sourceModelArn, targetModelName = targetModelName, modelKmsKeyId = modelKmsKeyId, targetModelTags = targetModelTags, clientRequestToken = clientRequestToken)
   output <- .bedrock$create_model_copy_job_output()
@@ -624,7 +645,8 @@ bedrock_create_model_customization_job <- function(jobName, customModelName, rol
     http_path = "/model-customization-jobs",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_model_customization_job_input(jobName = jobName, customModelName = customModelName, roleArn = roleArn, clientRequestToken = clientRequestToken, baseModelIdentifier = baseModelIdentifier, customizationType = customizationType, customModelKmsKeyId = customModelKmsKeyId, jobTags = jobTags, customModelTags = customModelTags, trainingDataConfig = trainingDataConfig, validationDataConfig = validationDataConfig, outputDataConfig = outputDataConfig, hyperParameters = hyperParameters, vpcConfig = vpcConfig, customizationConfig = customizationConfig)
   output <- .bedrock$create_model_customization_job_output()
@@ -664,7 +686,8 @@ bedrock_create_model_import_job <- function(jobName, importedModelName, roleArn,
     http_path = "/model-import-jobs",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_model_import_job_input(jobName = jobName, importedModelName = importedModelName, roleArn = roleArn, modelDataSource = modelDataSource, jobTags = jobTags, importedModelTags = importedModelTags, clientRequestToken = clientRequestToken, vpcConfig = vpcConfig, importedModelKmsKeyId = importedModelKmsKeyId)
   output <- .bedrock$create_model_import_job_output()
@@ -704,7 +727,8 @@ bedrock_create_model_invocation_job <- function(jobName, roleArn, clientRequestT
     http_path = "/model-invocation-job",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_model_invocation_job_input(jobName = jobName, roleArn = roleArn, clientRequestToken = clientRequestToken, modelId = modelId, inputDataConfig = inputDataConfig, outputDataConfig = outputDataConfig, vpcConfig = vpcConfig, timeoutDurationInHours = timeoutDurationInHours, tags = tags, modelInvocationType = modelInvocationType)
   output <- .bedrock$create_model_invocation_job_output()
@@ -742,7 +766,8 @@ bedrock_create_prompt_router <- function(clientRequestToken = NULL, promptRouter
     http_path = "/prompt-routers",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_prompt_router_input(clientRequestToken = clientRequestToken, promptRouterName = promptRouterName, models = models, description = description, routingCriteria = routingCriteria, fallbackModel = fallbackModel, tags = tags)
   output <- .bedrock$create_prompt_router_output()
@@ -785,7 +810,8 @@ bedrock_create_provisioned_model_throughput <- function(clientRequestToken = NUL
     http_path = "/provisioned-model-throughput",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$create_provisioned_model_throughput_input(clientRequestToken = clientRequestToken, modelUnits = modelUnits, provisionedModelName = provisionedModelName, modelId = modelId, commitmentDuration = commitmentDuration, tags = tags)
   output <- .bedrock$create_provisioned_model_throughput_output()
@@ -817,7 +843,8 @@ bedrock_delete_automated_reasoning_policy <- function(policyArn, force = NULL) {
     http_path = "/automated-reasoning-policies/{policyArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_automated_reasoning_policy_input(policyArn = policyArn, force = force)
   output <- .bedrock$delete_automated_reasoning_policy_output()
@@ -851,7 +878,8 @@ bedrock_delete_automated_reasoning_policy_build_workflow <- function(policyArn, 
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_automated_reasoning_policy_build_workflow_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, lastUpdatedAt = lastUpdatedAt)
   output <- .bedrock$delete_automated_reasoning_policy_build_workflow_output()
@@ -884,7 +912,8 @@ bedrock_delete_automated_reasoning_policy_test_case <- function(policyArn, testC
     http_path = "/automated-reasoning-policies/{policyArn}/test-cases/{testCaseId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_automated_reasoning_policy_test_case_input(policyArn = policyArn, testCaseId = testCaseId, lastUpdatedAt = lastUpdatedAt)
   output <- .bedrock$delete_automated_reasoning_policy_test_case_output()
@@ -915,7 +944,8 @@ bedrock_delete_custom_model <- function(modelIdentifier) {
     http_path = "/custom-models/{modelIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_custom_model_input(modelIdentifier = modelIdentifier)
   output <- .bedrock$delete_custom_model_output()
@@ -946,7 +976,8 @@ bedrock_delete_custom_model_deployment <- function(customModelDeploymentIdentifi
     http_path = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_custom_model_deployment_input(customModelDeploymentIdentifier = customModelDeploymentIdentifier)
   output <- .bedrock$delete_custom_model_deployment_output()
@@ -977,7 +1008,8 @@ bedrock_delete_enforced_guardrail_configuration <- function(configId) {
     http_path = "/enforcedGuardrailsConfiguration/{configId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_enforced_guardrail_configuration_input(configId = configId)
   output <- .bedrock$delete_enforced_guardrail_configuration_output()
@@ -1008,7 +1040,8 @@ bedrock_delete_foundation_model_agreement <- function(modelId) {
     http_path = "/delete-foundation-model-agreement",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_foundation_model_agreement_input(modelId = modelId)
   output <- .bedrock$delete_foundation_model_agreement_output()
@@ -1040,7 +1073,8 @@ bedrock_delete_guardrail <- function(guardrailIdentifier, guardrailVersion = NUL
     http_path = "/guardrails/{guardrailIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_guardrail_input(guardrailIdentifier = guardrailIdentifier, guardrailVersion = guardrailVersion)
   output <- .bedrock$delete_guardrail_output()
@@ -1071,7 +1105,8 @@ bedrock_delete_imported_model <- function(modelIdentifier) {
     http_path = "/imported-models/{modelIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_imported_model_input(modelIdentifier = modelIdentifier)
   output <- .bedrock$delete_imported_model_output()
@@ -1102,7 +1137,8 @@ bedrock_delete_inference_profile <- function(inferenceProfileIdentifier) {
     http_path = "/inference-profiles/{inferenceProfileIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_inference_profile_input(inferenceProfileIdentifier = inferenceProfileIdentifier)
   output <- .bedrock$delete_inference_profile_output()
@@ -1133,7 +1169,8 @@ bedrock_delete_marketplace_model_endpoint <- function(endpointArn) {
     http_path = "/marketplace-model/endpoints/{endpointArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_marketplace_model_endpoint_input(endpointArn = endpointArn)
   output <- .bedrock$delete_marketplace_model_endpoint_output()
@@ -1164,7 +1201,8 @@ bedrock_delete_model_invocation_logging_configuration <- function() {
     http_path = "/logging/modelinvocations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_model_invocation_logging_configuration_input()
   output <- .bedrock$delete_model_invocation_logging_configuration_output()
@@ -1195,7 +1233,8 @@ bedrock_delete_prompt_router <- function(promptRouterArn) {
     http_path = "/prompt-routers/{promptRouterArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_prompt_router_input(promptRouterArn = promptRouterArn)
   output <- .bedrock$delete_prompt_router_output()
@@ -1226,7 +1265,8 @@ bedrock_delete_provisioned_model_throughput <- function(provisionedModelId) {
     http_path = "/provisioned-model-throughput/{provisionedModelId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_provisioned_model_throughput_input(provisionedModelId = provisionedModelId)
   output <- .bedrock$delete_provisioned_model_throughput_output()
@@ -1257,7 +1297,8 @@ bedrock_delete_resource_policy <- function(resourceArn) {
     http_path = "/resource-policy/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$delete_resource_policy_input(resourceArn = resourceArn)
   output <- .bedrock$delete_resource_policy_output()
@@ -1288,7 +1329,8 @@ bedrock_deregister_marketplace_model_endpoint <- function(endpointArn) {
     http_path = "/marketplace-model/endpoints/{endpointArn}/registration",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$deregister_marketplace_model_endpoint_input(endpointArn = endpointArn)
   output <- .bedrock$deregister_marketplace_model_endpoint_output()
@@ -1319,7 +1361,8 @@ bedrock_export_automated_reasoning_policy_version <- function(policyArn) {
     http_path = "/automated-reasoning-policies/{policyArn}/export",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$export_automated_reasoning_policy_version_input(policyArn = policyArn)
   output <- .bedrock$export_automated_reasoning_policy_version_output()
@@ -1331,14 +1374,46 @@ bedrock_export_automated_reasoning_policy_version <- function(policyArn) {
 }
 .bedrock$operations$export_automated_reasoning_policy_version <- bedrock_export_automated_reasoning_policy_version
 
-#' Retrieves the details and status of an advanced prompt optimization job
+#' Returns the account-wide data retention mode for Amazon Bedrock
 #'
 #' @description
-#' Retrieves the details and status of an advanced prompt optimization job.
+#' Returns the account-wide data retention mode for Amazon Bedrock.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrock_get_account_data_retention/](https://www.paws-r-sdk.com/docs/bedrock_get_account_data_retention/) for full documentation.
+#'
+
+#'
+#' @keywords internal
+#'
+#' @rdname bedrock_get_account_data_retention
+bedrock_get_account_data_retention <- function() {
+  op <- new_operation(
+    name = "GetAccountDataRetention",
+    http_method = "GET",
+    http_path = "/data-retention",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrock$get_account_data_retention_input()
+  output <- .bedrock$get_account_data_retention_output()
+  config <- get_config()
+  svc <- .bedrock$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrock$operations$get_account_data_retention <- bedrock_get_account_data_retention
+
+#' Gets information about an advanced prompt optimization job
+#'
+#' @description
+#' Gets information about an advanced prompt optimization job.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrock_get_advanced_prompt_optimization_job/](https://www.paws-r-sdk.com/docs/bedrock_get_advanced_prompt_optimization_job/) for full documentation.
 #'
-#' @param jobIdentifier &#91;required&#93; ARN or ID of the advanced prompt optimization job.
+#' @param jobIdentifier &#91;required&#93; The ARN or ID of the advanced prompt optimization job.
 #'
 #' @keywords internal
 #'
@@ -1350,7 +1425,8 @@ bedrock_get_advanced_prompt_optimization_job <- function(jobIdentifier) {
     http_path = "/advanced-prompt-optimization-jobs/{jobIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_advanced_prompt_optimization_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$get_advanced_prompt_optimization_job_output()
@@ -1381,7 +1457,8 @@ bedrock_get_automated_reasoning_policy <- function(policyArn) {
     http_path = "/automated-reasoning-policies/{policyArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_input(policyArn = policyArn)
   output <- .bedrock$get_automated_reasoning_policy_output()
@@ -1414,7 +1491,8 @@ bedrock_get_automated_reasoning_policy_annotations <- function(policyArn, buildW
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/annotations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_annotations_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId)
   output <- .bedrock$get_automated_reasoning_policy_annotations_output()
@@ -1447,7 +1525,8 @@ bedrock_get_automated_reasoning_policy_build_workflow <- function(policyArn, bui
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_build_workflow_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId)
   output <- .bedrock$get_automated_reasoning_policy_build_workflow_output()
@@ -1483,7 +1562,8 @@ bedrock_get_automated_reasoning_policy_build_workflow_result_assets <- function(
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/result-assets",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_build_workflow_result_assets_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, assetType = assetType, assetId = assetId)
   output <- .bedrock$get_automated_reasoning_policy_build_workflow_result_assets_output()
@@ -1516,7 +1596,8 @@ bedrock_get_automated_reasoning_policy_next_scenario <- function(policyArn, buil
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/scenarios",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_next_scenario_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId)
   output <- .bedrock$get_automated_reasoning_policy_next_scenario_output()
@@ -1548,7 +1629,8 @@ bedrock_get_automated_reasoning_policy_test_case <- function(policyArn, testCase
     http_path = "/automated-reasoning-policies/{policyArn}/test-cases/{testCaseId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_test_case_input(policyArn = policyArn, testCaseId = testCaseId)
   output <- .bedrock$get_automated_reasoning_policy_test_case_output()
@@ -1581,7 +1663,8 @@ bedrock_get_automated_reasoning_policy_test_result <- function(policyArn, buildW
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/test-cases/{testCaseId}/test-results",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_automated_reasoning_policy_test_result_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, testCaseId = testCaseId)
   output <- .bedrock$get_automated_reasoning_policy_test_result_output()
@@ -1613,7 +1696,8 @@ bedrock_get_custom_model <- function(modelIdentifier) {
     http_path = "/custom-models/{modelIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_custom_model_input(modelIdentifier = modelIdentifier)
   output <- .bedrock$get_custom_model_output()
@@ -1645,7 +1729,8 @@ bedrock_get_custom_model_deployment <- function(customModelDeploymentIdentifier)
     http_path = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_custom_model_deployment_input(customModelDeploymentIdentifier = customModelDeploymentIdentifier)
   output <- .bedrock$get_custom_model_deployment_output()
@@ -1676,7 +1761,8 @@ bedrock_get_evaluation_job <- function(jobIdentifier) {
     http_path = "/evaluation-jobs/{jobIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_evaluation_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$get_evaluation_job_output()
@@ -1707,7 +1793,8 @@ bedrock_get_foundation_model <- function(modelIdentifier) {
     http_path = "/foundation-models/{modelIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_foundation_model_input(modelIdentifier = modelIdentifier)
   output <- .bedrock$get_foundation_model_output()
@@ -1738,7 +1825,8 @@ bedrock_get_foundation_model_availability <- function(modelId) {
     http_path = "/foundation-model-availability/{modelId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_foundation_model_availability_input(modelId = modelId)
   output <- .bedrock$get_foundation_model_availability_output()
@@ -1770,7 +1858,8 @@ bedrock_get_guardrail <- function(guardrailIdentifier, guardrailVersion = NULL) 
     http_path = "/guardrails/{guardrailIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_guardrail_input(guardrailIdentifier = guardrailIdentifier, guardrailVersion = guardrailVersion)
   output <- .bedrock$get_guardrail_output()
@@ -1801,7 +1890,8 @@ bedrock_get_imported_model <- function(modelIdentifier) {
     http_path = "/imported-models/{modelIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_imported_model_input(modelIdentifier = modelIdentifier)
   output <- .bedrock$get_imported_model_output()
@@ -1832,7 +1922,8 @@ bedrock_get_inference_profile <- function(inferenceProfileIdentifier) {
     http_path = "/inference-profiles/{inferenceProfileIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_inference_profile_input(inferenceProfileIdentifier = inferenceProfileIdentifier)
   output <- .bedrock$get_inference_profile_output()
@@ -1864,7 +1955,8 @@ bedrock_get_marketplace_model_endpoint <- function(endpointArn) {
     http_path = "/marketplace-model/endpoints/{endpointArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_marketplace_model_endpoint_input(endpointArn = endpointArn)
   output <- .bedrock$get_marketplace_model_endpoint_output()
@@ -1895,7 +1987,8 @@ bedrock_get_model_copy_job <- function(jobArn) {
     http_path = "/model-copy-jobs/{jobArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_model_copy_job_input(jobArn = jobArn)
   output <- .bedrock$get_model_copy_job_output()
@@ -1927,7 +2020,8 @@ bedrock_get_model_customization_job <- function(jobIdentifier) {
     http_path = "/model-customization-jobs/{jobIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_model_customization_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$get_model_customization_job_output()
@@ -1959,7 +2053,8 @@ bedrock_get_model_import_job <- function(jobIdentifier) {
     http_path = "/model-import-jobs/{jobIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_model_import_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$get_model_import_job_output()
@@ -1990,7 +2085,8 @@ bedrock_get_model_invocation_job <- function(jobIdentifier) {
     http_path = "/model-invocation-job/{jobIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_model_invocation_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$get_model_invocation_job_output()
@@ -2021,7 +2117,8 @@ bedrock_get_model_invocation_logging_configuration <- function() {
     http_path = "/logging/modelinvocations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_model_invocation_logging_configuration_input()
   output <- .bedrock$get_model_invocation_logging_configuration_output()
@@ -2052,7 +2149,8 @@ bedrock_get_prompt_router <- function(promptRouterArn) {
     http_path = "/prompt-routers/{promptRouterArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_prompt_router_input(promptRouterArn = promptRouterArn)
   output <- .bedrock$get_prompt_router_output()
@@ -2083,7 +2181,8 @@ bedrock_get_provisioned_model_throughput <- function(provisionedModelId) {
     http_path = "/provisioned-model-throughput/{provisionedModelId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_provisioned_model_throughput_input(provisionedModelId = provisionedModelId)
   output <- .bedrock$get_provisioned_model_throughput_output()
@@ -2114,7 +2213,8 @@ bedrock_get_resource_policy <- function(resourceArn) {
     http_path = "/resource-policy/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_resource_policy_input(resourceArn = resourceArn)
   output <- .bedrock$get_resource_policy_output()
@@ -2145,7 +2245,8 @@ bedrock_get_use_case_for_model_access <- function() {
     http_path = "/use-case-for-model-access",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$get_use_case_for_model_access_input()
   output <- .bedrock$get_use_case_for_model_access_output()
@@ -2157,17 +2258,17 @@ bedrock_get_use_case_for_model_access <- function() {
 }
 .bedrock$operations$get_use_case_for_model_access <- bedrock_get_use_case_for_model_access
 
-#' Lists all advanced prompt optimization jobs for the account
+#' Lists the advanced prompt optimization jobs in your account
 #'
 #' @description
-#' Lists all advanced prompt optimization jobs for the account.
+#' Lists the advanced prompt optimization jobs in your account.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrock_list_advanced_prompt_optimization_jobs/](https://www.paws-r-sdk.com/docs/bedrock_list_advanced_prompt_optimization_jobs/) for full documentation.
 #'
-#' @param maxResults Maximum number of results to return.
-#' @param nextToken Pagination token for the next page of results.
-#' @param sortBy Field to sort by in the returned list of jobs.
-#' @param sortOrder Sort order for the results.
+#' @param maxResults The maximum number of results to return in the response.
+#' @param nextToken If the total number of results is greater than the `maxResults` value provided in the request, use this token in a subsequent request to get the next set of results.
+#' @param sortBy The field to sort the results by.
+#' @param sortOrder The sort order for the results.
 #'
 #' @keywords internal
 #'
@@ -2179,7 +2280,8 @@ bedrock_list_advanced_prompt_optimization_jobs <- function(maxResults = NULL, ne
     http_path = "/advanced-prompt-optimization-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "jobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_advanced_prompt_optimization_jobs_input(maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_advanced_prompt_optimization_jobs_output()
@@ -2213,7 +2315,8 @@ bedrock_list_automated_reasoning_policies <- function(policyArn = NULL, nextToke
     http_path = "/automated-reasoning-policies",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "automatedReasoningPolicySummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_automated_reasoning_policies_input(policyArn = policyArn, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrock$list_automated_reasoning_policies_output()
@@ -2247,7 +2350,8 @@ bedrock_list_automated_reasoning_policy_build_workflows <- function(policyArn, n
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "automatedReasoningPolicyBuildWorkflowSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_automated_reasoning_policy_build_workflows_input(policyArn = policyArn, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrock$list_automated_reasoning_policy_build_workflows_output()
@@ -2280,7 +2384,8 @@ bedrock_list_automated_reasoning_policy_test_cases <- function(policyArn, nextTo
     http_path = "/automated-reasoning-policies/{policyArn}/test-cases",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "testCases"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_automated_reasoning_policy_test_cases_input(policyArn = policyArn, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrock$list_automated_reasoning_policy_test_cases_output()
@@ -2315,7 +2420,8 @@ bedrock_list_automated_reasoning_policy_test_results <- function(policyArn, buil
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/test-results",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "testResults"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_automated_reasoning_policy_test_results_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrock$list_automated_reasoning_policy_test_results_output()
@@ -2354,7 +2460,8 @@ bedrock_list_custom_model_deployments <- function(createdBefore = NULL, createdA
     http_path = "/model-customization/custom-model-deployments",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelDeploymentSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_custom_model_deployments_input(createdBefore = createdBefore, createdAfter = createdAfter, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder, statusEquals = statusEquals, modelArnEquals = modelArnEquals)
   output <- .bedrock$list_custom_model_deployments_output()
@@ -2404,7 +2511,8 @@ bedrock_list_custom_models <- function(creationTimeBefore = NULL, creationTimeAf
     http_path = "/custom-models",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_custom_models_input(creationTimeBefore = creationTimeBefore, creationTimeAfter = creationTimeAfter, nameContains = nameContains, baseModelArnEquals = baseModelArnEquals, foundationModelArnEquals = foundationModelArnEquals, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder, isOwned = isOwned, modelStatus = modelStatus)
   output <- .bedrock$list_custom_models_output()
@@ -2435,7 +2543,8 @@ bedrock_list_enforced_guardrails_configuration <- function(nextToken = NULL) {
     http_path = "/enforcedGuardrailsConfiguration",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", result_key = "guardrailsConfig"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_enforced_guardrails_configuration_input(nextToken = nextToken)
   output <- .bedrock$list_enforced_guardrails_configuration_output()
@@ -2474,7 +2583,8 @@ bedrock_list_evaluation_jobs <- function(creationTimeAfter = NULL, creationTimeB
     http_path = "/evaluation-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "jobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_evaluation_jobs_input(creationTimeAfter = creationTimeAfter, creationTimeBefore = creationTimeBefore, statusEquals = statusEquals, applicationTypeEquals = applicationTypeEquals, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_evaluation_jobs_output()
@@ -2506,7 +2616,8 @@ bedrock_list_foundation_model_agreement_offers <- function(modelId, offerType = 
     http_path = "/list-foundation-model-agreement-offers/{modelId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_foundation_model_agreement_offers_input(modelId = modelId, offerType = offerType)
   output <- .bedrock$list_foundation_model_agreement_offers_output()
@@ -2540,7 +2651,8 @@ bedrock_list_foundation_models <- function(byProvider = NULL, byCustomizationTyp
     http_path = "/foundation-models",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_foundation_models_input(byProvider = byProvider, byCustomizationType = byCustomizationType, byOutputModality = byOutputModality, byInferenceType = byInferenceType)
   output <- .bedrock$list_foundation_models_output()
@@ -2573,7 +2685,8 @@ bedrock_list_guardrails <- function(guardrailIdentifier = NULL, maxResults = NUL
     http_path = "/guardrails",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "guardrails"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_guardrails_input(guardrailIdentifier = guardrailIdentifier, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrock$list_guardrails_output()
@@ -2610,7 +2723,8 @@ bedrock_list_imported_models <- function(creationTimeBefore = NULL, creationTime
     http_path = "/imported-models",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_imported_models_input(creationTimeBefore = creationTimeBefore, creationTimeAfter = creationTimeAfter, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_imported_models_output()
@@ -2647,7 +2761,8 @@ bedrock_list_inference_profiles <- function(maxResults = NULL, nextToken = NULL,
     http_path = "/inference-profiles",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "inferenceProfileSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_inference_profiles_input(maxResults = maxResults, nextToken = nextToken, typeEquals = typeEquals)
   output <- .bedrock$list_inference_profiles_output()
@@ -2681,7 +2796,8 @@ bedrock_list_marketplace_model_endpoints <- function(maxResults = NULL, nextToke
     http_path = "/marketplace-model/endpoints",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "marketplaceModelEndpoints"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_marketplace_model_endpoints_input(maxResults = maxResults, nextToken = nextToken, modelSourceEquals = modelSourceEquals)
   output <- .bedrock$list_marketplace_model_endpoints_output()
@@ -2721,7 +2837,8 @@ bedrock_list_model_copy_jobs <- function(creationTimeAfter = NULL, creationTimeB
     http_path = "/model-copy-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelCopyJobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_model_copy_jobs_input(creationTimeAfter = creationTimeAfter, creationTimeBefore = creationTimeBefore, statusEquals = statusEquals, sourceAccountEquals = sourceAccountEquals, sourceModelArnEquals = sourceModelArnEquals, targetModelNameContains = targetModelNameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_model_copy_jobs_output()
@@ -2759,7 +2876,8 @@ bedrock_list_model_customization_jobs <- function(creationTimeAfter = NULL, crea
     http_path = "/model-customization-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelCustomizationJobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_model_customization_jobs_input(creationTimeAfter = creationTimeAfter, creationTimeBefore = creationTimeBefore, statusEquals = statusEquals, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_model_customization_jobs_output()
@@ -2797,7 +2915,8 @@ bedrock_list_model_import_jobs <- function(creationTimeAfter = NULL, creationTim
     http_path = "/model-import-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "modelImportJobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_model_import_jobs_input(creationTimeAfter = creationTimeAfter, creationTimeBefore = creationTimeBefore, statusEquals = statusEquals, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_model_import_jobs_output()
@@ -2863,7 +2982,8 @@ bedrock_list_model_invocation_jobs <- function(submitTimeAfter = NULL, submitTim
     http_path = "/model-invocation-jobs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "invocationJobSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_model_invocation_jobs_input(submitTimeAfter = submitTimeAfter, submitTimeBefore = submitTimeBefore, statusEquals = statusEquals, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_model_invocation_jobs_output()
@@ -2896,7 +3016,8 @@ bedrock_list_prompt_routers <- function(maxResults = NULL, nextToken = NULL, typ
     http_path = "/prompt-routers",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "promptRouterSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_prompt_routers_input(maxResults = maxResults, nextToken = nextToken, type = type)
   output <- .bedrock$list_prompt_routers_output()
@@ -2935,7 +3056,8 @@ bedrock_list_provisioned_model_throughputs <- function(creationTimeAfter = NULL,
     http_path = "/provisioned-model-throughputs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "provisionedModelSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_provisioned_model_throughputs_input(creationTimeAfter = creationTimeAfter, creationTimeBefore = creationTimeBefore, statusEquals = statusEquals, modelArnEquals = modelArnEquals, nameContains = nameContains, maxResults = maxResults, nextToken = nextToken, sortBy = sortBy, sortOrder = sortOrder)
   output <- .bedrock$list_provisioned_model_throughputs_output()
@@ -2966,7 +3088,8 @@ bedrock_list_tags_for_resource <- function(resourceARN) {
     http_path = "/listTagsForResource",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$list_tags_for_resource_input(resourceARN = resourceARN)
   output <- .bedrock$list_tags_for_resource_output()
@@ -2977,6 +3100,38 @@ bedrock_list_tags_for_resource <- function(resourceARN) {
   return(response)
 }
 .bedrock$operations$list_tags_for_resource <- bedrock_list_tags_for_resource
+
+#' Sets the account-wide data retention mode for Amazon Bedrock
+#'
+#' @description
+#' Sets the account-wide data retention mode for Amazon Bedrock.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrock_put_account_data_retention/](https://www.paws-r-sdk.com/docs/bedrock_put_account_data_retention/) for full documentation.
+#'
+#' @param mode &#91;required&#93; The data retention mode to set for the account.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrock_put_account_data_retention
+bedrock_put_account_data_retention <- function(mode) {
+  op <- new_operation(
+    name = "PutAccountDataRetention",
+    http_method = "PUT",
+    http_path = "/data-retention",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrock$put_account_data_retention_input(mode = mode)
+  output <- .bedrock$put_account_data_retention_output()
+  config <- get_config()
+  svc <- .bedrock$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrock$operations$put_account_data_retention <- bedrock_put_account_data_retention
 
 #' Sets the account-level enforced guardrail configuration
 #'
@@ -2998,7 +3153,8 @@ bedrock_put_enforced_guardrail_configuration <- function(configId = NULL, guardr
     http_path = "/enforcedGuardrailsConfiguration",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$put_enforced_guardrail_configuration_input(configId = configId, guardrailInferenceConfig = guardrailInferenceConfig)
   output <- .bedrock$put_enforced_guardrail_configuration_output()
@@ -3029,7 +3185,8 @@ bedrock_put_model_invocation_logging_configuration <- function(loggingConfig) {
     http_path = "/logging/modelinvocations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$put_model_invocation_logging_configuration_input(loggingConfig = loggingConfig)
   output <- .bedrock$put_model_invocation_logging_configuration_output()
@@ -3061,7 +3218,8 @@ bedrock_put_resource_policy <- function(resourceArn, resourcePolicy) {
     http_path = "/resource-policy",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$put_resource_policy_input(resourceArn = resourceArn, resourcePolicy = resourcePolicy)
   output <- .bedrock$put_resource_policy_output()
@@ -3092,7 +3250,8 @@ bedrock_put_use_case_for_model_access <- function(formData) {
     http_path = "/use-case-for-model-access",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$put_use_case_for_model_access_input(formData = formData)
   output <- .bedrock$put_use_case_for_model_access_output()
@@ -3125,7 +3284,8 @@ bedrock_register_marketplace_model_endpoint <- function(endpointIdentifier, mode
     http_path = "/marketplace-model/endpoints/{endpointIdentifier}/registration",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$register_marketplace_model_endpoint_input(endpointIdentifier = endpointIdentifier, modelSourceIdentifier = modelSourceIdentifier)
   output <- .bedrock$register_marketplace_model_endpoint_output()
@@ -3159,7 +3319,8 @@ bedrock_start_automated_reasoning_policy_build_workflow <- function(policyArn, b
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowType}/start",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$start_automated_reasoning_policy_build_workflow_input(policyArn = policyArn, buildWorkflowType = buildWorkflowType, clientRequestToken = clientRequestToken, sourceContent = sourceContent)
   output <- .bedrock$start_automated_reasoning_policy_build_workflow_output()
@@ -3193,7 +3354,8 @@ bedrock_start_automated_reasoning_policy_test_workflow <- function(policyArn, bu
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/test-workflows",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$start_automated_reasoning_policy_test_workflow_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, testCaseIds = testCaseIds, clientRequestToken = clientRequestToken)
   output <- .bedrock$start_automated_reasoning_policy_test_workflow_output()
@@ -3205,14 +3367,14 @@ bedrock_start_automated_reasoning_policy_test_workflow <- function(policyArn, bu
 }
 .bedrock$operations$start_automated_reasoning_policy_test_workflow <- bedrock_start_automated_reasoning_policy_test_workflow
 
-#' Stops an in-progress advanced prompt optimization job
+#' Stops an advanced prompt optimization job that is in progress
 #'
 #' @description
-#' Stops an in-progress advanced prompt optimization job.
+#' Stops an advanced prompt optimization job that is in progress.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrock_stop_advanced_prompt_optimization_job/](https://www.paws-r-sdk.com/docs/bedrock_stop_advanced_prompt_optimization_job/) for full documentation.
 #'
-#' @param jobIdentifier &#91;required&#93; ARN or ID of the advanced prompt optimization job to stop.
+#' @param jobIdentifier &#91;required&#93; The ARN or ID of the advanced prompt optimization job to stop.
 #'
 #' @keywords internal
 #'
@@ -3224,7 +3386,8 @@ bedrock_stop_advanced_prompt_optimization_job <- function(jobIdentifier) {
     http_path = "/advanced-prompt-optimization-jobs/{jobIdentifier}/stop",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$stop_advanced_prompt_optimization_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$stop_advanced_prompt_optimization_job_output()
@@ -3255,7 +3418,8 @@ bedrock_stop_evaluation_job <- function(jobIdentifier) {
     http_path = "/evaluation-job/{jobIdentifier}/stop",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$stop_evaluation_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$stop_evaluation_job_output()
@@ -3286,7 +3450,8 @@ bedrock_stop_model_customization_job <- function(jobIdentifier) {
     http_path = "/model-customization-jobs/{jobIdentifier}/stop",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$stop_model_customization_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$stop_model_customization_job_output()
@@ -3317,7 +3482,8 @@ bedrock_stop_model_invocation_job <- function(jobIdentifier) {
     http_path = "/model-invocation-job/{jobIdentifier}/stop",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$stop_model_invocation_job_input(jobIdentifier = jobIdentifier)
   output <- .bedrock$stop_model_invocation_job_output()
@@ -3349,7 +3515,8 @@ bedrock_tag_resource <- function(resourceARN, tags) {
     http_path = "/tagResource",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$tag_resource_input(resourceARN = resourceARN, tags = tags)
   output <- .bedrock$tag_resource_output()
@@ -3381,7 +3548,8 @@ bedrock_untag_resource <- function(resourceARN, tagKeys) {
     http_path = "/untagResource",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$untag_resource_input(resourceARN = resourceARN, tagKeys = tagKeys)
   output <- .bedrock$untag_resource_output()
@@ -3416,7 +3584,8 @@ bedrock_update_automated_reasoning_policy <- function(policyArn, policyDefinitio
     http_path = "/automated-reasoning-policies/{policyArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_automated_reasoning_policy_input(policyArn = policyArn, policyDefinition = policyDefinition, name = name, description = description)
   output <- .bedrock$update_automated_reasoning_policy_output()
@@ -3450,7 +3619,8 @@ bedrock_update_automated_reasoning_policy_annotations <- function(policyArn, bui
     http_path = "/automated-reasoning-policies/{policyArn}/build-workflows/{buildWorkflowId}/annotations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_automated_reasoning_policy_annotations_input(policyArn = policyArn, buildWorkflowId = buildWorkflowId, annotations = annotations, lastUpdatedAnnotationSetHash = lastUpdatedAnnotationSetHash)
   output <- .bedrock$update_automated_reasoning_policy_annotations_output()
@@ -3488,7 +3658,8 @@ bedrock_update_automated_reasoning_policy_test_case <- function(policyArn, testC
     http_path = "/automated-reasoning-policies/{policyArn}/test-cases/{testCaseId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_automated_reasoning_policy_test_case_input(policyArn = policyArn, testCaseId = testCaseId, guardContent = guardContent, queryContent = queryContent, lastUpdatedAt = lastUpdatedAt, expectedAggregatedFindingsResult = expectedAggregatedFindingsResult, confidenceThreshold = confidenceThreshold, clientRequestToken = clientRequestToken)
   output <- .bedrock$update_automated_reasoning_policy_test_case_output()
@@ -3520,7 +3691,8 @@ bedrock_update_custom_model_deployment <- function(modelArn, customModelDeployme
     http_path = "/model-customization/custom-model-deployments/{customModelDeploymentIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_custom_model_deployment_input(modelArn = modelArn, customModelDeploymentIdentifier = customModelDeploymentIdentifier)
   output <- .bedrock$update_custom_model_deployment_output()
@@ -3565,7 +3737,8 @@ bedrock_update_guardrail <- function(guardrailIdentifier, name, description = NU
     http_path = "/guardrails/{guardrailIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_guardrail_input(guardrailIdentifier = guardrailIdentifier, name = name, description = description, topicPolicyConfig = topicPolicyConfig, contentPolicyConfig = contentPolicyConfig, wordPolicyConfig = wordPolicyConfig, sensitiveInformationPolicyConfig = sensitiveInformationPolicyConfig, contextualGroundingPolicyConfig = contextualGroundingPolicyConfig, automatedReasoningPolicyConfig = automatedReasoningPolicyConfig, crossRegionConfig = crossRegionConfig, blockedInputMessaging = blockedInputMessaging, blockedOutputsMessaging = blockedOutputsMessaging, kmsKeyId = kmsKeyId)
   output <- .bedrock$update_guardrail_output()
@@ -3599,7 +3772,8 @@ bedrock_update_marketplace_model_endpoint <- function(endpointArn, endpointConfi
     http_path = "/marketplace-model/endpoints/{endpointArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_marketplace_model_endpoint_input(endpointArn = endpointArn, endpointConfig = endpointConfig, clientRequestToken = clientRequestToken)
   output <- .bedrock$update_marketplace_model_endpoint_output()
@@ -3638,7 +3812,8 @@ bedrock_update_provisioned_model_throughput <- function(provisionedModelId, desi
     http_path = "/provisioned-model-throughput/{provisionedModelId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrock$update_provisioned_model_throughput_input(provisionedModelId = provisionedModelId, desiredProvisionedModelName = desiredProvisionedModelName, desiredModelId = desiredModelId)
   output <- .bedrock$update_provisioned_model_throughput_output()

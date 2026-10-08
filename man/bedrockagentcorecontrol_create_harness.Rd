@@ -2,7 +2,7 @@
 % Please edit documentation in R/bedrockagentcorecontrol_operations.R
 \name{bedrockagentcorecontrol_create_harness}
 \alias{bedrockagentcorecontrol_create_harness}
-\title{Operation to create a Harness}
+\title{Operation to create a harness}
 \usage{
 bedrockagentcorecontrol_create_harness(
   harnessName,
@@ -19,6 +19,7 @@ bedrockagentcorecontrol_create_harness(
   allowedTools = NULL,
   memory = NULL,
   truncation = NULL,
+  hooks = NULL,
   maxIterations = NULL,
   maxTokens = NULL,
   timeoutSeconds = NULL,
@@ -54,6 +55,8 @@ bedrockagentcorecontrol_create_harness(
 
 \item{truncation}{The truncation configuration for managing conversation context when it exceeds model limits.}
 
+\item{hooks}{The lifecycle hooks to run at defined points in the agent loop.}
+
 \item{maxIterations}{The maximum number of iterations the agent loop can execute per invocation.}
 
 \item{maxTokens}{The maximum total number of output tokens the agent can generate across all model calls within a single invocation.}
@@ -63,7 +66,7 @@ bedrockagentcorecontrol_create_harness(
 \item{tags}{Tags to apply to the harness resource.}
 }
 \description{
-Operation to create a Harness.
+Operation to create a harness.
 
 See \url{https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_harness/} for full documentation.
 }

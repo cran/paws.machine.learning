@@ -6,19 +6,20 @@
 \usage{
 bedrockagentcorecontrol_create_gateway_target(
   gatewayIdentifier,
-  name,
+  name = NULL,
   description = NULL,
   clientToken = NULL,
   targetConfiguration,
   credentialProviderConfigurations = NULL,
   metadataConfiguration = NULL,
-  privateEndpoint = NULL
+  privateEndpoint = NULL,
+  certificateConfigurations = NULL
 )
 }
 \arguments{
 \item{gatewayIdentifier}{[required] The identifier of the gateway to create a target for.}
 
-\item{name}{[required] The name of the gateway target. The name must be unique within the gateway.}
+\item{name}{The name of the gateway target. The name must be unique within the gateway.}
 
 \item{description}{The description of the gateway target.}
 
@@ -31,6 +32,8 @@ bedrockagentcorecontrol_create_gateway_target(
 \item{metadataConfiguration}{Optional configuration for HTTP header and query parameter propagation to and from the gateway target.}
 
 \item{privateEndpoint}{The private endpoint configuration for the gateway target. Use this to connect the gateway to private resources in your VPC.}
+
+\item{certificateConfigurations}{The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list.}
 }
 \description{
 Creates a target for a gateway. A target defines an endpoint that the gateway can connect to.

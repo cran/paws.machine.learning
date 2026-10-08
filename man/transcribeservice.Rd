@@ -29,6 +29,7 @@ transcribeservice(
 \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
 \item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
 \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{use_dual_stack}: Set this to \code{true} to use the dualstack (IPv4 and IPv6) endpoint for a service, where available, falling back to the regular endpoint when it isn't. Defaults to the \code{AWS_USE_DUALSTACK_ENDPOINT} environment variable when unset.}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
@@ -79,7 +80,8 @@ Amazon Transcribe offers three main types of batch transcription: \strong{Standa
     close_connection = "logical",
     timeout = "numeric",
     s3_force_path_style = "logical",
-    sts_regional_endpoint = "string"
+    sts_regional_endpoint = "string",
+    use_dual_stack = "logical"
   ),
   credentials = list(
     creds = list(
@@ -139,6 +141,7 @@ Amazon Transcribe offers three main types of batch transcription: \strong{Standa
 \link[=transcribeservice_tag_resource]{tag_resource} \tab Adds one or more custom tags, each in the form of a key:value pair, to the specified resource\cr
 \link[=transcribeservice_untag_resource]{untag_resource} \tab Removes the specified tags from the specified Amazon Transcribe resource\cr
 \link[=transcribeservice_update_call_analytics_category]{update_call_analytics_category} \tab Updates the specified Call Analytics category with new rules\cr
+\link[=transcribeservice_update_language_model]{update_language_model} \tab Updates the encryption configuration for an existing custom language model\cr
 \link[=transcribeservice_update_medical_vocabulary]{update_medical_vocabulary} \tab Updates an existing custom medical vocabulary with new values\cr
 \link[=transcribeservice_update_vocabulary]{update_vocabulary} \tab Updates an existing custom vocabulary with new values\cr
 \link[=transcribeservice_update_vocabulary_filter]{update_vocabulary_filter} \tab Updates an existing custom vocabulary filter with a new list of words

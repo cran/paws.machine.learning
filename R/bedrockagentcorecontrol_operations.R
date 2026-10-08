@@ -6,7 +6,7 @@ NULL
 #' Adds examples to the dataset's DRAFT
 #'
 #' @description
-#' Adds examples to the dataset's DRAFT.
+#' Adds examples to the dataset's DRAFT. All examples are validated against the dataset's schema type before any writes occur. If any example fails validation, the entire batch is rejected (all-or-nothing semantics).
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_add_dataset_examples/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_add_dataset_examples/) for full documentation.
 #'
@@ -24,7 +24,8 @@ bedrockagentcorecontrol_add_dataset_examples <- function(datasetId, clientToken 
     http_path = "/datasets/{datasetId}/examples/add",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$add_dataset_examples_input(datasetId = datasetId, clientToken = clientToken, source = source)
   output <- .bedrockagentcorecontrol$add_dataset_examples_output()
@@ -36,6 +37,40 @@ bedrockagentcorecontrol_add_dataset_examples <- function(datasetId, clientToken 
 }
 .bedrockagentcorecontrol$operations$add_dataset_examples <- bedrockagentcorecontrol_add_dataset_examples
 
+#' Atomically creates or updates multiple rate limits for a gateway
+#'
+#' @description
+#' Atomically creates or updates multiple rate limits for a gateway. The operation updates existing limits with matching keys and creates new limits for new keys. If the operation fails, the service applies no changes. Retry the request after resolving the issue.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_batch_put_gateway_rate_limits/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_batch_put_gateway_rate_limits/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#' @param rateLimits &#91;required&#93; The complete set of rate limits for this gateway. This operation replaces all existing rate limits in a single request. If the operation fails, no rate limits are changed.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_batch_put_gateway_rate_limits
+bedrockagentcorecontrol_batch_put_gateway_rate_limits <- function(gatewayIdentifier, clientToken = NULL, rateLimits) {
+  op <- new_operation(
+    name = "BatchPutGatewayRateLimits",
+    http_method = "PUT",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits/batch",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$batch_put_gateway_rate_limits_input(gatewayIdentifier = gatewayIdentifier, clientToken = clientToken, rateLimits = rateLimits)
+  output <- .bedrockagentcorecontrol$batch_put_gateway_rate_limits_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$batch_put_gateway_rate_limits <- bedrockagentcorecontrol_batch_put_gateway_rate_limits
+
 #' Creates an Amazon Bedrock AgentCore Runtime
 #'
 #' @description
@@ -46,7 +81,7 @@ bedrockagentcorecontrol_add_dataset_examples <- function(datasetId, clientToken 
 #' @param agentRuntimeName &#91;required&#93; The name of the AgentCore Runtime.
 #' @param agentRuntimeArtifact &#91;required&#93; The artifact of the AgentCore Runtime.
 #' @param roleArn &#91;required&#93; The IAM role ARN that provides permissions for the AgentCore Runtime.
-#' @param networkConfiguration &#91;required&#93; The network configuration for the AgentCore Runtime.
+#' @param networkConfiguration The network configuration for the AgentCore Runtime.
 #' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
 #' @param description The description of the AgentCore Runtime.
 #' @param authorizerConfiguration The authorizer configuration for the AgentCore Runtime.
@@ -55,21 +90,24 @@ bedrockagentcorecontrol_add_dataset_examples <- function(datasetId, clientToken 
 #' @param lifecycleConfiguration The life cycle configuration for the AgentCore Runtime.
 #' @param environmentVariables Environment variables to set in the AgentCore Runtime environment.
 #' @param filesystemConfigurations The filesystem configurations to mount into the AgentCore Runtime. Use filesystem configurations to provide persistent storage to your AgentCore Runtime sessions.
+#' @param capacityProviderConfiguration The capacity provider configuration for the AgentCore Runtime. Use a capacity provider to run the AgentCore Runtime on the Instances compute type, which provisions Amazon Web Services managed compute in your account.
 #' @param tags A map of tag keys and values to assign to the agent runtime. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
+#' @param platformVersion The version of the runtime platform to use for the AgentCore Runtime.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_agent_runtime
-bedrockagentcorecontrol_create_agent_runtime <- function(agentRuntimeName, agentRuntimeArtifact, roleArn, networkConfiguration, clientToken = NULL, description = NULL, authorizerConfiguration = NULL, requestHeaderConfiguration = NULL, protocolConfiguration = NULL, lifecycleConfiguration = NULL, environmentVariables = NULL, filesystemConfigurations = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_agent_runtime <- function(agentRuntimeName, agentRuntimeArtifact, roleArn, networkConfiguration = NULL, clientToken = NULL, description = NULL, authorizerConfiguration = NULL, requestHeaderConfiguration = NULL, protocolConfiguration = NULL, lifecycleConfiguration = NULL, environmentVariables = NULL, filesystemConfigurations = NULL, capacityProviderConfiguration = NULL, tags = NULL, platformVersion = NULL) {
   op <- new_operation(
     name = "CreateAgentRuntime",
     http_method = "PUT",
     http_path = "/runtimes/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_agent_runtime_input(agentRuntimeName = agentRuntimeName, agentRuntimeArtifact = agentRuntimeArtifact, roleArn = roleArn, networkConfiguration = networkConfiguration, clientToken = clientToken, description = description, authorizerConfiguration = authorizerConfiguration, requestHeaderConfiguration = requestHeaderConfiguration, protocolConfiguration = protocolConfiguration, lifecycleConfiguration = lifecycleConfiguration, environmentVariables = environmentVariables, filesystemConfigurations = filesystemConfigurations, tags = tags)
+  input <- .bedrockagentcorecontrol$create_agent_runtime_input(agentRuntimeName = agentRuntimeName, agentRuntimeArtifact = agentRuntimeArtifact, roleArn = roleArn, networkConfiguration = networkConfiguration, clientToken = clientToken, description = description, authorizerConfiguration = authorizerConfiguration, requestHeaderConfiguration = requestHeaderConfiguration, protocolConfiguration = protocolConfiguration, lifecycleConfiguration = lifecycleConfiguration, environmentVariables = environmentVariables, filesystemConfigurations = filesystemConfigurations, capacityProviderConfiguration = capacityProviderConfiguration, tags = tags, platformVersion = platformVersion)
   output <- .bedrockagentcorecontrol$create_agent_runtime_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -103,7 +141,8 @@ bedrockagentcorecontrol_create_agent_runtime_endpoint <- function(agentRuntimeId
     http_path = "/runtimes/{agentRuntimeId}/runtime-endpoints/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_agent_runtime_endpoint_input(agentRuntimeId = agentRuntimeId, name = name, agentRuntimeVersion = agentRuntimeVersion, description = description, clientToken = clientToken, tags = tags)
   output <- .bedrockagentcorecontrol$create_agent_runtime_endpoint_output()
@@ -123,22 +162,25 @@ bedrockagentcorecontrol_create_agent_runtime_endpoint <- function(agentRuntimeId
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_api_key_credential_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_api_key_credential_provider/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the API key credential provider. The name must be unique within your account.
-#' @param apiKey &#91;required&#93; The API key to use for authentication. This value is encrypted and stored securely.
+#' @param apiKey The API key to use for authentication. This value is encrypted and stored securely.
+#' @param apiKeySecretConfig A reference to the Amazon Web Services Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when `apiKeySecretSource` is set to `EXTERNAL`.
+#' @param apiKeySecretSource The source type of the API key secret. Use `MANAGED` if the secret is managed by the service, or `EXTERNAL` if you manage the secret yourself in Amazon Web Services Secrets Manager.
 #' @param tags A map of tag keys and values to assign to the API key credential provider. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_api_key_credential_provider
-bedrockagentcorecontrol_create_api_key_credential_provider <- function(name, apiKey, tags = NULL) {
+bedrockagentcorecontrol_create_api_key_credential_provider <- function(name, apiKey = NULL, apiKeySecretConfig = NULL, apiKeySecretSource = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateApiKeyCredentialProvider",
     http_method = "POST",
     http_path = "/identities/CreateApiKeyCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_api_key_credential_provider_input(name = name, apiKey = apiKey, tags = tags)
+  input <- .bedrockagentcorecontrol$create_api_key_credential_provider_input(name = name, apiKey = apiKey, apiKeySecretConfig = apiKeySecretConfig, apiKeySecretSource = apiKeySecretSource, tags = tags)
   output <- .bedrockagentcorecontrol$create_api_key_credential_provider_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -163,22 +205,24 @@ bedrockagentcorecontrol_create_api_key_credential_provider <- function(name, api
 #' @param browserSigning The browser signing configuration that enables cryptographic agent identification using HTTP message signatures for web bot authentication.
 #' @param enterprisePolicies A list of enterprise policy files for the browser.
 #' @param certificates A list of certificates to install in the browser.
+#' @param filesystemConfigurations The file system configurations to mount into the browser. Use these configurations to mount your own Amazon Simple Storage Service (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access points. Your sessions can then access your data. If you don't specify this field, no file systems are mounted.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock AgentCore ignores the request but does not return an error.
 #' @param tags A map of tag keys and values to assign to the browser. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_browser
-bedrockagentcorecontrol_create_browser <- function(name, description = NULL, executionRoleArn = NULL, networkConfiguration, recording = NULL, browserSigning = NULL, enterprisePolicies = NULL, certificates = NULL, clientToken = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_browser <- function(name, description = NULL, executionRoleArn = NULL, networkConfiguration, recording = NULL, browserSigning = NULL, enterprisePolicies = NULL, certificates = NULL, filesystemConfigurations = NULL, clientToken = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateBrowser",
     http_method = "PUT",
     http_path = "/browsers",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_browser_input(name = name, description = description, executionRoleArn = executionRoleArn, networkConfiguration = networkConfiguration, recording = recording, browserSigning = browserSigning, enterprisePolicies = enterprisePolicies, certificates = certificates, clientToken = clientToken, tags = tags)
+  input <- .bedrockagentcorecontrol$create_browser_input(name = name, description = description, executionRoleArn = executionRoleArn, networkConfiguration = networkConfiguration, recording = recording, browserSigning = browserSigning, enterprisePolicies = enterprisePolicies, certificates = certificates, filesystemConfigurations = filesystemConfigurations, clientToken = clientToken, tags = tags)
   output <- .bedrockagentcorecontrol$create_browser_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -210,7 +254,8 @@ bedrockagentcorecontrol_create_browser_profile <- function(name, description = N
     http_path = "/browser-profiles",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_browser_profile_input(name = name, description = description, clientToken = clientToken, tags = tags)
   output <- .bedrockagentcorecontrol$create_browser_profile_output()
@@ -221,6 +266,43 @@ bedrockagentcorecontrol_create_browser_profile <- function(name, description = N
   return(response)
 }
 .bedrockagentcorecontrol$operations$create_browser_profile <- bedrockagentcorecontrol_create_browser_profile
+
+#' Creates a capacity provider
+#'
+#' @description
+#' Creates a capacity provider. A capacity provider defines the Amazon EC2 infrastructure for AgentCore Runtime, including the operating system, allowed instance types, networking, and storage. It also specifies the IAM permissions that AgentCore uses to manage those instances.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_capacity_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_capacity_provider/) for full documentation.
+#'
+#' @param name &#91;required&#93; The name of the capacity provider. The name must be unique within your account.
+#' @param description An optional description of the capacity provider. If you don't specify a description, the service creates the capacity provider without one.
+#' @param permissionsConfiguration &#91;required&#93; The permissions configuration for the capacity provider. This specifies the IAM role that AgentCore uses to manage the Amazon EC2 instances on your behalf.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#' @param tags A map of tag keys and values to associate with the capacity provider. If you don't specify tags, the capacity provider is created with no tags.
+#' @param computeConfiguration &#91;required&#93; The compute configuration for the capacity provider. This defines the Amazon EC2 compute resources used to launch instances: the operating system, allowed instance types, networking, and storage.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_create_capacity_provider
+bedrockagentcorecontrol_create_capacity_provider <- function(name, description = NULL, permissionsConfiguration, clientToken = NULL, tags = NULL, computeConfiguration) {
+  op <- new_operation(
+    name = "CreateCapacityProvider",
+    http_method = "PUT",
+    http_path = "/capacity-providers",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$create_capacity_provider_input(name = name, description = description, permissionsConfiguration = permissionsConfiguration, clientToken = clientToken, tags = tags, computeConfiguration = computeConfiguration)
+  output <- .bedrockagentcorecontrol$create_capacity_provider_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$create_capacity_provider <- bedrockagentcorecontrol_create_capacity_provider
 
 #' Creates a custom code interpreter
 #'
@@ -234,22 +316,24 @@ bedrockagentcorecontrol_create_browser_profile <- function(name, description = N
 #' @param executionRoleArn The Amazon Resource Name (ARN) of the IAM role that provides permissions for the code interpreter to access Amazon Web Services services.
 #' @param networkConfiguration &#91;required&#93; The network configuration for the code interpreter. This configuration specifies the network mode for the code interpreter.
 #' @param certificates A list of certificates to install in the code interpreter.
+#' @param filesystemConfigurations The file system configurations to mount into the code interpreter. Use these configurations to mount your own Amazon Simple Storage Service (Amazon S3) Files or Amazon Elastic File System (Amazon EFS) access points. Your sessions can then access your data. If you don't specify this field, no file systems are mounted.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Bedrock AgentCore ignores the request but does not return an error.
 #' @param tags A map of tag keys and values to assign to the code interpreter. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_code_interpreter
-bedrockagentcorecontrol_create_code_interpreter <- function(name, description = NULL, executionRoleArn = NULL, networkConfiguration, certificates = NULL, clientToken = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_code_interpreter <- function(name, description = NULL, executionRoleArn = NULL, networkConfiguration, certificates = NULL, filesystemConfigurations = NULL, clientToken = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateCodeInterpreter",
     http_method = "PUT",
     http_path = "/code-interpreters",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_code_interpreter_input(name = name, description = description, executionRoleArn = executionRoleArn, networkConfiguration = networkConfiguration, certificates = certificates, clientToken = clientToken, tags = tags)
+  input <- .bedrockagentcorecontrol$create_code_interpreter_input(name = name, description = description, executionRoleArn = executionRoleArn, networkConfiguration = networkConfiguration, certificates = certificates, filesystemConfigurations = filesystemConfigurations, clientToken = clientToken, tags = tags)
   output <- .bedrockagentcorecontrol$create_code_interpreter_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -273,21 +357,23 @@ bedrockagentcorecontrol_create_code_interpreter <- function(name, description = 
 #' @param branchName The branch name for version tracking. Defaults to `mainline` if not specified.
 #' @param commitMessage A commit message describing the initial version of the configuration bundle.
 #' @param createdBy The source that created this version, including the source name and optional ARN.
+#' @param kmsKeyArn Optional KMS key ARN for encrypting component configurations.
 #' @param tags A map of tag keys and values to assign to the configuration bundle. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_configuration_bundle
-bedrockagentcorecontrol_create_configuration_bundle <- function(clientToken = NULL, bundleName, description = NULL, components, branchName = NULL, commitMessage = NULL, createdBy = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_configuration_bundle <- function(clientToken = NULL, bundleName, description = NULL, components, branchName = NULL, commitMessage = NULL, createdBy = NULL, kmsKeyArn = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateConfigurationBundle",
     http_method = "POST",
     http_path = "/configuration-bundles/create",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_configuration_bundle_input(clientToken = clientToken, bundleName = bundleName, description = description, components = components, branchName = branchName, commitMessage = commitMessage, createdBy = createdBy, tags = tags)
+  input <- .bedrockagentcorecontrol$create_configuration_bundle_input(clientToken = clientToken, bundleName = bundleName, description = description, components = components, branchName = branchName, commitMessage = commitMessage, createdBy = createdBy, kmsKeyArn = kmsKeyArn, tags = tags)
   output <- .bedrockagentcorecontrol$create_configuration_bundle_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -297,19 +383,56 @@ bedrockagentcorecontrol_create_configuration_bundle <- function(clientToken = NU
 }
 .bedrockagentcorecontrol$operations$create_configuration_bundle <- bedrockagentcorecontrol_create_configuration_bundle
 
-#' Creates a new Dataset resource asynchronously
+#' Creates a new consent portal
 #'
 #' @description
-#' Creates a new Dataset resource asynchronously.
+#' Creates a new consent portal.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_consent_portal/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_consent_portal/) for full documentation.
+#'
+#' @param executionRoleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that the consent portal assumes to access the resources defined in its sources.
+#' @param idpConfig &#91;required&#93; The identity provider configuration that the consent portal uses to authenticate end users.
+#' @param name &#91;required&#93; The name of the consent portal. The name must be unique within your account.
+#' @param sources &#91;required&#93; The resources served by the consent portal. Currently, we only support type `agentcore-gateway`.
+#' @param description The description of the consent portal.
+#' @param tags A map of tag keys and values to assign to the consent portal. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_create_consent_portal
+bedrockagentcorecontrol_create_consent_portal <- function(executionRoleArn, idpConfig, name, sources, description = NULL, tags = NULL) {
+  op <- new_operation(
+    name = "CreateConsentPortal",
+    http_method = "POST",
+    http_path = "/identities/CreateConsentPortal",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$create_consent_portal_input(executionRoleArn = executionRoleArn, idpConfig = idpConfig, name = name, sources = sources, description = description, tags = tags)
+  output <- .bedrockagentcorecontrol$create_consent_portal_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$create_consent_portal <- bedrockagentcorecontrol_create_consent_portal
+
+#' Creates a new dataset resource asynchronously
+#'
+#' @description
+#' Creates a new dataset resource asynchronously. Returns immediately with status CREATING. Poll [`get_dataset`][bedrockagentcorecontrol_get_dataset] until status transitions to ACTIVE or CREATE_FAILED.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_dataset/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_dataset/) for full documentation.
 #'
-#' @param clientToken Optional idempotency token.
-#' @param datasetName &#91;required&#93; Human-readable name for the dataset. Unique within the account (case-insensitive). Immutable after creation.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#' @param datasetName &#91;required&#93; Human-readable name for the dataset. Must be unique within the account. Immutable after creation.
 #' @param description A description of the dataset.
 #' @param source &#91;required&#93; Source of initial examples. Provide either inline examples or an S3 URI pointing to a JSONL file.
 #' @param schemaType &#91;required&#93; Versioned schema type governing the structure of examples. Immutable after creation.
-#' @param kmsKeyArn Optional AWS KMS key ARN for SSE-KMS on service S3 writes.
+#' @param kmsKeyArn Optional KMS key ARN for server-side encryption on service Amazon S3 writes.
 #' @param tags A map of tag keys and values to assign to the dataset.
 #'
 #' @keywords internal
@@ -322,7 +445,8 @@ bedrockagentcorecontrol_create_dataset <- function(clientToken = NULL, datasetNa
     http_path = "/datasets",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_dataset_input(clientToken = clientToken, datasetName = datasetName, description = description, source = source, schemaType = schemaType, kmsKeyArn = kmsKeyArn, tags = tags)
   output <- .bedrockagentcorecontrol$create_dataset_output()
@@ -337,7 +461,7 @@ bedrockagentcorecontrol_create_dataset <- function(clientToken = NULL, datasetNa
 #' Publishes the current DRAFT as a new numbered version
 #'
 #' @description
-#' Publishes the current DRAFT as a new numbered version.
+#' Publishes the current DRAFT as a new numbered version. The DRAFT is preserved and remains editable after publishing. Returns immediately with status UPDATING. Poll [`get_dataset`][bedrockagentcorecontrol_get_dataset] until status transitions to ACTIVE or UPDATE_FAILED.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_dataset_version/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_dataset_version/) for full documentation.
 #'
@@ -354,7 +478,8 @@ bedrockagentcorecontrol_create_dataset_version <- function(datasetId, clientToke
     http_path = "/datasets/{datasetId}/versions",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_dataset_version_input(datasetId = datasetId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$create_dataset_version_output()
@@ -391,7 +516,8 @@ bedrockagentcorecontrol_create_evaluator <- function(clientToken = NULL, evaluat
     http_path = "/evaluators/create",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_evaluator_input(clientToken = clientToken, evaluatorName = evaluatorName, description = description, evaluatorConfig = evaluatorConfig, level = level, kmsKeyArn = kmsKeyArn, tags = tags)
   output <- .bedrockagentcorecontrol$create_evaluator_output()
@@ -444,7 +570,8 @@ bedrockagentcorecontrol_create_gateway <- function(name, description = NULL, cli
     http_path = "/gateways/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_gateway_input(name = name, description = description, clientToken = clientToken, roleArn = roleArn, protocolType = protocolType, protocolConfiguration = protocolConfiguration, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, kmsKeyArn = kmsKeyArn, interceptorConfigurations = interceptorConfigurations, policyEngineConfiguration = policyEngineConfiguration, exceptionLevel = exceptionLevel, tags = tags)
   output <- .bedrockagentcorecontrol$create_gateway_output()
@@ -455,6 +582,43 @@ bedrockagentcorecontrol_create_gateway <- function(name, description = NULL, cli
   return(response)
 }
 .bedrockagentcorecontrol$operations$create_gateway <- bedrockagentcorecontrol_create_gateway
+
+#' Creates a rate limit for a gateway
+#'
+#' @description
+#' Creates a rate limit for a gateway. Rate limits define throttling rules for each dimension that control request rates, token consumption rates, and concurrent connections through the gateway.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_gateway_rate_limit/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_gateway_rate_limit/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway to create the rate limit for.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#' @param rateLimitId An optional customer-defined identifier for the rate limit. If not provided, the system generates one.
+#' @param description An optional human-readable description for this rate limit. If not provided, the rate limit is created without a description.
+#' @param dimensionKeys &#91;required&#93; The ordered list of dimension key names that define the scope of this rate limit. Must be unique per gateway—no two rate limits can share the same dimension keys.
+#' @param entries &#91;required&#93; The rule entries that map dimension values to rate configurations.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_create_gateway_rate_limit
+bedrockagentcorecontrol_create_gateway_rate_limit <- function(gatewayIdentifier, clientToken = NULL, rateLimitId = NULL, description = NULL, dimensionKeys, entries) {
+  op <- new_operation(
+    name = "CreateGatewayRateLimit",
+    http_method = "POST",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$create_gateway_rate_limit_input(gatewayIdentifier = gatewayIdentifier, clientToken = clientToken, rateLimitId = rateLimitId, description = description, dimensionKeys = dimensionKeys, entries = entries)
+  output <- .bedrockagentcorecontrol$create_gateway_rate_limit_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$create_gateway_rate_limit <- bedrockagentcorecontrol_create_gateway_rate_limit
 
 #' Creates a rule for a gateway
 #'
@@ -480,7 +644,8 @@ bedrockagentcorecontrol_create_gateway_rule <- function(gatewayIdentifier, clien
     http_path = "/gateways/{gatewayIdentifier}/rules",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_gateway_rule_input(gatewayIdentifier = gatewayIdentifier, clientToken = clientToken, priority = priority, conditions = conditions, actions = actions, description = description)
   output <- .bedrockagentcorecontrol$create_gateway_rule_output()
@@ -500,27 +665,29 @@ bedrockagentcorecontrol_create_gateway_rule <- function(gatewayIdentifier, clien
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_gateway_target/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_gateway_target/) for full documentation.
 #'
 #' @param gatewayIdentifier &#91;required&#93; The identifier of the gateway to create a target for.
-#' @param name &#91;required&#93; The name of the gateway target. The name must be unique within the gateway.
+#' @param name The name of the gateway target. The name must be unique within the gateway.
 #' @param description The description of the gateway target.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
 #' @param targetConfiguration &#91;required&#93; The configuration settings for the target, including endpoint information and schema definitions.
 #' @param credentialProviderConfigurations The credential provider configurations for the target. These configurations specify how the gateway authenticates with the target endpoint.
 #' @param metadataConfiguration Optional configuration for HTTP header and query parameter propagation to and from the gateway target.
 #' @param privateEndpoint The private endpoint configuration for the gateway target. Use this to connect the gateway to private resources in your VPC.
+#' @param certificateConfigurations The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_gateway_target
-bedrockagentcorecontrol_create_gateway_target <- function(gatewayIdentifier, name, description = NULL, clientToken = NULL, targetConfiguration, credentialProviderConfigurations = NULL, metadataConfiguration = NULL, privateEndpoint = NULL) {
+bedrockagentcorecontrol_create_gateway_target <- function(gatewayIdentifier, name = NULL, description = NULL, clientToken = NULL, targetConfiguration, credentialProviderConfigurations = NULL, metadataConfiguration = NULL, privateEndpoint = NULL, certificateConfigurations = NULL) {
   op <- new_operation(
     name = "CreateGatewayTarget",
     http_method = "POST",
     http_path = "/gateways/{gatewayIdentifier}/targets/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_gateway_target_input(gatewayIdentifier = gatewayIdentifier, name = name, description = description, clientToken = clientToken, targetConfiguration = targetConfiguration, credentialProviderConfigurations = credentialProviderConfigurations, metadataConfiguration = metadataConfiguration, privateEndpoint = privateEndpoint)
+  input <- .bedrockagentcorecontrol$create_gateway_target_input(gatewayIdentifier = gatewayIdentifier, name = name, description = description, clientToken = clientToken, targetConfiguration = targetConfiguration, credentialProviderConfigurations = credentialProviderConfigurations, metadataConfiguration = metadataConfiguration, privateEndpoint = privateEndpoint, certificateConfigurations = certificateConfigurations)
   output <- .bedrockagentcorecontrol$create_gateway_target_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -530,10 +697,10 @@ bedrockagentcorecontrol_create_gateway_target <- function(gatewayIdentifier, nam
 }
 .bedrockagentcorecontrol$operations$create_gateway_target <- bedrockagentcorecontrol_create_gateway_target
 
-#' Operation to create a Harness
+#' Operation to create a harness
 #'
 #' @description
-#' Operation to create a Harness.
+#' Operation to create a harness.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_harness/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_harness/) for full documentation.
 #'
@@ -551,6 +718,7 @@ bedrockagentcorecontrol_create_gateway_target <- function(gatewayIdentifier, nam
 #' @param allowedTools The tools that the agent is allowed to use. Supports glob patterns such as * for all tools, @@builtin for all built-in tools, or @@serverName/toolName for specific MCP server tools.
 #' @param memory The AgentCore Memory configuration for persisting conversation context across sessions.
 #' @param truncation The truncation configuration for managing conversation context when it exceeds model limits.
+#' @param hooks The lifecycle hooks to run at defined points in the agent loop.
 #' @param maxIterations The maximum number of iterations the agent loop can execute per invocation.
 #' @param maxTokens The maximum total number of output tokens the agent can generate across all model calls within a single invocation.
 #' @param timeoutSeconds The maximum duration in seconds for the agent loop execution per invocation.
@@ -559,16 +727,17 @@ bedrockagentcorecontrol_create_gateway_target <- function(gatewayIdentifier, nam
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_harness
-bedrockagentcorecontrol_create_harness <- function(harnessName, clientToken = NULL, executionRoleArn, environment = NULL, environmentArtifact = NULL, environmentVariables = NULL, authorizerConfiguration = NULL, model = NULL, systemPrompt = NULL, tools = NULL, skills = NULL, allowedTools = NULL, memory = NULL, truncation = NULL, maxIterations = NULL, maxTokens = NULL, timeoutSeconds = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_harness <- function(harnessName, clientToken = NULL, executionRoleArn, environment = NULL, environmentArtifact = NULL, environmentVariables = NULL, authorizerConfiguration = NULL, model = NULL, systemPrompt = NULL, tools = NULL, skills = NULL, allowedTools = NULL, memory = NULL, truncation = NULL, hooks = NULL, maxIterations = NULL, maxTokens = NULL, timeoutSeconds = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateHarness",
     http_method = "POST",
     http_path = "/harnesses",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_harness_input(harnessName = harnessName, clientToken = clientToken, executionRoleArn = executionRoleArn, environment = environment, environmentArtifact = environmentArtifact, environmentVariables = environmentVariables, authorizerConfiguration = authorizerConfiguration, model = model, systemPrompt = systemPrompt, tools = tools, skills = skills, allowedTools = allowedTools, memory = memory, truncation = truncation, maxIterations = maxIterations, maxTokens = maxTokens, timeoutSeconds = timeoutSeconds, tags = tags)
+  input <- .bedrockagentcorecontrol$create_harness_input(harnessName = harnessName, clientToken = clientToken, executionRoleArn = executionRoleArn, environment = environment, environmentArtifact = environmentArtifact, environmentVariables = environmentVariables, authorizerConfiguration = authorizerConfiguration, model = model, systemPrompt = systemPrompt, tools = tools, skills = skills, allowedTools = allowedTools, memory = memory, truncation = truncation, hooks = hooks, maxIterations = maxIterations, maxTokens = maxTokens, timeoutSeconds = timeoutSeconds, tags = tags)
   output <- .bedrockagentcorecontrol$create_harness_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -577,6 +746,43 @@ bedrockagentcorecontrol_create_harness <- function(harnessName, clientToken = NU
   return(response)
 }
 .bedrockagentcorecontrol$operations$create_harness <- bedrockagentcorecontrol_create_harness
+
+#' Operation to create a harness endpoint
+#'
+#' @description
+#' Operation to create a harness endpoint.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_harness_endpoint/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_harness_endpoint/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness to create an endpoint for.
+#' @param endpointName &#91;required&#93; The name of the endpoint. Must start with a letter and contain only alphanumeric characters and underscores.
+#' @param targetVersion The harness version that the endpoint points to and serves invocations from.
+#' @param description A description of the endpoint.
+#' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
+#' @param tags Tags to apply to the endpoint resource.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_create_harness_endpoint
+bedrockagentcorecontrol_create_harness_endpoint <- function(harnessId, endpointName, targetVersion = NULL, description = NULL, clientToken = NULL, tags = NULL) {
+  op <- new_operation(
+    name = "CreateHarnessEndpoint",
+    http_method = "POST",
+    http_path = "/harnesses/{harnessId}/endpoints",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$create_harness_endpoint_input(harnessId = harnessId, endpointName = endpointName, targetVersion = targetVersion, description = description, clientToken = clientToken, tags = tags)
+  output <- .bedrockagentcorecontrol$create_harness_endpoint_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$create_harness_endpoint <- bedrockagentcorecontrol_create_harness_endpoint
 
 #' Creates a new Amazon Bedrock AgentCore Memory resource
 #'
@@ -593,22 +799,24 @@ bedrockagentcorecontrol_create_harness <- function(harnessName, clientToken = NU
 #' @param eventExpiryDuration &#91;required&#93; The duration after which memory events expire. Specified as an ISO 8601 duration.
 #' @param memoryStrategies The memory strategies to use for this memory. Strategies define how information is extracted, processed, and consolidated.
 #' @param indexedKeys Metadata keys to index for filtering. Once declared, indexed keys cannot be removed.
+#' @param namespaceKeys The namespace variable key definitions with optional validation rules. Use these `namespaceKeys` in `namespaceTemplates` to control namespace hierarchy.
 #' @param streamDeliveryResources Configuration for streaming memory record data to external resources.
 #' @param tags A map of tag keys and values to assign to an AgentCore Memory. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_memory
-bedrockagentcorecontrol_create_memory <- function(clientToken = NULL, name, description = NULL, encryptionKeyArn = NULL, memoryExecutionRoleArn = NULL, eventExpiryDuration, memoryStrategies = NULL, indexedKeys = NULL, streamDeliveryResources = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_memory <- function(clientToken = NULL, name, description = NULL, encryptionKeyArn = NULL, memoryExecutionRoleArn = NULL, eventExpiryDuration, memoryStrategies = NULL, indexedKeys = NULL, namespaceKeys = NULL, streamDeliveryResources = NULL, tags = NULL) {
   op <- new_operation(
     name = "CreateMemory",
     http_method = "POST",
     http_path = "/memories/create",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_memory_input(clientToken = clientToken, name = name, description = description, encryptionKeyArn = encryptionKeyArn, memoryExecutionRoleArn = memoryExecutionRoleArn, eventExpiryDuration = eventExpiryDuration, memoryStrategies = memoryStrategies, indexedKeys = indexedKeys, streamDeliveryResources = streamDeliveryResources, tags = tags)
+  input <- .bedrockagentcorecontrol$create_memory_input(clientToken = clientToken, name = name, description = description, encryptionKeyArn = encryptionKeyArn, memoryExecutionRoleArn = memoryExecutionRoleArn, eventExpiryDuration = eventExpiryDuration, memoryStrategies = memoryStrategies, indexedKeys = indexedKeys, namespaceKeys = namespaceKeys, streamDeliveryResources = streamDeliveryResources, tags = tags)
   output <- .bedrockagentcorecontrol$create_memory_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -640,7 +848,8 @@ bedrockagentcorecontrol_create_oauth_2_credential_provider <- function(name, cre
     http_path = "/identities/CreateOauth2CredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_oauth_2_credential_provider_input(name = name, credentialProviderVendor = credentialProviderVendor, oauth2ProviderConfigInput = oauth2ProviderConfigInput, tags = tags)
   output <- .bedrockagentcorecontrol$create_oauth_2_credential_provider_output()
@@ -665,7 +874,10 @@ bedrockagentcorecontrol_create_oauth_2_credential_provider <- function(name, cre
 #' @param description The description of the online evaluation configuration that explains its monitoring purpose and scope.
 #' @param rule &#91;required&#93; The evaluation rule that defines sampling configuration, filters, and session detection settings for the online evaluation.
 #' @param dataSourceConfig &#91;required&#93; The data source configuration that specifies CloudWatch log groups and service names to monitor for agent traces.
-#' @param evaluators &#91;required&#93; The list of evaluators to apply during online evaluation. Can include both built-in evaluators and custom evaluators created with [`create_evaluator`][bedrockagentcorecontrol_create_evaluator].
+#' @param evaluators The list of evaluators to apply during online evaluation. Can include both built-in evaluators and custom evaluators created with [`create_evaluator`][bedrockagentcorecontrol_create_evaluator].
+#' @param insights The list of insight types to run against agent sessions.
+#' @param clusteringConfig Configuration for periodic batch evaluation clustering of insight results.
+#' @param outputConfig The configuration that specifies where evaluation results should be written for monitoring and analysis.
 #' @param evaluationExecutionRoleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that grants permissions to read from CloudWatch logs, write evaluation results, and invoke Amazon Bedrock models for evaluation. If the configuration references evaluators encrypted with a customer managed KMS key, this role must also have `kms:Decrypt` permission on the KMS key. The service validates this permission at configuration creation time. For more information, see [Encryption at rest for AgentCore Evaluations](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html).
 #' @param enableOnCreate &#91;required&#93; Whether to enable the online evaluation configuration immediately upon creation. If true, evaluation begins automatically.
 #' @param tags A map of tag keys and values to assign to an AgentCore Online Evaluation Config. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment.
@@ -673,16 +885,17 @@ bedrockagentcorecontrol_create_oauth_2_credential_provider <- function(name, cre
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_online_evaluation_config
-bedrockagentcorecontrol_create_online_evaluation_config <- function(clientToken = NULL, onlineEvaluationConfigName, description = NULL, rule, dataSourceConfig, evaluators, evaluationExecutionRoleArn, enableOnCreate, tags = NULL) {
+bedrockagentcorecontrol_create_online_evaluation_config <- function(clientToken = NULL, onlineEvaluationConfigName, description = NULL, rule, dataSourceConfig, evaluators = NULL, insights = NULL, clusteringConfig = NULL, outputConfig = NULL, evaluationExecutionRoleArn, enableOnCreate, tags = NULL) {
   op <- new_operation(
     name = "CreateOnlineEvaluationConfig",
     http_method = "POST",
     http_path = "/online-evaluation-configs/create",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_online_evaluation_config_input(clientToken = clientToken, onlineEvaluationConfigName = onlineEvaluationConfigName, description = description, rule = rule, dataSourceConfig = dataSourceConfig, evaluators = evaluators, evaluationExecutionRoleArn = evaluationExecutionRoleArn, enableOnCreate = enableOnCreate, tags = tags)
+  input <- .bedrockagentcorecontrol$create_online_evaluation_config_input(clientToken = clientToken, onlineEvaluationConfigName = onlineEvaluationConfigName, description = description, rule = rule, dataSourceConfig = dataSourceConfig, evaluators = evaluators, insights = insights, clusteringConfig = clusteringConfig, outputConfig = outputConfig, evaluationExecutionRoleArn = evaluationExecutionRoleArn, enableOnCreate = enableOnCreate, tags = tags)
   output <- .bedrockagentcorecontrol$create_online_evaluation_config_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -704,21 +917,27 @@ bedrockagentcorecontrol_create_online_evaluation_config <- function(clientToken 
 #' @param description A description of the payment connector.
 #' @param type &#91;required&#93; The type of payment connector, which determines the payment provider integration.
 #' @param credentialProviderConfigurations &#91;required&#93; The credential provider configurations for the payment connector. These configurations specify how the connector authenticates with the payment provider.
+#' @param provisionMode The provision mode for creating the payment connector. If you don't specify a value, the default is `MANUAL`.
+#' 
+#' -   `MANUAL` - You provide the credential provider configurations directly.
+#' 
+#' -   `QUICK_CREATE` - The service orchestrates OAuth consent and provisions the credential provider for you.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_payment_connector
-bedrockagentcorecontrol_create_payment_connector <- function(paymentManagerId, name, description = NULL, type, credentialProviderConfigurations, clientToken = NULL) {
+bedrockagentcorecontrol_create_payment_connector <- function(paymentManagerId, name, description = NULL, type, credentialProviderConfigurations, provisionMode = NULL, clientToken = NULL) {
   op <- new_operation(
     name = "CreatePaymentConnector",
     http_method = "POST",
     http_path = "/payments/managers/{paymentManagerId}/connectors",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_payment_connector_input(paymentManagerId = paymentManagerId, name = name, description = description, type = type, credentialProviderConfigurations = credentialProviderConfigurations, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$create_payment_connector_input(paymentManagerId = paymentManagerId, name = name, description = description, type = type, credentialProviderConfigurations = credentialProviderConfigurations, provisionMode = provisionMode, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$create_payment_connector_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -752,7 +971,8 @@ bedrockagentcorecontrol_create_payment_credential_provider <- function(name, cre
     http_path = "/identities/CreatePaymentCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_payment_credential_provider_input(name = name, credentialProviderVendor = credentialProviderVendor, providerConfigurationInput = providerConfigurationInput, tags = tags)
   output <- .bedrockagentcorecontrol$create_payment_credential_provider_output()
@@ -782,20 +1002,22 @@ bedrockagentcorecontrol_create_payment_credential_provider <- function(name, cre
 #' @param roleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that the payment manager assumes to access resources on your behalf.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
 #' @param tags A map of tag keys and values to assign to the payment manager.
+#' @param kmsKeyArn The Amazon Resource Name (ARN) of the customer managed KMS key to use for encrypting sensitive payment manager data at rest. If you don't specify a key, the data is encrypted with an Amazon Web Services owned key.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_payment_manager
-bedrockagentcorecontrol_create_payment_manager <- function(name, description = NULL, authorizerType, authorizerConfiguration = NULL, roleArn, clientToken = NULL, tags = NULL) {
+bedrockagentcorecontrol_create_payment_manager <- function(name, description = NULL, authorizerType, authorizerConfiguration = NULL, roleArn, clientToken = NULL, tags = NULL, kmsKeyArn = NULL) {
   op <- new_operation(
     name = "CreatePaymentManager",
     http_method = "POST",
     http_path = "/payments/managers",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_payment_manager_input(name = name, description = description, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, roleArn = roleArn, clientToken = clientToken, tags = tags)
+  input <- .bedrockagentcorecontrol$create_payment_manager_input(name = name, description = description, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, roleArn = roleArn, clientToken = clientToken, tags = tags, kmsKeyArn = kmsKeyArn)
   output <- .bedrockagentcorecontrol$create_payment_manager_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -808,30 +1030,32 @@ bedrockagentcorecontrol_create_payment_manager <- function(name, description = N
 #' Creates a policy within the AgentCore Policy system
 #'
 #' @description
-#' Creates a policy within the AgentCore Policy system. Policies provide real-time, deterministic control over agentic interactions with AgentCore Gateway. Using the Cedar policy language, you can define fine-grained policies that specify which interactions with Gateway tools are permitted based on input parameters and OAuth claims, ensuring agents operate within defined boundaries and business rules. The policy is validated during creation against the Cedar schema generated from the Gateway's tools' input schemas, which defines the available tools, their parameters, and expected data types. This is an asynchronous operation. Use the [`get_policy`][bedrockagentcorecontrol_get_policy] operation to poll the `status` field to track completion.
+#' Creates a policy within the AgentCore Policy system. Policies provide real-time, deterministic control over agentic interactions with AgentCore Gateway. Using Cedar or Dogwood, you can define fine-grained policies that specify which interactions with Gateway tools are permitted based on input parameters and OAuth claims, ensuring agents operate within defined boundaries and business rules. The policy is validated during creation against the Cedar schema generated from the Gateway's tools' input schemas, which defines the available tools, their parameters, and expected data types. This is an asynchronous operation. Use the [`get_policy`][bedrockagentcorecontrol_get_policy] operation to poll the `status` field to track completion.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_policy/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_create_policy/) for full documentation.
 #'
 #' @param name &#91;required&#93; The customer-assigned immutable name for the policy. Must be unique within the account. This name is used for policy identification and cannot be changed after creation.
-#' @param definition &#91;required&#93; The Cedar policy statement that defines the access control rules. This contains the actual policy logic written in Cedar policy language, specifying effect (permit or forbid), principals, actions, resources, and conditions for agent behavior control.
+#' @param definition &#91;required&#93; The Cedar or Dogwood policy statement that defines the access control rules. This contains the actual policy logic written in Cedar or Dogwood, specifying effect (permit or forbid), principals, actions, resources, and conditions for agent behavior control.
 #' @param description A human-readable description of the policy's purpose and functionality (1-4,096 characters). This helps policy administrators understand the policy's intent, business rules, and operational scope. Use this field to document why the policy exists, what business requirement it addresses, and any special considerations for maintenance. Clear descriptions are essential for policy governance, auditing, and troubleshooting.
 #' @param validationMode The validation mode for the policy creation. Determines how Cedar analyzer validation results are handled during policy creation. FAIL_ON_ANY_FINDINGS (default) runs the Cedar analyzer to validate the policy against the Cedar schema and tool context, failing creation if the analyzer detects any validation issues to ensure strict conformance. IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows policy creation even if validation issues are detected, useful for testing or when the policy schema is evolving. Use FAIL_ON_ANY_FINDINGS for production policies to ensure correctness, and IGNORE_ALL_FINDINGS only when you understand and accept the analyzer findings.
+#' @param enforcementMode The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode to collect data on how it affects your application. Once you are satisfied with the data gathered, switch the policy to `ACTIVE`. Defaults to `ACTIVE`.
 #' @param policyEngineId &#91;required&#93; The identifier of the policy engine which contains this policy. Policy engines group related policies and provide the execution context for policy evaluation.
 #' @param clientToken A unique, case-sensitive identifier to ensure the idempotency of the request. The AWS SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without creating a duplicate policy.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_create_policy
-bedrockagentcorecontrol_create_policy <- function(name, definition, description = NULL, validationMode = NULL, policyEngineId, clientToken = NULL) {
+bedrockagentcorecontrol_create_policy <- function(name, definition, description = NULL, validationMode = NULL, enforcementMode = NULL, policyEngineId, clientToken = NULL) {
   op <- new_operation(
     name = "CreatePolicy",
     http_method = "POST",
     http_path = "/policy-engines/{policyEngineId}/policies",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$create_policy_input(name = name, definition = definition, description = description, validationMode = validationMode, policyEngineId = policyEngineId, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$create_policy_input(name = name, definition = definition, description = description, validationMode = validationMode, enforcementMode = enforcementMode, policyEngineId = policyEngineId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$create_policy_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -864,7 +1088,8 @@ bedrockagentcorecontrol_create_policy_engine <- function(name, description = NUL
     http_path = "/policy-engines",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_policy_engine_input(name = name, description = description, clientToken = clientToken, encryptionKeyArn = encryptionKeyArn, tags = tags)
   output <- .bedrockagentcorecontrol$create_policy_engine_output()
@@ -904,7 +1129,8 @@ bedrockagentcorecontrol_create_registry <- function(name, description = NULL, au
     http_path = "/registries",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_registry_input(name = name, description = description, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, clientToken = clientToken, approvalConfiguration = approvalConfiguration)
   output <- .bedrockagentcorecontrol$create_registry_output()
@@ -951,7 +1177,8 @@ bedrockagentcorecontrol_create_registry_record <- function(registryId, name, des
     http_path = "/registries/{registryId}/records",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_registry_record_input(registryId = registryId, name = name, description = description, descriptorType = descriptorType, descriptors = descriptors, recordVersion = recordVersion, synchronizationType = synchronizationType, synchronizationConfiguration = synchronizationConfiguration, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$create_registry_record_output()
@@ -984,7 +1211,8 @@ bedrockagentcorecontrol_create_workload_identity <- function(name, allowedResour
     http_path = "/identities/CreateWorkloadIdentity",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$create_workload_identity_input(name = name, allowedResourceOauth2ReturnUrls = allowedResourceOauth2ReturnUrls, tags = tags)
   output <- .bedrockagentcorecontrol$create_workload_identity_output()
@@ -996,29 +1224,32 @@ bedrockagentcorecontrol_create_workload_identity <- function(name, allowedResour
 }
 .bedrockagentcorecontrol$operations$create_workload_identity <- bedrockagentcorecontrol_create_workload_identity
 
-#' Deletes an Amazon Bedrock AgentCore Runtime
+#' Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an
+#' AgentCore Runtime when you provide the version qualifier
 #'
 #' @description
-#' Deletes an Amazon Bedrock AgentCore Runtime.
+#' Deletes an Amazon Bedrock AgentCore Runtime, or a single version of an AgentCore Runtime when you provide the version qualifier.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_agent_runtime/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_agent_runtime/) for full documentation.
 #'
 #' @param agentRuntimeId &#91;required&#93; The unique identifier of the AgentCore Runtime to delete.
+#' @param agentRuntimeVersion The version of the AgentCore Runtime to delete. When you provide this value, only that version is deleted. When you omit it, the entire AgentCore Runtime and all of its versions are deleted.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request but does not return an error.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_delete_agent_runtime
-bedrockagentcorecontrol_delete_agent_runtime <- function(agentRuntimeId, clientToken = NULL) {
+bedrockagentcorecontrol_delete_agent_runtime <- function(agentRuntimeId, agentRuntimeVersion = NULL, clientToken = NULL) {
   op <- new_operation(
     name = "DeleteAgentRuntime",
     http_method = "DELETE",
     http_path = "/runtimes/{agentRuntimeId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$delete_agent_runtime_input(agentRuntimeId = agentRuntimeId, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$delete_agent_runtime_input(agentRuntimeId = agentRuntimeId, agentRuntimeVersion = agentRuntimeVersion, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_agent_runtime_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -1028,10 +1259,10 @@ bedrockagentcorecontrol_delete_agent_runtime <- function(agentRuntimeId, clientT
 }
 .bedrockagentcorecontrol$operations$delete_agent_runtime <- bedrockagentcorecontrol_delete_agent_runtime
 
-#' Deletes an AAgentCore Runtime endpoint
+#' Deletes an AgentCore Runtime endpoint
 #'
 #' @description
-#' Deletes an AAgentCore Runtime endpoint.
+#' Deletes an AgentCore Runtime endpoint.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_agent_runtime_endpoint/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_agent_runtime_endpoint/) for full documentation.
 #'
@@ -1049,7 +1280,8 @@ bedrockagentcorecontrol_delete_agent_runtime_endpoint <- function(agentRuntimeId
     http_path = "/runtimes/{agentRuntimeId}/runtime-endpoints/{endpointName}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_agent_runtime_endpoint_input(agentRuntimeId = agentRuntimeId, endpointName = endpointName, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_agent_runtime_endpoint_output()
@@ -1080,7 +1312,8 @@ bedrockagentcorecontrol_delete_api_key_credential_provider <- function(name) {
     http_path = "/identities/DeleteApiKeyCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_api_key_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$delete_api_key_credential_provider_output()
@@ -1112,7 +1345,8 @@ bedrockagentcorecontrol_delete_browser <- function(browserId, clientToken = NULL
     http_path = "/browsers/{browserId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_browser_input(browserId = browserId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_browser_output()
@@ -1144,7 +1378,8 @@ bedrockagentcorecontrol_delete_browser_profile <- function(profileId, clientToke
     http_path = "/browser-profiles/{profileId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_browser_profile_input(profileId = profileId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_browser_profile_output()
@@ -1155,6 +1390,39 @@ bedrockagentcorecontrol_delete_browser_profile <- function(profileId, clientToke
   return(response)
 }
 .bedrockagentcorecontrol$operations$delete_browser_profile <- bedrockagentcorecontrol_delete_browser_profile
+
+#' Deletes a capacity provider
+#'
+#' @description
+#' Deletes a capacity provider. Before you delete a capacity provider, disassociate all agent runtimes and runtime versions that reference it. If any references remain, the operation fails.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_capacity_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_capacity_provider/) for full documentation.
+#'
+#' @param capacityProviderId &#91;required&#93; The unique identifier of the capacity provider to delete.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_delete_capacity_provider
+bedrockagentcorecontrol_delete_capacity_provider <- function(capacityProviderId, clientToken = NULL) {
+  op <- new_operation(
+    name = "DeleteCapacityProvider",
+    http_method = "DELETE",
+    http_path = "/capacity-providers/{capacityProviderId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$delete_capacity_provider_input(capacityProviderId = capacityProviderId, clientToken = clientToken)
+  output <- .bedrockagentcorecontrol$delete_capacity_provider_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$delete_capacity_provider <- bedrockagentcorecontrol_delete_capacity_provider
 
 #' Deletes a custom code interpreter
 #'
@@ -1176,7 +1444,8 @@ bedrockagentcorecontrol_delete_code_interpreter <- function(codeInterpreterId, c
     http_path = "/code-interpreters/{codeInterpreterId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_code_interpreter_input(codeInterpreterId = codeInterpreterId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_code_interpreter_output()
@@ -1207,7 +1476,8 @@ bedrockagentcorecontrol_delete_configuration_bundle <- function(bundleId) {
     http_path = "/configuration-bundles/{bundleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_configuration_bundle_input(bundleId = bundleId)
   output <- .bedrockagentcorecontrol$delete_configuration_bundle_output()
@@ -1219,16 +1489,47 @@ bedrockagentcorecontrol_delete_configuration_bundle <- function(bundleId) {
 }
 .bedrockagentcorecontrol$operations$delete_configuration_bundle <- bedrockagentcorecontrol_delete_configuration_bundle
 
-#' Deletes a dataset version or an entire dataset (all versions + name
-#' claim)
+#' Deletes a consent portal
 #'
 #' @description
-#' Deletes a dataset version or an entire dataset (all versions + name claim). Asynchronous 202.
+#' Deletes a consent portal.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_consent_portal/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_consent_portal/) for full documentation.
+#'
+#' @param consentPortalIdentifier &#91;required&#93; The identifier of the consent portal. You can specify either the consent portal ID or its Amazon Resource Name (ARN).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_delete_consent_portal
+bedrockagentcorecontrol_delete_consent_portal <- function(consentPortalIdentifier) {
+  op <- new_operation(
+    name = "DeleteConsentPortal",
+    http_method = "POST",
+    http_path = "/identities/DeleteConsentPortal",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$delete_consent_portal_input(consentPortalIdentifier = consentPortalIdentifier)
+  output <- .bedrockagentcorecontrol$delete_consent_portal_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$delete_consent_portal <- bedrockagentcorecontrol_delete_consent_portal
+
+#' Deletes a dataset version or an entire dataset asynchronously
+#'
+#' @description
+#' Deletes a dataset version or an entire dataset asynchronously. If `datasetVersion` is absent, deletes all versions and the dataset record itself. If provided, deletes only that specific version.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_dataset/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_dataset/) for full documentation.
 #'
 #' @param datasetId &#91;required&#93; The unique identifier of the dataset to delete.
-#' @param datasetVersion Optional version to delete. Use "DRAFT" or omit to delete the draft. Returns ResourceNotFoundException if the specified version does not exist.
+#' @param datasetVersion Optional version to delete. If absent, deletes the entire dataset. If provided, deletes only that specific version.
 #'
 #' @keywords internal
 #'
@@ -1240,7 +1541,8 @@ bedrockagentcorecontrol_delete_dataset <- function(datasetId, datasetVersion = N
     http_path = "/datasets/{datasetId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_dataset_input(datasetId = datasetId, datasetVersion = datasetVersion)
   output <- .bedrockagentcorecontrol$delete_dataset_output()
@@ -1255,7 +1557,7 @@ bedrockagentcorecontrol_delete_dataset <- function(datasetId, datasetVersion = N
 #' Deletes specific examples by ID from DRAFT
 #'
 #' @description
-#' Deletes specific examples by ID from DRAFT.
+#' Deletes specific examples by ID from DRAFT. All example IDs are validated before any deletes occur. If any ID does not exist in DRAFT, the entire batch is rejected (all-or-nothing semantics).
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_dataset_examples/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_dataset_examples/) for full documentation.
 #'
@@ -1273,7 +1575,8 @@ bedrockagentcorecontrol_delete_dataset_examples <- function(datasetId, clientTok
     http_path = "/datasets/{datasetId}/examples/delete",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_dataset_examples_input(datasetId = datasetId, clientToken = clientToken, exampleIds = exampleIds)
   output <- .bedrockagentcorecontrol$delete_dataset_examples_output()
@@ -1304,7 +1607,8 @@ bedrockagentcorecontrol_delete_evaluator <- function(evaluatorId) {
     http_path = "/evaluators/{evaluatorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_evaluator_input(evaluatorId = evaluatorId)
   output <- .bedrockagentcorecontrol$delete_evaluator_output()
@@ -1335,7 +1639,8 @@ bedrockagentcorecontrol_delete_gateway <- function(gatewayIdentifier) {
     http_path = "/gateways/{gatewayIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_gateway_input(gatewayIdentifier = gatewayIdentifier)
   output <- .bedrockagentcorecontrol$delete_gateway_output()
@@ -1346,6 +1651,39 @@ bedrockagentcorecontrol_delete_gateway <- function(gatewayIdentifier) {
   return(response)
 }
 .bedrockagentcorecontrol$operations$delete_gateway <- bedrockagentcorecontrol_delete_gateway
+
+#' Deletes a gateway rate limit
+#'
+#' @description
+#' Deletes a gateway rate limit.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_gateway_rate_limit/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_gateway_rate_limit/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway.
+#' @param rateLimitId &#91;required&#93; The unique identifier of the rate limit to delete.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_delete_gateway_rate_limit
+bedrockagentcorecontrol_delete_gateway_rate_limit <- function(gatewayIdentifier, rateLimitId) {
+  op <- new_operation(
+    name = "DeleteGatewayRateLimit",
+    http_method = "DELETE",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$delete_gateway_rate_limit_input(gatewayIdentifier = gatewayIdentifier, rateLimitId = rateLimitId)
+  output <- .bedrockagentcorecontrol$delete_gateway_rate_limit_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$delete_gateway_rate_limit <- bedrockagentcorecontrol_delete_gateway_rate_limit
 
 #' Deletes a gateway rule
 #'
@@ -1367,7 +1705,8 @@ bedrockagentcorecontrol_delete_gateway_rule <- function(gatewayIdentifier, ruleI
     http_path = "/gateways/{gatewayIdentifier}/rules/{ruleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_gateway_rule_input(gatewayIdentifier = gatewayIdentifier, ruleId = ruleId)
   output <- .bedrockagentcorecontrol$delete_gateway_rule_output()
@@ -1399,7 +1738,8 @@ bedrockagentcorecontrol_delete_gateway_target <- function(gatewayIdentifier, tar
     http_path = "/gateways/{gatewayIdentifier}/targets/{targetId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_gateway_target_input(gatewayIdentifier = gatewayIdentifier, targetId = targetId)
   output <- .bedrockagentcorecontrol$delete_gateway_target_output()
@@ -1420,20 +1760,22 @@ bedrockagentcorecontrol_delete_gateway_target <- function(gatewayIdentifier, tar
 #'
 #' @param harnessId &#91;required&#93; The ID of the harness to delete.
 #' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
+#' @param deleteManagedMemory Whether to delete the managed memory on harness deletion. Default: true. If false, the memory is disassociated and becomes a regular customer-owned resource.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_delete_harness
-bedrockagentcorecontrol_delete_harness <- function(harnessId, clientToken = NULL) {
+bedrockagentcorecontrol_delete_harness <- function(harnessId, clientToken = NULL, deleteManagedMemory = NULL) {
   op <- new_operation(
     name = "DeleteHarness",
     http_method = "DELETE",
     http_path = "/harnesses/{harnessId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$delete_harness_input(harnessId = harnessId, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$delete_harness_input(harnessId = harnessId, clientToken = clientToken, deleteManagedMemory = deleteManagedMemory)
   output <- .bedrockagentcorecontrol$delete_harness_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -1443,10 +1785,44 @@ bedrockagentcorecontrol_delete_harness <- function(harnessId, clientToken = NULL
 }
 .bedrockagentcorecontrol$operations$delete_harness <- bedrockagentcorecontrol_delete_harness
 
+#' Operation to delete a harness endpoint
+#'
+#' @description
+#' Operation to delete a harness endpoint.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_harness_endpoint/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_harness_endpoint/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness that the endpoint belongs to.
+#' @param endpointName &#91;required&#93; The name of the endpoint to delete.
+#' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_delete_harness_endpoint
+bedrockagentcorecontrol_delete_harness_endpoint <- function(harnessId, endpointName, clientToken = NULL) {
+  op <- new_operation(
+    name = "DeleteHarnessEndpoint",
+    http_method = "DELETE",
+    http_path = "/harnesses/{harnessId}/endpoints/{endpointName}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$delete_harness_endpoint_input(harnessId = harnessId, endpointName = endpointName, clientToken = clientToken)
+  output <- .bedrockagentcorecontrol$delete_harness_endpoint_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$delete_harness_endpoint <- bedrockagentcorecontrol_delete_harness_endpoint
+
 #' Deletes an Amazon Bedrock AgentCore Memory resource
 #'
 #' @description
-#' Deletes an Amazon Bedrock AgentCore Memory resource.
+#' Deletes an Amazon Bedrock AgentCore Memory resource. When you delete a memory resource, it is permanently removed.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_memory/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_delete_memory/) for full documentation.
 #'
@@ -1463,7 +1839,8 @@ bedrockagentcorecontrol_delete_memory <- function(clientToken = NULL, memoryId) 
     http_path = "/memories/{memoryId}/delete",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_memory_input(clientToken = clientToken, memoryId = memoryId)
   output <- .bedrockagentcorecontrol$delete_memory_output()
@@ -1494,7 +1871,8 @@ bedrockagentcorecontrol_delete_oauth_2_credential_provider <- function(name) {
     http_path = "/identities/DeleteOauth2CredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_oauth_2_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$delete_oauth_2_credential_provider_output()
@@ -1526,7 +1904,8 @@ bedrockagentcorecontrol_delete_online_evaluation_config <- function(onlineEvalua
     http_path = "/online-evaluation-configs/{onlineEvaluationConfigId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_online_evaluation_config_input(onlineEvaluationConfigId = onlineEvaluationConfigId)
   output <- .bedrockagentcorecontrol$delete_online_evaluation_config_output()
@@ -1559,7 +1938,8 @@ bedrockagentcorecontrol_delete_payment_connector <- function(paymentManagerId, p
     http_path = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_payment_connector_input(paymentManagerId = paymentManagerId, paymentConnectorId = paymentConnectorId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_payment_connector_output()
@@ -1591,7 +1971,8 @@ bedrockagentcorecontrol_delete_payment_credential_provider <- function(name) {
     http_path = "/identities/DeletePaymentCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_payment_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$delete_payment_credential_provider_output()
@@ -1623,7 +2004,8 @@ bedrockagentcorecontrol_delete_payment_manager <- function(paymentManagerId, cli
     http_path = "/payments/managers/{paymentManagerId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_payment_manager_input(paymentManagerId = paymentManagerId, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$delete_payment_manager_output()
@@ -1655,7 +2037,8 @@ bedrockagentcorecontrol_delete_policy <- function(policyEngineId, policyId) {
     http_path = "/policy-engines/{policyEngineId}/policies/{policyId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_policy_input(policyEngineId = policyEngineId, policyId = policyId)
   output <- .bedrockagentcorecontrol$delete_policy_output()
@@ -1686,7 +2069,8 @@ bedrockagentcorecontrol_delete_policy_engine <- function(policyEngineId) {
     http_path = "/policy-engines/{policyEngineId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_policy_engine_input(policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$delete_policy_engine_output()
@@ -1717,7 +2101,8 @@ bedrockagentcorecontrol_delete_registry <- function(registryId) {
     http_path = "/registries/{registryId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_registry_input(registryId = registryId)
   output <- .bedrockagentcorecontrol$delete_registry_output()
@@ -1749,7 +2134,8 @@ bedrockagentcorecontrol_delete_registry_record <- function(registryId, recordId)
     http_path = "/registries/{registryId}/records/{recordId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_registry_record_input(registryId = registryId, recordId = recordId)
   output <- .bedrockagentcorecontrol$delete_registry_record_output()
@@ -1780,7 +2166,8 @@ bedrockagentcorecontrol_delete_resource_policy <- function(resourceArn) {
     http_path = "/resourcepolicy/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_resource_policy_input(resourceArn = resourceArn)
   output <- .bedrockagentcorecontrol$delete_resource_policy_output()
@@ -1811,7 +2198,8 @@ bedrockagentcorecontrol_delete_workload_identity <- function(name) {
     http_path = "/identities/DeleteWorkloadIdentity",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$delete_workload_identity_input(name = name)
   output <- .bedrockagentcorecontrol$delete_workload_identity_output()
@@ -1843,7 +2231,8 @@ bedrockagentcorecontrol_get_agent_runtime <- function(agentRuntimeId, agentRunti
     http_path = "/runtimes/{agentRuntimeId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_agent_runtime_input(agentRuntimeId = agentRuntimeId, agentRuntimeVersion = agentRuntimeVersion)
   output <- .bedrockagentcorecontrol$get_agent_runtime_output()
@@ -1875,7 +2264,8 @@ bedrockagentcorecontrol_get_agent_runtime_endpoint <- function(agentRuntimeId, e
     http_path = "/runtimes/{agentRuntimeId}/runtime-endpoints/{endpointName}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_agent_runtime_endpoint_input(agentRuntimeId = agentRuntimeId, endpointName = endpointName)
   output <- .bedrockagentcorecontrol$get_agent_runtime_endpoint_output()
@@ -1906,7 +2296,8 @@ bedrockagentcorecontrol_get_api_key_credential_provider <- function(name) {
     http_path = "/identities/GetApiKeyCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_api_key_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$get_api_key_credential_provider_output()
@@ -1937,7 +2328,8 @@ bedrockagentcorecontrol_get_browser <- function(browserId) {
     http_path = "/browsers/{browserId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_browser_input(browserId = browserId)
   output <- .bedrockagentcorecontrol$get_browser_output()
@@ -1968,7 +2360,8 @@ bedrockagentcorecontrol_get_browser_profile <- function(profileId) {
     http_path = "/browser-profiles/{profileId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_browser_profile_input(profileId = profileId)
   output <- .bedrockagentcorecontrol$get_browser_profile_output()
@@ -1979,6 +2372,39 @@ bedrockagentcorecontrol_get_browser_profile <- function(profileId) {
   return(response)
 }
 .bedrockagentcorecontrol$operations$get_browser_profile <- bedrockagentcorecontrol_get_browser_profile
+
+#' Retrieves information about a capacity provider, including its status,
+#' permissions configuration, and compute configuration
+#'
+#' @description
+#' Retrieves information about a capacity provider, including its status, permissions configuration, and compute configuration.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_capacity_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_capacity_provider/) for full documentation.
+#'
+#' @param capacityProviderId &#91;required&#93; The unique identifier of the capacity provider.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_get_capacity_provider
+bedrockagentcorecontrol_get_capacity_provider <- function(capacityProviderId) {
+  op <- new_operation(
+    name = "GetCapacityProvider",
+    http_method = "GET",
+    http_path = "/capacity-providers/{capacityProviderId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$get_capacity_provider_input(capacityProviderId = capacityProviderId)
+  output <- .bedrockagentcorecontrol$get_capacity_provider_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$get_capacity_provider <- bedrockagentcorecontrol_get_capacity_provider
 
 #' Gets information about a custom code interpreter
 #'
@@ -1999,7 +2425,8 @@ bedrockagentcorecontrol_get_code_interpreter <- function(codeInterpreterId) {
     http_path = "/code-interpreters/{codeInterpreterId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_code_interpreter_input(codeInterpreterId = codeInterpreterId)
   output <- .bedrockagentcorecontrol$get_code_interpreter_output()
@@ -2031,7 +2458,8 @@ bedrockagentcorecontrol_get_configuration_bundle <- function(bundleId, branchNam
     http_path = "/configuration-bundles/{bundleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_configuration_bundle_input(bundleId = bundleId, branchName = branchName)
   output <- .bedrockagentcorecontrol$get_configuration_bundle_output()
@@ -2064,7 +2492,8 @@ bedrockagentcorecontrol_get_configuration_bundle_version <- function(bundleId, v
     http_path = "/configuration-bundles/{bundleId}/versions/{versionId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_configuration_bundle_version_input(bundleId = bundleId, versionId = versionId)
   output <- .bedrockagentcorecontrol$get_configuration_bundle_version_output()
@@ -2076,10 +2505,42 @@ bedrockagentcorecontrol_get_configuration_bundle_version <- function(bundleId, v
 }
 .bedrockagentcorecontrol$operations$get_configuration_bundle_version <- bedrockagentcorecontrol_get_configuration_bundle_version
 
-#' Retrieves dataset metadata only
+#' Retrieves information about a consent portal
 #'
 #' @description
-#' Retrieves dataset metadata only.
+#' Retrieves information about a consent portal.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_consent_portal/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_consent_portal/) for full documentation.
+#'
+#' @param consentPortalIdentifier &#91;required&#93; The identifier of the consent portal. You can specify either the consent portal ID or its Amazon Resource Name (ARN).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_get_consent_portal
+bedrockagentcorecontrol_get_consent_portal <- function(consentPortalIdentifier) {
+  op <- new_operation(
+    name = "GetConsentPortal",
+    http_method = "POST",
+    http_path = "/identities/GetConsentPortal",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$get_consent_portal_input(consentPortalIdentifier = consentPortalIdentifier)
+  output <- .bedrockagentcorecontrol$get_consent_portal_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$get_consent_portal <- bedrockagentcorecontrol_get_consent_portal
+
+#' Retrieves dataset metadata
+#'
+#' @description
+#' Retrieves dataset metadata. Use the `datasetVersion` query parameter to retrieve a specific version's metadata. If absent, defaults to DRAFT. For paginated example content, use [`list_dataset_examples`][bedrockagentcorecontrol_list_dataset_examples].
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_dataset/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_dataset/) for full documentation.
 #'
@@ -2096,7 +2557,8 @@ bedrockagentcorecontrol_get_dataset <- function(datasetId, datasetVersion = NULL
     http_path = "/datasets/{datasetId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_dataset_input(datasetId = datasetId, datasetVersion = datasetVersion)
   output <- .bedrockagentcorecontrol$get_dataset_output()
@@ -2129,7 +2591,8 @@ bedrockagentcorecontrol_get_evaluator <- function(evaluatorId, includedData = NU
     http_path = "/evaluators/{evaluatorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_evaluator_input(evaluatorId = evaluatorId, includedData = includedData)
   output <- .bedrockagentcorecontrol$get_evaluator_output()
@@ -2160,7 +2623,8 @@ bedrockagentcorecontrol_get_gateway <- function(gatewayIdentifier) {
     http_path = "/gateways/{gatewayIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_gateway_input(gatewayIdentifier = gatewayIdentifier)
   output <- .bedrockagentcorecontrol$get_gateway_output()
@@ -2171,6 +2635,39 @@ bedrockagentcorecontrol_get_gateway <- function(gatewayIdentifier) {
   return(response)
 }
 .bedrockagentcorecontrol$operations$get_gateway <- bedrockagentcorecontrol_get_gateway
+
+#' Retrieves information about a gateway rate limit
+#'
+#' @description
+#' Retrieves information about a gateway rate limit.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_gateway_rate_limit/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_gateway_rate_limit/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway.
+#' @param rateLimitId &#91;required&#93; The unique identifier of the rate limit to retrieve.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_get_gateway_rate_limit
+bedrockagentcorecontrol_get_gateway_rate_limit <- function(gatewayIdentifier, rateLimitId) {
+  op <- new_operation(
+    name = "GetGatewayRateLimit",
+    http_method = "GET",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$get_gateway_rate_limit_input(gatewayIdentifier = gatewayIdentifier, rateLimitId = rateLimitId)
+  output <- .bedrockagentcorecontrol$get_gateway_rate_limit_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$get_gateway_rate_limit <- bedrockagentcorecontrol_get_gateway_rate_limit
 
 #' Retrieves detailed information about a specific gateway rule
 #'
@@ -2192,7 +2689,8 @@ bedrockagentcorecontrol_get_gateway_rule <- function(gatewayIdentifier, ruleId) 
     http_path = "/gateways/{gatewayIdentifier}/rules/{ruleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_gateway_rule_input(gatewayIdentifier = gatewayIdentifier, ruleId = ruleId)
   output <- .bedrockagentcorecontrol$get_gateway_rule_output()
@@ -2224,7 +2722,8 @@ bedrockagentcorecontrol_get_gateway_target <- function(gatewayIdentifier, target
     http_path = "/gateways/{gatewayIdentifier}/targets/{targetId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_gateway_target_input(gatewayIdentifier = gatewayIdentifier, targetId = targetId)
   output <- .bedrockagentcorecontrol$get_gateway_target_output()
@@ -2236,28 +2735,30 @@ bedrockagentcorecontrol_get_gateway_target <- function(gatewayIdentifier, target
 }
 .bedrockagentcorecontrol$operations$get_gateway_target <- bedrockagentcorecontrol_get_gateway_target
 
-#' Operation to get a single Harness
+#' Operation to get a single harness
 #'
 #' @description
-#' Operation to get a single Harness.
+#' Operation to get a single harness.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_harness/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_harness/) for full documentation.
 #'
 #' @param harnessId &#91;required&#93; The ID of the harness to retrieve.
+#' @param harnessVersion Specific version of the harness to retrieve. If omitted, returns the current Harness configuration, including its status.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_get_harness
-bedrockagentcorecontrol_get_harness <- function(harnessId) {
+bedrockagentcorecontrol_get_harness <- function(harnessId, harnessVersion = NULL) {
   op <- new_operation(
     name = "GetHarness",
     http_method = "GET",
     http_path = "/harnesses/{harnessId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$get_harness_input(harnessId = harnessId)
+  input <- .bedrockagentcorecontrol$get_harness_input(harnessId = harnessId, harnessVersion = harnessVersion)
   output <- .bedrockagentcorecontrol$get_harness_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -2266,6 +2767,39 @@ bedrockagentcorecontrol_get_harness <- function(harnessId) {
   return(response)
 }
 .bedrockagentcorecontrol$operations$get_harness <- bedrockagentcorecontrol_get_harness
+
+#' Operation to get a single harness endpoint
+#'
+#' @description
+#' Operation to get a single harness endpoint.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_harness_endpoint/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_harness_endpoint/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness that the endpoint belongs to.
+#' @param endpointName &#91;required&#93; The name of the endpoint to retrieve.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_get_harness_endpoint
+bedrockagentcorecontrol_get_harness_endpoint <- function(harnessId, endpointName) {
+  op <- new_operation(
+    name = "GetHarnessEndpoint",
+    http_method = "GET",
+    http_path = "/harnesses/{harnessId}/endpoints/{endpointName}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$get_harness_endpoint_input(harnessId = harnessId, endpointName = endpointName)
+  output <- .bedrockagentcorecontrol$get_harness_endpoint_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$get_harness_endpoint <- bedrockagentcorecontrol_get_harness_endpoint
 
 #' Retrieve an existing Amazon Bedrock AgentCore Memory resource
 #'
@@ -2287,7 +2821,8 @@ bedrockagentcorecontrol_get_memory <- function(memoryId, view = NULL) {
     http_path = "/memories/{memoryId}/details",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_memory_input(memoryId = memoryId, view = view)
   output <- .bedrockagentcorecontrol$get_memory_output()
@@ -2318,7 +2853,8 @@ bedrockagentcorecontrol_get_oauth_2_credential_provider <- function(name) {
     http_path = "/identities/GetOauth2CredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_oauth_2_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$get_oauth_2_credential_provider_output()
@@ -2350,7 +2886,8 @@ bedrockagentcorecontrol_get_online_evaluation_config <- function(onlineEvaluatio
     http_path = "/online-evaluation-configs/{onlineEvaluationConfigId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_online_evaluation_config_input(onlineEvaluationConfigId = onlineEvaluationConfigId)
   output <- .bedrockagentcorecontrol$get_online_evaluation_config_output()
@@ -2382,7 +2919,8 @@ bedrockagentcorecontrol_get_payment_connector <- function(paymentManagerId, paym
     http_path = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_payment_connector_input(paymentManagerId = paymentManagerId, paymentConnectorId = paymentConnectorId)
   output <- .bedrockagentcorecontrol$get_payment_connector_output()
@@ -2413,7 +2951,8 @@ bedrockagentcorecontrol_get_payment_credential_provider <- function(name) {
     http_path = "/identities/GetPaymentCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_payment_credential_provider_input(name = name)
   output <- .bedrockagentcorecontrol$get_payment_credential_provider_output()
@@ -2444,7 +2983,8 @@ bedrockagentcorecontrol_get_payment_manager <- function(paymentManagerId) {
     http_path = "/payments/managers/{paymentManagerId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_payment_manager_input(paymentManagerId = paymentManagerId)
   output <- .bedrockagentcorecontrol$get_payment_manager_output()
@@ -2477,7 +3017,8 @@ bedrockagentcorecontrol_get_policy <- function(policyEngineId, policyId) {
     http_path = "/policy-engines/{policyEngineId}/policies/{policyId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_input(policyEngineId = policyEngineId, policyId = policyId)
   output <- .bedrockagentcorecontrol$get_policy_output()
@@ -2509,7 +3050,8 @@ bedrockagentcorecontrol_get_policy_engine <- function(policyEngineId) {
     http_path = "/policy-engines/{policyEngineId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_engine_input(policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$get_policy_engine_output()
@@ -2541,7 +3083,8 @@ bedrockagentcorecontrol_get_policy_engine_summary <- function(policyEngineId) {
     http_path = "/policy-engine-summaries/{policyEngineId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_engine_summary_input(policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$get_policy_engine_summary_output()
@@ -2557,7 +3100,7 @@ bedrockagentcorecontrol_get_policy_engine_summary <- function(policyEngineId) {
 #' AgentCore Policy system
 #'
 #' @description
-#' Retrieves information about a policy generation request within the AgentCore Policy system. Policy generation converts natural language descriptions into Cedar policy statements using AI-powered translation, enabling non-technical users to create policies.
+#' Retrieves information about a policy generation request within the AgentCore Policy system. Policy generation converts natural language descriptions into Dogwood policy statements using AI-powered translation, enabling non-technical users to create policies.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_policy_generation/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_get_policy_generation/) for full documentation.
 #'
@@ -2574,7 +3117,8 @@ bedrockagentcorecontrol_get_policy_generation <- function(policyGenerationId, po
     http_path = "/policy-engines/{policyEngineId}/policy-generations/{policyGenerationId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_generation_input(policyGenerationId = policyGenerationId, policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$get_policy_generation_output()
@@ -2607,7 +3151,8 @@ bedrockagentcorecontrol_get_policy_generation_summary <- function(policyGenerati
     http_path = "/policy-engines/{policyEngineId}/policy-generation-summaries/{policyGenerationId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_generation_summary_input(policyGenerationId = policyGenerationId, policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$get_policy_generation_summary_output()
@@ -2640,7 +3185,8 @@ bedrockagentcorecontrol_get_policy_summary <- function(policyEngineId, policyId)
     http_path = "/policy-engines/{policyEngineId}/policy-summaries/{policyId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_policy_summary_input(policyEngineId = policyEngineId, policyId = policyId)
   output <- .bedrockagentcorecontrol$get_policy_summary_output()
@@ -2671,7 +3217,8 @@ bedrockagentcorecontrol_get_registry <- function(registryId) {
     http_path = "/registries/{registryId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_registry_input(registryId = registryId)
   output <- .bedrockagentcorecontrol$get_registry_output()
@@ -2703,7 +3250,8 @@ bedrockagentcorecontrol_get_registry_record <- function(registryId, recordId) {
     http_path = "/registries/{registryId}/records/{recordId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_registry_record_input(registryId = registryId, recordId = recordId)
   output <- .bedrockagentcorecontrol$get_registry_record_output()
@@ -2734,7 +3282,8 @@ bedrockagentcorecontrol_get_resource_policy <- function(resourceArn) {
     http_path = "/resourcepolicy/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_resource_policy_input(resourceArn = resourceArn)
   output <- .bedrockagentcorecontrol$get_resource_policy_output()
@@ -2765,7 +3314,8 @@ bedrockagentcorecontrol_get_token_vault <- function(tokenVaultId = NULL) {
     http_path = "/identities/get-token-vault",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_token_vault_input(tokenVaultId = tokenVaultId)
   output <- .bedrockagentcorecontrol$get_token_vault_output()
@@ -2796,7 +3346,8 @@ bedrockagentcorecontrol_get_workload_identity <- function(name) {
     http_path = "/identities/GetWorkloadIdentity",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$get_workload_identity_input(name = name)
   output <- .bedrockagentcorecontrol$get_workload_identity_output()
@@ -2829,7 +3380,8 @@ bedrockagentcorecontrol_list_agent_runtime_endpoints <- function(agentRuntimeId,
     http_path = "/runtimes/{agentRuntimeId}/runtime-endpoints/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "runtimeEndpoints"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_agent_runtime_endpoints_input(agentRuntimeId = agentRuntimeId, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_agent_runtime_endpoints_output()
@@ -2862,7 +3414,8 @@ bedrockagentcorecontrol_list_agent_runtime_versions <- function(agentRuntimeId, 
     http_path = "/runtimes/{agentRuntimeId}/versions/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "agentRuntimes"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_agent_runtime_versions_input(agentRuntimeId = agentRuntimeId, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_agent_runtime_versions_output()
@@ -2873,6 +3426,41 @@ bedrockagentcorecontrol_list_agent_runtime_versions <- function(agentRuntimeId, 
   return(response)
 }
 .bedrockagentcorecontrol$operations$list_agent_runtime_versions <- bedrockagentcorecontrol_list_agent_runtime_versions
+
+#' Lists the agent runtime versions that are associated with a capacity
+#' provider
+#'
+#' @description
+#' Lists the agent runtime versions that are associated with a capacity provider. Use this operation to identify the runtimes you must disassociate before you can delete the capacity provider. Results are paginated; use the `nextToken` parameter to retrieve additional results.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_agent_runtime_versions_by_capacity_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_agent_runtime_versions_by_capacity_provider/) for full documentation.
+#'
+#' @param capacityProviderId &#91;required&#93; The unique identifier of the capacity provider.
+#' @param maxResults The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the `nextToken` field when making another request to return the next batch of results.
+#' @param nextToken If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_agen_runt_vers_by_capa_prov
+bedrockagentcorecontrol_list_agent_runtime_versions_by_capacity_provider <- function(capacityProviderId, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListAgentRuntimeVersionsByCapacityProvider",
+    http_method = "POST",
+    http_path = "/capacity-providers/{capacityProviderId}/runtime-versions",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "agentRuntimes"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_agent_runtime_versions_by_capacity_provider_input(capacityProviderId = capacityProviderId, maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_agent_runtime_versions_by_capacity_provider_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_agent_runtime_versions_by_capacity_provider <- bedrockagentcorecontrol_list_agent_runtime_versions_by_capacity_provider
 
 #' Lists all Amazon Secure Agents in your account
 #'
@@ -2894,7 +3482,8 @@ bedrockagentcorecontrol_list_agent_runtimes <- function(maxResults = NULL, nextT
     http_path = "/runtimes/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "agentRuntimes"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_agent_runtimes_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_agent_runtimes_output()
@@ -2926,7 +3515,8 @@ bedrockagentcorecontrol_list_api_key_credential_providers <- function(nextToken 
     http_path = "/identities/ListApiKeyCredentialProviders",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "credentialProviders"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_api_key_credential_providers_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_api_key_credential_providers_output()
@@ -2959,7 +3549,8 @@ bedrockagentcorecontrol_list_browser_profiles <- function(maxResults = NULL, nex
     http_path = "/browser-profiles",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "profileSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_browser_profiles_input(maxResults = maxResults, nextToken = nextToken, name = name)
   output <- .bedrockagentcorecontrol$list_browser_profiles_output()
@@ -2992,7 +3583,8 @@ bedrockagentcorecontrol_list_browsers <- function(maxResults = NULL, nextToken =
     http_path = "/browsers",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "browserSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_browsers_input(maxResults = maxResults, nextToken = nextToken, type = type)
   output <- .bedrockagentcorecontrol$list_browsers_output()
@@ -3003,6 +3595,40 @@ bedrockagentcorecontrol_list_browsers <- function(maxResults = NULL, nextToken =
   return(response)
 }
 .bedrockagentcorecontrol$operations$list_browsers <- bedrockagentcorecontrol_list_browsers
+
+#' Lists the capacity providers in your account and returns summary
+#' information for each one
+#'
+#' @description
+#' Lists the capacity providers in your account and returns summary information for each one. To retrieve the full configuration for a specific capacity provider, use [`get_capacity_provider`][bedrockagentcorecontrol_get_capacity_provider]. Results are paginated; use the `nextToken` parameter to retrieve additional results.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_capacity_providers/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_capacity_providers/) for full documentation.
+#'
+#' @param maxResults The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the `nextToken` field when making another request to return the next batch of results.
+#' @param nextToken If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_capacity_providers
+bedrockagentcorecontrol_list_capacity_providers <- function(maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListCapacityProviders",
+    http_method = "POST",
+    http_path = "/capacity-providers",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "capacityProviders"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_capacity_providers_input(maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_capacity_providers_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_capacity_providers <- bedrockagentcorecontrol_list_capacity_providers
 
 #' Lists all custom code interpreters in your account
 #'
@@ -3025,7 +3651,8 @@ bedrockagentcorecontrol_list_code_interpreters <- function(maxResults = NULL, ne
     http_path = "/code-interpreters",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "codeInterpreterSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_code_interpreters_input(maxResults = maxResults, nextToken = nextToken, type = type)
   output <- .bedrockagentcorecontrol$list_code_interpreters_output()
@@ -3060,7 +3687,8 @@ bedrockagentcorecontrol_list_configuration_bundle_versions <- function(bundleId,
     http_path = "/configuration-bundles/{bundleId}/versions",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "versions"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_configuration_bundle_versions_input(bundleId = bundleId, nextToken = nextToken, maxResults = maxResults, filter = filter)
   output <- .bedrockagentcorecontrol$list_configuration_bundle_versions_output()
@@ -3092,7 +3720,8 @@ bedrockagentcorecontrol_list_configuration_bundles <- function(nextToken = NULL,
     http_path = "/configuration-bundles",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "bundles"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_configuration_bundles_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_configuration_bundles_output()
@@ -3104,16 +3733,49 @@ bedrockagentcorecontrol_list_configuration_bundles <- function(nextToken = NULL,
 }
 .bedrockagentcorecontrol$operations$list_configuration_bundles <- bedrockagentcorecontrol_list_configuration_bundles
 
+#' Lists all of the consent portals in your account
+#'
+#' @description
+#' Lists all of the consent portals in your account.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_consent_portals/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_consent_portals/) for full documentation.
+#'
+#' @param maxResults The maximum number of consent portals to return in a single call.
+#' @param nextToken A token to retrieve the next page of results. Use the value returned in a previous response to request the next page.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_consent_portals
+bedrockagentcorecontrol_list_consent_portals <- function(maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListConsentPortals",
+    http_method = "POST",
+    http_path = "/identities/ListConsentPortals",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "consentPortals"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_consent_portals_input(maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_consent_portals_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_consent_portals <- bedrockagentcorecontrol_list_consent_portals
+
 #' Returns paginated examples from the dataset
 #'
 #' @description
-#' Returns paginated examples from the dataset.
+#' Returns paginated examples from the dataset. The server embeds the resolved version in the pagination token. Once pagination begins, all subsequent pages are pinned to that version regardless of concurrent mutations.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_dataset_examples/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_dataset_examples/) for full documentation.
 #'
 #' @param datasetId &#91;required&#93; The unique identifier of the dataset.
-#' @param datasetVersion Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent. Only used on the first request (when nextToken is absent). For subsequent pages, the version is extracted from the nextToken and this parameter is ignored.
-#' @param maxResults Maximum number of examples to return per page. Default: 1000. Min: 1, max: 1000. Response size is validated against 5 MB limit after reading. For bulk access to all examples, use the `downloadUrl` field from GetDataset.
+#' @param datasetVersion Version to paginate: "DRAFT" or a version number. Defaults to DRAFT if absent. Only used on the first request; for subsequent pages, the version is extracted from the pagination token.
+#' @param maxResults Maximum number of examples to return per page.
 #' @param nextToken The token for the next page of results.
 #'
 #' @keywords internal
@@ -3126,7 +3788,8 @@ bedrockagentcorecontrol_list_dataset_examples <- function(datasetId, datasetVers
     http_path = "/datasets/{datasetId}/examples",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "examples"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_dataset_examples_input(datasetId = datasetId, datasetVersion = datasetVersion, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_dataset_examples_output()
@@ -3160,7 +3823,8 @@ bedrockagentcorecontrol_list_dataset_versions <- function(datasetId, nextToken =
     http_path = "/datasets/{datasetId}/versions",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "versions"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_dataset_versions_input(datasetId = datasetId, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_dataset_versions_output()
@@ -3175,7 +3839,7 @@ bedrockagentcorecontrol_list_dataset_versions <- function(datasetId, nextToken =
 #' Lists all datasets in the caller's account, paginated
 #'
 #' @description
-#' Lists all datasets in the caller's account, paginated. No presigned URLs in list results.
+#' Lists all datasets in the caller's account, paginated.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_datasets/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_datasets/) for full documentation.
 #'
@@ -3192,7 +3856,8 @@ bedrockagentcorecontrol_list_datasets <- function(nextToken = NULL, maxResults =
     http_path = "/datasets",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "datasets"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_datasets_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_datasets_output()
@@ -3225,7 +3890,8 @@ bedrockagentcorecontrol_list_evaluators <- function(nextToken = NULL, maxResults
     http_path = "/evaluators",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "evaluators"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_evaluators_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_evaluators_output()
@@ -3236,6 +3902,40 @@ bedrockagentcorecontrol_list_evaluators <- function(nextToken = NULL, maxResults
   return(response)
 }
 .bedrockagentcorecontrol$operations$list_evaluators <- bedrockagentcorecontrol_list_evaluators
+
+#' Lists all rate limits for a gateway
+#'
+#' @description
+#' Lists all rate limits for a gateway. Results are paginated. Use the `nextToken` parameter to retrieve additional results.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_gateway_rate_limits/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_gateway_rate_limits/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway.
+#' @param maxResults The maximum number of results to return in the response. If the total number of results is greater than this value, use the token returned in the response in the `nextToken` field when making another request to return the next batch of results.
+#' @param nextToken The token to use to retrieve the next page of results. Use the value returned in a previous [`list_gateway_rate_limits`][bedrockagentcorecontrol_list_gateway_rate_limits] response.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_gateway_rate_limits
+bedrockagentcorecontrol_list_gateway_rate_limits <- function(gatewayIdentifier, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListGatewayRateLimits",
+    http_method = "GET",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "rateLimits"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_gateway_rate_limits_input(gatewayIdentifier = gatewayIdentifier, maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_gateway_rate_limits_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_gateway_rate_limits <- bedrockagentcorecontrol_list_gateway_rate_limits
 
 #' Lists all rules for a gateway
 #'
@@ -3258,7 +3958,8 @@ bedrockagentcorecontrol_list_gateway_rules <- function(gatewayIdentifier, maxRes
     http_path = "/gateways/{gatewayIdentifier}/rules",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "gatewayRules"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_gateway_rules_input(gatewayIdentifier = gatewayIdentifier, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_gateway_rules_output()
@@ -3291,7 +3992,8 @@ bedrockagentcorecontrol_list_gateway_targets <- function(gatewayIdentifier, maxR
     http_path = "/gateways/{gatewayIdentifier}/targets/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "items"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_gateway_targets_input(gatewayIdentifier = gatewayIdentifier, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_gateway_targets_output()
@@ -3323,7 +4025,8 @@ bedrockagentcorecontrol_list_gateways <- function(maxResults = NULL, nextToken =
     http_path = "/gateways/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "items"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_gateways_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_gateways_output()
@@ -3335,10 +4038,78 @@ bedrockagentcorecontrol_list_gateways <- function(maxResults = NULL, nextToken =
 }
 .bedrockagentcorecontrol$operations$list_gateways <- bedrockagentcorecontrol_list_gateways
 
-#' Operation to list Harnesses
+#' Operation to list the endpoints of a harness
 #'
 #' @description
-#' Operation to list Harnesses.
+#' Operation to list the endpoints of a harness.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harness_endpoints/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harness_endpoints/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness whose endpoints are listed.
+#' @param maxResults The maximum number of results to return in a single call.
+#' @param nextToken The token for the next set of results.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_harness_endpoints
+bedrockagentcorecontrol_list_harness_endpoints <- function(harnessId, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListHarnessEndpoints",
+    http_method = "GET",
+    http_path = "/harnesses/{harnessId}/endpoints",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "endpoints"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_harness_endpoints_input(harnessId = harnessId, maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_harness_endpoints_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_harness_endpoints <- bedrockagentcorecontrol_list_harness_endpoints
+
+#' Operation to list the versions of a Harness
+#'
+#' @description
+#' Operation to list the versions of a Harness.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harness_versions/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harness_versions/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness whose versions are listed.
+#' @param maxResults The maximum number of results to return in a single call.
+#' @param nextToken The token for the next set of results.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_list_harness_versions
+bedrockagentcorecontrol_list_harness_versions <- function(harnessId, maxResults = NULL, nextToken = NULL) {
+  op <- new_operation(
+    name = "ListHarnessVersions",
+    http_method = "GET",
+    http_path = "/harnesses/{harnessId}/versions",
+    host_prefix = "",
+    paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "harnessVersions"),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$list_harness_versions_input(harnessId = harnessId, maxResults = maxResults, nextToken = nextToken)
+  output <- .bedrockagentcorecontrol$list_harness_versions_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$list_harness_versions <- bedrockagentcorecontrol_list_harness_versions
+
+#' Operation to list harnesses
+#'
+#' @description
+#' Operation to list harnesses.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harnesses/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_harnesses/) for full documentation.
 #'
@@ -3355,7 +4126,8 @@ bedrockagentcorecontrol_list_harnesses <- function(maxResults = NULL, nextToken 
     http_path = "/harnesses",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "harnesses"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_harnesses_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_harnesses_output()
@@ -3388,7 +4160,8 @@ bedrockagentcorecontrol_list_memories <- function(maxResults = NULL, nextToken =
     http_path = "/memories/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "memories"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_memories_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_memories_output()
@@ -3420,7 +4193,8 @@ bedrockagentcorecontrol_list_oauth_2_credential_providers <- function(nextToken 
     http_path = "/identities/ListOauth2CredentialProviders",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "credentialProviders"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_oauth_2_credential_providers_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_oauth_2_credential_providers_output()
@@ -3453,7 +4227,8 @@ bedrockagentcorecontrol_list_online_evaluation_configs <- function(nextToken = N
     http_path = "/online-evaluation-configs",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "onlineEvaluationConfigs"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_online_evaluation_configs_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_online_evaluation_configs_output()
@@ -3486,7 +4261,8 @@ bedrockagentcorecontrol_list_payment_connectors <- function(paymentManagerId, ma
     http_path = "/payments/managers/{paymentManagerId}/connectors-list",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "paymentConnectors"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_payment_connectors_input(paymentManagerId = paymentManagerId, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_payment_connectors_output()
@@ -3518,7 +4294,8 @@ bedrockagentcorecontrol_list_payment_credential_providers <- function(nextToken 
     http_path = "/identities/ListPaymentCredentialProviders",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "credentialProviders"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_payment_credential_providers_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_payment_credential_providers_output()
@@ -3550,7 +4327,8 @@ bedrockagentcorecontrol_list_payment_managers <- function(maxResults = NULL, nex
     http_path = "/payments/managers-list",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "paymentManagers"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_payment_managers_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentcorecontrol$list_payment_managers_output()
@@ -3584,7 +4362,8 @@ bedrockagentcorecontrol_list_policies <- function(nextToken = NULL, maxResults =
     http_path = "/policy-engines/{policyEngineId}/policies",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policies"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policies_input(nextToken = nextToken, maxResults = maxResults, policyEngineId = policyEngineId, targetResourceScope = targetResourceScope)
   output <- .bedrockagentcorecontrol$list_policies_output()
@@ -3617,7 +4396,8 @@ bedrockagentcorecontrol_list_policy_engine_summaries <- function(nextToken = NUL
     http_path = "/policy-engine-summaries",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policyEngines"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_engine_summaries_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_policy_engine_summaries_output()
@@ -3649,7 +4429,8 @@ bedrockagentcorecontrol_list_policy_engines <- function(nextToken = NULL, maxRes
     http_path = "/policy-engines",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policyEngines"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_engines_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_policy_engines_output()
@@ -3665,7 +4446,7 @@ bedrockagentcorecontrol_list_policy_engines <- function(nextToken = NULL, maxRes
 #' request within the AgentCore Policy system
 #'
 #' @description
-#' Retrieves a list of generated policy assets from a policy generation request within the AgentCore Policy system. This operation returns the actual Cedar policies and related artifacts produced by the AI-powered policy generation process, allowing users to review and select from multiple generated policy options.
+#' Retrieves a list of generated policy assets from a policy generation request within the AgentCore Policy system. This operation returns the actual Dogwood policies and related artifacts produced by the AI-powered policy generation process, allowing users to review and select from multiple generated policy options.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_policy_generation_assets/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_list_policy_generation_assets/) for full documentation.
 #'
@@ -3684,7 +4465,8 @@ bedrockagentcorecontrol_list_policy_generation_assets <- function(policyGenerati
     http_path = "/policy-engines/{policyEngineId}/policy-generations/{policyGenerationId}/assets",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policyGenerationAssets"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_generation_assets_input(policyGenerationId = policyGenerationId, policyEngineId = policyEngineId, nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_policy_generation_assets_output()
@@ -3718,7 +4500,8 @@ bedrockagentcorecontrol_list_policy_generation_summaries <- function(nextToken =
     http_path = "/policy-engines/{policyEngineId}/policy-generation-summaries",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policyGenerations"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_generation_summaries_input(nextToken = nextToken, maxResults = maxResults, policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$list_policy_generation_summaries_output()
@@ -3752,7 +4535,8 @@ bedrockagentcorecontrol_list_policy_generations <- function(nextToken = NULL, ma
     http_path = "/policy-engines/{policyEngineId}/policy-generations",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policyGenerations"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_generations_input(nextToken = nextToken, maxResults = maxResults, policyEngineId = policyEngineId)
   output <- .bedrockagentcorecontrol$list_policy_generations_output()
@@ -3787,7 +4571,8 @@ bedrockagentcorecontrol_list_policy_summaries <- function(nextToken = NULL, maxR
     http_path = "/policy-engines/{policyEngineId}/policy-summaries",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "policies"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_policy_summaries_input(nextToken = nextToken, maxResults = maxResults, policyEngineId = policyEngineId, targetResourceScope = targetResourceScope)
   output <- .bedrockagentcorecontrol$list_policy_summaries_output()
@@ -3821,7 +4606,8 @@ bedrockagentcorecontrol_list_registries <- function(maxResults = NULL, nextToken
     http_path = "/registries",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "registries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_registries_input(maxResults = maxResults, nextToken = nextToken, status = status, authorizerType = authorizerType)
   output <- .bedrockagentcorecontrol$list_registries_output()
@@ -3857,7 +4643,8 @@ bedrockagentcorecontrol_list_registry_records <- function(registryId, maxResults
     http_path = "/registries/{registryId}/records",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "registryRecords"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_registry_records_input(registryId = registryId, maxResults = maxResults, nextToken = nextToken, name = name, status = status, descriptorType = descriptorType)
   output <- .bedrockagentcorecontrol$list_registry_records_output()
@@ -3888,7 +4675,8 @@ bedrockagentcorecontrol_list_tags_for_resource <- function(resourceArn) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_tags_for_resource_input(resourceArn = resourceArn)
   output <- .bedrockagentcorecontrol$list_tags_for_resource_output()
@@ -3920,7 +4708,8 @@ bedrockagentcorecontrol_list_workload_identities <- function(nextToken = NULL, m
     http_path = "/identities/ListWorkloadIdentities",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "workloadIdentities"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$list_workload_identities_input(nextToken = nextToken, maxResults = maxResults)
   output <- .bedrockagentcorecontrol$list_workload_identities_output()
@@ -3953,7 +4742,8 @@ bedrockagentcorecontrol_put_resource_policy <- function(resourceArn, policy) {
     http_path = "/resourcepolicy/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$put_resource_policy_input(resourceArn = resourceArn, policy = policy)
   output <- .bedrockagentcorecontrol$put_resource_policy_output()
@@ -3964,6 +4754,42 @@ bedrockagentcorecontrol_put_resource_policy <- function(resourceArn, policy) {
   return(response)
 }
 .bedrockagentcorecontrol$operations$put_resource_policy <- bedrockagentcorecontrol_put_resource_policy
+
+#' Replaces the service-managed credentials of a payment connector with
+#' newly issued credentials
+#'
+#' @description
+#' Replaces the service-managed credentials of a payment connector with newly issued credentials.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_rotate_payment_connector_credentials/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_rotate_payment_connector_credentials/) for full documentation.
+#'
+#' @param paymentManagerId &#91;required&#93; The unique identifier of the parent payment manager.
+#' @param paymentConnectorId &#91;required&#93; The unique identifier of the payment connector whose credentials you want to rotate.
+#' @param credentialsToRotate &#91;required&#93; The credentials to rotate. Specify the member that matches the payment connector's `type`. Each credential that you select is rotated independently.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_rotate_payment_connector_credentials
+bedrockagentcorecontrol_rotate_payment_connector_credentials <- function(paymentManagerId, paymentConnectorId, credentialsToRotate, clientToken = NULL) {
+  op <- new_operation(
+    name = "RotatePaymentConnectorCredentials",
+    http_method = "POST",
+    http_path = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$rotate_payment_connector_credentials_input(paymentManagerId = paymentManagerId, paymentConnectorId = paymentConnectorId, credentialsToRotate = credentialsToRotate, clientToken = clientToken)
+  output <- .bedrockagentcorecontrol$rotate_payment_connector_credentials_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$rotate_payment_connector_credentials <- bedrockagentcorecontrol_rotate_payment_connector_credentials
 
 #' Sets the customer master key (CMK) for a token vault
 #'
@@ -3985,7 +4811,8 @@ bedrockagentcorecontrol_set_token_vault_cmk <- function(tokenVaultId = NULL, kms
     http_path = "/identities/set-token-vault-cmk",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$set_token_vault_cmk_input(tokenVaultId = tokenVaultId, kmsConfiguration = kmsConfiguration)
   output <- .bedrockagentcorecontrol$set_token_vault_cmk_output()
@@ -3997,17 +4824,17 @@ bedrockagentcorecontrol_set_token_vault_cmk <- function(tokenVaultId = NULL, kms
 }
 .bedrockagentcorecontrol$operations$set_token_vault_cmk <- bedrockagentcorecontrol_set_token_vault_cmk
 
-#' Initiates the AI-powered generation of Cedar policies from natural
+#' Initiates the AI-powered generation of Dogwood policies from natural
 #' language descriptions within the AgentCore Policy system
 #'
 #' @description
-#' Initiates the AI-powered generation of Cedar policies from natural language descriptions within the AgentCore Policy system. This feature enables both technical and non-technical users to create policies by describing their authorization requirements in plain English, which is then automatically translated into formal Cedar policy statements. The generation process analyzes the natural language input along with the Gateway's tool context to produce validated policy options. Generated policy assets are automatically deleted after 7 days, so you should review and create policies from the generated assets within this timeframe. Once created, policies are permanent and not subject to this expiration. Generated policies should be reviewed and tested in log-only mode before deploying to production. Use this when you want to describe policy intent naturally rather than learning Cedar syntax, though generated policies may require refinement for complex scenarios.
+#' Initiates the AI-powered generation of Dogwood policies from natural language descriptions within the AgentCore Policy system. This feature enables both technical and non-technical users to create policies by describing their authorization requirements in plain English, which is then automatically translated into formal Dogwood policy statements. The generation process analyzes the natural language input along with the Gateway's tool context to produce validated policy options. Generated policy assets are automatically deleted after 7 days, so you should review and create policies from the generated assets within this timeframe. Once created, policies are permanent and not subject to this expiration. Generated policies should be reviewed and tested in log-only mode before deploying to production. Use this when you want to describe policy intent naturally rather than learning Dogwood syntax, though generated policies may require refinement for complex scenarios.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_start_policy_generation/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_start_policy_generation/) for full documentation.
 #'
 #' @param policyEngineId &#91;required&#93; The identifier of the policy engine that provides the context for policy generation. This engine's schema and tool context are used to ensure generated policies are valid and applicable.
 #' @param resource &#91;required&#93; The resource information that provides context for policy generation. This helps the AI understand the target resources and generate appropriate access control rules.
-#' @param content &#91;required&#93; The natural language description of the desired policy behavior. This content is processed by AI to generate corresponding Cedar policy statements that match the described intent.
+#' @param content &#91;required&#93; The natural language description of the desired policy behavior. This content is processed by AI to generate corresponding Dogwood policy statements that match the described intent.
 #' @param name &#91;required&#93; A customer-assigned name for the policy generation request. This helps track and identify generation operations, especially when running multiple generations simultaneously.
 #' @param clientToken A unique, case-sensitive identifier to ensure the idempotency of the request. The AWS SDK automatically generates this token, so you don't need to provide it in most cases. If you retry a request with the same client token, the service returns the same response without starting a duplicate generation.
 #'
@@ -4021,7 +4848,8 @@ bedrockagentcorecontrol_start_policy_generation <- function(policyEngineId, reso
     http_path = "/policy-engines/{policyEngineId}/policy-generations",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$start_policy_generation_input(policyEngineId = policyEngineId, resource = resource, content = content, name = name, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$start_policy_generation_output()
@@ -4053,7 +4881,8 @@ bedrockagentcorecontrol_submit_registry_record_for_approval <- function(registry
     http_path = "/registries/{registryId}/records/{recordId}/submit-for-approval",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$submit_registry_record_for_approval_input(registryId = registryId, recordId = recordId)
   output <- .bedrockagentcorecontrol$submit_registry_record_for_approval_output()
@@ -4086,7 +4915,8 @@ bedrockagentcorecontrol_synchronize_gateway_targets <- function(gatewayIdentifie
     http_path = "/gateways/{gatewayIdentifier}/synchronizeTargets",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$synchronize_gateway_targets_input(gatewayIdentifier = gatewayIdentifier, targetIdList = targetIdList)
   output <- .bedrockagentcorecontrol$synchronize_gateway_targets_output()
@@ -4119,7 +4949,8 @@ bedrockagentcorecontrol_tag_resource <- function(resourceArn, tags) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$tag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .bedrockagentcorecontrol$tag_resource_output()
@@ -4151,7 +4982,8 @@ bedrockagentcorecontrol_untag_resource <- function(resourceArn, tagKeys) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$untag_resource_input(resourceArn = resourceArn, tagKeys = tagKeys)
   output <- .bedrockagentcorecontrol$untag_resource_output()
@@ -4173,7 +5005,7 @@ bedrockagentcorecontrol_untag_resource <- function(resourceArn, tagKeys) {
 #' @param agentRuntimeId &#91;required&#93; The unique identifier of the AgentCore Runtime to update.
 #' @param agentRuntimeArtifact &#91;required&#93; The updated artifact of the AgentCore Runtime.
 #' @param roleArn &#91;required&#93; The updated IAM role ARN that provides permissions for the AgentCore Runtime.
-#' @param networkConfiguration &#91;required&#93; The updated network configuration for the AgentCore Runtime.
+#' @param networkConfiguration The updated network configuration for the AgentCore Runtime.
 #' @param description The updated description of the AgentCore Runtime.
 #' @param authorizerConfiguration The updated authorizer configuration for the AgentCore Runtime.
 #' @param requestHeaderConfiguration The updated configuration for HTTP request headers that will be passed through to the runtime.
@@ -4182,21 +5014,24 @@ bedrockagentcorecontrol_untag_resource <- function(resourceArn, tagKeys) {
 #' @param metadataConfiguration The updated configuration for microVM Metadata Service (MMDS) settings for the AgentCore Runtime.
 #' @param environmentVariables Updated environment variables to set in the AgentCore Runtime environment.
 #' @param filesystemConfigurations The updated filesystem configurations to mount into the AgentCore Runtime.
+#' @param capacityProviderConfiguration The updated capacity provider configuration for the AgentCore Runtime.
+#' @param platformVersion The updated version of the runtime platform to use for the AgentCore Runtime.
 #' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_agent_runtime
-bedrockagentcorecontrol_update_agent_runtime <- function(agentRuntimeId, agentRuntimeArtifact, roleArn, networkConfiguration, description = NULL, authorizerConfiguration = NULL, requestHeaderConfiguration = NULL, protocolConfiguration = NULL, lifecycleConfiguration = NULL, metadataConfiguration = NULL, environmentVariables = NULL, filesystemConfigurations = NULL, clientToken = NULL) {
+bedrockagentcorecontrol_update_agent_runtime <- function(agentRuntimeId, agentRuntimeArtifact, roleArn, networkConfiguration = NULL, description = NULL, authorizerConfiguration = NULL, requestHeaderConfiguration = NULL, protocolConfiguration = NULL, lifecycleConfiguration = NULL, metadataConfiguration = NULL, environmentVariables = NULL, filesystemConfigurations = NULL, capacityProviderConfiguration = NULL, platformVersion = NULL, clientToken = NULL) {
   op <- new_operation(
     name = "UpdateAgentRuntime",
     http_method = "PUT",
     http_path = "/runtimes/{agentRuntimeId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_agent_runtime_input(agentRuntimeId = agentRuntimeId, agentRuntimeArtifact = agentRuntimeArtifact, roleArn = roleArn, networkConfiguration = networkConfiguration, description = description, authorizerConfiguration = authorizerConfiguration, requestHeaderConfiguration = requestHeaderConfiguration, protocolConfiguration = protocolConfiguration, lifecycleConfiguration = lifecycleConfiguration, metadataConfiguration = metadataConfiguration, environmentVariables = environmentVariables, filesystemConfigurations = filesystemConfigurations, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$update_agent_runtime_input(agentRuntimeId = agentRuntimeId, agentRuntimeArtifact = agentRuntimeArtifact, roleArn = roleArn, networkConfiguration = networkConfiguration, description = description, authorizerConfiguration = authorizerConfiguration, requestHeaderConfiguration = requestHeaderConfiguration, protocolConfiguration = protocolConfiguration, lifecycleConfiguration = lifecycleConfiguration, metadataConfiguration = metadataConfiguration, environmentVariables = environmentVariables, filesystemConfigurations = filesystemConfigurations, capacityProviderConfiguration = capacityProviderConfiguration, platformVersion = platformVersion, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$update_agent_runtime_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4229,7 +5064,8 @@ bedrockagentcorecontrol_update_agent_runtime_endpoint <- function(agentRuntimeId
     http_path = "/runtimes/{agentRuntimeId}/runtime-endpoints/{endpointName}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_agent_runtime_endpoint_input(agentRuntimeId = agentRuntimeId, endpointName = endpointName, agentRuntimeVersion = agentRuntimeVersion, description = description, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$update_agent_runtime_endpoint_output()
@@ -4249,21 +5085,24 @@ bedrockagentcorecontrol_update_agent_runtime_endpoint <- function(agentRuntimeId
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_api_key_credential_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_api_key_credential_provider/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the API key credential provider to update.
-#' @param apiKey &#91;required&#93; The new API key to use for authentication. This value replaces the existing API key and is encrypted and stored securely.
+#' @param apiKey The new API key to use for authentication. This value replaces the existing API key and is encrypted and stored securely.
+#' @param apiKeySecretConfig A reference to the Amazon Web Services Secrets Manager secret that stores the API key. This includes the secret ID and the JSON key used to extract the API key value from the secret. Required when `apiKeySecretSource` is set to `EXTERNAL`.
+#' @param apiKeySecretSource The source type of the API key secret. Use `MANAGED` if the secret is managed by the service, or `EXTERNAL` if you manage the secret yourself in Amazon Web Services Secrets Manager.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_api_key_credential_provider
-bedrockagentcorecontrol_update_api_key_credential_provider <- function(name, apiKey) {
+bedrockagentcorecontrol_update_api_key_credential_provider <- function(name, apiKey = NULL, apiKeySecretConfig = NULL, apiKeySecretSource = NULL) {
   op <- new_operation(
     name = "UpdateApiKeyCredentialProvider",
     http_method = "POST",
     http_path = "/identities/UpdateApiKeyCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_api_key_credential_provider_input(name = name, apiKey = apiKey)
+  input <- .bedrockagentcorecontrol$update_api_key_credential_provider_input(name = name, apiKey = apiKey, apiKeySecretConfig = apiKeySecretConfig, apiKeySecretSource = apiKeySecretSource)
   output <- .bedrockagentcorecontrol$update_api_key_credential_provider_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4272,6 +5111,40 @@ bedrockagentcorecontrol_update_api_key_credential_provider <- function(name, api
   return(response)
 }
 .bedrockagentcorecontrol$operations$update_api_key_credential_provider <- bedrockagentcorecontrol_update_api_key_credential_provider
+
+#' Updates a capacity provider
+#'
+#' @description
+#' Updates a capacity provider. Only the description can be changed. To change other configuration, such as instance types, networking, or storage, create a new capacity provider.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_capacity_provider/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_capacity_provider/) for full documentation.
+#'
+#' @param capacityProviderId &#91;required&#93; The unique identifier of the capacity provider to update.
+#' @param description The updated description of the capacity provider.
+#' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_update_capacity_provider
+bedrockagentcorecontrol_update_capacity_provider <- function(capacityProviderId, description = NULL, clientToken = NULL) {
+  op <- new_operation(
+    name = "UpdateCapacityProvider",
+    http_method = "PUT",
+    http_path = "/capacity-providers/{capacityProviderId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$update_capacity_provider_input(capacityProviderId = capacityProviderId, description = description, clientToken = clientToken)
+  output <- .bedrockagentcorecontrol$update_capacity_provider_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$update_capacity_provider <- bedrockagentcorecontrol_update_capacity_provider
 
 #' Updates a configuration bundle by creating a new version with the
 #' specified changes
@@ -4286,24 +5159,26 @@ bedrockagentcorecontrol_update_api_key_credential_provider <- function(name, api
 #' @param bundleName The updated name for the configuration bundle.
 #' @param description The updated description for the configuration bundle.
 #' @param components The updated component configurations. Creates a new version of the bundle.
-#' @param parentVersionIds A list of parent version identifiers for lineage tracking. Regular commits have a single parent. Merge commits have two parents: the target branch parent and the source branch parent. If the branch already exists, the first parent must be the latest version on that branch.
+#' @param parentVersionIds &#91;required&#93; A list of parent version identifiers for lineage tracking. Regular commits have a single parent. Merge commits have two parents: the target branch parent and the source branch parent. If the branch already exists, the first parent must be the latest version on that branch.
 #' @param branchName The branch name for this version. If not specified, inherits the parent's branch or defaults to `mainline`.
-#' @param commitMessage A commit message describing the changes in this version.
+#' @param commitMessage &#91;required&#93; A commit message describing the changes in this version.
 #' @param createdBy The source that created this version, including the source name and optional ARN.
+#' @param kmsKeyArn Optional KMS key ARN for encrypting component configurations. If provided, components will be encrypted with this key. If the bundle already has a KMS key, this rotates to the new key.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_configuration_bundle
-bedrockagentcorecontrol_update_configuration_bundle <- function(clientToken = NULL, bundleId, bundleName = NULL, description = NULL, components = NULL, parentVersionIds = NULL, branchName = NULL, commitMessage = NULL, createdBy = NULL) {
+bedrockagentcorecontrol_update_configuration_bundle <- function(clientToken = NULL, bundleId, bundleName = NULL, description = NULL, components = NULL, parentVersionIds, branchName = NULL, commitMessage, createdBy = NULL, kmsKeyArn = NULL) {
   op <- new_operation(
     name = "UpdateConfigurationBundle",
     http_method = "PUT",
     http_path = "/configuration-bundles/{bundleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_configuration_bundle_input(clientToken = clientToken, bundleId = bundleId, bundleName = bundleName, description = description, components = components, parentVersionIds = parentVersionIds, branchName = branchName, commitMessage = commitMessage, createdBy = createdBy)
+  input <- .bedrockagentcorecontrol$update_configuration_bundle_input(clientToken = clientToken, bundleId = bundleId, bundleName = bundleName, description = description, components = components, parentVersionIds = parentVersionIds, branchName = branchName, commitMessage = commitMessage, createdBy = createdBy, kmsKeyArn = kmsKeyArn)
   output <- .bedrockagentcorecontrol$update_configuration_bundle_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4313,10 +5188,45 @@ bedrockagentcorecontrol_update_configuration_bundle <- function(clientToken = NU
 }
 .bedrockagentcorecontrol$operations$update_configuration_bundle <- bedrockagentcorecontrol_update_configuration_bundle
 
+#' Updates an existing consent portal
+#'
+#' @description
+#' Updates an existing consent portal.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_consent_portal/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_consent_portal/) for full documentation.
+#'
+#' @param consentPortalIdentifier &#91;required&#93; The identifier of the consent portal. You can specify either the consent portal ID or its Amazon Resource Name (ARN).
+#' @param executionRoleArn The Amazon Resource Name (ARN) of the IAM role that the consent portal assumes to access the resources defined in its sources.
+#' @param idpConfig The identity provider configuration that the consent portal uses to authenticate end users.
+#' @param description The description of the consent portal.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_update_consent_portal
+bedrockagentcorecontrol_update_consent_portal <- function(consentPortalIdentifier, executionRoleArn = NULL, idpConfig = NULL, description = NULL) {
+  op <- new_operation(
+    name = "UpdateConsentPortal",
+    http_method = "POST",
+    http_path = "/identities/UpdateConsentPortal",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$update_consent_portal_input(consentPortalIdentifier = consentPortalIdentifier, executionRoleArn = executionRoleArn, idpConfig = idpConfig, description = description)
+  output <- .bedrockagentcorecontrol$update_consent_portal_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$update_consent_portal <- bedrockagentcorecontrol_update_consent_portal
+
 #' Updates a dataset's metadata
 #'
 #' @description
-#' Updates a dataset's metadata. Synchronous operation. Only provided fields are updated; omitted fields remain unchanged.
+#' Updates a dataset's metadata. Synchronous operation. Only provided fields are updated; omitted fields remain unchanged. To modify dataset content, use [`add_dataset_examples`][bedrockagentcorecontrol_add_dataset_examples], [`update_dataset_examples`][bedrockagentcorecontrol_update_dataset_examples], or [`delete_dataset_examples`][bedrockagentcorecontrol_delete_dataset_examples].
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_dataset/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_dataset/) for full documentation.
 #'
@@ -4334,7 +5244,8 @@ bedrockagentcorecontrol_update_dataset <- function(datasetId, clientToken = NULL
     http_path = "/datasets/{datasetId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_dataset_input(datasetId = datasetId, clientToken = clientToken, description = description)
   output <- .bedrockagentcorecontrol$update_dataset_output()
@@ -4349,13 +5260,13 @@ bedrockagentcorecontrol_update_dataset <- function(datasetId, clientToken = NULL
 #' Updates multiple existing examples in-place on DRAFT
 #'
 #' @description
-#' Updates multiple existing examples in-place on DRAFT.
+#' Updates multiple existing examples in-place on DRAFT. All examples are validated against the dataset's schema type before any writes occur. If any example fails validation, the entire batch is rejected (all-or-nothing semantics).
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_dataset_examples/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_dataset_examples/) for full documentation.
 #'
 #' @param datasetId &#91;required&#93; The unique identifier of the dataset.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
-#' @param examples &#91;required&#93; Examples to update. Each element is a JSON object containing a required `exampleId` string field identifying the existing example, plus the replacement fields. The `exampleId` is extracted and removed before persistence; the remaining document is validated against the dataset's schemaType. Max 1000 examples per call. Total request body must not exceed 5 MB.
+#' @param examples &#91;required&#93; Examples to update. Each element is a JSON object containing a required `exampleId` field identifying the existing example, plus the replacement fields. Maximum 1000 examples per call.
 #'
 #' @keywords internal
 #'
@@ -4367,7 +5278,8 @@ bedrockagentcorecontrol_update_dataset_examples <- function(datasetId, clientTok
     http_path = "/datasets/{datasetId}/examples/update",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_dataset_examples_input(datasetId = datasetId, clientToken = clientToken, examples = examples)
   output <- .bedrockagentcorecontrol$update_dataset_examples_output()
@@ -4404,7 +5316,8 @@ bedrockagentcorecontrol_update_evaluator <- function(clientToken = NULL, evaluat
     http_path = "/evaluators/{evaluatorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_evaluator_input(clientToken = clientToken, evaluatorId = evaluatorId, description = description, evaluatorConfig = evaluatorConfig, level = level, kmsKeyArn = kmsKeyArn)
   output <- .bedrockagentcorecontrol$update_evaluator_output()
@@ -4432,6 +5345,7 @@ bedrockagentcorecontrol_update_evaluator <- function(clientToken = NULL, evaluat
 #' @param authorizerType &#91;required&#93; The updated authorizer type for the gateway.
 #' @param authorizerConfiguration The updated authorizer configuration for the gateway.
 #' @param kmsKeyArn The updated ARN of the KMS key used to encrypt the gateway.
+#' @param customTransformConfiguration The updated custom transformation configuration for the gateway. This configuration defines how the gateway transforms requests and responses.
 #' @param interceptorConfigurations The updated interceptor configurations for the gateway.
 #' @param policyEngineConfiguration The updated policy engine configuration for the gateway. A policy engine is a collection of policies that evaluates and authorizes agent tool calls. When associated with a gateway, the policy engine intercepts all agent requests and determines whether to allow or deny each action based on the defined policies.
 #' @param exceptionLevel The level of detail in error messages returned when invoking the gateway.
@@ -4439,20 +5353,22 @@ bedrockagentcorecontrol_update_evaluator <- function(clientToken = NULL, evaluat
 #' -   If the value is `DEBUG`, granular exception messages are returned to help a user debug the gateway.
 #' 
 #' -   If the value is omitted, a generic error message is returned to the end user.
+#' @param wafConfiguration The updated Amazon Web Services WAF configuration for the gateway.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_gateway
-bedrockagentcorecontrol_update_gateway <- function(gatewayIdentifier, name, description = NULL, roleArn, protocolType = NULL, protocolConfiguration = NULL, authorizerType, authorizerConfiguration = NULL, kmsKeyArn = NULL, interceptorConfigurations = NULL, policyEngineConfiguration = NULL, exceptionLevel = NULL) {
+bedrockagentcorecontrol_update_gateway <- function(gatewayIdentifier, name, description = NULL, roleArn, protocolType = NULL, protocolConfiguration = NULL, authorizerType, authorizerConfiguration = NULL, kmsKeyArn = NULL, customTransformConfiguration = NULL, interceptorConfigurations = NULL, policyEngineConfiguration = NULL, exceptionLevel = NULL, wafConfiguration = NULL) {
   op <- new_operation(
     name = "UpdateGateway",
     http_method = "PUT",
     http_path = "/gateways/{gatewayIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_gateway_input(gatewayIdentifier = gatewayIdentifier, name = name, description = description, roleArn = roleArn, protocolType = protocolType, protocolConfiguration = protocolConfiguration, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, kmsKeyArn = kmsKeyArn, interceptorConfigurations = interceptorConfigurations, policyEngineConfiguration = policyEngineConfiguration, exceptionLevel = exceptionLevel)
+  input <- .bedrockagentcorecontrol$update_gateway_input(gatewayIdentifier = gatewayIdentifier, name = name, description = description, roleArn = roleArn, protocolType = protocolType, protocolConfiguration = protocolConfiguration, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, kmsKeyArn = kmsKeyArn, customTransformConfiguration = customTransformConfiguration, interceptorConfigurations = interceptorConfigurations, policyEngineConfiguration = policyEngineConfiguration, exceptionLevel = exceptionLevel, wafConfiguration = wafConfiguration)
   output <- .bedrockagentcorecontrol$update_gateway_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4461,6 +5377,41 @@ bedrockagentcorecontrol_update_gateway <- function(gatewayIdentifier, name, desc
   return(response)
 }
 .bedrockagentcorecontrol$operations$update_gateway <- bedrockagentcorecontrol_update_gateway
+
+#' Updates the entries of a gateway rate limit
+#'
+#' @description
+#' Updates the entries of a gateway rate limit. The dimension keys are immutable after creation.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_gateway_rate_limit/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_gateway_rate_limit/) for full documentation.
+#'
+#' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway.
+#' @param rateLimitId &#91;required&#93; The unique identifier of the rate limit to update.
+#' @param description The updated human-readable description for this rate limit.
+#' @param entries &#91;required&#93; The updated rule entries. The dimension keys are immutable after creation and cannot be changed.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_update_gateway_rate_limit
+bedrockagentcorecontrol_update_gateway_rate_limit <- function(gatewayIdentifier, rateLimitId, description = NULL, entries) {
+  op <- new_operation(
+    name = "UpdateGatewayRateLimit",
+    http_method = "PATCH",
+    http_path = "/gateways/{gatewayIdentifier}/rate-limits/{rateLimitId}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$update_gateway_rate_limit_input(gatewayIdentifier = gatewayIdentifier, rateLimitId = rateLimitId, description = description, entries = entries)
+  output <- .bedrockagentcorecontrol$update_gateway_rate_limit_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$update_gateway_rate_limit <- bedrockagentcorecontrol_update_gateway_rate_limit
 
 #' Updates a gateway rule's priority, conditions, actions, or description
 #'
@@ -4486,7 +5437,8 @@ bedrockagentcorecontrol_update_gateway_rule <- function(gatewayIdentifier, ruleI
     http_path = "/gateways/{gatewayIdentifier}/rules/{ruleId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_gateway_rule_input(gatewayIdentifier = gatewayIdentifier, ruleId = ruleId, priority = priority, conditions = conditions, actions = actions, description = description)
   output <- .bedrockagentcorecontrol$update_gateway_rule_output()
@@ -4507,26 +5459,28 @@ bedrockagentcorecontrol_update_gateway_rule <- function(gatewayIdentifier, ruleI
 #'
 #' @param gatewayIdentifier &#91;required&#93; The unique identifier of the gateway associated with the target.
 #' @param targetId &#91;required&#93; The unique identifier of the gateway target to update.
-#' @param name &#91;required&#93; The updated name for the gateway target.
+#' @param name The updated name for the gateway target.
 #' @param description The updated description for the gateway target.
 #' @param targetConfiguration &#91;required&#93; The configuration for a gateway target. This structure defines how the gateway connects to and interacts with the target endpoint.
 #' @param credentialProviderConfigurations The updated credential provider configurations for the gateway target.
 #' @param metadataConfiguration Configuration for HTTP header and query parameter propagation to the gateway target.
 #' @param privateEndpoint The private endpoint configuration for the gateway target. Use this to connect the gateway to private resources in your VPC.
+#' @param certificateConfigurations The private certificate authority (CA) configurations for the gateway target. Use this to have the gateway trust a private CA when it establishes TLS connections to the target endpoint. Provide each certificate by reference to an Amazon S3 object or an Amazon Web Services Secrets Manager secret. You can specify only one certificate authority configuration in this list. To remove a previously configured certificate authority, omit this field on update.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_gateway_target
-bedrockagentcorecontrol_update_gateway_target <- function(gatewayIdentifier, targetId, name, description = NULL, targetConfiguration, credentialProviderConfigurations = NULL, metadataConfiguration = NULL, privateEndpoint = NULL) {
+bedrockagentcorecontrol_update_gateway_target <- function(gatewayIdentifier, targetId, name = NULL, description = NULL, targetConfiguration, credentialProviderConfigurations = NULL, metadataConfiguration = NULL, privateEndpoint = NULL, certificateConfigurations = NULL) {
   op <- new_operation(
     name = "UpdateGatewayTarget",
     http_method = "PUT",
     http_path = "/gateways/{gatewayIdentifier}/targets/{targetId}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_gateway_target_input(gatewayIdentifier = gatewayIdentifier, targetId = targetId, name = name, description = description, targetConfiguration = targetConfiguration, credentialProviderConfigurations = credentialProviderConfigurations, metadataConfiguration = metadataConfiguration, privateEndpoint = privateEndpoint)
+  input <- .bedrockagentcorecontrol$update_gateway_target_input(gatewayIdentifier = gatewayIdentifier, targetId = targetId, name = name, description = description, targetConfiguration = targetConfiguration, credentialProviderConfigurations = credentialProviderConfigurations, metadataConfiguration = metadataConfiguration, privateEndpoint = privateEndpoint, certificateConfigurations = certificateConfigurations)
   output <- .bedrockagentcorecontrol$update_gateway_target_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4536,10 +5490,10 @@ bedrockagentcorecontrol_update_gateway_target <- function(gatewayIdentifier, tar
 }
 .bedrockagentcorecontrol$operations$update_gateway_target <- bedrockagentcorecontrol_update_gateway_target
 
-#' Operation to update a Harness
+#' Operation to update a harness
 #'
 #' @description
-#' Operation to update a Harness.
+#' Operation to update a harness.
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_harness/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_harness/) for full documentation.
 #'
@@ -4557,6 +5511,7 @@ bedrockagentcorecontrol_update_gateway_target <- function(gatewayIdentifier, tar
 #' @param allowedTools The tools that the agent is allowed to use. If specified, this replaces all existing allowed tools. If not specified, the existing value is retained.
 #' @param memory The AgentCore Memory configuration. Use the optionalValue wrapper to set a new value, or set it to null to clear the existing configuration.
 #' @param truncation The truncation configuration for managing conversation context. If not specified, the existing value is retained.
+#' @param hooks The lifecycle hooks to run at defined points in the agent loop. If specified, this replaces all existing hooks. If not specified, the existing hooks are retained.
 #' @param maxIterations The maximum number of iterations the agent loop can execute per invocation. If not specified, the existing value is retained.
 #' @param maxTokens The maximum total number of output tokens the agent can generate across all model calls within a single invocation. If not specified, the existing value is retained.
 #' @param timeoutSeconds The maximum duration in seconds for the agent loop execution per invocation. If not specified, the existing value is retained.
@@ -4564,16 +5519,17 @@ bedrockagentcorecontrol_update_gateway_target <- function(gatewayIdentifier, tar
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_harness
-bedrockagentcorecontrol_update_harness <- function(harnessId, clientToken = NULL, executionRoleArn = NULL, environment = NULL, environmentArtifact = NULL, environmentVariables = NULL, authorizerConfiguration = NULL, model = NULL, systemPrompt = NULL, tools = NULL, skills = NULL, allowedTools = NULL, memory = NULL, truncation = NULL, maxIterations = NULL, maxTokens = NULL, timeoutSeconds = NULL) {
+bedrockagentcorecontrol_update_harness <- function(harnessId, clientToken = NULL, executionRoleArn = NULL, environment = NULL, environmentArtifact = NULL, environmentVariables = NULL, authorizerConfiguration = NULL, model = NULL, systemPrompt = NULL, tools = NULL, skills = NULL, allowedTools = NULL, memory = NULL, truncation = NULL, hooks = NULL, maxIterations = NULL, maxTokens = NULL, timeoutSeconds = NULL) {
   op <- new_operation(
     name = "UpdateHarness",
     http_method = "PATCH",
     http_path = "/harnesses/{harnessId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_harness_input(harnessId = harnessId, clientToken = clientToken, executionRoleArn = executionRoleArn, environment = environment, environmentArtifact = environmentArtifact, environmentVariables = environmentVariables, authorizerConfiguration = authorizerConfiguration, model = model, systemPrompt = systemPrompt, tools = tools, skills = skills, allowedTools = allowedTools, memory = memory, truncation = truncation, maxIterations = maxIterations, maxTokens = maxTokens, timeoutSeconds = timeoutSeconds)
+  input <- .bedrockagentcorecontrol$update_harness_input(harnessId = harnessId, clientToken = clientToken, executionRoleArn = executionRoleArn, environment = environment, environmentArtifact = environmentArtifact, environmentVariables = environmentVariables, authorizerConfiguration = authorizerConfiguration, model = model, systemPrompt = systemPrompt, tools = tools, skills = skills, allowedTools = allowedTools, memory = memory, truncation = truncation, hooks = hooks, maxIterations = maxIterations, maxTokens = maxTokens, timeoutSeconds = timeoutSeconds)
   output <- .bedrockagentcorecontrol$update_harness_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4582,6 +5538,42 @@ bedrockagentcorecontrol_update_harness <- function(harnessId, clientToken = NULL
   return(response)
 }
 .bedrockagentcorecontrol$operations$update_harness <- bedrockagentcorecontrol_update_harness
+
+#' Operation to update a harness endpoint
+#'
+#' @description
+#' Operation to update a harness endpoint.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_harness_endpoint/](https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_harness_endpoint/) for full documentation.
+#'
+#' @param harnessId &#91;required&#93; The ID of the harness that the endpoint belongs to.
+#' @param endpointName &#91;required&#93; The name of the endpoint to update.
+#' @param targetVersion The harness version that the endpoint points to. If not specified, the existing value is retained.
+#' @param description A description of the endpoint. If not specified, the existing value is retained.
+#' @param clientToken A unique, case-sensitive identifier to ensure idempotency of the request.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentcorecontrol_update_harness_endpoint
+bedrockagentcorecontrol_update_harness_endpoint <- function(harnessId, endpointName, targetVersion = NULL, description = NULL, clientToken = NULL) {
+  op <- new_operation(
+    name = "UpdateHarnessEndpoint",
+    http_method = "PATCH",
+    http_path = "/harnesses/{harnessId}/endpoints/{endpointName}",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentcorecontrol$update_harness_endpoint_input(harnessId = harnessId, endpointName = endpointName, targetVersion = targetVersion, description = description, clientToken = clientToken)
+  output <- .bedrockagentcorecontrol$update_harness_endpoint_output()
+  config <- get_config()
+  svc <- .bedrockagentcorecontrol$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentcorecontrol$operations$update_harness_endpoint <- bedrockagentcorecontrol_update_harness_endpoint
 
 #' Update an Amazon Bedrock AgentCore Memory resource memory
 #'
@@ -4597,21 +5589,23 @@ bedrockagentcorecontrol_update_harness <- function(harnessId, clientToken = NULL
 #' @param memoryExecutionRoleArn The ARN of the IAM role that provides permissions for the AgentCore Memory resource.
 #' @param memoryStrategies The memory strategies to add, modify, or delete.
 #' @param addIndexedKeys Additional metadata keys to index. Previously indexed keys cannot be removed.
+#' @param namespaceKeys The namespace variable key definitions with validation rules for this memory. This value fully replaces the existing set — any key you omit is removed. Any referenced `namespaceKey` omission will throw ValidationException.
 #' @param streamDeliveryResources Configuration for streaming memory record data to external resources.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_memory
-bedrockagentcorecontrol_update_memory <- function(clientToken = NULL, memoryId, description = NULL, eventExpiryDuration = NULL, memoryExecutionRoleArn = NULL, memoryStrategies = NULL, addIndexedKeys = NULL, streamDeliveryResources = NULL) {
+bedrockagentcorecontrol_update_memory <- function(clientToken = NULL, memoryId, description = NULL, eventExpiryDuration = NULL, memoryExecutionRoleArn = NULL, memoryStrategies = NULL, addIndexedKeys = NULL, namespaceKeys = NULL, streamDeliveryResources = NULL) {
   op <- new_operation(
     name = "UpdateMemory",
     http_method = "PUT",
     http_path = "/memories/{memoryId}/update",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_memory_input(clientToken = clientToken, memoryId = memoryId, description = description, eventExpiryDuration = eventExpiryDuration, memoryExecutionRoleArn = memoryExecutionRoleArn, memoryStrategies = memoryStrategies, addIndexedKeys = addIndexedKeys, streamDeliveryResources = streamDeliveryResources)
+  input <- .bedrockagentcorecontrol$update_memory_input(clientToken = clientToken, memoryId = memoryId, description = description, eventExpiryDuration = eventExpiryDuration, memoryExecutionRoleArn = memoryExecutionRoleArn, memoryStrategies = memoryStrategies, addIndexedKeys = addIndexedKeys, namespaceKeys = namespaceKeys, streamDeliveryResources = streamDeliveryResources)
   output <- .bedrockagentcorecontrol$update_memory_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4642,7 +5636,8 @@ bedrockagentcorecontrol_update_oauth_2_credential_provider <- function(name, cre
     http_path = "/identities/UpdateOauth2CredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_oauth_2_credential_provider_input(name = name, credentialProviderVendor = credentialProviderVendor, oauth2ProviderConfigInput = oauth2ProviderConfigInput)
   output <- .bedrockagentcorecontrol$update_oauth_2_credential_provider_output()
@@ -4668,22 +5663,26 @@ bedrockagentcorecontrol_update_oauth_2_credential_provider <- function(name, cre
 #' @param rule The updated evaluation rule containing sampling configuration, filters, and session settings.
 #' @param dataSourceConfig The updated data source configuration specifying CloudWatch log groups and service names to monitor.
 #' @param evaluators The updated list of evaluators to apply during online evaluation.
+#' @param insights The updated list of insight types to run against agent sessions.
+#' @param clusteringConfig The updated clustering configuration for periodic batch evaluation.
+#' @param outputConfig The configuration that specifies where evaluation results should be written for monitoring and analysis.
 #' @param evaluationExecutionRoleArn The updated Amazon Resource Name (ARN) of the IAM role used for evaluation execution.
 #' @param executionStatus The updated execution status to enable or disable the online evaluation.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_online_evaluation_config
-bedrockagentcorecontrol_update_online_evaluation_config <- function(clientToken = NULL, onlineEvaluationConfigId, description = NULL, rule = NULL, dataSourceConfig = NULL, evaluators = NULL, evaluationExecutionRoleArn = NULL, executionStatus = NULL) {
+bedrockagentcorecontrol_update_online_evaluation_config <- function(clientToken = NULL, onlineEvaluationConfigId, description = NULL, rule = NULL, dataSourceConfig = NULL, evaluators = NULL, insights = NULL, clusteringConfig = NULL, outputConfig = NULL, evaluationExecutionRoleArn = NULL, executionStatus = NULL) {
   op <- new_operation(
     name = "UpdateOnlineEvaluationConfig",
     http_method = "PUT",
     http_path = "/online-evaluation-configs/{onlineEvaluationConfigId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_online_evaluation_config_input(clientToken = clientToken, onlineEvaluationConfigId = onlineEvaluationConfigId, description = description, rule = rule, dataSourceConfig = dataSourceConfig, evaluators = evaluators, evaluationExecutionRoleArn = evaluationExecutionRoleArn, executionStatus = executionStatus)
+  input <- .bedrockagentcorecontrol$update_online_evaluation_config_input(clientToken = clientToken, onlineEvaluationConfigId = onlineEvaluationConfigId, description = description, rule = rule, dataSourceConfig = dataSourceConfig, evaluators = evaluators, insights = insights, clusteringConfig = clusteringConfig, outputConfig = outputConfig, evaluationExecutionRoleArn = evaluationExecutionRoleArn, executionStatus = executionStatus)
   output <- .bedrockagentcorecontrol$update_online_evaluation_config_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4717,7 +5716,8 @@ bedrockagentcorecontrol_update_payment_connector <- function(paymentManagerId, p
     http_path = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_payment_connector_input(paymentManagerId = paymentManagerId, paymentConnectorId = paymentConnectorId, description = description, type = type, credentialProviderConfigurations = credentialProviderConfigurations, clientToken = clientToken)
   output <- .bedrockagentcorecontrol$update_payment_connector_output()
@@ -4751,7 +5751,8 @@ bedrockagentcorecontrol_update_payment_credential_provider <- function(name, cre
     http_path = "/identities/UpdatePaymentCredentialProvider",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_payment_credential_provider_input(name = name, credentialProviderVendor = credentialProviderVendor, providerConfigurationInput = providerConfigurationInput)
   output <- .bedrockagentcorecontrol$update_payment_credential_provider_output()
@@ -4776,20 +5777,22 @@ bedrockagentcorecontrol_update_payment_credential_provider <- function(name, cre
 #' @param authorizerConfiguration The updated authorizer configuration for the payment manager.
 #' @param roleArn The updated Amazon Resource Name (ARN) of the IAM role for the payment manager.
 #' @param clientToken A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see [Ensuring idempotency](https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html).
+#' @param kmsKeyArn The updated Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt sensitive payment manager data at rest.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_payment_manager
-bedrockagentcorecontrol_update_payment_manager <- function(paymentManagerId, description = NULL, authorizerType = NULL, authorizerConfiguration = NULL, roleArn = NULL, clientToken = NULL) {
+bedrockagentcorecontrol_update_payment_manager <- function(paymentManagerId, description = NULL, authorizerType = NULL, authorizerConfiguration = NULL, roleArn = NULL, clientToken = NULL, kmsKeyArn = NULL) {
   op <- new_operation(
     name = "UpdatePaymentManager",
     http_method = "PATCH",
     http_path = "/payments/managers/{paymentManagerId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_payment_manager_input(paymentManagerId = paymentManagerId, description = description, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, roleArn = roleArn, clientToken = clientToken)
+  input <- .bedrockagentcorecontrol$update_payment_manager_input(paymentManagerId = paymentManagerId, description = description, authorizerType = authorizerType, authorizerConfiguration = authorizerConfiguration, roleArn = roleArn, clientToken = clientToken, kmsKeyArn = kmsKeyArn)
   output <- .bedrockagentcorecontrol$update_payment_manager_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4809,22 +5812,24 @@ bedrockagentcorecontrol_update_payment_manager <- function(paymentManagerId, des
 #' @param policyEngineId &#91;required&#93; The identifier of the policy engine that manages the policy to be updated. This ensures the policy is updated within the correct policy engine context.
 #' @param policyId &#91;required&#93; The unique identifier of the policy to be updated. This must be a valid policy ID that exists within the specified policy engine.
 #' @param description The new human-readable description for the policy. This optional field allows updating the policy's documentation while keeping the same policy logic.
-#' @param definition The new Cedar policy statement that defines the access control rules. This replaces the existing policy definition with new logic while maintaining the policy's identity.
+#' @param definition The new Cedar or Dogwood policy statement that defines the access control rules. This replaces the existing policy definition with new logic while maintaining the policy's identity.
 #' @param validationMode The validation mode for the policy update. Determines how Cedar analyzer validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs the Cedar analyzer and fails the update if validation issues are detected, ensuring the policy conforms to the Cedar schema and tool context. IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows updates despite validation warnings. Use FAIL_ON_ANY_FINDINGS to ensure policy correctness during updates, especially when modifying policy logic or conditions.
+#' @param enforcementMode The enforcement mode for the policy. Run this policy in `LOG_ONLY` mode to collect data on how it affects your application. Once you are satisfied with the data gathered, switch the policy to `ACTIVE`. If you omit this field, the policy's existing enforcement mode is unchanged.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentcorecontrol_update_policy
-bedrockagentcorecontrol_update_policy <- function(policyEngineId, policyId, description = NULL, definition = NULL, validationMode = NULL) {
+bedrockagentcorecontrol_update_policy <- function(policyEngineId, policyId, description = NULL, definition = NULL, validationMode = NULL, enforcementMode = NULL) {
   op <- new_operation(
     name = "UpdatePolicy",
     http_method = "PATCH",
     http_path = "/policy-engines/{policyEngineId}/policies/{policyId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentcorecontrol$update_policy_input(policyEngineId = policyEngineId, policyId = policyId, description = description, definition = definition, validationMode = validationMode)
+  input <- .bedrockagentcorecontrol$update_policy_input(policyEngineId = policyEngineId, policyId = policyId, description = description, definition = definition, validationMode = validationMode, enforcementMode = enforcementMode)
   output <- .bedrockagentcorecontrol$update_policy_output()
   config <- get_config()
   svc <- .bedrockagentcorecontrol$service(config, op)
@@ -4854,7 +5859,8 @@ bedrockagentcorecontrol_update_policy_engine <- function(policyEngineId, descrip
     http_path = "/policy-engines/{policyEngineId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_policy_engine_input(policyEngineId = policyEngineId, description = description)
   output <- .bedrockagentcorecontrol$update_policy_engine_output()
@@ -4889,7 +5895,8 @@ bedrockagentcorecontrol_update_registry <- function(registryId, name = NULL, des
     http_path = "/registries/{registryId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_registry_input(registryId = registryId, name = name, description = description, authorizerConfiguration = authorizerConfiguration, approvalConfiguration = approvalConfiguration)
   output <- .bedrockagentcorecontrol$update_registry_output()
@@ -4929,7 +5936,8 @@ bedrockagentcorecontrol_update_registry_record <- function(registryId, recordId,
     http_path = "/registries/{registryId}/records/{recordId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_registry_record_input(registryId = registryId, recordId = recordId, name = name, description = description, descriptorType = descriptorType, descriptors = descriptors, recordVersion = recordVersion, synchronizationType = synchronizationType, synchronizationConfiguration = synchronizationConfiguration, triggerSynchronization = triggerSynchronization)
   output <- .bedrockagentcorecontrol$update_registry_record_output()
@@ -4963,7 +5971,8 @@ bedrockagentcorecontrol_update_registry_record_status <- function(registryId, re
     http_path = "/registries/{registryId}/records/{recordId}/status",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_registry_record_status_input(registryId = registryId, recordId = recordId, status = status, statusReason = statusReason)
   output <- .bedrockagentcorecontrol$update_registry_record_status_output()
@@ -4995,7 +6004,8 @@ bedrockagentcorecontrol_update_workload_identity <- function(name, allowedResour
     http_path = "/identities/UpdateWorkloadIdentity",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentcorecontrol$update_workload_identity_input(name = name, allowedResourceOauth2ReturnUrls = allowedResourceOauth2ReturnUrls)
   output <- .bedrockagentcorecontrol$update_workload_identity_output()

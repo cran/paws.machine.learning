@@ -29,6 +29,7 @@ sagemakerfeaturestoreruntime(
 \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
 \item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
 \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{use_dual_stack}: Set this to \code{true} to use the dualstack (IPv4 and IPv6) endpoint for a service, where available, falling back to the regular endpoint when it isn't. Defaults to the \code{AWS_USE_DUALSTACK_ENDPOINT} environment variable when unset.}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
@@ -82,7 +83,8 @@ Use the following operations to configure your \code{OnlineStore} and \code{Offl
     close_connection = "logical",
     timeout = "numeric",
     s3_force_path_style = "logical",
-    sts_regional_endpoint = "string"
+    sts_regional_endpoint = "string",
+    use_dual_stack = "logical"
   ),
   credentials = list(
     creds = list(
@@ -103,9 +105,12 @@ Use the following operations to configure your \code{OnlineStore} and \code{Offl
 
 \tabular{ll}{
 \link[=sagemakerfeaturestoreruntime_batch_get_record]{batch_get_record} \tab Retrieves a batch of Records from a FeatureGroup\cr
+\link[=sagemakerfeaturestoreruntime_batch_write_record]{batch_write_record} \tab Writes a batch of Records to one or more FeatureGroups\cr
 \link[=sagemakerfeaturestoreruntime_delete_record]{delete_record} \tab Deletes a Record from a FeatureGroup in the OnlineStore\cr
 \link[=sagemakerfeaturestoreruntime_get_record]{get_record} \tab Use for OnlineStore serving from a FeatureStore\cr
-\link[=sagemakerfeaturestoreruntime_put_record]{put_record} \tab The PutRecord API is used to ingest a list of Records into your feature group
+\link[=sagemakerfeaturestoreruntime_list_records]{list_records} \tab Lists the RecordIdentifier values of all records stored in a FeatureGroup's OnlineStore\cr
+\link[=sagemakerfeaturestoreruntime_put_record]{put_record} \tab The PutRecord API is used to ingest a list of Records into your feature group\cr
+\link[=sagemakerfeaturestoreruntime_update_record]{update_record} \tab Updates one or more feature values for an existing record in the specified feature group
 }
 }
 

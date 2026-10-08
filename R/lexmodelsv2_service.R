@@ -5,7 +5,33 @@ NULL
 #' Amazon Lex Model Building V2
 #'
 #' @description
-#' Amazon Lex Model Building Service provides APIs for creating, managing, and deploying conversational bots and their components.
+#' This document provides detailed information about the Amazon Lex V2 API actions and their parameters.
+#' 
+#' For information about the IAM access control permissions you need to use this API, see [Identity-based policies for Amazon Lex V2](https://docs.aws.amazon.com/lexv2/latest/dg/security_iam_service-with-iam.html).
+#' 
+#' Amazon Lex V2 Model Building V2 operations let you build and manage bots.
+#' 
+#' If you use a custom HTTP client to call Amazon Lex Model Building V2 operations, you must set the "Content-Type" HTTP header to "application/x-amz-json-1.1". Otherwise, you receive an HTTP 404 - UnknownOperationException in the response.
+#' 
+#' Amazon Lex Model Building V2 operations return the responses with the "application/x-amz-json-1.1" content type.
+#' 
+#' You can use [Amazon Web Services SDKs](https://builder.aws.com/build/tools#sdk) to access Amazon Lex V2 APIs using your favorite programming language. The SDKs automatically perform useful tasks for you, such as:
+#' 
+#' -   Cryptographically sign your service requests
+#' 
+#' -   Retry requests
+#' 
+#' -   Handle error responses
+#' 
+#' The following resources provide additional information about the Amazon Lex V2 Model Building API.
+#' 
+#' -   *Amazon Web Services General Reference*
+#' 
+#'     -   [Amazon Lex V2 Endpoints for each region](https://docs.aws.amazon.com/general/latest/gr/lex.html).
+#' 
+#' -   *Command Line Interface*
+#' 
+#'     -   [Amazon Lex Model Building V2 CLI commands](https://docs.aws.amazon.com/cli/latest/reference/lexv2-models/).
 #'
 #' @param
 #' config
@@ -26,6 +52,7 @@ NULL
 #' \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
 #' \item{\strong{s3_force_path_style}: Set this to `true` to force the request to use path-style addressing, i.e. `http://s3.amazonaws.com/BUCKET/KEY`.}
 #' \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+#' \item{\strong{use_dual_stack}: Set this to `true` to use the dualstack (IPv4 and IPv6) endpoint for a service, where available, falling back to the regular endpoint when it isn't. Defaults to the `AWS_USE_DUALSTACK_ENDPOINT` environment variable when unset.}
 #' }
 #' @param
 #' credentials
@@ -64,7 +91,8 @@ NULL
 #'     close_connection = "logical",
 #'     timeout = "numeric",
 #'     s3_force_path_style = "logical",
-#'     sts_regional_endpoint = "string"
+#'     sts_regional_endpoint = "string",
+#'     use_dual_stack = "logical"
 #'   ),
 #'   credentials = list(
 #'     creds = list(

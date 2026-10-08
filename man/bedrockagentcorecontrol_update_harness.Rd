@@ -2,7 +2,7 @@
 % Please edit documentation in R/bedrockagentcorecontrol_operations.R
 \name{bedrockagentcorecontrol_update_harness}
 \alias{bedrockagentcorecontrol_update_harness}
-\title{Operation to update a Harness}
+\title{Operation to update a harness}
 \usage{
 bedrockagentcorecontrol_update_harness(
   harnessId,
@@ -19,6 +19,7 @@ bedrockagentcorecontrol_update_harness(
   allowedTools = NULL,
   memory = NULL,
   truncation = NULL,
+  hooks = NULL,
   maxIterations = NULL,
   maxTokens = NULL,
   timeoutSeconds = NULL
@@ -53,6 +54,8 @@ bedrockagentcorecontrol_update_harness(
 
 \item{truncation}{The truncation configuration for managing conversation context. If not specified, the existing value is retained.}
 
+\item{hooks}{The lifecycle hooks to run at defined points in the agent loop. If specified, this replaces all existing hooks. If not specified, the existing hooks are retained.}
+
 \item{maxIterations}{The maximum number of iterations the agent loop can execute per invocation. If not specified, the existing value is retained.}
 
 \item{maxTokens}{The maximum total number of output tokens the agent can generate across all model calls within a single invocation. If not specified, the existing value is retained.}
@@ -60,7 +63,7 @@ bedrockagentcorecontrol_update_harness(
 \item{timeoutSeconds}{The maximum duration in seconds for the agent loop execution per invocation. If not specified, the existing value is retained.}
 }
 \description{
-Operation to update a Harness.
+Operation to update a harness.
 
 See \url{https://www.paws-r-sdk.com/docs/bedrockagentcorecontrol_update_harness/} for full documentation.
 }

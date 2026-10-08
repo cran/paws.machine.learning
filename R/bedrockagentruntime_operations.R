@@ -3,6 +3,82 @@
 #' @include bedrockagentruntime_service.R
 NULL
 
+#' Retrieves information from one or more knowledge bases using an agentic
+#' approach
+#'
+#' @description
+#' Retrieves information from one or more knowledge bases using an agentic approach. Agentic retrieval uses a foundation model to intelligently decompose complex queries into sub-queries and iteratively retrieve relevant information from your knowledge bases. This approach improves retrieval accuracy for complex, multi-step questions that a single retrieval pass might not fully address.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentruntime_agentic_retrieve_stream/](https://www.paws-r-sdk.com/docs/bedrockagentruntime_agentic_retrieve_stream/) for full documentation.
+#'
+#' @param agenticRetrieveConfiguration &#91;required&#93; Configuration settings for the agentic retrieval operation.
+#' @param generateResponse Whether to generate a response based on the retrieved results.
+#' @param memoryConfiguration The configuration for using an Amazon Bedrock AgentCore Memory resource with this retrieval.
+#' @param messages &#91;required&#93; The list of messages for the agentic retrieval conversation.
+#' @param nextToken Opaque continuation token for paginated results.
+#' @param policyConfiguration Policy configuration for guardrails and content filtering.
+#' @param retrievers &#91;required&#93; The list of retrievers to use for agentic retrieval.
+#' @param userContext Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentruntime_agentic_retrieve_stream
+bedrockagentruntime_agentic_retrieve_stream <- function(agenticRetrieveConfiguration, generateResponse = NULL, memoryConfiguration = NULL, messages, nextToken = NULL, policyConfiguration = NULL, retrievers, userContext = NULL) {
+  op <- new_operation(
+    name = "AgenticRetrieveStream",
+    http_method = "POST",
+    http_path = "/agenticRetrieveStream",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = TRUE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentruntime$agentic_retrieve_stream_input(agenticRetrieveConfiguration = agenticRetrieveConfiguration, generateResponse = generateResponse, memoryConfiguration = memoryConfiguration, messages = messages, nextToken = nextToken, policyConfiguration = policyConfiguration, retrievers = retrievers, userContext = userContext)
+  output <- .bedrockagentruntime$agentic_retrieve_stream_output()
+  config <- get_config()
+  svc <- .bedrockagentruntime$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentruntime$operations$agentic_retrieve_stream <- bedrockagentruntime_agentic_retrieve_stream
+
+#' Checks whether a user has access to a specific document by verifying
+#' against the ingested access control list (ACL) in a knowledge base
+#'
+#' @description
+#' Checks whether a user has access to a specific document by verifying against the ingested access control list (ACL) in a knowledge base. Use this operation to validate that document-level access control is working as expected after ingestion. To use this operation, you must have the `bedrock:CheckIngestedDocumentAcl` permission.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentruntime_check_ingested_document_acl/](https://www.paws-r-sdk.com/docs/bedrockagentruntime_check_ingested_document_acl/) for full documentation.
+#'
+#' @param dataSourceId &#91;required&#93; The unique identifier of the data source that contains the document.
+#' @param documentId &#91;required&#93; The unique identifier of the document to check access for.
+#' @param knowledgeBaseId &#91;required&#93; The unique identifier of the knowledge base that contains the document.
+#' @param userContext &#91;required&#93; The context object containing identity information for access control filtering, including user ID and optional group memberships used to evaluate the document access control list (ACL).
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentruntime_check_ingested_document_acl
+bedrockagentruntime_check_ingested_document_acl <- function(dataSourceId, documentId, knowledgeBaseId, userContext) {
+  op <- new_operation(
+    name = "CheckIngestedDocumentAcl",
+    http_method = "POST",
+    http_path = "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/check-ingested-document-acl",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentruntime$check_ingested_document_acl_input(dataSourceId = dataSourceId, documentId = documentId, knowledgeBaseId = knowledgeBaseId, userContext = userContext)
+  output <- .bedrockagentruntime$check_ingested_document_acl_output()
+  config <- get_config()
+  svc <- .bedrockagentruntime$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentruntime$operations$check_ingested_document_acl <- bedrockagentruntime_check_ingested_document_acl
+
 #' Creates a new invocation within a session
 #'
 #' @description
@@ -24,7 +100,8 @@ bedrockagentruntime_create_invocation <- function(description = NULL, invocation
     http_path = "/sessions/{sessionIdentifier}/invocations/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$create_invocation_input(description = description, invocationId = invocationId, sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$create_invocation_output()
@@ -59,7 +136,8 @@ bedrockagentruntime_create_session <- function(encryptionKeyArn = NULL, sessionM
     http_path = "/sessions/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$create_session_input(encryptionKeyArn = encryptionKeyArn, sessionMetadata = sessionMetadata, tags = tags)
   output <- .bedrockagentruntime$create_session_output()
@@ -93,7 +171,8 @@ bedrockagentruntime_delete_agent_memory <- function(agentAliasId, agentId, memor
     http_path = "/agents/{agentId}/agentAliases/{agentAliasId}/memories",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$delete_agent_memory_input(agentAliasId = agentAliasId, agentId = agentId, memoryId = memoryId, sessionId = sessionId)
   output <- .bedrockagentruntime$delete_agent_memory_output()
@@ -124,7 +203,8 @@ bedrockagentruntime_delete_session <- function(sessionIdentifier) {
     http_path = "/sessions/{sessionIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$delete_session_input(sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$delete_session_output()
@@ -155,7 +235,8 @@ bedrockagentruntime_end_session <- function(sessionIdentifier) {
     http_path = "/sessions/{sessionIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$end_session_input(sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$end_session_output()
@@ -187,7 +268,8 @@ bedrockagentruntime_generate_query <- function(queryGenerationInput, transformat
     http_path = "/generateQuery",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$generate_query_input(queryGenerationInput = queryGenerationInput, transformationConfiguration = transformationConfiguration)
   output <- .bedrockagentruntime$generate_query_output()
@@ -223,7 +305,8 @@ bedrockagentruntime_get_agent_memory <- function(agentAliasId, agentId, maxItems
     http_path = "/agents/{agentId}/agentAliases/{agentAliasId}/memories",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxItems", result_key = "memoryContents"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$get_agent_memory_input(agentAliasId = agentAliasId, agentId = agentId, maxItems = maxItems, memoryId = memoryId, memoryType = memoryType, nextToken = nextToken)
   output <- .bedrockagentruntime$get_agent_memory_output()
@@ -234,6 +317,42 @@ bedrockagentruntime_get_agent_memory <- function(agentAliasId, agentId, maxItems
   return(response)
 }
 .bedrockagentruntime$operations$get_agent_memory <- bedrockagentruntime_get_agent_memory
+
+#' Retrieves the content of an ingested document from a knowledge base
+#'
+#' @description
+#' Retrieves the content of an ingested document from a knowledge base. Returns a pre-signed URL for secure document access.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentruntime_get_document_content/](https://www.paws-r-sdk.com/docs/bedrockagentruntime_get_document_content/) for full documentation.
+#'
+#' @param dataSourceId &#91;required&#93; The unique identifier of the data source that contains the document.
+#' @param documentId &#91;required&#93; The unique identifier of the document to retrieve content for.
+#' @param knowledgeBaseId &#91;required&#93; The unique identifier of the knowledge base that contains the document.
+#' @param outputFormat The output format for the document content. `RAW` returns the original file. `EXTRACTED` returns parsed text as JSON. Defaults to `RAW`.
+#' @param userContext Contains information about the user making the request. This is used for access control filtering to ensure that results only include documents the user is authorized to access.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentruntime_get_document_content
+bedrockagentruntime_get_document_content <- function(dataSourceId, documentId, knowledgeBaseId, outputFormat = NULL, userContext = NULL) {
+  op <- new_operation(
+    name = "GetDocumentContent",
+    http_method = "POST",
+    http_path = "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/documents/{documentId}/content",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentruntime$get_document_content_input(dataSourceId = dataSourceId, documentId = documentId, knowledgeBaseId = knowledgeBaseId, outputFormat = outputFormat, userContext = userContext)
+  output <- .bedrockagentruntime$get_document_content_output()
+  config <- get_config()
+  svc <- .bedrockagentruntime$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentruntime$operations$get_document_content <- bedrockagentruntime_get_document_content
 
 #' Retrieves the flow definition snapshot used for a flow execution
 #'
@@ -256,7 +375,8 @@ bedrockagentruntime_get_execution_flow_snapshot <- function(executionIdentifier,
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/flowsnapshot",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$get_execution_flow_snapshot_input(executionIdentifier = executionIdentifier, flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier)
   output <- .bedrockagentruntime$get_execution_flow_snapshot_output()
@@ -290,7 +410,8 @@ bedrockagentruntime_get_flow_execution <- function(executionIdentifier, flowAlia
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$get_flow_execution_input(executionIdentifier = executionIdentifier, flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier)
   output <- .bedrockagentruntime$get_flow_execution_output()
@@ -301,6 +422,41 @@ bedrockagentruntime_get_flow_execution <- function(executionIdentifier, flowAlia
   return(response)
 }
 .bedrockagentruntime$operations$get_flow_execution <- bedrockagentruntime_get_flow_execution
+
+#' Retrieves the ingested access control list (ACL) for a specific document
+#' in a knowledge base
+#'
+#' @description
+#' Retrieves the ingested access control list (ACL) for a specific document in a knowledge base. Use this operation to inspect the allow and deny lists that were ingested for a document to troubleshoot access control issues. To use this operation, you must have the `bedrock:GetIngestedDocumentAcl` permission.
+#'
+#' See [https://www.paws-r-sdk.com/docs/bedrockagentruntime_get_ingested_document_acl/](https://www.paws-r-sdk.com/docs/bedrockagentruntime_get_ingested_document_acl/) for full documentation.
+#'
+#' @param dataSourceId &#91;required&#93; The unique identifier of the data source that contains the document.
+#' @param documentId &#91;required&#93; The unique identifier of the document to retrieve the ingested access control list (ACL) for.
+#' @param knowledgeBaseId &#91;required&#93; The unique identifier of the knowledge base that contains the document.
+#'
+#' @keywords internal
+#'
+#' @rdname bedrockagentruntime_get_ingested_document_acl
+bedrockagentruntime_get_ingested_document_acl <- function(dataSourceId, documentId, knowledgeBaseId) {
+  op <- new_operation(
+    name = "GetIngestedDocumentAcl",
+    http_method = "POST",
+    http_path = "/knowledgebases/{knowledgeBaseId}/datasources/{dataSourceId}/get-ingested-document-acl",
+    host_prefix = "",
+    paginator = list(),
+    stream_api = FALSE,
+    http_checksum = NULL
+  )
+  input <- .bedrockagentruntime$get_ingested_document_acl_input(dataSourceId = dataSourceId, documentId = documentId, knowledgeBaseId = knowledgeBaseId)
+  output <- .bedrockagentruntime$get_ingested_document_acl_output()
+  config <- get_config()
+  svc <- .bedrockagentruntime$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.bedrockagentruntime$operations$get_ingested_document_acl <- bedrockagentruntime_get_ingested_document_acl
 
 #' Retrieves the details of a specific invocation step within an invocation
 #' in a session
@@ -324,7 +480,8 @@ bedrockagentruntime_get_invocation_step <- function(invocationIdentifier, invoca
     http_path = "/sessions/{sessionIdentifier}/invocationSteps/{invocationStepId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$get_invocation_step_input(invocationIdentifier = invocationIdentifier, invocationStepId = invocationStepId, sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$get_invocation_step_output()
@@ -355,7 +512,8 @@ bedrockagentruntime_get_session <- function(sessionIdentifier) {
     http_path = "/sessions/{sessionIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$get_session_input(sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$get_session_output()
@@ -367,10 +525,11 @@ bedrockagentruntime_get_session <- function(sessionIdentifier) {
 }
 .bedrockagentruntime$operations$get_session <- bedrockagentruntime_get_session
 
-#' Sends a prompt for the agent to process and respond to
+#' Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer
+#' open to new customers
 #'
 #' @description
-#' Sends a prompt for the agent to process and respond to. Note the following fields for the request:
+#' Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to new customers. For capabilities similar to Bedrock Agents Classic, explore Amazon Bedrock AgentCore. Existing customers can continue to use the service as normal. For more information, see [Amazon Bedrock Agents Classic availability change](https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html).
 #'
 #' See [https://www.paws-r-sdk.com/docs/bedrockagentruntime_invoke_agent/](https://www.paws-r-sdk.com/docs/bedrockagentruntime_invoke_agent/) for full documentation.
 #'
@@ -403,7 +562,8 @@ bedrockagentruntime_invoke_agent <- function(agentAliasId, agentId, bedrockModel
     http_path = "/agents/{agentId}/agentAliases/{agentAliasId}/sessions/{sessionId}/text",
     host_prefix = "",
     paginator = list(),
-    stream_api = TRUE
+    stream_api = TRUE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$invoke_agent_input(agentAliasId = agentAliasId, agentId = agentId, bedrockModelConfigurations = bedrockModelConfigurations, enableTrace = enableTrace, endSession = endSession, inputText = inputText, memoryId = memoryId, promptCreationConfigurations = promptCreationConfigurations, sessionId = sessionId, sessionState = sessionState, sourceArn = sourceArn, streamingConfigurations = streamingConfigurations)
   output <- .bedrockagentruntime$invoke_agent_output()
@@ -440,7 +600,8 @@ bedrockagentruntime_invoke_flow <- function(enableTrace = NULL, executionId = NU
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}",
     host_prefix = "",
     paginator = list(),
-    stream_api = TRUE
+    stream_api = TRUE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$invoke_flow_input(enableTrace = enableTrace, executionId = executionId, flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier, inputs = inputs, modelPerformanceConfiguration = modelPerformanceConfiguration)
   output <- .bedrockagentruntime$invoke_flow_output()
@@ -501,7 +662,8 @@ bedrockagentruntime_invoke_inline_agent <- function(actionGroups = NULL, agentCo
     http_path = "/agents/{sessionId}",
     host_prefix = "",
     paginator = list(),
-    stream_api = TRUE
+    stream_api = TRUE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$invoke_inline_agent_input(actionGroups = actionGroups, agentCollaboration = agentCollaboration, agentName = agentName, bedrockModelConfigurations = bedrockModelConfigurations, collaboratorConfigurations = collaboratorConfigurations, collaborators = collaborators, customOrchestration = customOrchestration, customerEncryptionKeyArn = customerEncryptionKeyArn, enableTrace = enableTrace, endSession = endSession, foundationModel = foundationModel, guardrailConfiguration = guardrailConfiguration, idleSessionTTLInSeconds = idleSessionTTLInSeconds, inlineSessionState = inlineSessionState, inputText = inputText, instruction = instruction, knowledgeBases = knowledgeBases, orchestrationType = orchestrationType, promptCreationConfigurations = promptCreationConfigurations, promptOverrideConfiguration = promptOverrideConfiguration, sessionId = sessionId, streamingConfigurations = streamingConfigurations)
   output <- .bedrockagentruntime$invoke_inline_agent_output()
@@ -537,7 +699,8 @@ bedrockagentruntime_list_flow_execution_events <- function(eventType, executionI
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/events",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "flowExecutionEvents"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_flow_execution_events_input(eventType = eventType, executionIdentifier = executionIdentifier, flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentruntime$list_flow_execution_events_output()
@@ -571,7 +734,8 @@ bedrockagentruntime_list_flow_executions <- function(flowAliasIdentifier = NULL,
     http_path = "/flows/{flowIdentifier}/executions",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "flowExecutionSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_flow_executions_input(flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier, maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentruntime$list_flow_executions_output()
@@ -606,7 +770,8 @@ bedrockagentruntime_list_invocation_steps <- function(invocationIdentifier = NUL
     http_path = "/sessions/{sessionIdentifier}/invocationSteps/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "invocationStepSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_invocation_steps_input(invocationIdentifier = invocationIdentifier, maxResults = maxResults, nextToken = nextToken, sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$list_invocation_steps_output()
@@ -639,7 +804,8 @@ bedrockagentruntime_list_invocations <- function(maxResults = NULL, nextToken = 
     http_path = "/sessions/{sessionIdentifier}/invocations/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "invocationSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_invocations_input(maxResults = maxResults, nextToken = nextToken, sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$list_invocations_output()
@@ -671,7 +837,8 @@ bedrockagentruntime_list_sessions <- function(maxResults = NULL, nextToken = NUL
     http_path = "/sessions/",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", limit_key = "maxResults", result_key = "sessionSummaries"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_sessions_input(maxResults = maxResults, nextToken = nextToken)
   output <- .bedrockagentruntime$list_sessions_output()
@@ -702,7 +869,8 @@ bedrockagentruntime_list_tags_for_resource <- function(resourceArn) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$list_tags_for_resource_input(resourceArn = resourceArn)
   output <- .bedrockagentruntime$list_tags_for_resource_output()
@@ -734,7 +902,8 @@ bedrockagentruntime_optimize_prompt <- function(input, targetModelId) {
     http_path = "/optimize-prompt",
     host_prefix = "",
     paginator = list(),
-    stream_api = TRUE
+    stream_api = TRUE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$optimize_prompt_input(input = input, targetModelId = targetModelId)
   output <- .bedrockagentruntime$optimize_prompt_output()
@@ -769,7 +938,8 @@ bedrockagentruntime_put_invocation_step <- function(invocationIdentifier, invoca
     http_path = "/sessions/{sessionIdentifier}/invocationSteps/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$put_invocation_step_input(invocationIdentifier = invocationIdentifier, invocationStepId = invocationStepId, invocationStepTime = invocationStepTime, payload = payload, sessionIdentifier = sessionIdentifier)
   output <- .bedrockagentruntime$put_invocation_step_output()
@@ -803,7 +973,8 @@ bedrockagentruntime_rerank <- function(nextToken = NULL, queries, rerankingConfi
     http_path = "/rerank",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", result_key = "results"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$rerank_input(nextToken = nextToken, queries = queries, rerankingConfiguration = rerankingConfiguration, sources = sources)
   output <- .bedrockagentruntime$rerank_output()
@@ -827,20 +998,22 @@ bedrockagentruntime_rerank <- function(nextToken = NULL, queries, rerankingConfi
 #' @param nextToken If there are more results than can fit in the response, the response returns a `nextToken`. Use this token in the `nextToken` field of another request to retrieve the next batch of results.
 #' @param retrievalConfiguration Contains configurations for the knowledge base query and retrieval process. For more information, see [Query configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
 #' @param retrievalQuery &#91;required&#93; Contains the query to send the knowledge base.
+#' @param userContext Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentruntime_retrieve
-bedrockagentruntime_retrieve <- function(guardrailConfiguration = NULL, knowledgeBaseId, nextToken = NULL, retrievalConfiguration = NULL, retrievalQuery) {
+bedrockagentruntime_retrieve <- function(guardrailConfiguration = NULL, knowledgeBaseId, nextToken = NULL, retrievalConfiguration = NULL, retrievalQuery, userContext = NULL) {
   op <- new_operation(
     name = "Retrieve",
     http_method = "POST",
     http_path = "/knowledgebases/{knowledgeBaseId}/retrieve",
     host_prefix = "",
     paginator = list(input_token = "nextToken", output_token = "nextToken", result_key = "retrievalResults"),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentruntime$retrieve_input(guardrailConfiguration = guardrailConfiguration, knowledgeBaseId = knowledgeBaseId, nextToken = nextToken, retrievalConfiguration = retrievalConfiguration, retrievalQuery = retrievalQuery)
+  input <- .bedrockagentruntime$retrieve_input(guardrailConfiguration = guardrailConfiguration, knowledgeBaseId = knowledgeBaseId, nextToken = nextToken, retrievalConfiguration = retrievalConfiguration, retrievalQuery = retrievalQuery, userContext = userContext)
   output <- .bedrockagentruntime$retrieve_output()
   config <- get_config()
   svc <- .bedrockagentruntime$service(config, op)
@@ -862,20 +1035,22 @@ bedrockagentruntime_retrieve <- function(guardrailConfiguration = NULL, knowledg
 #' @param retrieveAndGenerateConfiguration Contains configurations for the knowledge base query and retrieval process. For more information, see [Query configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
 #' @param sessionConfiguration Contains details about the session with the knowledge base.
 #' @param sessionId The unique identifier of the session. When you first make a [`retrieve_and_generate`][bedrockagentruntime_retrieve_and_generate] request, Amazon Bedrock automatically generates this value. You must reuse this value for all subsequent requests in the same conversational session. This value allows Amazon Bedrock to maintain context and knowledge from previous interactions. You can't explicitly set the `sessionId` yourself.
+#' @param userContext Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentruntime_retrieve_and_generate
-bedrockagentruntime_retrieve_and_generate <- function(input, retrieveAndGenerateConfiguration = NULL, sessionConfiguration = NULL, sessionId = NULL) {
+bedrockagentruntime_retrieve_and_generate <- function(input, retrieveAndGenerateConfiguration = NULL, sessionConfiguration = NULL, sessionId = NULL, userContext = NULL) {
   op <- new_operation(
     name = "RetrieveAndGenerate",
     http_method = "POST",
     http_path = "/retrieveAndGenerate",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentruntime$retrieve_and_generate_input(input = input, retrieveAndGenerateConfiguration = retrieveAndGenerateConfiguration, sessionConfiguration = sessionConfiguration, sessionId = sessionId)
+  input <- .bedrockagentruntime$retrieve_and_generate_input(input = input, retrieveAndGenerateConfiguration = retrieveAndGenerateConfiguration, sessionConfiguration = sessionConfiguration, sessionId = sessionId, userContext = userContext)
   output <- .bedrockagentruntime$retrieve_and_generate_output()
   config <- get_config()
   svc <- .bedrockagentruntime$service(config, op)
@@ -897,20 +1072,22 @@ bedrockagentruntime_retrieve_and_generate <- function(input, retrieveAndGenerate
 #' @param retrieveAndGenerateConfiguration Contains configurations for the knowledge base query and retrieval process. For more information, see [Query configurations](https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html).
 #' @param sessionConfiguration Contains details about the session with the knowledge base.
 #' @param sessionId The unique identifier of the session. When you first make a [`retrieve_and_generate`][bedrockagentruntime_retrieve_and_generate] request, Amazon Bedrock automatically generates this value. You must reuse this value for all subsequent requests in the same conversational session. This value allows Amazon Bedrock to maintain context and knowledge from previous interactions. You can't explicitly set the `sessionId` yourself.
+#' @param userContext Contains information about the user making the request. This is used for access control filtering to ensure that retrieval results only include documents the user is authorized to access.
 #'
 #' @keywords internal
 #'
 #' @rdname bedrockagentruntime_retrieve_and_generate_stream
-bedrockagentruntime_retrieve_and_generate_stream <- function(input, retrieveAndGenerateConfiguration = NULL, sessionConfiguration = NULL, sessionId = NULL) {
+bedrockagentruntime_retrieve_and_generate_stream <- function(input, retrieveAndGenerateConfiguration = NULL, sessionConfiguration = NULL, sessionId = NULL, userContext = NULL) {
   op <- new_operation(
     name = "RetrieveAndGenerateStream",
     http_method = "POST",
     http_path = "/retrieveAndGenerateStream",
     host_prefix = "",
     paginator = list(),
-    stream_api = TRUE
+    stream_api = TRUE,
+    http_checksum = NULL
   )
-  input <- .bedrockagentruntime$retrieve_and_generate_stream_input(input = input, retrieveAndGenerateConfiguration = retrieveAndGenerateConfiguration, sessionConfiguration = sessionConfiguration, sessionId = sessionId)
+  input <- .bedrockagentruntime$retrieve_and_generate_stream_input(input = input, retrieveAndGenerateConfiguration = retrieveAndGenerateConfiguration, sessionConfiguration = sessionConfiguration, sessionId = sessionId, userContext = userContext)
   output <- .bedrockagentruntime$retrieve_and_generate_stream_output()
   config <- get_config()
   svc <- .bedrockagentruntime$service(config, op)
@@ -943,7 +1120,8 @@ bedrockagentruntime_start_flow_execution <- function(flowAliasIdentifier, flowEx
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$start_flow_execution_input(flowAliasIdentifier = flowAliasIdentifier, flowExecutionName = flowExecutionName, flowIdentifier = flowIdentifier, inputs = inputs, modelPerformanceConfiguration = modelPerformanceConfiguration)
   output <- .bedrockagentruntime$start_flow_execution_output()
@@ -976,7 +1154,8 @@ bedrockagentruntime_stop_flow_execution <- function(executionIdentifier, flowAli
     http_path = "/flows/{flowIdentifier}/aliases/{flowAliasIdentifier}/executions/{executionIdentifier}/stop",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$stop_flow_execution_input(executionIdentifier = executionIdentifier, flowAliasIdentifier = flowAliasIdentifier, flowIdentifier = flowIdentifier)
   output <- .bedrockagentruntime$stop_flow_execution_output()
@@ -1008,7 +1187,8 @@ bedrockagentruntime_tag_resource <- function(resourceArn, tags) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$tag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .bedrockagentruntime$tag_resource_output()
@@ -1040,7 +1220,8 @@ bedrockagentruntime_untag_resource <- function(resourceArn, tagKeys) {
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$untag_resource_input(resourceArn = resourceArn, tagKeys = tagKeys)
   output <- .bedrockagentruntime$untag_resource_output()
@@ -1072,7 +1253,8 @@ bedrockagentruntime_update_session <- function(sessionIdentifier, sessionMetadat
     http_path = "/sessions/{sessionIdentifier}/",
     host_prefix = "",
     paginator = list(),
-    stream_api = FALSE
+    stream_api = FALSE,
+    http_checksum = NULL
   )
   input <- .bedrockagentruntime$update_session_input(sessionIdentifier = sessionIdentifier, sessionMetadata = sessionMetadata)
   output <- .bedrockagentruntime$update_session_output()

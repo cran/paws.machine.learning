@@ -29,6 +29,7 @@ bedrockruntime(
 \item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
 \item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
 \item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{use_dual_stack}: Set this to \code{true} to use the dualstack (IPv4 and IPv6) endpoint for a service, where available, falling back to the regular endpoint when it isn't. Defaults to the \code{AWS_USE_DUALSTACK_ENDPOINT} environment variable when unset.}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
@@ -74,7 +75,8 @@ Describes the API operations for running inference using Amazon Bedrock models.
     close_connection = "logical",
     timeout = "numeric",
     s3_force_path_style = "logical",
-    sts_regional_endpoint = "string"
+    sts_regional_endpoint = "string",
+    use_dual_stack = "logical"
   ),
   credentials = list(
     creds = list(
@@ -99,6 +101,7 @@ Describes the API operations for running inference using Amazon Bedrock models.
 \link[=bedrockruntime_converse_stream]{converse_stream} \tab Sends messages to the specified Amazon Bedrock model and returns the response in a stream\cr
 \link[=bedrockruntime_count_tokens]{count_tokens} \tab Returns the token count for a given inference request\cr
 \link[=bedrockruntime_get_async_invoke]{get_async_invoke} \tab Retrieve information about an asynchronous invocation\cr
+\link[=bedrockruntime_invoke_guardrail_checks]{invoke_guardrail_checks} \tab Evaluates messages against inline guardrail checks\cr
 \link[=bedrockruntime_invoke_model]{invoke_model} \tab Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body\cr
 \link[=bedrockruntime_invoke_model_with_bidirectional_stream]{invoke_model_with_bidirectional_stream} \tab Invoke the specified Amazon Bedrock model to run inference using the bidirectional stream\cr
 \link[=bedrockruntime_invoke_model_with_response_stream]{invoke_model_with_response_stream} \tab Invoke the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body\cr
